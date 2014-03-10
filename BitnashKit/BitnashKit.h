@@ -6,8 +6,13 @@
 //  Copyright (c) 2014 Bitmarkets. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef BitnashKit_BitnashKit_h
+#define BitnashKit_BitnashKit_h
 
-@interface BitnashKit : NSObject
+#import "BNServer.h"
+#import "BNWallet.h"
+#import "NSObject+BNJSON.h"
+#import "NSArray+BNJSON.h"
+#import "NSDictionary+BNJSON.h"
 
-@end
+#endif
