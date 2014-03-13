@@ -12,8 +12,7 @@
 @interface BNTxIn : NSObject
 
 @property BNScriptSig *scriptSig;
-@property NSString *previousTxHash;
 @property NSNumber *previousOutIndex;
-@property NSNumber *previousOutValue;
+@property NSString *previousTxSerializedHex;
 
 @end

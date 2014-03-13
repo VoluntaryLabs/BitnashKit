@@ -17,6 +17,8 @@
 		DC261F4A18CD2D4A005328DA /* bitcoinj-0.11-bundled.jar in Resources */ = {isa = PBXBuildFile; fileRef = DC261F4718CD2D4A005328DA /* bitcoinj-0.11-bundled.jar */; };
 		DC261F4B18CD2D4A005328DA /* json-simple-1.1.1.jar in Resources */ = {isa = PBXBuildFile; fileRef = DC261F4818CD2D4A005328DA /* json-simple-1.1.1.jar */; };
 		DC261F4C18CD2D4A005328DA /* slf4j-simple-1.7.6.jar in Resources */ = {isa = PBXBuildFile; fileRef = DC261F4918CD2D4A005328DA /* slf4j-simple-1.7.6.jar */; };
+		DC6161AF18CFBF7900F7B602 /* NSString+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC6161AD18CFBF7900F7B602 /* NSString+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC6161B018CFBF7900F7B602 /* NSString+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6161AE18CFBF7900F7B602 /* NSString+BNJSON.m */; };
 		DC85CBB718CBE1D400942C9D /* BitnashKit.h in Headers */ = {isa = PBXBuildFile; fileRef = DC85CBB618CBE13800942C9D /* BitnashKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC90332218CBD1A2005D82A2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC90332118CBD1A2005D82A2 /* Cocoa.framework */; };
 		DC90332C18CBD1A2005D82A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC90332A18CBD1A2005D82A2 /* InfoPlist.strings */; };
@@ -66,6 +68,8 @@
 		DC261F4718CD2D4A005328DA /* bitcoinj-0.11-bundled.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "bitcoinj-0.11-bundled.jar"; path = "../BitnashJ/lib/bitcoinj-0.11-bundled.jar"; sourceTree = "<group>"; };
 		DC261F4818CD2D4A005328DA /* json-simple-1.1.1.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "json-simple-1.1.1.jar"; path = "../BitnashJ/lib/json-simple-1.1.1.jar"; sourceTree = "<group>"; };
 		DC261F4918CD2D4A005328DA /* slf4j-simple-1.7.6.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "slf4j-simple-1.7.6.jar"; path = "../BitnashJ/lib/slf4j-simple-1.7.6.jar"; sourceTree = "<group>"; };
+		DC6161AD18CFBF7900F7B602 /* NSString+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BNJSON.h"; sourceTree = "<group>"; };
+		DC6161AE18CFBF7900F7B602 /* NSString+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BNJSON.m"; sourceTree = "<group>"; };
 		DC85CBB618CBE13800942C9D /* BitnashKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitnashKit.h; sourceTree = "<group>"; };
 		DC90331E18CBD1A2005D82A2 /* BitnashKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitnashKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC90332118CBD1A2005D82A2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -202,6 +206,8 @@
 				DC261F3D18CD20A4005328DA /* NSArray+BNJSON.m */,
 				DC261F4018CD21FA005328DA /* NSDictionary+BNJSON.h */,
 				DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */,
+				DC6161AD18CFBF7900F7B602 /* NSString+BNJSON.h */,
+				DC6161AE18CFBF7900F7B602 /* NSString+BNJSON.m */,
 			);
 			path = BitnashKit;
 			sourceTree = "<group>";
@@ -253,6 +259,7 @@
 				DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */,
 				DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */,
+				DC6161AF18CFBF7900F7B602 /* NSString+BNJSON.h in Headers */,
 				DCE23FC218CC329600F64729 /* BNMultisigScriptPubKey.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +373,7 @@
 				DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */,
 				DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,
+				DC6161B018CFBF7900F7B602 /* NSString+BNJSON.m in Sources */,
 				DC261F3B18CD1FEC005328DA /* NSObject+BNJSON.m in Sources */,
 				DCE23FB318CC2F6D00F64729 /* BNEscrowTx.m in Sources */,
 			);

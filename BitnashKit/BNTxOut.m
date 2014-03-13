@@ -12,7 +12,7 @@
 
 + (NSArray *)jsonProperties
 {
-    return [NSArray arrayWithObjects:@"valueSatoshi", @"scriptPubKey", nil];
+    return [NSArray arrayWithObjects:@"value", @"scriptPubKey", nil];
 }
 
 @end

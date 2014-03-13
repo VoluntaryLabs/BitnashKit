@@ -16,6 +16,9 @@
 @property NSError *error;
 //Set to most recent error that occured during an operation.
 
+@property BOOL logsStderr;
+@property BOOL logsErrors;
+
 @property NSTask *task;
 
 - (void)start;

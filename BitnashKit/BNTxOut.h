@@ -11,7 +11,7 @@
 
 @interface BNTxOut : NSObject
 
-@property NSNumber *valueSatoshi;
+@property NSNumber *value;
 @property BNScriptPubKey *scriptPubKey;
 
 @end

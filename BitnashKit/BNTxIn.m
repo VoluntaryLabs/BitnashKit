@@ -12,7 +12,7 @@
 
 + (NSArray *)jsonProperties
 {
-    return [NSArray arrayWithObjects:@"scriptSig", @"previousTxHash", @"previousOutIndex", @"previousOutValue", nil];
+    return [NSArray arrayWithObjects:@"scriptSig", @"previousTxSerializedHex", @"previousOutIndex", nil];
 }
 
 @end

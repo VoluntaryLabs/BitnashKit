@@ -11,8 +11,5 @@
 
 #import "BNServer.h"
 #import "BNWallet.h"
-#import "NSObject+BNJSON.h"
-#import "NSArray+BNJSON.h"
-#import "NSDictionary+BNJSON.h"
 
 #endif

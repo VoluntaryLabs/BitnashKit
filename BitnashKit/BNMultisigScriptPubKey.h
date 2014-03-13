@@ -11,6 +11,6 @@
 
 @interface BNMultisigScriptPubKey : BNScriptPubKey
 
-@property NSArray *pubKeys;
+@property NSMutableArray *pubKeys;
 
 @end

@@ -33,6 +33,7 @@
             [dict setObject:[object asJSONObject] forKey:property];
 #pragma clang diagnostic pop
         }
+        [dict setObject:NSStringFromClass([self class])  forKey:@"type"];
         return dict;
     }
     else

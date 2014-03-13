@@ -11,6 +11,13 @@
 
 @implementation BNServer
 
+- (id)init
+{
+    self = [super init];
+    self.path = [NSHomeDirectory() stringByAppendingString:@"/.bitnash"];
+    return self;
+}
+
 - (void)start
 {
     self.error = nil;
@@ -43,7 +50,10 @@
     _task.standardInput = [NSPipe pipe];
     _task.standardOutput = [NSPipe pipe];
     
-    _task.standardError = [NSPipe pipe];
+    if (!_logsStderr)
+    {
+        _task.standardError = [NSPipe pipe];
+    }
     
     [_task launch];
 }
@@ -86,6 +96,8 @@
         return nil;
     }
     
+//NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+    
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
     [[_task.standardInput fileHandleForWriting] writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -97,19 +109,25 @@
         [output appendData:data];
     }
     
-NSLog(@"Output: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
+NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
     
     if (error)
     {
         self.error = error;
+        if (self.logsErrors) {
+            NSLog(@"BNServer Error: %@", [_error localizedDescription]);
+        }
         return nil;
     }
     
     if ([response objectForKey:@"error"])
     {
         self.error = [NSError errorWithDomain:@"com.bitmarkets.Bitnash" code:0 userInfo:[NSDictionary dictionaryWithObject:[response objectForKey:@"error"] forKey:NSLocalizedDescriptionKey]];
+        if (self.logsErrors) {
+            NSLog(@"BNServer Error: %@", [_error localizedDescription]);
+        }
         return nil;
     }
     else
