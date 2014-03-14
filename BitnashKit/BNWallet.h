@@ -33,6 +33,9 @@
 //Start a BNServer and set it on this wallet prior to use.
 
 
+- (void)setPath:(NSString *)path;
+//Set that path to the wallet directory
+
 - (NSError *) error;
 //Error for last operation.
 
@@ -42,7 +45,7 @@
 - (NSString *)createAddress;
 //Create a new keypair for the wallet and return the address.
 
-- (BNEscrowTx *)newEscrowTransaction;
+- (BNEscrowTx *)newEscrowTx;
 //Create a new BNEscrowTransaction for this Wallet and return it.
 
 - (void)debugWriteTxFile;

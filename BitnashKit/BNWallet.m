@@ -12,6 +12,17 @@
 
 @implementation BNWallet
 
+- (id)init
+{
+    self = [super init];
+    self.server = [[BNServer alloc] init];
+    return self;
+}
+
+- (void)setPath:(NSString *)path
+{
+    _server.path = path;
+}
 
 - (NSError *) error
 {
@@ -28,7 +39,7 @@
     return [_server sendMessage:@"createAddress" withObject:nil];
 }
 
-- (BNEscrowTx *)newEscrowTransaction
+- (BNEscrowTx *)newEscrowTx
 {
     BNEscrowTx *tx = [[BNEscrowTx alloc] init];
     tx.wallet = self;
@@ -43,7 +54,7 @@
 - (void)debugWriteTxFile
 {
     [_server start];
-    BNEscrowTx *tx = [self newEscrowTransaction];
+    BNEscrowTx *tx = [self newEscrowTx];
     [tx fillForValue:92000];
     [[tx asJSONString] writeToFile:[self txFilePath] atomically:YES encoding:NSUTF8StringEncoding error:0x0];
 }

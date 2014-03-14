@@ -106,6 +106,7 @@
     while (![[[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding] hasSuffix:@"\n"])
     {
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
+        NSLog(@"availableData[%@]" , [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         [output appendData:data];
     }
     
