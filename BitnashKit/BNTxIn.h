@@ -14,5 +14,6 @@
 @property BNScriptSig *scriptSig;
 @property NSNumber *previousOutIndex;
 @property NSString *previousTxSerializedHex;
+@property NSString *previousTxHash;
 
 @end
