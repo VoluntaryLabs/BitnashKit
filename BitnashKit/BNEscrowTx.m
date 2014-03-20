@@ -20,12 +20,8 @@
     return [NSArray arrayWithObjects:
             @"inputs",
             @"outputs",
+            @"hash",
             nil];
-}
-
-- (NSNumber *)fee
-{
-    return nil;
 }
 
 - (void)fillForValue:(long long)value
@@ -49,9 +45,14 @@
     return nil;
 }
 
-- (void)mergeWithEscrowTx:(BNEscrowTx *)tx
+- (void)addInputsFromEscrowTx:(BNEscrowTx *)tx;
 {
     [_inputs addObjectsFromArray:tx.inputs];
+}
+
+- (void)mergeWithEscrowTx:(BNEscrowTx *)tx
+{
+    [self addInputsFromEscrowTx:tx];
     for (BNTxOut *txOut in tx.outputs)
     {
         if ([txOut.scriptPubKey isMultisig])
@@ -69,11 +70,28 @@
     }
 }
 
-- (void)addFeeAndSign
+- (void)addFee
 {
-    BNEscrowTx *tx = [_wallet.server sendMessage:@"addFeeAndSignEscrowTx" withObject:self];
+    BNEscrowTx *tx = [_wallet.server sendMessage:@"addFeeToEscrowTx" withObject:self];
     self.inputs = tx.inputs;
     self.outputs = tx.outputs;
+    self.hash = tx.hash;
+}
+
+- (void)sign
+{
+    BNEscrowTx *tx = [_wallet.server sendMessage:@"signEscrowTx" withObject:self];
+    self.inputs = tx.inputs;
+    self.outputs = tx.outputs;
+    self.hash = tx.hash;
+}
+
+- (void)broadcast
+{
+    BNEscrowTx *tx = [_wallet.server sendMessage:@"broadcast" withObject:self];
+    self.inputs = tx.inputs;
+    self.outputs = tx.outputs;
+    self.hash = tx.hash;
 }
 
 @end

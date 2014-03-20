@@ -16,6 +16,8 @@
 @property NSError *error;
 //Set to most recent error that occured during an operation.
 
+@property BOOL started;
+
 @property BOOL logsStderr;
 @property BOOL logsErrors;
 

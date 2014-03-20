@@ -48,8 +48,4 @@
 - (BNEscrowTx *)newEscrowTx;
 //Create a new BNEscrowTransaction for this Wallet and return it.
 
-- (void)debugWriteTxFile;
-- (void)debugMergeWithThenSign:(BNWallet *)otherWallet;
-
-
 @end

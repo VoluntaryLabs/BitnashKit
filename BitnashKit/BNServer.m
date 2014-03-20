@@ -20,6 +20,15 @@
 
 - (void)start
 {
+    if (_started)
+    {
+        return;
+    }
+    else
+    {
+        self.started = YES;
+    }
+    
     self.error = nil;
     
     [self createDir];
@@ -74,6 +83,11 @@
 
 - (id)sendMessage:(NSString *)messageName withObject:(id)object
 {
+    if (!_started)
+    {
+        [self start];
+    }
+    
     self.error = nil;
     
     NSMutableDictionary *message = [NSMutableDictionary dictionary];
@@ -106,11 +120,10 @@
     while (![[[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding] hasSuffix:@"\n"])
     {
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
-        NSLog(@"availableData[%@]" , [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         [output appendData:data];
     }
     
-NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
+//NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
     
