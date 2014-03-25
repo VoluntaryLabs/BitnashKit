@@ -11,5 +11,10 @@
 
 #import "BNServer.h"
 #import "BNWallet.h"
+#import "BNEscrowTx.h"
+#import "BNReleaseTx.h"
+#import "BNTxIn.h"
+#import "BNTxOut.h"
+#import "BNPayToAddressScriptPubKey.h"
 
 #endif

@@ -21,12 +21,13 @@
             @"inputs",
             @"outputs",
             @"hash",
+            @"isLocked",
             nil];
 }
 
 - (void)fillForValue:(long long)value
 {
-    BNEscrowTx *tx = [_wallet.server sendMessage:@"fillEscrowTx" withObject:[NSNumber numberWithLongLong:value]];
+    BNEscrowTx *tx = [self.wallet.server sendMessage:@"fillEscrowTx" withObject:[NSNumber numberWithLongLong:value]];
     self.inputs = tx.inputs;
     self.outputs = tx.outputs;
     BNMultisigScriptPubKey *scriptPubKey = (BNMultisigScriptPubKey *)[self multisigOutput].scriptPubKey;
@@ -35,7 +36,7 @@
 
 - (BNTxOut *)multisigOutput
 {
-    for (BNTxOut *txOut in _outputs)
+    for (BNTxOut *txOut in self.outputs)
     {
         if ([txOut.scriptPubKey isMultisig])
         {
@@ -45,14 +46,14 @@
     return nil;
 }
 
-- (void)addInputsFromEscrowTx:(BNEscrowTx *)tx;
+- (void)addInputsFromTx:(BNTx *)tx;
 {
-    [_inputs addObjectsFromArray:tx.inputs];
+    [self.inputs addObjectsFromArray:tx.inputs];
 }
 
-- (void)mergeWithEscrowTx:(BNEscrowTx *)tx
+- (void)mergeWithTx:(BNTx *)tx
 {
-    [self addInputsFromEscrowTx:tx];
+    [self addInputsFromTx:tx];
     for (BNTxOut *txOut in tx.outputs)
     {
         if ([txOut.scriptPubKey isMultisig])
@@ -65,22 +66,14 @@
         }
         else
         {
-            [_outputs addObject:txOut];
+            [self.outputs addObject:txOut];
         }
     }
 }
 
-- (void)addFee
-{
-    BNEscrowTx *tx = [_wallet.server sendMessage:@"addFeeToEscrowTx" withObject:self];
-    self.inputs = tx.inputs;
-    self.outputs = tx.outputs;
-    self.hash = tx.hash;
-}
-
 - (void)sign
 {
-    BNEscrowTx *tx = [_wallet.server sendMessage:@"signEscrowTx" withObject:self];
+    BNEscrowTx *tx = [self.wallet.server sendMessage:@"signEscrowTx" withObject:self];
     self.inputs = tx.inputs;
     self.outputs = tx.outputs;
     self.hash = tx.hash;
@@ -88,7 +81,7 @@
 
 - (void)broadcast
 {
-    BNEscrowTx *tx = [_wallet.server sendMessage:@"broadcast" withObject:self];
+    BNEscrowTx *tx = [self.wallet.server sendMessage:@"broadcast" withObject:self];
     self.inputs = tx.inputs;
     self.outputs = tx.outputs;
     self.hash = tx.hash;

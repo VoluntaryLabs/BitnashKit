@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BNServer.h"
 #import "BNEscrowTx.h"
+#import "BNReleaseTx.h"
 
 @interface BNWallet : NSObject
 
@@ -47,5 +48,8 @@
 
 - (BNEscrowTx *)newEscrowTx;
 //Create a new BNEscrowTransaction for this Wallet and return it.
+
+- (BNReleaseTx *)newReleaseTx;
+//Create a new BNReleaseTx for this Wallet and return it.
 
 @end

@@ -46,4 +46,11 @@
     return tx;
 }
 
+- (BNReleaseTx *)newReleaseTx
+{
+    BNReleaseTx *tx = [[BNReleaseTx alloc] init];
+    tx.wallet = self;
+    return tx;
+}
+
 @end

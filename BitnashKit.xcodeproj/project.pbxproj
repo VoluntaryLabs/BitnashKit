@@ -31,19 +31,23 @@
 		DC90334F18CBD213005D82A2 /* BNWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = DC90334D18CBD213005D82A2 /* BNWallet.m */; };
 		DCA62FB018CD2FEC00475735 /* BNServer.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA62FAE18CD2FEC00475735 /* BNServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA62FAF18CD2FEC00475735 /* BNServer.m */; };
+		DCD906EF18E0DF0F00342231 /* BNReleaseTx.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD906ED18E0DF0F00342231 /* BNReleaseTx.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCD906F018E0DF0F00342231 /* BNReleaseTx.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD906EE18E0DF0F00342231 /* BNReleaseTx.m */; };
+		DCD906F318E0DF3600342231 /* BNTx.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD906F118E0DF3600342231 /* BNTx.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCD906F418E0DF3600342231 /* BNTx.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD906F218E0DF3600342231 /* BNTx.m */; };
 		DCE23FB218CC2F6D00F64729 /* BNEscrowTx.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FB018CC2F6D00F64729 /* BNEscrowTx.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE23FB318CC2F6D00F64729 /* BNEscrowTx.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FB118CC2F6D00F64729 /* BNEscrowTx.m */; };
-		DCE23FB618CC314900F64729 /* BNTxOut.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FB418CC314900F64729 /* BNTxOut.h */; };
+		DCE23FB618CC314900F64729 /* BNTxOut.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FB418CC314900F64729 /* BNTxOut.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE23FB718CC314900F64729 /* BNTxOut.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FB518CC314900F64729 /* BNTxOut.m */; };
-		DCE23FBA18CC316B00F64729 /* BNTxIn.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FB818CC316B00F64729 /* BNTxIn.h */; };
+		DCE23FBA18CC316B00F64729 /* BNTxIn.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FB818CC316B00F64729 /* BNTxIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE23FBB18CC316B00F64729 /* BNTxIn.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FB918CC316B00F64729 /* BNTxIn.m */; };
-		DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FBC18CC326000F64729 /* BNScriptPubKey.h */; };
+		DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FBC18CC326000F64729 /* BNScriptPubKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE23FBF18CC326000F64729 /* BNScriptPubKey.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FBD18CC326000F64729 /* BNScriptPubKey.m */; };
-		DCE23FC218CC329600F64729 /* BNMultisigScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FC018CC329600F64729 /* BNMultisigScriptPubKey.h */; };
+		DCE23FC218CC329600F64729 /* BNMultisigScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FC018CC329600F64729 /* BNMultisigScriptPubKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FC118CC329600F64729 /* BNMultisigScriptPubKey.m */; };
-		DCE23FC618CC36C900F64729 /* BNScriptSig.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FC418CC36C900F64729 /* BNScriptSig.h */; };
+		DCE23FC618CC36C900F64729 /* BNScriptSig.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE23FC418CC36C900F64729 /* BNScriptSig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE23FC718CC36C900F64729 /* BNScriptSig.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FC518CC36C900F64729 /* BNScriptSig.m */; };
-		DCE3D9CE18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE3D9CC18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h */; };
+		DCE3D9CE18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE3D9CC18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE3D9CD18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +92,10 @@
 		DC90334D18CBD213005D82A2 /* BNWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNWallet.m; sourceTree = "<group>"; };
 		DCA62FAE18CD2FEC00475735 /* BNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNServer.h; sourceTree = "<group>"; };
 		DCA62FAF18CD2FEC00475735 /* BNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNServer.m; sourceTree = "<group>"; };
+		DCD906ED18E0DF0F00342231 /* BNReleaseTx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNReleaseTx.h; sourceTree = "<group>"; };
+		DCD906EE18E0DF0F00342231 /* BNReleaseTx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNReleaseTx.m; sourceTree = "<group>"; };
+		DCD906F118E0DF3600342231 /* BNTx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNTx.h; sourceTree = "<group>"; };
+		DCD906F218E0DF3600342231 /* BNTx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNTx.m; sourceTree = "<group>"; };
 		DCE23FB018CC2F6D00F64729 /* BNEscrowTx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNEscrowTx.h; sourceTree = "<group>"; };
 		DCE23FB118CC2F6D00F64729 /* BNEscrowTx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNEscrowTx.m; sourceTree = "<group>"; };
 		DCE23FB418CC314900F64729 /* BNTxOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNTxOut.h; sourceTree = "<group>"; };
@@ -186,8 +194,12 @@
 				DCA62FAF18CD2FEC00475735 /* BNServer.m */,
 				DC90334C18CBD213005D82A2 /* BNWallet.h */,
 				DC90334D18CBD213005D82A2 /* BNWallet.m */,
+				DCD906F118E0DF3600342231 /* BNTx.h */,
+				DCD906F218E0DF3600342231 /* BNTx.m */,
 				DCE23FB018CC2F6D00F64729 /* BNEscrowTx.h */,
 				DCE23FB118CC2F6D00F64729 /* BNEscrowTx.m */,
+				DCD906ED18E0DF0F00342231 /* BNReleaseTx.h */,
+				DCD906EE18E0DF0F00342231 /* BNReleaseTx.m */,
 				DCE23FB818CC316B00F64729 /* BNTxIn.h */,
 				DCE23FB918CC316B00F64729 /* BNTxIn.m */,
 				DCE23FB418CC314900F64729 /* BNTxOut.h */,
@@ -255,9 +267,11 @@
 				DC261F3E18CD20A4005328DA /* NSArray+BNJSON.h in Headers */,
 				DCE23FC618CC36C900F64729 /* BNScriptSig.h in Headers */,
 				DCE23FB618CC314900F64729 /* BNTxOut.h in Headers */,
+				DCD906F318E0DF3600342231 /* BNTx.h in Headers */,
 				DCE23FBA18CC316B00F64729 /* BNTxIn.h in Headers */,
 				DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */,
+				DCD906EF18E0DF0F00342231 /* BNReleaseTx.h in Headers */,
 				DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */,
 				DC6161AF18CFBF7900F7B602 /* NSString+BNJSON.h in Headers */,
 				DCE23FC218CC329600F64729 /* BNMultisigScriptPubKey.h in Headers */,
@@ -363,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD906F418E0DF3600342231 /* BNTx.m in Sources */,
 				DCE23FBF18CC326000F64729 /* BNScriptPubKey.m in Sources */,
 				DC90334F18CBD213005D82A2 /* BNWallet.m in Sources */,
 				DCE23FB718CC314900F64729 /* BNTxOut.m in Sources */,
@@ -372,6 +387,7 @@
 				DCE23FBB18CC316B00F64729 /* BNTxIn.m in Sources */,
 				DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */,
 				DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */,
+				DCD906F018E0DF0F00342231 /* BNReleaseTx.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,
 				DC6161B018CFBF7900F7B602 /* NSString+BNJSON.m in Sources */,
 				DC261F3B18CD1FEC005328DA /* NSObject+BNJSON.m in Sources */,
