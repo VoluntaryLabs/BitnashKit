@@ -1,0 +1,3 @@
+[submodule "BitnashJ"]
+	path = BitnashJ
+	url = git@github.com:richcollins/BitnashJ.git
