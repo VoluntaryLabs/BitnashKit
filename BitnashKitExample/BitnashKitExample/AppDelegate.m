@@ -17,7 +17,12 @@
 - (BNWallet *)debugWalletFor:(NSString *)name
 {
     BNWallet *wallet = [[BNWallet alloc] init];
-    [wallet setPath:[@"/Users/richcollins/projects/OpenSource/Bitmarkets/Bitnash/sim/data/" stringByAppendingString:name]];
+    
+    NSString *dataPath = [@"~/Library/Application Support/BitnashKit/" stringByExpandingTildeInPath];
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    [wallet setPath:dataPath];
     wallet.server.logsStderr = YES;
     wallet.server.logsErrors = YES;
     return wallet;
