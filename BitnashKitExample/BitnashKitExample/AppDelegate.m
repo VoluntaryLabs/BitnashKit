@@ -18,7 +18,8 @@
 {
     BNWallet *wallet = [[BNWallet alloc] init];
     
-    NSString *dataPath = [@"~/Library/Application Support/BitnashKit/" stringByExpandingTildeInPath];
+    NSString *dataPath = [[@"~/Library/Application Support/BitnashKit/" stringByExpandingTildeInPath] stringByAppendingPathComponent:name];
+    
     NSError *error;
     [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:YES attributes:nil error:&error];
     
