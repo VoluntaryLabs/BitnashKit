@@ -6,5 +6,4 @@ dist/*
 tmp/*
 xcuserdata*
 
-*.class
 BitnashJ/.settings/org.eclipse.jdt.core.prefs
