@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC85CB7018CBDF6800942C9D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC85CB6F18CBDF6800942C9D /* Cocoa.framework */; };
+		DC85CB7A18CBDF6800942C9D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC85CB7818CBDF6800942C9D /* InfoPlist.strings */; };
+		DC85CB7C18CBDF6800942C9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC85CB7B18CBDF6800942C9D /* main.m */; };
+		DC85CB8018CBDF6800942C9D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DC85CB7E18CBDF6800942C9D /* Credits.rtf */; };
+		DC85CB8318CBDF6800942C9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC85CB8218CBDF6800942C9D /* AppDelegate.m */; };
+		DC85CB8618CBDF6800942C9D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC85CB8418CBDF6800942C9D /* MainMenu.xib */; };
+		DC85CB8818CBDF6800942C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC85CB8718CBDF6800942C9D /* Images.xcassets */; };
+		DC85CB8F18CBDF6800942C9D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC85CB8E18CBDF6800942C9D /* XCTest.framework */; };
+		DC85CB9018CBDF6800942C9D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC85CB6F18CBDF6800942C9D /* Cocoa.framework */; };
+		DC85CB9818CBDF6800942C9D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC85CB9618CBDF6800942C9D /* InfoPlist.strings */; };
+		DC85CB9A18CBDF6800942C9D /* BitnashKitExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC85CB9918CBDF6800942C9D /* BitnashKitExampleTests.m */; };
+		DCBA43671904880900D1B3F9 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43661904880900D1B3F9 /* QRCodeGenerator.m */; };
+		DCBA43771904895400D1B3F9 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43691904895400D1B3F9 /* bitstream.c */; };
+		DCBA43781904895400D1B3F9 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA436B1904895400D1B3F9 /* mask.c */; };
+		DCBA43791904895400D1B3F9 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA436D1904895400D1B3F9 /* qrencode.c */; };
+		DCBA437A1904895400D1B3F9 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA436F1904895400D1B3F9 /* qrinput.c */; };
+		DCBA437B1904895400D1B3F9 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43711904895400D1B3F9 /* qrspec.c */; };
+		DCBA437C1904895400D1B3F9 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43731904895400D1B3F9 /* rscode.c */; };
+		DCBA437D1904895400D1B3F9 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43751904895400D1B3F9 /* split.c */; };
+		DCE5E280190AF7310005396A /* BitnashKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE5E27D190AF6DC0005396A /* BitnashKit.framework */; };
+		DCF1CBFE18FF0CBD00AE815A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF1CBFD18FF0CBD00AE815A /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC85CB9118CBDF6800942C9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC85CB6418CBDF6800942C9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC85CB6B18CBDF6800942C9D;
+			remoteInfo = BitnashKitExample;
+		};
+		DCE5E27C190AF6DC0005396A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCE5E277190AF6DC0005396A /* BitnashKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC90331E18CBD1A2005D82A2;
+			remoteInfo = BitnashKit;
+		};
+		DCE5E27E190AF6DC0005396A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCE5E277190AF6DC0005396A /* BitnashKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC90333518CBD1A2005D82A2;
+			remoteInfo = BitnashKitTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DC85CB6C18CBDF6800942C9D /* BitnashKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitnashKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC85CB6F18CBDF6800942C9D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DC85CB7218CBDF6800942C9D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		DC85CB7318CBDF6800942C9D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DC85CB7418CBDF6800942C9D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DC85CB7718CBDF6800942C9D /* BitnashKitExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BitnashKitExample-Info.plist"; sourceTree = "<group>"; };
+		DC85CB7918CBDF6800942C9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DC85CB7B18CBDF6800942C9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DC85CB7D18CBDF6800942C9D /* BitnashKitExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BitnashKitExample-Prefix.pch"; sourceTree = "<group>"; };
+		DC85CB7F18CBDF6800942C9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		DC85CB8118CBDF6800942C9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DC85CB8218CBDF6800942C9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DC85CB8518CBDF6800942C9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		DC85CB8718CBDF6800942C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DC85CB8D18CBDF6800942C9D /* BitnashKitExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitnashKitExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC85CB8E18CBDF6800942C9D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DC85CB9518CBDF6800942C9D /* BitnashKitExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BitnashKitExampleTests-Info.plist"; sourceTree = "<group>"; };
+		DC85CB9718CBDF6800942C9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DC85CB9918CBDF6800942C9D /* BitnashKitExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitnashKitExampleTests.m; sourceTree = "<group>"; };
+		DCBA43651904880900D1B3F9 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeGenerator.h; path = "Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder/QRCodeGenerator.h"; sourceTree = "<group>"; };
+		DCBA43661904880900D1B3F9 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeGenerator.m; path = "Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder/QRCodeGenerator.m"; sourceTree = "<group>"; };
+		DCBA43691904895400D1B3F9 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		DCBA436A1904895400D1B3F9 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		DCBA436B1904895400D1B3F9 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		DCBA436C1904895400D1B3F9 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		DCBA436D1904895400D1B3F9 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		DCBA436E1904895400D1B3F9 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		DCBA436F1904895400D1B3F9 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		DCBA43701904895400D1B3F9 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		DCBA43711904895400D1B3F9 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		DCBA43721904895400D1B3F9 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		DCBA43731904895400D1B3F9 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		DCBA43741904895400D1B3F9 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		DCBA43751904895400D1B3F9 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		DCBA43761904895400D1B3F9 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		DCE5E277190AF6DC0005396A /* BitnashKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BitnashKit.xcodeproj; path = ../BitnashKit.xcodeproj; sourceTree = "<group>"; };
+		DCF1CBFD18FF0CBD00AE815A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC85CB6918CBDF6800942C9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCE5E280190AF7310005396A /* BitnashKit.framework in Frameworks */,
+				DCF1CBFE18FF0CBD00AE815A /* QuartzCore.framework in Frameworks */,
+				DC85CB7018CBDF6800942C9D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC85CB8A18CBDF6800942C9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC85CB9018CBDF6800942C9D /* Cocoa.framework in Frameworks */,
+				DC85CB8F18CBDF6800942C9D /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC85CB6318CBDF6800942C9D = {
+			isa = PBXGroup;
+			children = (
+				DC85CB7518CBDF6800942C9D /* BitnashKitExample */,
+				DCBA4362190487E800D1B3F9 /* QREncoder */,
+				DC85CB9318CBDF6800942C9D /* BitnashKitExampleTests */,
+				DC85CB6E18CBDF6800942C9D /* Frameworks */,
+				DC85CB6D18CBDF6800942C9D /* Products */,
+				DCE5E277190AF6DC0005396A /* BitnashKit.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		DC85CB6D18CBDF6800942C9D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC85CB6C18CBDF6800942C9D /* BitnashKitExample.app */,
+				DC85CB8D18CBDF6800942C9D /* BitnashKitExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC85CB6E18CBDF6800942C9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCF1CBFD18FF0CBD00AE815A /* QuartzCore.framework */,
+				DC85CB6F18CBDF6800942C9D /* Cocoa.framework */,
+				DC85CB8E18CBDF6800942C9D /* XCTest.framework */,
+				DC85CB7118CBDF6800942C9D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC85CB7118CBDF6800942C9D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC85CB7218CBDF6800942C9D /* AppKit.framework */,
+				DC85CB7318CBDF6800942C9D /* CoreData.framework */,
+				DC85CB7418CBDF6800942C9D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		DC85CB7518CBDF6800942C9D /* BitnashKitExample */ = {
+			isa = PBXGroup;
+			children = (
+				DC85CB8118CBDF6800942C9D /* AppDelegate.h */,
+				DC85CB8218CBDF6800942C9D /* AppDelegate.m */,
+				DC85CB8418CBDF6800942C9D /* MainMenu.xib */,
+				DC85CB8718CBDF6800942C9D /* Images.xcassets */,
+				DC85CB7618CBDF6800942C9D /* Supporting Files */,
+			);
+			path = BitnashKitExample;
+			sourceTree = "<group>";
+		};
+		DC85CB7618CBDF6800942C9D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC85CB7718CBDF6800942C9D /* BitnashKitExample-Info.plist */,
+				DC85CB7818CBDF6800942C9D /* InfoPlist.strings */,
+				DC85CB7B18CBDF6800942C9D /* main.m */,
+				DC85CB7D18CBDF6800942C9D /* BitnashKitExample-Prefix.pch */,
+				DC85CB7E18CBDF6800942C9D /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC85CB9318CBDF6800942C9D /* BitnashKitExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC85CB9918CBDF6800942C9D /* BitnashKitExampleTests.m */,
+				DC85CB9418CBDF6800942C9D /* Supporting Files */,
+			);
+			path = BitnashKitExampleTests;
+			sourceTree = "<group>";
+		};
+		DC85CB9418CBDF6800942C9D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC85CB9518CBDF6800942C9D /* BitnashKitExampleTests-Info.plist */,
+				DC85CB9618CBDF6800942C9D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DCBA4362190487E800D1B3F9 /* QREncoder */ = {
+			isa = PBXGroup;
+			children = (
+				DCBA43681904895400D1B3F9 /* libqrencode */,
+				DCBA43651904880900D1B3F9 /* QRCodeGenerator.h */,
+				DCBA43661904880900D1B3F9 /* QRCodeGenerator.m */,
+			);
+			name = QREncoder;
+			sourceTree = "<group>";
+		};
+		DCBA43681904895400D1B3F9 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				DCBA43691904895400D1B3F9 /* bitstream.c */,
+				DCBA436A1904895400D1B3F9 /* bitstream.h */,
+				DCBA436B1904895400D1B3F9 /* mask.c */,
+				DCBA436C1904895400D1B3F9 /* mask.h */,
+				DCBA436D1904895400D1B3F9 /* qrencode.c */,
+				DCBA436E1904895400D1B3F9 /* qrencode.h */,
+				DCBA436F1904895400D1B3F9 /* qrinput.c */,
+				DCBA43701904895400D1B3F9 /* qrinput.h */,
+				DCBA43711904895400D1B3F9 /* qrspec.c */,
+				DCBA43721904895400D1B3F9 /* qrspec.h */,
+				DCBA43731904895400D1B3F9 /* rscode.c */,
+				DCBA43741904895400D1B3F9 /* rscode.h */,
+				DCBA43751904895400D1B3F9 /* split.c */,
+				DCBA43761904895400D1B3F9 /* split.h */,
+			);
+			name = libqrencode;
+			path = "Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder/libqrencode";
+			sourceTree = "<group>";
+		};
+		DCE5E278190AF6DC0005396A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCE5E27D190AF6DC0005396A /* BitnashKit.framework */,
+				DCE5E27F190AF6DC0005396A /* BitnashKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC85CB6B18CBDF6800942C9D /* BitnashKitExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC85CB9D18CBDF6800942C9D /* Build configuration list for PBXNativeTarget "BitnashKitExample" */;
+			buildPhases = (
+				DC85CB6818CBDF6800942C9D /* Sources */,
+				DC85CB6918CBDF6800942C9D /* Frameworks */,
+				DC85CB6A18CBDF6800942C9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BitnashKitExample;
+			productName = BitnashKitExample;
+			productReference = DC85CB6C18CBDF6800942C9D /* BitnashKitExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DC85CB8C18CBDF6800942C9D /* BitnashKitExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC85CBA018CBDF6800942C9D /* Build configuration list for PBXNativeTarget "BitnashKitExampleTests" */;
+			buildPhases = (
+				DC85CB8918CBDF6800942C9D /* Sources */,
+				DC85CB8A18CBDF6800942C9D /* Frameworks */,
+				DC85CB8B18CBDF6800942C9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC85CB9218CBDF6800942C9D /* PBXTargetDependency */,
+			);
+			name = BitnashKitExampleTests;
+			productName = BitnashKitExampleTests;
+			productReference = DC85CB8D18CBDF6800942C9D /* BitnashKitExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC85CB6418CBDF6800942C9D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Bitmarkets;
+				TargetAttributes = {
+					DC85CB8C18CBDF6800942C9D = {
+						TestTargetID = DC85CB6B18CBDF6800942C9D;
+					};
+				};
+			};
+			buildConfigurationList = DC85CB6718CBDF6800942C9D /* Build configuration list for PBXProject "BitnashKitExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DC85CB6318CBDF6800942C9D;
+			productRefGroup = DC85CB6D18CBDF6800942C9D /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DCE5E278190AF6DC0005396A /* Products */;
+					ProjectRef = DCE5E277190AF6DC0005396A /* BitnashKit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				DC85CB6B18CBDF6800942C9D /* BitnashKitExample */,
+				DC85CB8C18CBDF6800942C9D /* BitnashKitExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DCE5E27D190AF6DC0005396A /* BitnashKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BitnashKit.framework;
+			remoteRef = DCE5E27C190AF6DC0005396A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCE5E27F190AF6DC0005396A /* BitnashKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BitnashKitTests.xctest;
+			remoteRef = DCE5E27E190AF6DC0005396A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC85CB6A18CBDF6800942C9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC85CB7A18CBDF6800942C9D /* InfoPlist.strings in Resources */,
+				DC85CB8818CBDF6800942C9D /* Images.xcassets in Resources */,
+				DC85CB8018CBDF6800942C9D /* Credits.rtf in Resources */,
+				DC85CB8618CBDF6800942C9D /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC85CB8B18CBDF6800942C9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC85CB9818CBDF6800942C9D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC85CB6818CBDF6800942C9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCBA43791904895400D1B3F9 /* qrencode.c in Sources */,
+				DCBA437A1904895400D1B3F9 /* qrinput.c in Sources */,
+				DCBA43781904895400D1B3F9 /* mask.c in Sources */,
+				DC85CB8318CBDF6800942C9D /* AppDelegate.m in Sources */,
+				DCBA437C1904895400D1B3F9 /* rscode.c in Sources */,
+				DC85CB7C18CBDF6800942C9D /* main.m in Sources */,
+				DCBA43671904880900D1B3F9 /* QRCodeGenerator.m in Sources */,
+				DCBA43771904895400D1B3F9 /* bitstream.c in Sources */,
+				DCBA437D1904895400D1B3F9 /* split.c in Sources */,
+				DCBA437B1904895400D1B3F9 /* qrspec.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC85CB8918CBDF6800942C9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC85CB9A18CBDF6800942C9D /* BitnashKitExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC85CB9218CBDF6800942C9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC85CB6B18CBDF6800942C9D /* BitnashKitExample */;
+			targetProxy = DC85CB9118CBDF6800942C9D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DC85CB7818CBDF6800942C9D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC85CB7918CBDF6800942C9D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DC85CB7E18CBDF6800942C9D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC85CB7F18CBDF6800942C9D /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		DC85CB8418CBDF6800942C9D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC85CB8518CBDF6800942C9D /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		DC85CB9618CBDF6800942C9D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC85CB9718CBDF6800942C9D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC85CB9B18CBDF6800942C9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DC85CB9C18CBDF6800942C9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DC85CB9E18CBDF6800942C9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BitnashKitExample/BitnashKitExample-Prefix.pch";
+				INFOPLIST_FILE = "BitnashKitExample/BitnashKitExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DC85CB9F18CBDF6800942C9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BitnashKitExample/BitnashKitExample-Prefix.pch";
+				INFOPLIST_FILE = "BitnashKitExample/BitnashKitExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DC85CBA118CBDF6800942C9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BitnashKitExample.app/Contents/MacOS/BitnashKitExample";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BitnashKitExample/BitnashKitExample-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BitnashKitExampleTests/BitnashKitExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		DC85CBA218CBDF6800942C9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BitnashKitExample.app/Contents/MacOS/BitnashKitExample";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BitnashKitExample/BitnashKitExample-Prefix.pch";
+				INFOPLIST_FILE = "BitnashKitExampleTests/BitnashKitExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC85CB6718CBDF6800942C9D /* Build configuration list for PBXProject "BitnashKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC85CB9B18CBDF6800942C9D /* Debug */,
+				DC85CB9C18CBDF6800942C9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC85CB9D18CBDF6800942C9D /* Build configuration list for PBXNativeTarget "BitnashKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC85CB9E18CBDF6800942C9D /* Debug */,
+				DC85CB9F18CBDF6800942C9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC85CBA018CBDF6800942C9D /* Build configuration list for PBXNativeTarget "BitnashKitExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC85CBA118CBDF6800942C9D /* Debug */,
+				DC85CBA218CBDF6800942C9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC85CB6418CBDF6800942C9D /* Project object */;
+}
