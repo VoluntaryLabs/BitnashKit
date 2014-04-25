@@ -5,6 +5,6 @@ build/*
 dist/*
 tmp/*
 xcuserdata*
-xcworkspace*
+*xcworkspace*
 
 BitnashJ/.settings/org.eclipse.jdt.core.prefs
