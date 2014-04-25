@@ -10,14 +10,4 @@
 
 @implementation BNReleaseTx
 
-+ (NSArray *)jsonProperties
-{
-    return [NSArray arrayWithObjects:
-            @"inputs",
-            @"outputs",
-            @"hash",
-            @"isLocked",
-            nil];
-}
-
 @end

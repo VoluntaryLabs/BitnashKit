@@ -10,4 +10,11 @@
 
 @implementation BNScriptSig
 
+- (id)init
+{
+    self = [super init];
+    [self.serializedSlotNames addObject:@"programHexBytes"];
+    return self;
+}
+
 @end

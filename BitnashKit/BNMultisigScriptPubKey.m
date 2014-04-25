@@ -10,14 +10,18 @@
 
 @implementation BNMultisigScriptPubKey
 
-+ (NSArray *)jsonProperties
-{
-    return [NSArray arrayWithObjects:@"pubKeys", nil];
-}
-
 - (BOOL)isMultisig
 {
     return YES;
+}
+
+- (id)init
+{
+    self = [super init];
+    [self.serializedSlotNames addObjectsFromArray:[NSArray arrayWithObjects:
+                                                   @"pubKeys",
+                                                   nil]];
+    return self;
 }
 
 @end

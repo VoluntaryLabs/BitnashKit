@@ -7,7 +7,7 @@
 //
 
 #import "NSDictionary+BNJSON.h"
-#import "NSObject+BNJSON.h"
+#import "BNObject.h"
 
 @implementation NSDictionary (BNJSON)
 
@@ -27,7 +27,7 @@
     if (objType)
     {
         Class objClass = NSClassFromString(objType);
-        id obj = [[objClass alloc] init];
+        BNObject *obj = [[objClass alloc] init];
         [obj awakeFromJSONDict:self];
         return obj;
     }

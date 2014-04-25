@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "BNScriptPubKey.h"
+#import "BNObject.h"
 
-@interface BNTxOut : NSObject
+@interface BNTxOut : BNObject
 
 @property NSNumber *value;
 @property BNScriptPubKey *scriptPubKey;

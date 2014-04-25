@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BNObject.h"
 
 @class BNWallet;
 
-@interface BNTx : NSObject
+@interface BNTx : BNObject
 
 @property (weak) BNWallet *wallet;
 
@@ -20,10 +21,12 @@
 
 @property NSString *hash;
 
+- (id)sendToServer:(NSString *)message withArg:(id)arg;
+
 - (void)fillForValue:(long long)value;
 //fills the Transaction with inputs, outputs and a public key based on the transactions value
 
-- (void)addFee;
+- (void)subtractFee;
 //subtracts the estimated fee from the first output.
 
 - (void)sign;
@@ -37,5 +40,7 @@
 
 - (void)broadcast;
 //Broadcast to the network.
+
+- (void)ping;
 
 @end

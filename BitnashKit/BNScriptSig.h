@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BNObject.h"
 
-@interface BNScriptSig : NSObject
+@interface BNScriptSig : BNObject
+
+@property NSString *programHexBytes;
 
 @end

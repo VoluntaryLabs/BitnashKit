@@ -12,6 +12,11 @@
 
 @implementation BNWallet
 
++ (NSArray *)jsonProperties
+{
+    return [NSArray array];
+}
+
 - (id)init
 {
     self = [super init];
@@ -24,19 +29,19 @@
     _server.path = path;
 }
 
-- (NSError *) error
+- (BNError *) error
 {
     return _server.error;
 }
 
 - (NSNumber *)balance
 {
-    return [_server sendMessage:@"getBalance" withObject:nil];
+    return [_server sendMessage:@"balance" withObject:self withArg:nil];
 }
 
 - (NSString *)createAddress
 {
-    return [_server sendMessage:@"createAddress" withObject:nil];
+    return [_server sendMessage:@"createAddress" withObject:self withArg:nil];
 }
 
 - (BNEscrowTx *)newEscrowTx

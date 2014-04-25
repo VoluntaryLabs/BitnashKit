@@ -77,12 +77,24 @@
     }
     
     if (error) {
-        self.error = error;
+        BNError *bnError = [[BNError alloc] init];
+        bnError.description = [error localizedDescription];
+        self.error = bnError;
     }
 }
 
 - (id)sendMessage:(NSString *)messageName withObject:(id)object
 {
+    return [self sendMessage:messageName withObject:object withArg:nil];
+}
+
+- (id)sendMessage:(NSString *)messageName withObject:(id)object withArg:(id)arg
+{
+    if (arg == nil)
+    {
+        arg = [NSNull null];
+    }
+    
     if (!_started)
     {
         [self start];
@@ -98,7 +110,8 @@
         object = [NSNull null];
     }
     
-    [message setObject:[object asJSONObject] forKey:@"data"];
+    [message setObject:[object asJSONObject] forKey:@"obj"];
+    [message setObject:[arg asJSONObject] forKey:@"arg"];
     
     NSError *error = nil;
     
@@ -106,7 +119,9 @@
     
     if (error)
     {
-        self.error = error;
+        BNError *bnError = [[BNError alloc] init];
+        bnError.description = [error localizedDescription];
+        self.error = bnError;
         return nil;
     }
     
@@ -129,24 +144,24 @@ NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:N
     
     if (error)
     {
-        self.error = error;
-        if (self.logsErrors) {
-            NSLog(@"BNServer Error: %@", [_error localizedDescription]);
+        if (self.logsErrors)
+        {
+            NSLog(@"BNServer Error: %@", _error.description);
         }
         return nil;
     }
     
     if ([response objectForKey:@"error"])
     {
-        self.error = [NSError errorWithDomain:@"com.bitmarkets.Bitnash" code:0 userInfo:[NSDictionary dictionaryWithObject:[response objectForKey:@"error"] forKey:NSLocalizedDescriptionKey]];
+        self.error = [[response objectForKey:@"error"] asObjectFromJSONObject];
         if (self.logsErrors) {
-            NSLog(@"BNServer Error: %@", [_error localizedDescription]);
+            NSLog(@"BNServer Error: %@", error.description);
         }
         return nil;
     }
     else
     {
-        return [[response objectForKey:@"data"] asObjectFromJSONObject];
+        return [[response objectForKey:@"obj"] asObjectFromJSONObject];
     }
 }
 

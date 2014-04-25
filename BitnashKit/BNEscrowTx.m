@@ -15,25 +15,6 @@
 
 @implementation BNEscrowTx
 
-+ (NSArray *)jsonProperties
-{
-    return [NSArray arrayWithObjects:
-            @"inputs",
-            @"outputs",
-            @"hash",
-            @"isLocked",
-            nil];
-}
-
-- (void)fillForValue:(long long)value
-{
-    BNEscrowTx *tx = [self.wallet.server sendMessage:@"fillEscrowTx" withObject:[NSNumber numberWithLongLong:value]];
-    self.inputs = tx.inputs;
-    self.outputs = tx.outputs;
-    BNMultisigScriptPubKey *scriptPubKey = (BNMultisigScriptPubKey *)[self multisigOutput].scriptPubKey;
-    [scriptPubKey.pubKeys removeLastObject];
-}
-
 - (BNTxOut *)multisigOutput
 {
     for (BNTxOut *txOut in self.outputs)
@@ -58,25 +39,21 @@
     {
         if ([txOut.scriptPubKey isMultisig])
         {
-            [self multisigOutput].value = [NSNumber numberWithLongLong:[[self multisigOutput].value longLongValue] + [txOut.value longLongValue]];
+            BNTxOut *multisigOutput = [self multisigOutput];
             
-            BNMultisigScriptPubKey *myScriptPubKey = (BNMultisigScriptPubKey *)([self multisigOutput].scriptPubKey);
+            multisigOutput.value = [NSNumber numberWithLongLong:[multisigOutput.value longLongValue] + [txOut.value longLongValue]];
+            
+            BNMultisigScriptPubKey *multisigScriptPubKey = (BNMultisigScriptPubKey *)multisigOutput.scriptPubKey;
             BNMultisigScriptPubKey *txOutScriptPubKey = (BNMultisigScriptPubKey *)(txOut.scriptPubKey);
-            [myScriptPubKey.pubKeys addObjectsFromArray:txOutScriptPubKey.pubKeys];
+            
+            [multisigScriptPubKey.pubKeys removeLastObject];
+            [multisigScriptPubKey.pubKeys addObject:[txOutScriptPubKey.pubKeys firstObject]];
         }
         else
         {
             [self.outputs addObject:txOut];
         }
     }
-}
-
-- (void)sign
-{
-    BNEscrowTx *tx = [self.wallet.server sendMessage:@"signEscrowTx" withObject:self];
-    self.inputs = tx.inputs;
-    self.outputs = tx.outputs;
-    self.hash = tx.hash;
 }
 
 - (void)broadcast

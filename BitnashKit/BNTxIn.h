@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "BNScriptSig.h"
+#import "BNObject.h"
 
-@interface BNTxIn : NSObject
+@interface BNTxIn : BNObject
 
 @property BNScriptSig *scriptSig;
 @property NSNumber *previousOutIndex;

@@ -10,9 +10,14 @@
 
 @implementation BNTxOut
 
-+ (NSArray *)jsonProperties
+- (id)init
 {
-    return [NSArray arrayWithObjects:@"value", @"scriptPubKey", nil];
+    self = [super init];
+    [self.serializedSlotNames addObjectsFromArray:[NSArray arrayWithObjects:
+                                                   @"value",
+                                                   @"scriptPubKey",
+                                                   nil]];
+    return self;
 }
 
 @end

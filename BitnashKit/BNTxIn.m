@@ -10,9 +10,16 @@
 
 @implementation BNTxIn
 
-+ (NSArray *)jsonProperties
+- (id)init
 {
-    return [NSArray arrayWithObjects:@"scriptSig", @"previousTxSerializedHex", @"previousTxHash", @"previousOutIndex", nil];
+    self = [super init];
+    [self.serializedSlotNames addObjectsFromArray:[NSArray arrayWithObjects:
+                                                   @"scriptSig",
+                                                   @"previousTxSerializedHex",
+                                                   @"previousTxHash",
+                                                   @"previousOutIndex",
+                                                   nil]];
+    return self;
 }
 
 @end

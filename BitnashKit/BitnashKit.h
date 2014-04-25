@@ -16,5 +16,11 @@
 #import "BNTxIn.h"
 #import "BNTxOut.h"
 #import "BNPayToAddressScriptPubKey.h"
+#import "BNMultisigScriptSig.h"
+#import "NSObject+BNJSON.h"
+#import "NSArray+BNJSON.h"
+#import "NSDictionary+BNJSON.h"
+#import "NSString+BNJSON.h"
+#import "BNError.h"
 
 #endif

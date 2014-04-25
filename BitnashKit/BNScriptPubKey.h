@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BNObject.h"
 
-@interface BNScriptPubKey : NSObject
+@interface BNScriptPubKey : BNObject
 
 - (BOOL)isMultisig;
 

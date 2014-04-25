@@ -16,8 +16,4 @@
 
 - (id)asObjectFromJSONObject;
 
-- (void)awakeFromJSONDict:(NSDictionary *)dict;
-
-
-
 @end

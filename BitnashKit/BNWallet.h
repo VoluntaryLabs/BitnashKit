@@ -10,8 +10,9 @@
 #import "BNServer.h"
 #import "BNEscrowTx.h"
 #import "BNReleaseTx.h"
+#import "BNObject.h"
 
-@interface BNWallet : NSObject
+@interface BNWallet : BNObject
 
 //1. Get Balance (seller)
 //2. Get Deposit Address (seller)
