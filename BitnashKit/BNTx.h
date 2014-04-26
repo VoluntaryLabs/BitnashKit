@@ -23,6 +23,8 @@
 
 - (id)sendToServer:(NSString *)message withArg:(id)arg;
 
+- (id)sendToServer:(NSString *)message;
+
 - (void)fillForValue:(long long)value;
 //fills the Transaction with inputs, outputs and a public key based on the transactions value
 
@@ -40,6 +42,9 @@
 
 - (void)broadcast;
 //Broadcast to the network.
+
+- (BOOL)isConfirmed;
+//YES if this tx is in a block from the longest chain.
 
 - (void)ping;
 

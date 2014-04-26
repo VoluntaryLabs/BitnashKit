@@ -184,7 +184,12 @@
     
     //[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(showBalances) userInfo:nil repeats:YES];
     
-    [self showBalances];
+    //[self showBalances];
+    
+    BNTx *tx = [[BNTx alloc] init];
+    tx.wallet = _buyerWallet;
+    tx.hash = @"1f0a6a48812473fd7a63aa675e7f87b0a983f26c37f24f95e09052ca658cec6d";
+    NSLog(@"%i", [tx isConfirmed]);
     
     //[self debugEscrow];
     //[self debugRelease];

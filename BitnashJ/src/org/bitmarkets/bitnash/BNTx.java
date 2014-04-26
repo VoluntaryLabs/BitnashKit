@@ -7,7 +7,9 @@ import org.json.simple.JSONArray;
 
 import com.google.bitcoin.core.AddressFormatException;
 import com.google.bitcoin.core.NetworkParameters;
+import com.google.bitcoin.core.Sha256Hash;
 import com.google.bitcoin.core.Transaction;
+import com.google.bitcoin.core.TransactionConfidence;
 import com.google.bitcoin.core.TransactionInput;
 import com.google.bitcoin.core.TransactionOutput;
 import com.google.bitcoin.core.Wallet;
@@ -96,6 +98,10 @@ public class BNTx extends BNObject {
 		return this;
 	}
 	
+	public Boolean apiIsConfirmed(Object args) {
+		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
+	}
+	
 	BNError error;
 	JSONArray inputs;
 	JSONArray outputs;
@@ -127,8 +133,10 @@ public class BNTx extends BNObject {
 	}
 	
 	void didDeserializeSelf() {
-		//TODO load from hash
-		transaction = new Transaction(networkParams());
+		transaction = wallet().getTransaction(new Sha256Hash(hash));
+		if (transaction == null) {
+			transaction = new Transaction(networkParams());
+		}
 	}
 	
 	

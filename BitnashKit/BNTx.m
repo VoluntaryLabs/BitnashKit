@@ -34,6 +34,11 @@
     return result;
 }
 
+- (id)sendToServer:(NSString *)message
+{
+    return [self sendToServer:message withArg:nil];
+}
+
 - (void)fillForValue:(long long)value
 {
     [self copySlotsFrom:[self sendToServer:@"fillForValue" withArg:[NSNumber numberWithLongLong:value]]];
@@ -73,6 +78,11 @@
 - (void)ping
 {
     [self.wallet.server sendMessage:@"ping" withObject:self];
+}
+
+- (BOOL)isConfirmed
+{
+    return [(NSNumber *)[self sendToServer:@"isConfirmed"] boolValue];
 }
 
 @end
