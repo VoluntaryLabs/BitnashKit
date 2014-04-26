@@ -17,7 +17,6 @@
 
 @property NSMutableArray *inputs;
 @property NSMutableArray *outputs;
-@property NSNumber *isLocked;
 
 @property NSString *hash;
 
@@ -45,6 +44,12 @@
 
 - (BOOL)isConfirmed;
 //YES if this tx is in a block from the longest chain.
+
+- (void)markInputsAsSpent;
+//Marks the inputs as spent so they won't be used for subsequent txs
+
+- (void)markInputsAsUnspent;
+//Marks the inputs as spent so they won't be used for subsequent txs
 
 - (void)ping;
 

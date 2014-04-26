@@ -25,7 +25,7 @@
     
     [wallet setPath:dataPath];
     wallet.server.logsStderr = YES;
-    wallet.server.logsErrors = YES;
+    //wallet.server.logsErrors = YES;
     return wallet;
 }
 
@@ -184,12 +184,24 @@
     
     //[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(showBalances) userInfo:nil repeats:YES];
     
-    //[self showBalances];
+    [self showBalances];
     
-    BNTx *tx = [[BNTx alloc] init];
+    /*
+    NSLog(@"\n\nbuyer balance: %@\n\n", [_buyerWallet balance]);
+    
+    BNEscrowTx *tx = [[BNEscrowTx alloc] init];
     tx.wallet = _buyerWallet;
-    tx.hash = @"1f0a6a48812473fd7a63aa675e7f87b0a983f26c37f24f95e09052ca658cec6d";
-    NSLog(@"%i", [tx isConfirmed]);
+    [tx fillForValue:20000];
+    [tx markInputsAsSpent];
+    [tx writeToFile:@"/Users/richcollins/Downloads/tx-filled.json"];
+    
+    NSLog(@"\n\nbuyer balance: %@\n\n", [_buyerWallet balance]);
+    
+    [tx markInputsAsUnspent];
+    
+    NSLog(@"\n\nbuyer balance: %@\n\n", [_buyerWallet balance]);
+     */
+    
     
     //[self debugEscrow];
     //[self debugRelease];

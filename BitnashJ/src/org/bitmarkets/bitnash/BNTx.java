@@ -15,6 +15,11 @@ import com.google.bitcoin.core.TransactionOutput;
 import com.google.bitcoin.core.Wallet;
 
 public class BNTx extends BNObject {
+	public BNTx() {
+		super();
+		bnSlotNames.addAll(Arrays.asList("error", "inputs", "outputs", "hash"));
+	}
+	
 	public BNError getError() {
 		return error;
 	}
@@ -53,14 +58,6 @@ public class BNTx extends BNObject {
 	
 	public void setHash(String hash) {
 		this.hash = hash;
-	}
-	
-	public Boolean getIsLocked() {
-		return isLocked;
-	}
-	
-	public void setIsLocked(Boolean isLocked) {
-		this.isLocked = isLocked;
 	}
 	
 	//TODO subtract fees evenly from change outputs rather than multisig?
@@ -102,18 +99,28 @@ public class BNTx extends BNObject {
 		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
 	}
 	
+	public BNTx apiMarkInputsAsSpent(Object args) {
+		for (Object inputObj : inputs) {
+			TransactionInput input = ((BNTxIn) inputObj).transactionInput();
+			input.getConnectedOutput().markAsSpent(input);
+		}
+		return this;
+	}
+	
+	public BNTx apiMarkInputsAsUnspent(Object args) {
+		for (Object inputObj : inputs) {
+			TransactionInput input = ((BNTxIn) inputObj).transactionInput();
+			input.getConnectedOutput().markAsUnspent();
+		}
+		return this;
+	}
+	
 	BNError error;
 	JSONArray inputs;
 	JSONArray outputs;
 	String hash;
-	Boolean isLocked;
 	
 	Transaction transaction;
-	
-	public BNTx() {
-		super();
-		bnSlotNames.addAll(Arrays.asList("error", "inputs", "outputs", "hash", "isLocked"));
-	}
 	
 	void resetSlots() {
 		inputs = new JSONArray();
@@ -133,7 +140,10 @@ public class BNTx extends BNObject {
 	}
 	
 	void didDeserializeSelf() {
-		transaction = wallet().getTransaction(new Sha256Hash(hash));
+		if (hash != null) {
+			transaction = wallet().getTransaction(new Sha256Hash(hash));
+		}
+		
 		if (transaction == null) {
 			transaction = new Transaction(networkParams());
 		}

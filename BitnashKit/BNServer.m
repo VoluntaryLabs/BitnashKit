@@ -125,7 +125,7 @@
         return nil;
     }
     
-NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+//NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
     [[_task.standardInput fileHandleForWriting] writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -138,7 +138,7 @@ NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:jsonData encoding:NSU
         [output appendData:data];
     }
     
-NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
+//NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
     

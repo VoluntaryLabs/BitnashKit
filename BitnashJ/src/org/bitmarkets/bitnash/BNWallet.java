@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 
 import com.google.bitcoin.core.*;
 import com.google.bitcoin.kits.WalletAppKit;
-import com.google.bitcoin.wallet.AllowUnconfirmedCoinSelector;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 public class BNWallet extends BNObject {
@@ -24,7 +23,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	public BigInteger getBalance() {
-		return walletAppKit.wallet().getBalance(new AllowUnconfirmedCoinSelector()); //TODO
+		return walletAppKit.wallet().getBalance();
 	}
 	
 	public String apiCreateAddress(Object args) {

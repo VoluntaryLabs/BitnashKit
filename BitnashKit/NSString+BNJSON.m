@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Bitmarkets. All rights reserved.
 //
 
-#import "NSString+BNJSON.h"
+
 #import "NSObject+BNJSON.h"
+#import "NSString+BNJSON.h"
+
 
 @implementation NSString (BNJSON)
 
@@ -17,14 +19,14 @@
     
     id object = [NSJSONSerialization JSONObjectWithData:[self dataUsingEncoding:NSUTF8StringEncoding] options:0x0 error:&error];
      
-     if (error)
-     {
-         return nil;
-     }
-     else
-     {
-         return [object asObjectFromJSONObject];
-     }
+    if (error)
+    {
+        return nil;
+    }
+    else
+    {
+        return [object asObjectFromJSONObject];
+    }
 }
 
 @end

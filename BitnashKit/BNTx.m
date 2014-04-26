@@ -14,7 +14,6 @@
 - (id)init
 {
     self = [super init];
-    self.isLocked = [NSNumber numberWithBool:NO];
     self.inputs = [NSMutableArray array];
     self.outputs = [NSMutableArray array];
     [self.serializedSlotNames addObjectsFromArray:[NSArray arrayWithObjects:
@@ -22,7 +21,6 @@
                                                    @"inputs",
                                                    @"outputs",
                                                    @"hash",
-                                                   @"isLocked",
                                                    nil]];
     return self;
 }
@@ -83,6 +81,16 @@
 - (BOOL)isConfirmed
 {
     return [(NSNumber *)[self sendToServer:@"isConfirmed"] boolValue];
+}
+
+- (void)markInputsAsSpent
+{
+    [self sendToServer:@"markInputsAsSpent"];
+}
+
+- (void)markInputsAsUnspent
+{
+    [self sendToServer:@"markInputsAsUnspent"];
 }
 
 @end
