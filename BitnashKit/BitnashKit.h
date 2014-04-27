@@ -11,11 +11,11 @@
 
 #import "BNServer.h"
 #import "BNWallet.h"
-#import "BNEscrowTx.h"
-#import "BNReleaseTx.h"
+#import "BNTx.h"
 #import "BNTxIn.h"
 #import "BNTxOut.h"
 #import "BNPayToAddressScriptPubKey.h"
+#import "BNMultisigScriptPubKey.h"
 #import "BNMultisigScriptSig.h"
 #import "NSObject+BNJSON.h"
 #import "NSArray+BNJSON.h"

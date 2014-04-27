@@ -8,6 +8,7 @@
 
 #import "BNTx.h"
 #import "BNWallet.h"
+#import "BNMultisigScriptPubKey.h"
 
 @implementation BNTx
 
@@ -37,45 +38,86 @@
     return [self sendToServer:message withArg:nil];
 }
 
-- (void)fillForValue:(long long)value
+- (BNTxOut *)newOutput
 {
-    [self copySlotsFrom:[self sendToServer:@"fillForValue" withArg:[NSNumber numberWithLongLong:value]]];
+    BNTxOut *newOutput = [[BNTxOut alloc] init];
+    [_outputs addObject:newOutput];
+    return newOutput;
+}
+
+- (void)configureForEscrowWithValue:(long long)value
+{
+    BNTxOut *txOut = [self newOutput];
+    
+    txOut.value = [NSNumber numberWithLongLong:value];
+    
+    BNMultisigScriptPubKey *script = [[BNMultisigScriptPubKey alloc] init];
+    NSString *pubKey = [_wallet createPubKey];
+    [script.pubKeys addObject:pubKey];
+    [script.pubKeys addObject:pubKey]; //do it twice to properly estimate tx size for fees
+    txOut.scriptPubKey = script;
+    
+    [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
 }
 
 - (void)subtractFee
 {
-    BNTx *tx = [self.wallet.server sendMessage:@"subtractFee" withObject:self];
-    self.inputs = tx.inputs;
-    self.outputs = tx.outputs;
-    self.hash = tx.hash;
+    [self copySlotsFrom:[self sendToServer:@"subtractFee"]];
+}
+
+- (BNMultisigScriptPubKey *)multisigScriptPubKey
+{
+    return (BNMultisigScriptPubKey *)([self multisigOutput].scriptPubKey);
+}
+
+- (BNTx *)mergedWithEscrowTx:(BNTx *)tx
+{
+    BNTx *mergedTx = [[BNTx alloc] init];
+    mergedTx.wallet = _wallet;
+    
+    [mergedTx.inputs addObjectsFromArray:_inputs];
+    [mergedTx.inputs addObjectsFromArray:tx.inputs];
+    
+    [mergedTx.outputs addObjectsFromArray:_outputs];
+    [mergedTx.outputs addObjectsFromArray:tx.outputs];
+    
+    while ([mergedTx multisigOutput])
+    {
+        [mergedTx.outputs removeObject:[mergedTx multisigOutput]];
+    }
+    
+    BNTxOut *newMultisigOut = [mergedTx newOutput];
+    newMultisigOut.value = [NSNumber numberWithLongLong:[self multisigOutput].value.longLongValue + [tx multisigOutput].value.longLongValue];
+    
+    BNMultisigScriptPubKey *multisigScriptPubKey = [[BNMultisigScriptPubKey alloc] init];
+    [multisigScriptPubKey.pubKeys addObject:[[self multisigScriptPubKey].pubKeys firstObject]];
+    [multisigScriptPubKey.pubKeys addObject:[[tx multisigScriptPubKey].pubKeys firstObject]];
+    
+    newMultisigOut.scriptPubKey = multisigScriptPubKey;
+     
+    return mergedTx;
 }
 
 - (void)sign
 {
-    BNTx *tx = [self.wallet.server sendMessage:@"sign" withObject:self];
-    self.inputs = tx.inputs;
-    self.outputs = tx.outputs;
-    self.hash = tx.hash;
+    [self copySlotsFrom:[self sendToServer:@"sign"]];
 }
 
-- (void)addInputsFromTx:(BNEscrowTx *)tx
+- (BNTxOut *)multisigOutput
 {
-    
-}
-
-- (void)mergeWithTx:(BNEscrowTx *)tx
-{
-    
+    for (BNTxOut *txOut in self.outputs)
+    {
+        if ([txOut.scriptPubKey isMultisig])
+        {
+            return txOut;
+        }
+    }
+    return nil;
 }
 
 - (void)broadcast
 {
-    [self.wallet.server sendMessage:@"broadcast" withObject:self];
-}
-
-- (void)ping
-{
-    [self.wallet.server sendMessage:@"ping" withObject:self];
+    [self sendToServer:@"broadcast"];
 }
 
 - (BOOL)isConfirmed

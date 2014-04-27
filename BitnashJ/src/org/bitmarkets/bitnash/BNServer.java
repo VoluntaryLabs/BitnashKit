@@ -17,7 +17,7 @@ public class BNServer {
 			try {
 //System.err.println("waiting for line ...");
 				line = reader.readLine();
-//System.err.println("BitcoinJ Received: " + line);
+System.err.println("BitcoinJ Received: " + line);
 				if (line == null) {
 					break;
 				} else {
@@ -82,7 +82,7 @@ public class BNServer {
 				outgoingMessage.put("error", e2.toString());
 			}
 		}
-//System.err.println("BitcoinJ Sending: " + outgoingMessage.toJSONString());
+System.err.println("BitcoinJ Sending: " + outgoingMessage.toJSONString());
 		System.out.println(outgoingMessage.toJSONString());
 	}
 	

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BNObject.h"
+#import "BNTxOut.h"
 
 @class BNWallet;
 
@@ -20,24 +21,20 @@
 
 @property NSString *hash;
 
-- (id)sendToServer:(NSString *)message withArg:(id)arg;
+- (BNTxOut *)newOutput;
+//Creates a new BNTxOut and adds it to the outputs array.
 
-- (id)sendToServer:(NSString *)message;
-
-- (void)fillForValue:(long long)value;
-//fills the Transaction with inputs, outputs and a public key based on the transactions value
+- (void)configureForEscrowWithValue:(long long)value;
+//sets up transaction for a 2 of 2 multisig output w/ given value.  Also selects inputs and change address.  Doesn't add fees.
 
 - (void)subtractFee;
-//subtracts the estimated fee from the first output.
+//subtracts the estimated fees from the first output.
 
 - (void)sign;
 //signs the inputs owned by wallet associated with this tx.
 
-- (void)addInputsFromTx:(BNTx *)tx;
-//Adds the inputs from tx.
-
-- (void)mergeWithTx:(BNTx *)tx;
-//Merges the inputs and outputs from tx.
+- (BNTx *)mergedWithEscrowTx:(BNTx *)tx;
+//Returns a new BNTx that includes the inputs and outputs from this BNTx and the tx arg.  The multisig outputs are merged into a single multisig output with a value summed from the others and a set of pubkeys derrived from the first pubkey from any existing multisig output.
 
 - (void)broadcast;
 //Broadcast to the network.
@@ -50,7 +47,5 @@
 
 - (void)markInputsAsUnspent;
 //Marks the inputs as spent so they won't be used for subsequent txs
-
-- (void)ping;
 
 @end

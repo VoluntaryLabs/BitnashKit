@@ -15,8 +15,8 @@
 
 @property BNWallet *buyerWallet;
 @property BNWallet *sellerWallet;
-@property BNEscrowTx *escrowTx;
-@property BNReleaseTx *releaseTx;
+@property BNTx *escrowTx;
+@property BNTx *releaseTx;
 
 @property IBOutlet NSTextField *textField;
 @property IBOutlet NSImageView *imageView;

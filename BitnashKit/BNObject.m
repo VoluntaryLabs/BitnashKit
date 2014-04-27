@@ -72,6 +72,7 @@
     [[self asJSONString] writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
+//TODO better implementation
 - (void)copySlotsFrom:(BNObject *)other
 {
     [self awakeFromJSONDict:[other asJSONObject]];

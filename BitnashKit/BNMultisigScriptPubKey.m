@@ -21,6 +21,7 @@
     [self.serializedSlotNames addObjectsFromArray:[NSArray arrayWithObjects:
                                                    @"pubKeys",
                                                    nil]];
+    self.pubKeys = [NSMutableArray array];
     return self;
 }
 

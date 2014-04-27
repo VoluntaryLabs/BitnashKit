@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "BNServer.h"
-#import "BNEscrowTx.h"
-#import "BNReleaseTx.h"
 #import "BNObject.h"
+#import "BNTx.h"
 
 @interface BNWallet : BNObject
 
@@ -47,10 +46,9 @@
 - (NSString *)createAddress;
 //Create a new keypair for the wallet and return the address.
 
-- (BNEscrowTx *)newEscrowTx;
-//Create a new BNEscrowTransaction for this Wallet and return it.
+- (NSString *)createPubKey;
+//Create a new keypair for the wallet and return the pubKey.
 
-- (BNReleaseTx *)newReleaseTx;
-//Create a new BNReleaseTx for this Wallet and return it.
+- (BNTx *)newTx;
 
 @end

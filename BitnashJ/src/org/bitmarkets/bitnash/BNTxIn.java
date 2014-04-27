@@ -80,9 +80,10 @@ public class BNTxIn extends BNObject {
 	String previousTxHash;
 	
 	void signPayToAddress() {
-		TransactionSignature txSig = signUsingKey(transactionInput().getOutpoint().getConnectedKey(wallet()));
+		ECKey key = transactionInput().getOutpoint().getConnectedKey(wallet());
+		TransactionSignature txSig = signUsingKey(key);
 		if (txSig != null) {
-			transactionInput().setScriptSig(ScriptBuilder.createInputScript(txSig));
+			transactionInput().setScriptSig(ScriptBuilder.createInputScript(txSig, key));
 		}
 	}
 	
@@ -166,6 +167,7 @@ public class BNTxIn extends BNObject {
 	void willSerializeSelf() {
 		setPreviousOutIndex(BigInteger.valueOf(transactionInput().getOutpoint().getIndex()));
 		setPreviousTxHash(transactionInput().getConnectedOutput().getParentTransaction().getHashAsString());
+		setPreviousTxSerializedHex(Utils.bytesToHexString(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
 		
 		if (transactionInput().getScriptSig() != null && transactionInput().getScriptSig().getChunks().size() > 0) {
 			scriptSig = new BNScriptSig();

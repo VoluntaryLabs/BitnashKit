@@ -7,6 +7,7 @@
 //
 
 #import "BNWallet.h"
+#import "BNTx.h"
 #import "NSObject+BNJSON.h"
 #import "NSString+BNJSON.h"
 
@@ -44,16 +45,15 @@
     return [_server sendMessage:@"createAddress" withObject:self withArg:nil];
 }
 
-- (BNEscrowTx *)newEscrowTx
+- (NSString *)createPubKey
 {
-    BNEscrowTx *tx = [[BNEscrowTx alloc] init];
-    tx.wallet = self;
-    return tx;
+    return [_server sendMessage:@"createPubKey" withObject:self withArg:nil];
 }
 
-- (BNReleaseTx *)newReleaseTx
+
+- (BNTx *)newTx
 {
-    BNReleaseTx *tx = [[BNReleaseTx alloc] init];
+    BNTx *tx = [[BNTx alloc] init];
     tx.wallet = self;
     return tx;
 }

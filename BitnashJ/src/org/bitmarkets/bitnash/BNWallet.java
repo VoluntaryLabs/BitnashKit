@@ -33,6 +33,13 @@ public class BNWallet extends BNObject {
 		return key.toAddress(walletAppKit.wallet().getParams()).toString();
 	}
 	
+	public String apiCreatePubKey(Object args) {
+		ECKey key = new ECKey();
+		walletAppKit.wallet().addKey(key);
+		
+		return Utils.bytesToHexString(key.getPubKey());
+	}
+	
 	public Wallet wallet() {
 		return walletAppKit.wallet();
 	}

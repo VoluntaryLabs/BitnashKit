@@ -24,7 +24,7 @@
     [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:YES attributes:nil error:&error];
     
     [wallet setPath:dataPath];
-    wallet.server.logsStderr = YES;
+    //wallet.server.logsStderr = YES;
     //wallet.server.logsErrors = YES;
     return wallet;
 }
@@ -37,26 +37,7 @@
     NSString *paymentUrl = [NSString stringWithFormat:@"bitcoin:%@?amount=%@",
                             address,
                             amount];
-    
-    /*
-    CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    [qrFilter setValue:[paymentUrl dataUsingEncoding:NSUTF8StringEncoding] forKey:@"inputMessage"];
-    [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
-    
-    CGAffineTransform xForm = CGAffineTransformMakeScale(5.0f, 5.0f);
-    [qrFilter setValue:[NSValue valueWithBytes:&xForm objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
-    
-    [qrFilter setValue:kCISamplerFilterLinear forKey:kCISamplerFilterMode];
-    
-    CIImage *ciImage = [qrFilter valueForKey:kCIOutputImageKey];
-    
-    //ciImage = [ciImage imageByApplyingTransform:CGAffineTransformMakeScale(5.0f, 5.0f)];
-    
-    NSCIImageRep *rep = [NSCIImageRep imageRepWithCIImage:ciImage];
-    NSImage *nsImage = [[NSImage alloc] initWithSize:rep.size];
-    [nsImage addRepresentation:rep];
-     */
-    
+
     _imageView.image = [QRCodeGenerator qrImageForString:paymentUrl imageSize:256.0];
     
     [_textField setStringValue:[NSString stringWithFormat:@"Insufficient Value.  Please send %@ to %@", amount, address]];
@@ -64,10 +45,10 @@
 
 - (void)debugEscrow
 {
-    BNEscrowTx *buyerTx = [[BNEscrowTx alloc] init];
-    
+    BNTx *buyerTx = [[BNTx alloc] init];
     buyerTx.wallet = _buyerWallet;
-    [buyerTx fillForValue:50000];
+    [buyerTx configureForEscrowWithValue:50000];
+    [buyerTx writeToFile:@"/tmp/buyer-escrow-tx.json"];
     
     if (buyerTx.error)
     {
@@ -75,13 +56,14 @@
         {
             [self showInsufficientValueError:buyerTx];
         }
+        
         return;
     }
-    [buyerTx writeToFile:@"/Users/richcollins/Downloads/escrow-filled-buyer.json"];
     
-    BNEscrowTx *sellerTx = [[BNEscrowTx alloc] init];
+    BNTx *sellerTx = [[BNTx alloc] init];
     sellerTx.wallet = _sellerWallet;
-    [sellerTx fillForValue:50000];
+    [sellerTx configureForEscrowWithValue:50000];
+    [sellerTx writeToFile:@"/tmp/seller-escrow-tx.json"];
     
     if (sellerTx.error)
     {
@@ -89,32 +71,36 @@
         {
             [self showInsufficientValueError:sellerTx];
         }
+        
         return;
     }
-    [sellerTx writeToFile:@"/Users/richcollins/Downloads/escrow-filled-seller.json"];
     
-    _escrowTx = sellerTx;
+    _escrowTx = [sellerTx mergedWithEscrowTx:buyerTx];
     
-    [_escrowTx mergeWithTx:buyerTx];
+    [_escrowTx writeToFile:@"/tmp/escrow-tx-merged.json"];
+    
+    [_escrowTx subtractFee];
+    
+    [_escrowTx writeToFile:@"/tmp/escrow-tx-with_fees.json"];
     
     [_escrowTx sign];
-    [_escrowTx writeToFile:@"/Users/richcollins/Downloads/escrow-signed-seller.json"];
+    
+    [_escrowTx writeToFile:@"/tmp/escrow-tx-seller-signed.json"];
     
     _escrowTx.wallet = _buyerWallet;
     [_escrowTx sign];
-    [_escrowTx writeToFile:@"/Users/richcollins/Downloads/escrow-signed-buyer.json"];
+    
+    [_escrowTx writeToFile:@"/tmp/escrow-tx-fully-signed.json"];
     
     [_escrowTx broadcast];
-    [_escrowTx writeToFile:@"/Users/richcollins/Downloads/escrow-broadcasted-buyer.json"];
     
     _escrowTx.wallet = _sellerWallet;
     [_escrowTx broadcast];
-    [_escrowTx writeToFile:@"/Users/richcollins/Downloads/escrow-broadcasted-seller.json"];
 }
 
 - (void)debugRelease
 {
-    self.releaseTx = [[BNReleaseTx alloc] init];
+    self.releaseTx = [[BNTx alloc] init];
     _releaseTx.wallet = _sellerWallet;
     BNTxIn *txIn = [[BNTxIn alloc] init];
     txIn.previousOutIndex = [NSNumber numberWithInt:0];
@@ -140,25 +126,15 @@
     
     [_releaseTx.outputs addObject:txOut];
     
-    [_releaseTx writeToFile:@"/Users/richcollins/Downloads/release-unsigned.json"];
-    
     [_releaseTx subtractFee];
-    
-    [_releaseTx writeToFile:@"/Users/richcollins/Downloads/release-with-fees.json"];
-    
     [_releaseTx sign];
-    
-    [_releaseTx writeToFile:@"/Users/richcollins/Downloads/release-signed-seller.json"];
     
     _releaseTx.wallet = _buyerWallet;
     [_releaseTx sign];
     
-    [_releaseTx writeToFile:@"/Users/richcollins/Downloads/release-signed-buyer.json"];
-    
     [_releaseTx broadcast];
     
     _releaseTx.wallet = _sellerWallet;
-    
     [_releaseTx broadcast];
     
     //http://testnet.btclook.com/txn/bd9f6215244f1059fdf853c2fd01f96ffa53aef6efc77846e4064cc904bf012b
@@ -182,26 +158,7 @@
     [_buyerWallet.server start];
     [_sellerWallet.server start];
     
-    //[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(showBalances) userInfo:nil repeats:YES];
-    
     [self showBalances];
-    
-    /*
-    NSLog(@"\n\nbuyer balance: %@\n\n", [_buyerWallet balance]);
-    
-    BNEscrowTx *tx = [[BNEscrowTx alloc] init];
-    tx.wallet = _buyerWallet;
-    [tx fillForValue:20000];
-    [tx markInputsAsSpent];
-    [tx writeToFile:@"/Users/richcollins/Downloads/tx-filled.json"];
-    
-    NSLog(@"\n\nbuyer balance: %@\n\n", [_buyerWallet balance]);
-    
-    [tx markInputsAsUnspent];
-    
-    NSLog(@"\n\nbuyer balance: %@\n\n", [_buyerWallet balance]);
-     */
-    
     
     //[self debugEscrow];
     //[self debugRelease];
