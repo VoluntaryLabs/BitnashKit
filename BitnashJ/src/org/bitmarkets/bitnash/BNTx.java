@@ -1,6 +1,7 @@
 package org.bitmarkets.bitnash;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.json.simple.JSONArray;
@@ -142,6 +143,21 @@ public class BNTx extends BNObject {
 		return this;
 	}
 	
+	public BNTx apiRemoveForeignInputs(Object args) {
+		ArrayList<TransactionInput> allInputs = new ArrayList<TransactionInput>(transaction.getInputs());
+		transaction.clearInputs();
+		for (TransactionInput input : allInputs) {
+			if (input.getConnectedOutput().isMine(wallet())) {
+				transaction.addInput(input);
+			}
+		}
+		return this;
+	}
+	
+	public BigInteger apiInputValue(Object args) {
+		return inputValue();
+	}
+	
 	BNError error;
 	JSONArray inputs;
 	JSONArray outputs;
@@ -154,12 +170,18 @@ public class BNTx extends BNObject {
 		outputs = new JSONArray();
 	}
 	
-	BigInteger fees() {
-		BigInteger fees = BigInteger.valueOf(0);
+	BigInteger inputValue() {
+		BigInteger value = BigInteger.valueOf(0);
 		
 		for (TransactionInput input : transaction.getInputs()) {
-			fees = fees.add(input.getConnectedOutput().getValue());
+			value = value.add(input.getConnectedOutput().getValue());
 		}
+		
+		return value;
+	}
+	
+	BigInteger fees() {
+		BigInteger fees = inputValue();
 		
 		for (TransactionOutput output : transaction.getOutputs()) {
 			fees = fees.subtract(output.getValue());

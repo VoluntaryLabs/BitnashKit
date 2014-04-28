@@ -48,4 +48,7 @@
 - (void)markInputsAsUnspent;
 //Marks the inputs as spent so they won't be used for subsequent txs
 
+- (BNTx *)cancellationTx;
+//Returns a new transaction that sends this transactions inputs back to this transactions wallet
+
 @end

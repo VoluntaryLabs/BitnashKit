@@ -24,7 +24,7 @@
     [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:YES attributes:nil error:&error];
     
     [wallet setPath:dataPath];
-    //wallet.server.logsStderr = YES;
+    wallet.server.logsStderr = YES;
     //wallet.server.logsErrors = YES;
     return wallet;
 }
@@ -92,6 +92,11 @@
     
     [_escrowTx writeToFile:@"/tmp/escrow-tx-fully-signed.json"];
     
+    BNTx *cancellationTx = [_escrowTx cancellationTx];
+    [cancellationTx writeToFile:@"/tmp/cancellation.json"];
+    
+    return;
+    
     [_escrowTx broadcast];
     
     _escrowTx.wallet = _sellerWallet;
@@ -158,9 +163,9 @@
     [_buyerWallet.server start];
     [_sellerWallet.server start];
     
-    [self showBalances];
+    //[self showBalances];
     
-    //[self debugEscrow];
+    [self debugEscrow];
     //[self debugRelease];
 }
 

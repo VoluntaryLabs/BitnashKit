@@ -9,6 +9,7 @@
 #import "BNTx.h"
 #import "BNWallet.h"
 #import "BNMultisigScriptPubKey.h"
+#import "BNPayToAddressScriptPubKey.h"
 
 @implementation BNTx
 
@@ -133,6 +134,24 @@
 - (void)markInputsAsUnspent
 {
     [self sendToServer:@"markInputsAsUnspent"];
+}
+
+- (BNTx *)cancellationTx
+{
+    BNTx *tx = [self sendToServer:@"removeForeignInputs"];
+    tx.wallet = _wallet;
+    [tx.outputs removeAllObjects];
+    
+    BNTxOut *txOut = [tx newOutput];
+    txOut.value = [tx sendToServer:@"inputValue"];
+    
+    BNPayToAddressScriptPubKey *scriptPubKey = [[BNPayToAddressScriptPubKey alloc] init];
+    scriptPubKey.address = [_wallet createAddress];
+    txOut.scriptPubKey = scriptPubKey;
+    
+    [tx subtractFee];
+    
+    return tx;
 }
 
 @end
