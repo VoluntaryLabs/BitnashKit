@@ -15,6 +15,8 @@
 		DC261F4318CD21FB005328DA /* NSDictionary+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */; };
 		DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC4F2FAF19039CD0008803F7 /* NSNull+BNJSON.h */; };
 		DC4F2FB219039CD0008803F7 /* NSNull+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */; };
+		DC5A24881910605F00D48B14 /* bitcoinj.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5A24871910605F00D48B14 /* bitcoinj.jar */; };
+		DC5A24891910606900D48B14 /* bitcoinj.jar in Resources */ = {isa = PBXBuildFile; fileRef = DC5A24871910605F00D48B14 /* bitcoinj.jar */; };
 		DC6161AF18CFBF7900F7B602 /* NSString+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC6161AD18CFBF7900F7B602 /* NSString+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC6161B018CFBF7900F7B602 /* NSString+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6161AE18CFBF7900F7B602 /* NSString+BNJSON.m */; };
 		DC85CBB718CBE1D400942C9D /* BitnashKit.h in Headers */ = {isa = PBXBuildFile; fileRef = DC85CBB618CBE13800942C9D /* BitnashKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,11 +49,9 @@
 		DCE23FC718CC36C900F64729 /* BNScriptSig.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE23FC518CC36C900F64729 /* BNScriptSig.m */; };
 		DCE3D9CE18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCE3D9CC18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE3D9CD18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m */; };
-		DCE5E284190AFF640005396A /* bitcoinj-0.11-bundled.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE5E281190AFF640005396A /* bitcoinj-0.11-bundled.jar */; };
 		DCE5E285190AFF640005396A /* json-simple-1.1.1.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE5E282190AFF640005396A /* json-simple-1.1.1.jar */; };
 		DCE5E286190AFF640005396A /* slf4j-simple-1.7.6.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE5E283190AFF640005396A /* slf4j-simple-1.7.6.jar */; };
 		DCE5E28B190B02FF0005396A /* org in Resources */ = {isa = PBXBuildFile; fileRef = DCE5E28A190B02FF0005396A /* org */; };
-		DCE5E28C190B034D0005396A /* bitcoinj-0.11-bundled.jar in Resources */ = {isa = PBXBuildFile; fileRef = DCE5E281190AFF640005396A /* bitcoinj-0.11-bundled.jar */; };
 		DCE5E28D190B034D0005396A /* json-simple-1.1.1.jar in Resources */ = {isa = PBXBuildFile; fileRef = DCE5E282190AFF640005396A /* json-simple-1.1.1.jar */; };
 		DCE5E28E190B034D0005396A /* slf4j-simple-1.7.6.jar in Resources */ = {isa = PBXBuildFile; fileRef = DCE5E283190AFF640005396A /* slf4j-simple-1.7.6.jar */; };
 		DCF1CBFB18FF01CC00AE815A /* BNError.h in Headers */ = {isa = PBXBuildFile; fileRef = DCF1CBF918FF01CC00AE815A /* BNError.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,6 +79,7 @@
 		DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BNJSON.m"; sourceTree = "<group>"; };
 		DC4F2FAF19039CD0008803F7 /* NSNull+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+BNJSON.h"; sourceTree = "<group>"; };
 		DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+BNJSON.m"; sourceTree = "<group>"; };
+		DC5A24871910605F00D48B14 /* bitcoinj.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = bitcoinj.jar; path = BitnashJ/lib/bitcoinj.jar; sourceTree = "<group>"; };
 		DC6161AD18CFBF7900F7B602 /* NSString+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BNJSON.h"; sourceTree = "<group>"; };
 		DC6161AE18CFBF7900F7B602 /* NSString+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BNJSON.m"; sourceTree = "<group>"; };
 		DC85CBB618CBE13800942C9D /* BitnashKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitnashKit.h; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		DCE23FC518CC36C900F64729 /* BNScriptSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNScriptSig.m; sourceTree = "<group>"; };
 		DCE3D9CC18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPayToAddressScriptPubKey.h; sourceTree = "<group>"; };
 		DCE3D9CD18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPayToAddressScriptPubKey.m; sourceTree = "<group>"; };
-		DCE5E281190AFF640005396A /* bitcoinj-0.11-bundled.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "bitcoinj-0.11-bundled.jar"; path = "BitnashJ/lib/bitcoinj-0.11-bundled.jar"; sourceTree = "<group>"; };
 		DCE5E282190AFF640005396A /* json-simple-1.1.1.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "json-simple-1.1.1.jar"; path = "BitnashJ/lib/json-simple-1.1.1.jar"; sourceTree = "<group>"; };
 		DCE5E283190AFF640005396A /* slf4j-simple-1.7.6.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "slf4j-simple-1.7.6.jar"; path = "BitnashJ/lib/slf4j-simple-1.7.6.jar"; sourceTree = "<group>"; };
 		DCE5E28A190B02FF0005396A /* org */ = {isa = PBXFileReference; lastKnownFileType = folder; name = org; path = BitnashJ/bin/org; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCE5E284190AFF640005396A /* bitcoinj-0.11-bundled.jar in Frameworks */,
 				DCE5E285190AFF640005396A /* json-simple-1.1.1.jar in Frameworks */,
+				DC5A24881910605F00D48B14 /* bitcoinj.jar in Frameworks */,
 				DCE5E286190AFF640005396A /* slf4j-simple-1.7.6.jar in Frameworks */,
 				DC90332218CBD1A2005D82A2 /* Cocoa.framework in Frameworks */,
 			);
@@ -156,9 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				DCE5E28A190B02FF0005396A /* org */,
-				DCE5E281190AFF640005396A /* bitcoinj-0.11-bundled.jar */,
 				DCE5E282190AFF640005396A /* json-simple-1.1.1.jar */,
 				DCE5E283190AFF640005396A /* slf4j-simple-1.7.6.jar */,
+				DC5A24871910605F00D48B14 /* bitcoinj.jar */,
 			);
 			name = BitnashJ;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCE5E28C190B034D0005396A /* bitcoinj-0.11-bundled.jar in Resources */,
+				DC5A24891910606900D48B14 /* bitcoinj.jar in Resources */,
 				DCE5E28D190B034D0005396A /* json-simple-1.1.1.jar in Resources */,
 				DCE5E28E190B034D0005396A /* slf4j-simple-1.7.6.jar in Resources */,
 				DC90332C18CBD1A2005D82A2 /* InfoPlist.strings in Resources */,

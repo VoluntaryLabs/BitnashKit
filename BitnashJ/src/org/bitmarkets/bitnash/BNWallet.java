@@ -45,6 +45,15 @@ public class BNWallet extends BNObject {
 		return Utils.bytesToHexString(key.getPubKey());
 	}
 	
+	@SuppressWarnings("unchecked")
+	public JSONArray apiTransactions() {
+		JSONArray transactions = new JSONArray();
+		for (Transaction transaction : wallet().getTransactions(true)) {
+			transactions.add(transaction);
+		}
+		return transactions;
+	}
+	
 	public Wallet wallet() {
 		return walletAppKit.wallet();
 	}

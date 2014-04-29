@@ -50,12 +50,16 @@
     return [_server sendMessage:@"createPubKey" withObject:self withArg:nil];
 }
 
-
 - (BNTx *)newTx
 {
     BNTx *tx = [[BNTx alloc] init];
     tx.wallet = self;
     return tx;
+}
+
+- (NSArray *)transactions
+{
+    return [_server sendMessage:@"transactions" withObject:self];
 }
 
 @end

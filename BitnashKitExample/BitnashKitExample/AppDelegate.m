@@ -166,7 +166,7 @@
     //self.sellerWallet = [self debugWalletFor:@"seller"];
     
     [self showStatus];
-    [self performSelector:@selector(showStatus) withObject:nil afterDelay:5];
+    //[self performSelector:@selector(showStatus) withObject:nil afterDelay:5];
     
     //[self showBalances];
     

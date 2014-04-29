@@ -42,7 +42,7 @@
     
     NSString *classPath = [[NSArray arrayWithObjects:
                             frameworkBundle.resourcePath,
-                            [frameworkBundle pathForResource:@"bitcoinj-0.11-bundled" ofType:@"jar"],
+                            [frameworkBundle pathForResource:@"bitcoinj" ofType:@"jar"],
                             [frameworkBundle pathForResource:@"json-simple-1.1.1" ofType:@"jar"],
                             [frameworkBundle pathForResource:@"slf4j-simple-1.7.6" ofType:@"jar"],
                             nil] componentsJoinedByString:@":"];

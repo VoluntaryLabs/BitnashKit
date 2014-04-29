@@ -1,9 +1,13 @@
 package org.bitmarkets.bitnash;
 
 import java.io.BufferedReader;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.Service;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -40,8 +44,12 @@ public class BNServer extends BNObject implements Runnable {
 	public void start() {
 		status = "starting";
 		new Thread(this).start();
-		bnWallet.getWalletAppKit().startAndWait();
-		status = "started";
+		bnWallet.getWalletAppKit().startAsync();
+		bnWallet.getWalletAppKit().addListener(new Service.Listener(){
+			public void running() {
+				status = "started";
+			}
+		}, MoreExecutors.sameThreadExecutor());
 	}
 	
 	public void run() {
@@ -102,8 +110,18 @@ System.err.println("BitnashJ BNServer Received: " + line);
 		}
 		finally {
 System.err.println("Stopping Server ...");
-			bnWallet.getWalletAppKit().stopAndWait();
-System.err.println("Server Stopped");
+			try {
+				bnWallet.getWalletAppKit().stopAsync();
+				bnWallet.getWalletAppKit().awaitTerminated(5, TimeUnit.SECONDS);
+				System.exit(0);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			finally {
+				System.err.println("Server Stopped");
+				System.exit(1);
+			}
 		}
 	}
 	
