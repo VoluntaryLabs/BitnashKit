@@ -152,20 +152,25 @@
     NSLog(@"\n\nseller balance: %@\n\n", [_sellerWallet balance]);
 }
 
+- (void)showStatus
+{
+    NSLog(@"%@", [_buyerWallet.server status]);
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     //TODO: Should we delegate the state for BNObjects to a BitcoinJ object?
     
     
     self.buyerWallet = [self debugWalletFor:@"buyer"];
-    self.sellerWallet = [self debugWalletFor:@"seller"];
+    //self.sellerWallet = [self debugWalletFor:@"seller"];
     
-    [_buyerWallet.server start];
-    [_sellerWallet.server start];
+    [self showStatus];
+    [self performSelector:@selector(showStatus) withObject:nil afterDelay:5];
     
     //[self showBalances];
     
-    [self debugEscrow];
+    //[self debugEscrow];
     //[self debugRelease];
 }
 

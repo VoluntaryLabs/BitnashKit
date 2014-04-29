@@ -1,5 +1,7 @@
 package org.bitmarkets.bitnash;
 
+import java.lang.reflect.Method;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -65,7 +67,15 @@ public class BNObjectDeserializer {
 			String fullyQualifiedName = this.getClass().getPackage().getName() + "." + type;
 			BNObject obj;
 			try {
-				obj = (BNObject) Class.forName(fullyQualifiedName).newInstance();
+				Class<?> objClass = Class.forName(fullyQualifiedName);
+				
+				try {
+					Method constructor = objClass.getMethod("bnDeserializerInstance", (Class<?>[])null);
+					obj = (BNObject) constructor.invoke(objClass);
+				}
+				catch (NoSuchMethodException e) {
+					obj = (BNObject) objClass.newInstance();
+				}
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

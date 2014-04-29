@@ -33,7 +33,7 @@
     
     [self createDir];
     
-    if (_error)
+    if (self.error)
     {
         return;
     }
@@ -65,6 +65,11 @@
     }
     
     [_task launch];
+}
+
+- (NSString *)status
+{
+    return [self sendMessage:@"status" withObject:self];
 }
 
 - (void)createDir
@@ -146,7 +151,7 @@
     {
         if (self.logsErrors)
         {
-            NSLog(@"BNServer Error: %@", _error.description);
+            NSLog(@"BNServer Error: %@", self.error.description);
         }
         return nil;
     }

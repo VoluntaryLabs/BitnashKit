@@ -9,13 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "BNError.h"
 
-@interface BNServer : NSObject
+@interface BNServer : BNObject
 
 @property NSString *path;
 //path to folder that will contain the wallet and chainstore.
-
-@property BNError *error;
-//Set to most recent error that occured during an operation.
 
 @property BOOL started;
 
@@ -26,6 +23,9 @@
 
 - (void)start;
 //Start the wallet child process (BitcoinJ)
+
+- (NSString *)status;
+//The current status of the server (initialized, starting, started)
 
 - (id)sendMessage:(NSString *)messageName withObject:(id)object;
 

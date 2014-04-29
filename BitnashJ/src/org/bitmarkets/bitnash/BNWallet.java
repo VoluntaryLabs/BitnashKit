@@ -12,10 +12,15 @@ import com.google.bitcoin.kits.WalletAppKit;
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 public class BNWallet extends BNObject {
 	public static enum NetworkType {TestNet3, MainNet};
-	public static WalletAppKit walletAppKit;
+	
+	public WalletAppKit walletAppKit;
+	
+	public WalletAppKit getWalletAppKit() {
+		return walletAppKit;
+	}
 	
 	public void setWalletAppKit(WalletAppKit walletAppKit) {
-		BNWallet.walletAppKit = walletAppKit;
+		this.walletAppKit = walletAppKit;
 	}
 	
 	public BigInteger apiBalance(Object args) {
