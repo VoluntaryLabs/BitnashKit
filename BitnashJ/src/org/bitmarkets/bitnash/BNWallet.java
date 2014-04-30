@@ -11,6 +11,7 @@ import com.google.bitcoin.kits.WalletAppKit;
 import com.google.bitcoin.wallet.WalletTransaction;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
+@SuppressWarnings("unchecked")
 public class BNWallet extends BNObject {
 	public static enum NetworkType {TestNet3, MainNet};
 	
@@ -70,7 +71,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONArray apiGetDepositAddresses() {
+	public JSONArray apiAddresses(Object args) {
 		JSONArray list = new JSONArray();
 		for (ECKey key : walletAppKit.wallet().getKeys()) {
 			list.add(new Address(walletAppKit.wallet().getParams(), key.getPubKeyHash()).toString());

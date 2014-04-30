@@ -18,14 +18,6 @@
 		DC85CB9018CBDF6800942C9D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC85CB6F18CBDF6800942C9D /* Cocoa.framework */; };
 		DC85CB9818CBDF6800942C9D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC85CB9618CBDF6800942C9D /* InfoPlist.strings */; };
 		DC85CB9A18CBDF6800942C9D /* BitnashKitExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC85CB9918CBDF6800942C9D /* BitnashKitExampleTests.m */; };
-		DCBA43671904880900D1B3F9 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43661904880900D1B3F9 /* QRCodeGenerator.m */; };
-		DCBA43771904895400D1B3F9 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43691904895400D1B3F9 /* bitstream.c */; };
-		DCBA43781904895400D1B3F9 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA436B1904895400D1B3F9 /* mask.c */; };
-		DCBA43791904895400D1B3F9 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA436D1904895400D1B3F9 /* qrencode.c */; };
-		DCBA437A1904895400D1B3F9 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA436F1904895400D1B3F9 /* qrinput.c */; };
-		DCBA437B1904895400D1B3F9 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43711904895400D1B3F9 /* qrspec.c */; };
-		DCBA437C1904895400D1B3F9 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43731904895400D1B3F9 /* rscode.c */; };
-		DCBA437D1904895400D1B3F9 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = DCBA43751904895400D1B3F9 /* split.c */; };
 		DCE5E280190AF7310005396A /* BitnashKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE5E27D190AF6DC0005396A /* BitnashKit.framework */; };
 		DCF1CBFE18FF0CBD00AE815A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF1CBFD18FF0CBD00AE815A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -74,22 +66,6 @@
 		DC85CB9518CBDF6800942C9D /* BitnashKitExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BitnashKitExampleTests-Info.plist"; sourceTree = "<group>"; };
 		DC85CB9718CBDF6800942C9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DC85CB9918CBDF6800942C9D /* BitnashKitExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitnashKitExampleTests.m; sourceTree = "<group>"; };
-		DCBA43651904880900D1B3F9 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeGenerator.h; path = "Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder/QRCodeGenerator.h"; sourceTree = "<group>"; };
-		DCBA43661904880900D1B3F9 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeGenerator.m; path = "Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder/QRCodeGenerator.m"; sourceTree = "<group>"; };
-		DCBA43691904895400D1B3F9 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
-		DCBA436A1904895400D1B3F9 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
-		DCBA436B1904895400D1B3F9 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
-		DCBA436C1904895400D1B3F9 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
-		DCBA436D1904895400D1B3F9 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
-		DCBA436E1904895400D1B3F9 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
-		DCBA436F1904895400D1B3F9 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
-		DCBA43701904895400D1B3F9 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
-		DCBA43711904895400D1B3F9 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
-		DCBA43721904895400D1B3F9 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
-		DCBA43731904895400D1B3F9 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
-		DCBA43741904895400D1B3F9 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
-		DCBA43751904895400D1B3F9 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
-		DCBA43761904895400D1B3F9 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		DCE5E277190AF6DC0005396A /* BitnashKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BitnashKit.xcodeproj; path = ../BitnashKit.xcodeproj; sourceTree = "<group>"; };
 		DCF1CBFD18FF0CBD00AE815A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -121,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				DC85CB7518CBDF6800942C9D /* BitnashKitExample */,
-				DCBA4362190487E800D1B3F9 /* QREncoder */,
 				DC85CB9318CBDF6800942C9D /* BitnashKitExampleTests */,
 				DC85CB6E18CBDF6800942C9D /* Frameworks */,
 				DC85CB6D18CBDF6800942C9D /* Products */,
@@ -199,38 +174,6 @@
 				DC85CB9618CBDF6800942C9D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DCBA4362190487E800D1B3F9 /* QREncoder */ = {
-			isa = PBXGroup;
-			children = (
-				DCBA43681904895400D1B3F9 /* libqrencode */,
-				DCBA43651904880900D1B3F9 /* QRCodeGenerator.h */,
-				DCBA43661904880900D1B3F9 /* QRCodeGenerator.m */,
-			);
-			name = QREncoder;
-			sourceTree = "<group>";
-		};
-		DCBA43681904895400D1B3F9 /* libqrencode */ = {
-			isa = PBXGroup;
-			children = (
-				DCBA43691904895400D1B3F9 /* bitstream.c */,
-				DCBA436A1904895400D1B3F9 /* bitstream.h */,
-				DCBA436B1904895400D1B3F9 /* mask.c */,
-				DCBA436C1904895400D1B3F9 /* mask.h */,
-				DCBA436D1904895400D1B3F9 /* qrencode.c */,
-				DCBA436E1904895400D1B3F9 /* qrencode.h */,
-				DCBA436F1904895400D1B3F9 /* qrinput.c */,
-				DCBA43701904895400D1B3F9 /* qrinput.h */,
-				DCBA43711904895400D1B3F9 /* qrspec.c */,
-				DCBA43721904895400D1B3F9 /* qrspec.h */,
-				DCBA43731904895400D1B3F9 /* rscode.c */,
-				DCBA43741904895400D1B3F9 /* rscode.h */,
-				DCBA43751904895400D1B3F9 /* split.c */,
-				DCBA43761904895400D1B3F9 /* split.h */,
-			);
-			name = libqrencode;
-			path = "Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder/libqrencode";
 			sourceTree = "<group>";
 		};
 		DCE5E278190AF6DC0005396A /* Products */ = {
@@ -363,16 +306,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCBA43791904895400D1B3F9 /* qrencode.c in Sources */,
-				DCBA437A1904895400D1B3F9 /* qrinput.c in Sources */,
-				DCBA43781904895400D1B3F9 /* mask.c in Sources */,
 				DC85CB8318CBDF6800942C9D /* AppDelegate.m in Sources */,
-				DCBA437C1904895400D1B3F9 /* rscode.c in Sources */,
 				DC85CB7C18CBDF6800942C9D /* main.m in Sources */,
-				DCBA43671904880900D1B3F9 /* QRCodeGenerator.m in Sources */,
-				DCBA43771904895400D1B3F9 /* bitstream.c in Sources */,
-				DCBA437D1904895400D1B3F9 /* split.c in Sources */,
-				DCBA437B1904895400D1B3F9 /* qrspec.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

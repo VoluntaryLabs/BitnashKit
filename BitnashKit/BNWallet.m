@@ -62,4 +62,9 @@
     return [_server sendMessage:@"transactions" withObject:self];
 }
 
+- (NSArray *)addresses
+{
+    return [_server sendMessage:@"addresses" withObject:self];
+}
+
 @end

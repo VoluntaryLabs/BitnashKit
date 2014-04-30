@@ -53,4 +53,6 @@
 
 - (NSArray *)transactions;
 
+- (NSArray *)addresses;
+
 @end

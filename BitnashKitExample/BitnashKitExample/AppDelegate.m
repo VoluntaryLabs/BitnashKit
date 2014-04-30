@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-#import "QRCodeGenerator.h"
 
 @implementation AppDelegate
 
@@ -170,7 +169,7 @@
     
     //[self showBalances];
     
-    NSLog(@"%@", [[self.buyerWallet transactions] asJSONString]);
+    NSLog(@"%@", [[self.buyerWallet addresses] asJSONString]);
     
     //[self debugEscrow];
     //[self debugRelease];
