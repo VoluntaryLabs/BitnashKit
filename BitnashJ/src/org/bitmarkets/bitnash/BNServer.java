@@ -37,10 +37,6 @@ public class BNServer extends BNObject implements Runnable {
 		this.bnWallet = bnWallet;
 	}
 	
-	public static BNServer getShared() {
-		return shared;
-	}
-	
 	public void start() {
 		status = "starting";
 		new Thread(this).start();

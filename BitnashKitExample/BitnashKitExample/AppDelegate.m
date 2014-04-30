@@ -157,23 +157,36 @@
     NSLog(@"%@", [_buyerWallet.server status]);
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)waitUntilStarted
 {
-    //TODO: Should we delegate the state for BNObjects to a BitcoinJ object?
-    
-    
-    self.buyerWallet = [self debugWalletFor:@"buyer"];
-    //self.sellerWallet = [self debugWalletFor:@"seller"];
+    if (![[_buyerWallet.server status] isEqualToString:@"started"])
+    {
+        [self performSelector:@selector(waitUntilStarted) withObject:nil afterDelay:1];
+        return;
+    }
     
     //[self showStatus];
     //[self performSelector:@selector(showStatus) withObject:nil afterDelay:5];
     
     //[self showBalances];
     
-    NSLog(@"%@", [self.buyerWallet createAddress]);
+    NSLog(@"%@", [[self.buyerWallet transactions] asJSONString]);
     
     //[self debugEscrow];
     //[self debugRelease];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    //TODO: Should we delegate the state for BNObjects to a BitcoinJ object?
+    
+    
+    self.buyerWallet = [self debugWalletFor:@"buyer"];
+    [self.buyerWallet.server start];
+    //self.sellerWallet = [self debugWalletFor:@"seller"];
+    [self.self.sellerWallet.server start];
+    
+    [self waitUntilStarted];
 }
 
 @end

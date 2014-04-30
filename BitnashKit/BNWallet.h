@@ -51,4 +51,6 @@
 
 - (BNTx *)newTx;
 
+- (NSArray *)transactions;
+
 @end

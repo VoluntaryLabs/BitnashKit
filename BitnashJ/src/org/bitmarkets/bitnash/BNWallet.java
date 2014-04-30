@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 
 import com.google.bitcoin.core.*;
 import com.google.bitcoin.kits.WalletAppKit;
+import com.google.bitcoin.wallet.WalletTransaction;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 public class BNWallet extends BNObject {
@@ -50,10 +51,12 @@ public class BNWallet extends BNObject {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONArray apiTransactions() {
+	public JSONArray apiTransactions(Object args) {
 		JSONArray transactions = new JSONArray();
 		for (Transaction transaction : wallet().getTransactions(true)) {
-			transactions.add(transaction);
+			BNTx bnTx = new BNTx();
+			bnTx.setTransaction(transaction);
+			transactions.add(bnTx);
 		}
 		return transactions;
 	}

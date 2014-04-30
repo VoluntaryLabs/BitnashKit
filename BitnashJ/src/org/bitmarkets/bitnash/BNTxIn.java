@@ -166,8 +166,11 @@ public class BNTxIn extends BNObject {
 	
 	void willSerializeSelf() {
 		setPreviousOutIndex(BigInteger.valueOf(transactionInput().getOutpoint().getIndex()));
-		setPreviousTxHash(transactionInput().getConnectedOutput().getParentTransaction().getHashAsString());
-		setPreviousTxSerializedHex(Utils.bytesToHexString(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
+		setPreviousTxHash(transactionInput().getOutpoint().getHash().toString());
+		
+		if (transactionInput().getConnectedOutput() != null) {
+			setPreviousTxSerializedHex(Utils.bytesToHexString(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
+		}
 		
 		if (transactionInput().getScriptSig() != null && transactionInput().getScriptSig().getChunks().size() > 0) {
 			scriptSig = new BNScriptSig();
