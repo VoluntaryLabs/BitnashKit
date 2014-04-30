@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA753DC0191079DA00D07CB5 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DA8191079DA00D07CB5 /* bitstream.c */; };
+		AA753DC1191079DA00D07CB5 /* bitstream.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DA9191079DA00D07CB5 /* bitstream.h */; };
+		AA753DC2191079DA00D07CB5 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DAA191079DA00D07CB5 /* mask.c */; };
+		AA753DC3191079DA00D07CB5 /* mask.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DAB191079DA00D07CB5 /* mask.h */; };
+		AA753DC4191079DA00D07CB5 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DAC191079DA00D07CB5 /* qrencode.c */; };
+		AA753DC5191079DA00D07CB5 /* qrencode.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DAD191079DA00D07CB5 /* qrencode.h */; };
+		AA753DC6191079DA00D07CB5 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DAE191079DA00D07CB5 /* qrinput.c */; };
+		AA753DC7191079DA00D07CB5 /* qrinput.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DAF191079DA00D07CB5 /* qrinput.h */; };
+		AA753DC8191079DA00D07CB5 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DB0191079DA00D07CB5 /* qrspec.c */; };
+		AA753DC9191079DA00D07CB5 /* qrspec.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB1191079DA00D07CB5 /* qrspec.h */; };
+		AA753DCA191079DA00D07CB5 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DB2191079DA00D07CB5 /* rscode.c */; };
+		AA753DCB191079DA00D07CB5 /* rscode.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB3191079DA00D07CB5 /* rscode.h */; };
+		AA753DCC191079DA00D07CB5 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DB4191079DA00D07CB5 /* split.c */; };
+		AA753DCD191079DA00D07CB5 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB5191079DA00D07CB5 /* split.h */; };
+		AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */; };
 		DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3818CD1FEC005328DA /* NSObject+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC261F3B18CD1FEC005328DA /* NSObject+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F3918CD1FEC005328DA /* NSObject+BNJSON.m */; };
 		DC261F3E18CD20A4005328DA /* NSArray+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3C18CD20A4005328DA /* NSArray+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,6 +87,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA753DA8191079DA00D07CB5 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		AA753DA9191079DA00D07CB5 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		AA753DAA191079DA00D07CB5 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		AA753DAB191079DA00D07CB5 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		AA753DAC191079DA00D07CB5 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		AA753DAD191079DA00D07CB5 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		AA753DAE191079DA00D07CB5 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		AA753DAF191079DA00D07CB5 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		AA753DB0191079DA00D07CB5 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		AA753DB1191079DA00D07CB5 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		AA753DB2191079DA00D07CB5 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		AA753DB3191079DA00D07CB5 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		AA753DB4191079DA00D07CB5 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		AA753DB5191079DA00D07CB5 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
+		AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
 		DC261F3818CD1FEC005328DA /* NSObject+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BNJSON.h"; sourceTree = "<group>"; };
 		DC261F3918CD1FEC005328DA /* NSObject+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BNJSON.m"; sourceTree = "<group>"; };
 		DC261F3C18CD20A4005328DA /* NSArray+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BNJSON.h"; sourceTree = "<group>"; };
@@ -152,6 +184,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA753D9E191079DA00D07CB5 /* Mac-QR-Code-Encoder */ = {
+			isa = PBXGroup;
+			children = (
+				AA753DA7191079DA00D07CB5 /* libqrencode */,
+				AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */,
+				AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */,
+			);
+			name = "Mac-QR-Code-Encoder";
+			path = "BitnashKitExample/Mac-QR-Code-Encoder-master/Mac-QR-Code-Encoder";
+			sourceTree = SOURCE_ROOT;
+		};
+		AA753DA7191079DA00D07CB5 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				AA753DA8191079DA00D07CB5 /* bitstream.c */,
+				AA753DA9191079DA00D07CB5 /* bitstream.h */,
+				AA753DAA191079DA00D07CB5 /* mask.c */,
+				AA753DAB191079DA00D07CB5 /* mask.h */,
+				AA753DAC191079DA00D07CB5 /* qrencode.c */,
+				AA753DAD191079DA00D07CB5 /* qrencode.h */,
+				AA753DAE191079DA00D07CB5 /* qrinput.c */,
+				AA753DAF191079DA00D07CB5 /* qrinput.h */,
+				AA753DB0191079DA00D07CB5 /* qrspec.c */,
+				AA753DB1191079DA00D07CB5 /* qrspec.h */,
+				AA753DB2191079DA00D07CB5 /* rscode.c */,
+				AA753DB3191079DA00D07CB5 /* rscode.h */,
+				AA753DB4191079DA00D07CB5 /* split.c */,
+				AA753DB5191079DA00D07CB5 /* split.h */,
+			);
+			path = libqrencode;
+			sourceTree = "<group>";
+		};
 		DC261F4D18CD2E1A005328DA /* BitnashJ */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +270,7 @@
 		DC90332718CBD1A2005D82A2 /* BitnashKit */ = {
 			isa = PBXGroup;
 			children = (
+				AA753D9E191079DA00D07CB5 /* Mac-QR-Code-Encoder */,
 				DC90332818CBD1A2005D82A2 /* Supporting Files */,
 				DC85CBB618CBE13800942C9D /* BitnashKit.h */,
 				DCA62FAE18CD2FEC00475735 /* BNServer.h */,
@@ -285,23 +350,31 @@
 			files = (
 				DCF1CBFB18FF01CC00AE815A /* BNError.h in Headers */,
 				DCD10B2218E219A10001B6F4 /* BNPayToAddressScriptSig.h in Headers */,
+				AA753DC7191079DA00D07CB5 /* qrinput.h in Headers */,
+				AA753DC9191079DA00D07CB5 /* qrspec.h in Headers */,
 				DCE3D9CE18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h in Headers */,
 				DC90334E18CBD213005D82A2 /* BNWallet.h in Headers */,
 				DC85CBB718CBE1D400942C9D /* BitnashKit.h in Headers */,
 				DCA62FB018CD2FEC00475735 /* BNServer.h in Headers */,
 				DC261F3E18CD20A4005328DA /* NSArray+BNJSON.h in Headers */,
+				AA753DCD191079DA00D07CB5 /* split.h in Headers */,
+				AA753DC1191079DA00D07CB5 /* bitstream.h in Headers */,
 				DCE23FC618CC36C900F64729 /* BNScriptSig.h in Headers */,
 				DCE23FB618CC314900F64729 /* BNTxOut.h in Headers */,
+				AA753DCB191079DA00D07CB5 /* rscode.h in Headers */,
 				DCD10B1E18E218F60001B6F4 /* BNMultisigScriptSig.h in Headers */,
 				DCD906F318E0DF3600342231 /* BNTx.h in Headers */,
 				DCE23FBA18CC316B00F64729 /* BNTxIn.h in Headers */,
+				AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */,
 				DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */,
 				DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */,
+				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
 				DCF1CC0218FF20FE00AE815A /* BNObject.h in Headers */,
 				DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */,
 				DC6161AF18CFBF7900F7B602 /* NSString+BNJSON.h in Headers */,
 				DCE23FC218CC329600F64729 /* BNMultisigScriptPubKey.h in Headers */,
+				AA753DC5191079DA00D07CB5 /* qrencode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,20 +480,28 @@
 				DCD10B1F18E218F60001B6F4 /* BNMultisigScriptSig.m in Sources */,
 				DCF1CC0318FF20FE00AE815A /* BNObject.m in Sources */,
 				DCD906F418E0DF3600342231 /* BNTx.m in Sources */,
+				AA753DCC191079DA00D07CB5 /* split.c in Sources */,
 				DCE23FBF18CC326000F64729 /* BNScriptPubKey.m in Sources */,
 				DC90334F18CBD213005D82A2 /* BNWallet.m in Sources */,
 				DCE23FB718CC314900F64729 /* BNTxOut.m in Sources */,
+				AA753DC8191079DA00D07CB5 /* qrspec.c in Sources */,
 				DCE23FC718CC36C900F64729 /* BNScriptSig.m in Sources */,
 				DC261F4318CD21FB005328DA /* NSDictionary+BNJSON.m in Sources */,
 				DC261F3F18CD20A4005328DA /* NSArray+BNJSON.m in Sources */,
 				DCE23FBB18CC316B00F64729 /* BNTxIn.m in Sources */,
+				AA753DC0191079DA00D07CB5 /* bitstream.c in Sources */,
 				DCD10B2318E219A10001B6F4 /* BNPayToAddressScriptSig.m in Sources */,
 				DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */,
 				DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,
+				AA753DC6191079DA00D07CB5 /* qrinput.c in Sources */,
+				AA753DCA191079DA00D07CB5 /* rscode.c in Sources */,
+				AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */,
 				DC4F2FB219039CD0008803F7 /* NSNull+BNJSON.m in Sources */,
 				DC6161B018CFBF7900F7B602 /* NSString+BNJSON.m in Sources */,
+				AA753DC2191079DA00D07CB5 /* mask.c in Sources */,
 				DC261F3B18CD1FEC005328DA /* NSObject+BNJSON.m in Sources */,
+				AA753DC4191079DA00D07CB5 /* qrencode.c in Sources */,
 				DCF1CBFC18FF01CC00AE815A /* BNError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
