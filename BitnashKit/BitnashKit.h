@@ -22,5 +22,6 @@
 #import "NSDictionary+BNJSON.h"
 #import "NSString+BNJSON.h"
 #import "BNError.h"
+#import "QRCodeGenerator.h"
 
 #endif
