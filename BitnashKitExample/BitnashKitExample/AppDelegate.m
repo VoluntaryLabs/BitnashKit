@@ -165,10 +165,12 @@
     self.buyerWallet = [self debugWalletFor:@"buyer"];
     //self.sellerWallet = [self debugWalletFor:@"seller"];
     
-    [self showStatus];
+    //[self showStatus];
     //[self performSelector:@selector(showStatus) withObject:nil afterDelay:5];
     
     //[self showBalances];
+    
+    NSLog(@"%@", [self.buyerWallet createAddress]);
     
     //[self debugEscrow];
     //[self debugRelease];

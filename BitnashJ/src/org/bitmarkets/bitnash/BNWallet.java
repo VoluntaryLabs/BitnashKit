@@ -15,6 +15,10 @@ public class BNWallet extends BNObject {
 	
 	public WalletAppKit walletAppKit;
 	
+	public static BNWallet bnDeserializerInstance() {
+		return BNServer.bnDeserializerInstance().getBnWallet();
+	}
+	
 	public WalletAppKit getWalletAppKit() {
 		return walletAppKit;
 	}
