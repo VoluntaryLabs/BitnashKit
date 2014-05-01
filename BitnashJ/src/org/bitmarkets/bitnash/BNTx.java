@@ -19,7 +19,14 @@ import com.google.bitcoin.script.Script;
 public class BNTx extends BNObject {
 	public BNTx() {
 		super();
-		bnSlotNames.addAll(Arrays.asList("error", "inputs", "outputs", "hash", "netValue"));
+		bnSlotNames.addAll(Arrays.asList(
+				"error",
+				"inputs",
+				"outputs",
+				"hash",
+				"netValue",
+				"updateTime"
+		));
 	}
 	
 	public BNError getError() {
@@ -68,6 +75,14 @@ public class BNTx extends BNObject {
 	
 	public void setNetValue(BigInteger netValue) {
 		this.netValue = netValue;
+	}
+	
+	public BigInteger getUpdateTime() {
+		return updateTime;
+	}
+	
+	public void setUpdateTime(BigInteger updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 	public BNTx apiAddInputsAndChange(Object args) throws InsufficientMoneyException {
@@ -171,6 +186,7 @@ public class BNTx extends BNObject {
 	JSONArray outputs;
 	String hash;
 	BigInteger netValue;
+	BigInteger updateTime;
 	
 	Transaction transaction;
 	
@@ -244,5 +260,7 @@ public class BNTx extends BNObject {
 		
 		setHash(transaction.getHashAsString());
 		setNetValue(transaction.getValue(wallet()));
+System.err.println(transaction.getUpdateTime());
+		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
 	}
 }

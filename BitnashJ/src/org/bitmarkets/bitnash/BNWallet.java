@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 
 import com.google.bitcoin.core.*;
 import com.google.bitcoin.kits.WalletAppKit;
-import com.google.bitcoin.wallet.WalletTransaction;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 @SuppressWarnings("unchecked")
@@ -51,7 +50,6 @@ public class BNWallet extends BNObject {
 		return Utils.bytesToHexString(key.getPubKey());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public JSONArray apiTransactions(Object args) {
 		JSONArray transactions = new JSONArray();
 		for (Transaction transaction : wallet().getTransactions(true)) {
@@ -70,7 +68,6 @@ public class BNWallet extends BNObject {
 		return walletAppKit.peerGroup();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public JSONArray apiAddresses(Object args) {
 		JSONArray list = new JSONArray();
 		for (ECKey key : walletAppKit.wallet().getKeys()) {

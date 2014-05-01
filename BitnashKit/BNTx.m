@@ -24,6 +24,7 @@
                                                    @"outputs",
                                                    @"hash",
                                                    @"netValue",
+                                                   @"updateTime",
                                                    nil]];
     return self;
 }
