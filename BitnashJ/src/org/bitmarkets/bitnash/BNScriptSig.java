@@ -21,6 +21,10 @@ public class BNScriptSig extends BNObject {
 		return txIn().transactionInput().getScriptSig();
 	}
 	
+	public boolean isMultisig() {
+		return script().getChunks().size() > 2; //TODO will this always be the case?
+	}
+	
 	String programHexBytes;
 	
 	BNTxIn txIn() {

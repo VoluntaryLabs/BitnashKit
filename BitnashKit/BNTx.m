@@ -25,6 +25,7 @@
                                                    @"hash",
                                                    @"netValue",
                                                    @"updateTime",
+                                                   @"counterParty",
                                                    nil]];
     return self;
 }

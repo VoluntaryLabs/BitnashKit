@@ -23,6 +23,7 @@
 
 @property NSNumber *netValue;
 @property NSNumber *updateTime;
+@property NSString *counterParty;
 
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.

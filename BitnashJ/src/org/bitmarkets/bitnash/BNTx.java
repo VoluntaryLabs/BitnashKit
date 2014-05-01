@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.json.simple.JSONArray;
 
+import com.google.bitcoin.core.ECKey;
 import com.google.bitcoin.core.InsufficientMoneyException;
 import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Sha256Hash;
@@ -13,8 +14,10 @@ import com.google.bitcoin.core.Transaction;
 import com.google.bitcoin.core.TransactionConfidence;
 import com.google.bitcoin.core.TransactionInput;
 import com.google.bitcoin.core.TransactionOutput;
+import com.google.bitcoin.core.Utils;
 import com.google.bitcoin.core.Wallet;
 import com.google.bitcoin.script.Script;
+import com.google.bitcoin.script.ScriptChunk;
 
 public class BNTx extends BNObject {
 	public BNTx() {
@@ -25,7 +28,8 @@ public class BNTx extends BNObject {
 				"outputs",
 				"hash",
 				"netValue",
-				"updateTime"
+				"updateTime",
+				"counterParty"
 		));
 	}
 	
@@ -83,6 +87,14 @@ public class BNTx extends BNObject {
 	
 	public void setUpdateTime(BigInteger updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	public String getCounterParty() {
+		return counterParty;
+	}
+	
+	public void setCounterParty(String counterParty) {
+		this.counterParty = counterParty;
 	}
 	
 	public BNTx apiAddInputsAndChange(Object args) throws InsufficientMoneyException {
@@ -187,6 +199,7 @@ public class BNTx extends BNObject {
 	String hash;
 	BigInteger netValue;
 	BigInteger updateTime;
+	String counterParty;
 	
 	Transaction transaction;
 	
@@ -241,7 +254,6 @@ public class BNTx extends BNObject {
 		}
 	}
 	
-	
 	@SuppressWarnings("unchecked")
 	void willSerializeSelf() {
 		for (@SuppressWarnings("unused") TransactionInput input : transaction.getInputs()) {
@@ -262,5 +274,53 @@ public class BNTx extends BNObject {
 		setNetValue(transaction.getValue(wallet()));
 System.err.println(transaction.getUpdateTime());
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
+		
+		setupCounterParty();
+	}
+	
+	void setupCounterParty() { //TODO properly check previous output for type.  Handle all types.
+		if (netValue.longValue() > 0) {
+			for (Object input : inputs) {
+				BNTxIn txIn = (BNTxIn) input;
+				if (txIn.getScriptSig().isMultisig()) {
+					for (ScriptChunk chunk : txIn.getScriptSig().script().getChunks()) {
+						if (chunk.data.length > 1) {
+							if (!wallet().hasKey(new ECKey(null, chunk.data))) {
+								setCounterParty(Utils.bytesToHexString(chunk.data));
+								break;
+							}
+						}
+					}
+					if (counterParty != null) {
+						break;
+					}
+				} else {
+					ECKey key = new ECKey(null, txIn.getScriptSig().script().getChunks().get(1).data);
+					if (!wallet().hasKey(key)) {
+						setCounterParty(key.toAddress(networkParams()).toString());
+						break;
+					}
+				}
+			}
+		} else {
+			for (Object output : outputs) {
+				BNTxOut txOut = (BNTxOut) output;
+				BNScriptPubKey scriptPubKey = txOut.getScriptPubKey();
+				if (scriptPubKey.script().isSentToMultiSig()) {
+					for (Object pubKey : ((BNMultisigScriptPubKey)scriptPubKey).getPubKeys()) {
+						if (!wallet().hasKey(new ECKey(null, Utils.parseAsHexOrBase58((String)pubKey)))) {
+							setCounterParty((String)pubKey);
+							break;
+						}
+					}
+					if (counterParty != null) {
+						break;
+					}
+				} else if (!txOut.transactionOutput().isMine(wallet())) {
+					setCounterParty(scriptPubKey.script().getToAddress(networkParams()).toString());
+					break;
+				}
+			}
+		}
 	}
 }
