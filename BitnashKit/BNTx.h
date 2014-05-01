@@ -21,6 +21,8 @@
 
 @property NSString *hash;
 
+@property NSNumber *netValue;
+
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.
 

@@ -169,7 +169,7 @@
     
     //[self showBalances];
     
-    NSLog(@"%@", [[self.buyerWallet addresses] asJSONString]);
+    [[[self.buyerWallet transactions] asJSONString] writeToFile:@"/tmp/transactions.json" atomically:YES encoding:NSUTF8StringEncoding error:0x0];
     
     //[self debugEscrow];
     //[self debugRelease];

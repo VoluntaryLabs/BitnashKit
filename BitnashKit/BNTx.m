@@ -23,6 +23,7 @@
                                                    @"inputs",
                                                    @"outputs",
                                                    @"hash",
+                                                   @"netValue",
                                                    nil]];
     return self;
 }
