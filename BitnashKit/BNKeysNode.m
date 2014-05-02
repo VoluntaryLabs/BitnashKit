@@ -18,6 +18,7 @@
     self.nodeTitle = @"Addresses";
     self.childClass = BNKey.class;
     self.nodeSuggestedWidth = 325;
+    self.shouldUseCountForNodeNote = YES;
     return self;
 }
 
