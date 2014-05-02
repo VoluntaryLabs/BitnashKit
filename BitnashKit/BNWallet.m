@@ -30,6 +30,7 @@
     self.transactionsNode.wallet = self;
     
     self.addressesNode = [[BNKeysNode alloc] init];
+    self.addressesNode.wallet = self;
 
     return self;
 }
