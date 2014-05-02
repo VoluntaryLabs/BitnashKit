@@ -30,7 +30,7 @@
 
 - (void)showInsufficientValueError:(BNTx *)tx
 {
-    NSString *address = [tx.wallet createAddress];
+    NSString *address = [tx.wallet createKey].address;
     NSString *amount = [[[NSDecimalNumber decimalNumberWithDecimal:[tx.error.insufficientValue decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithMantissa:1 exponent:8 isNegative:NO]] stringValue];
     
     NSString *paymentUrl = [NSString stringWithFormat:@"bitcoin:%@?amount=%@",
@@ -116,7 +116,7 @@
     txOut.value = [NSNumber numberWithLongLong:50000];
     
     BNPayToAddressScriptPubKey *scriptPubKey = [[BNPayToAddressScriptPubKey alloc] init];
-    scriptPubKey.address = [_buyerWallet createAddress];
+    scriptPubKey.address = [_buyerWallet createKey].address;
     txOut.scriptPubKey = scriptPubKey;
     
     [_releaseTx.outputs addObject:txOut];
@@ -125,7 +125,7 @@
     txOut.value = [NSNumber numberWithLongLong:50000];
     
     scriptPubKey = [[BNPayToAddressScriptPubKey alloc] init];
-    scriptPubKey.address = [_sellerWallet createAddress];
+    scriptPubKey.address = [_sellerWallet createKey].address;
     txOut.scriptPubKey = scriptPubKey;
     
     [_releaseTx.outputs addObject:txOut];
@@ -170,6 +170,8 @@
     //[self showBalances];
     
     [[[self.buyerWallet transactions] asJSONString] writeToFile:@"/tmp/transactions.json" atomically:YES encoding:NSUTF8StringEncoding error:0x0];
+    
+    [[[self.buyerWallet keys] asJSONString] writeToFile:@"/tmp/keys.json" atomically:YES encoding:NSUTF8StringEncoding error:0x0];
     
     //[self debugEscrow];
     //[self debugRelease];

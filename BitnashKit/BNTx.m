@@ -56,9 +56,9 @@
     txOut.value = [NSNumber numberWithLongLong:value];
     
     BNMultisigScriptPubKey *script = [[BNMultisigScriptPubKey alloc] init];
-    NSString *pubKey = [_wallet createPubKey];
-    [script.pubKeys addObject:pubKey];
-    [script.pubKeys addObject:pubKey]; //do it twice to properly estimate tx size for fees
+    BNKey *key = [_wallet createKey];
+    [script.pubKeys addObject:key.pubKey];
+    [script.pubKeys addObject:key.pubKey]; //do it twice to properly estimate tx size for fees
     txOut.scriptPubKey = script;
     
     [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
@@ -149,7 +149,7 @@
     txOut.value = [tx sendToServer:@"inputValue"];
     
     BNPayToAddressScriptPubKey *scriptPubKey = [[BNPayToAddressScriptPubKey alloc] init];
-    scriptPubKey.address = [_wallet createAddress];
+    scriptPubKey.address = [_wallet createKey].address;
     txOut.scriptPubKey = scriptPubKey;
     
     [tx subtractFee];

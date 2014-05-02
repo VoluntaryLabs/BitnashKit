@@ -23,5 +23,6 @@
 #import "NSString+BNJSON.h"
 #import "BNError.h"
 #import "QRCodeGenerator.h"
+#import "BNKey.h"
 
 #endif

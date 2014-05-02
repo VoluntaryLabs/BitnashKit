@@ -36,18 +36,11 @@ public class BNWallet extends BNObject {
 		return walletAppKit.wallet().getBalance();
 	}
 	
-	public String apiCreateAddress(Object args) {
+	public String apiCreateKey(Object args) {
 		ECKey key = new ECKey();
 		walletAppKit.wallet().addKey(key);
 		
 		return key.toAddress(walletAppKit.wallet().getParams()).toString();
-	}
-	
-	public String apiCreatePubKey(Object args) {
-		ECKey key = new ECKey();
-		walletAppKit.wallet().addKey(key);
-		
-		return Utils.bytesToHexString(key.getPubKey());
 	}
 	
 	public JSONArray apiTransactions(Object args) {
@@ -60,21 +53,23 @@ public class BNWallet extends BNObject {
 		return transactions;
 	}
 	
+	public JSONArray apiKeys(Object args) {
+		JSONArray keys = new JSONArray();
+		for (ECKey key : wallet().getKeys()) {
+			BNKey bnKey = new BNKey();
+			bnKey.setBnParent(this);
+			bnKey.setKey(key);
+			keys.add(bnKey);
+		}
+		return keys;
+	}
+	
 	public Wallet wallet() {
 		return walletAppKit.wallet();
 	}
 	
 	public PeerGroup peerGroup() {
 		return walletAppKit.peerGroup();
-	}
-	
-	public JSONArray apiAddresses(Object args) {
-		JSONArray list = new JSONArray();
-		for (ECKey key : walletAppKit.wallet().getKeys()) {
-			list.add(new Address(walletAppKit.wallet().getParams(), key.getPubKeyHash()).toString());
-		}
-		
-		return list;
 	}
 	
 	public String transactionsPath() throws IOException {

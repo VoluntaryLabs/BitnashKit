@@ -10,6 +10,7 @@
 #import "BNServer.h"
 #import "BNObject.h"
 #import "BNTx.h"
+#import "BNKey.h"
 
 @interface BNWallet : BNObject
 
@@ -43,16 +44,13 @@
 - (NSNumber *)balance;
 //return the balance of the wallet in Satoshi.  Blocking call.
 
-- (NSString *)createAddress;
-//Create a new keypair for the wallet and return the address.
-
-- (NSString *)createPubKey;
-//Create a new keypair for the wallet and return the pubKey.
+- (BNKey *)createKey;
+//Create a new keypair for the wallet and return it;
 
 - (BNTx *)newTx;
 
 - (NSArray *)transactions;
 
-- (NSArray *)addresses;
+- (NSArray *)keys;
 
 @end

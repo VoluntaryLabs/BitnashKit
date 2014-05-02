@@ -40,14 +40,9 @@
     return [_server sendMessage:@"balance" withObject:self withArg:nil];
 }
 
-- (NSString *)createAddress
+- (BNKey *)createKey
 {
-    return [_server sendMessage:@"createAddress" withObject:self withArg:nil];
-}
-
-- (NSString *)createPubKey
-{
-    return [_server sendMessage:@"createPubKey" withObject:self withArg:nil];
+    return [_server sendMessage:@"createKey" withObject:self withArg:nil];
 }
 
 - (BNTx *)newTx
@@ -62,9 +57,9 @@
     return [_server sendMessage:@"transactions" withObject:self];
 }
 
-- (NSArray *)addresses
+- (NSArray *)keys
 {
-    return [_server sendMessage:@"addresses" withObject:self];
+    return [_server sendMessage:@"keys" withObject:self];
 }
 
 @end
