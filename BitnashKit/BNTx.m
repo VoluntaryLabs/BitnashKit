@@ -179,6 +179,13 @@
 
 - (NSString *)nodeTitle
 {
+    /*
+    if (self.children.count == 0)
+    {
+        [self composeChildrenFromPropertyNames:@[@"updateTime", @"counterParty"]];
+    }
+    */
+    
     return [NSString stringWithFormat:@"%@ of %.4f BTC", self.txTypeString, (float)(self.netValue.doubleValue * 0.00000001)];
 }
 
