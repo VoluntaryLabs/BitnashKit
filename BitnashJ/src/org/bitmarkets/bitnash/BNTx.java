@@ -20,13 +20,23 @@ import com.google.bitcoin.script.Script;
 import com.google.bitcoin.script.ScriptChunk;
 
 public class BNTx extends BNObject {
+	BNError error;
+	JSONArray inputs;
+	JSONArray outputs;
+	String txHash;
+	BigInteger netValue;
+	BigInteger updateTime;
+	String counterParty;
+	
+	Transaction transaction;
+	
 	public BNTx() {
 		super();
 		bnSlotNames.addAll(Arrays.asList(
 				"error",
 				"inputs",
 				"outputs",
-				"hash",
+				"txHash",
 				"netValue",
 				"updateTime",
 				"counterParty"
@@ -65,12 +75,12 @@ public class BNTx extends BNObject {
 		this.outputs = outputs;
 	}
 	
-	public String getHash() {
-		return hash;
+	public String getTxHash() {
+		return txHash;
 	}
 	
-	public void setHash(String hash) {
-		this.hash = hash;
+	public void setTxHash(String txHash) {
+		this.txHash = txHash;
 	}
 	
 	public BigInteger getNetValue() {
@@ -193,16 +203,6 @@ public class BNTx extends BNObject {
 		return inputValue();
 	}
 	
-	BNError error;
-	JSONArray inputs;
-	JSONArray outputs;
-	String hash;
-	BigInteger netValue;
-	BigInteger updateTime;
-	String counterParty;
-	
-	Transaction transaction;
-	
 	void resetSlots() {
 		inputs = new JSONArray();
 		outputs = new JSONArray();
@@ -245,8 +245,8 @@ public class BNTx extends BNObject {
 	}
 	
 	void didDeserializeSelf() {
-		if (hash != null) {
-			transaction = wallet().getTransaction(new Sha256Hash(hash));
+		if (txHash != null) {
+			transaction = wallet().getTransaction(new Sha256Hash(txHash));
 		}
 		
 		if (transaction == null) {
@@ -270,7 +270,7 @@ public class BNTx extends BNObject {
 			txOut.willSerialize();
 		}
 		
-		setHash(transaction.getHashAsString());
+		setTxHash(transaction.getHashAsString());
 		setNetValue(transaction.getValue(wallet()));
 System.err.println(transaction.getUpdateTime());
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));

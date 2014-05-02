@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <NavKit/NavKit.h>
 
 @class BNError;
 
-@interface BNObject : NSObject
+@interface BNObject : NavInfoNode
 
 @property NSMutableArray *serializedSlotNames;
 @property BNError *error;

@@ -19,7 +19,7 @@
 @property NSMutableArray *inputs;
 @property NSMutableArray *outputs;
 
-@property NSString *hash;
+@property NSString *txHash;
 
 @property NSNumber *netValue;
 @property NSNumber *updateTime;

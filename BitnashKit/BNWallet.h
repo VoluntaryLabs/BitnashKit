@@ -11,6 +11,8 @@
 #import "BNObject.h"
 #import "BNTx.h"
 #import "BNKey.h"
+#import "BNTransactionsNode.h"
+#import "BNKeysNode.h"
 
 @interface BNWallet : BNObject
 
@@ -33,6 +35,9 @@
 
 @property BNServer *server;
 //Start a BNServer and set it on this wallet prior to use.
+
+@property BNTransactionsNode *transactionsNode;
+@property BNKeysNode *addressesNode;
 
 
 - (void)setPath:(NSString *)path;

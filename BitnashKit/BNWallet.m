@@ -22,7 +22,25 @@
 {
     self = [super init];
     self.server = [[BNServer alloc] init];
+    self.nodeTitle = @"Wallet";
+    self.nodeSuggestedWidth = 200;
+    self.shouldSortChildren = NO;
+    self.nodeSubtitle = @"starting ...";
+    self.transactionsNode = [[BNTransactionsNode alloc] init];
+    self.transactionsNode.wallet = self;
+    
+    self.addressesNode = [[BNKeysNode alloc] init];
+
     return self;
+}
+
+- (void)fetch
+{
+    if ([[_server status] isEqualToString:@"started"])
+    {
+        self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
+        [self setChildren:[NSMutableArray arrayWithObjects:self.transactionsNode, self.addressesNode, nil]];
+    }
 }
 
 - (void)setPath:(NSString *)path

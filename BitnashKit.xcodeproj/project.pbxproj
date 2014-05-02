@@ -29,6 +29,11 @@
 		DC261F3F18CD20A4005328DA /* NSArray+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F3D18CD20A4005328DA /* NSArray+BNJSON.m */; };
 		DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F4018CD21FA005328DA /* NSDictionary+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC261F4318CD21FB005328DA /* NSDictionary+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */; };
+		DC350EA6191437CE00C25A01 /* NavKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9C8D24191435EB008F4B63 /* NavKit.framework */; };
+		DC350EB4191439FD00C25A01 /* BNTransactionsNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DC350EB2191439FD00C25A01 /* BNTransactionsNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DC350EB3191439FD00C25A01 /* BNTransactionsNode.m */; };
+		DC350EBA1914420000C25A01 /* BNKeysNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DC350EB8191441FF00C25A01 /* BNKeysNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC350EBB1914420000C25A01 /* BNKeysNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DC350EB9191441FF00C25A01 /* BNKeysNode.m */; };
 		DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC4F2FAF19039CD0008803F7 /* NSNull+BNJSON.h */; };
 		DC4F2FB219039CD0008803F7 /* NSNull+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */; };
 		DC5A24881910605F00D48B14 /* bitcoinj.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5A24871910605F00D48B14 /* bitcoinj.jar */; };
@@ -86,6 +91,20 @@
 			remoteGlobalIDString = DC90331D18CBD1A2005D82A2;
 			remoteInfo = BitnashKit;
 		};
+		DC9C8D23191435EB008F4B63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9C8D1B191435EB008F4B63 /* NavKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AAE31DCC18FF1C0700405754;
+			remoteInfo = NavKit;
+		};
+		DC9C8D25191435EB008F4B63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9C8D1B191435EB008F4B63 /* NavKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AAE31DE318FF1C0700405754;
+			remoteInfo = NavKitTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +130,10 @@
 		DC261F3D18CD20A4005328DA /* NSArray+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BNJSON.m"; sourceTree = "<group>"; };
 		DC261F4018CD21FA005328DA /* NSDictionary+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BNJSON.h"; sourceTree = "<group>"; };
 		DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BNJSON.m"; sourceTree = "<group>"; };
+		DC350EB2191439FD00C25A01 /* BNTransactionsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNTransactionsNode.h; sourceTree = "<group>"; };
+		DC350EB3191439FD00C25A01 /* BNTransactionsNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNTransactionsNode.m; sourceTree = "<group>"; };
+		DC350EB8191441FF00C25A01 /* BNKeysNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNKeysNode.h; sourceTree = "<group>"; };
+		DC350EB9191441FF00C25A01 /* BNKeysNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNKeysNode.m; sourceTree = "<group>"; };
 		DC4F2FAF19039CD0008803F7 /* NSNull+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+BNJSON.h"; sourceTree = "<group>"; };
 		DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+BNJSON.m"; sourceTree = "<group>"; };
 		DC5A24871910605F00D48B14 /* bitcoinj.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = bitcoinj.jar; path = BitnashJ/lib/bitcoinj.jar; sourceTree = "<group>"; };
@@ -132,6 +155,7 @@
 		DC90334218CBD1A2005D82A2 /* BitnashKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitnashKitTests.m; sourceTree = "<group>"; };
 		DC90334C18CBD213005D82A2 /* BNWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNWallet.h; sourceTree = "<group>"; };
 		DC90334D18CBD213005D82A2 /* BNWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNWallet.m; sourceTree = "<group>"; };
+		DC9C8D1B191435EB008F4B63 /* NavKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavKit.xcodeproj; path = ../NavKit/NavKit.xcodeproj; sourceTree = "<group>"; };
 		DCA62FAE18CD2FEC00475735 /* BNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNServer.h; sourceTree = "<group>"; };
 		DCA62FAF18CD2FEC00475735 /* BNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNServer.m; sourceTree = "<group>"; };
 		DCB016CF191316730064F540 /* BNKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNKey.h; sourceTree = "<group>"; };
@@ -168,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC350EA6191437CE00C25A01 /* NavKit.framework in Frameworks */,
 				DCE5E285190AFF640005396A /* json-simple-1.1.1.jar in Frameworks */,
 				DC5A24881910605F00D48B14 /* bitcoinj.jar in Frameworks */,
 				DCE5E286190AFF640005396A /* slf4j-simple-1.7.6.jar in Frameworks */,
@@ -239,6 +264,7 @@
 				DC90333C18CBD1A2005D82A2 /* BitnashKitTests */,
 				DC90332018CBD1A2005D82A2 /* Frameworks */,
 				DC90331F18CBD1A2005D82A2 /* Products */,
+				DC9C8D1B191435EB008F4B63 /* NavKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -283,6 +309,12 @@
 				DCF1CC0118FF20FE00AE815A /* BNObject.m */,
 				DC90334C18CBD213005D82A2 /* BNWallet.h */,
 				DC90334D18CBD213005D82A2 /* BNWallet.m */,
+				DC350EB2191439FD00C25A01 /* BNTransactionsNode.h */,
+				DC350EB3191439FD00C25A01 /* BNTransactionsNode.m */,
+				DC350EB8191441FF00C25A01 /* BNKeysNode.h */,
+				DC350EB9191441FF00C25A01 /* BNKeysNode.m */,
+				DCB016CF191316730064F540 /* BNKey.h */,
+				DCB016D0191316730064F540 /* BNKey.m */,
 				DCD906F118E0DF3600342231 /* BNTx.h */,
 				DCD906F218E0DF3600342231 /* BNTx.m */,
 				DCE23FB818CC316B00F64729 /* BNTxIn.h */,
@@ -313,8 +345,6 @@
 				DCF1CBFA18FF01CC00AE815A /* BNError.m */,
 				DC4F2FAF19039CD0008803F7 /* NSNull+BNJSON.h */,
 				DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */,
-				DCB016CF191316730064F540 /* BNKey.h */,
-				DCB016D0191316730064F540 /* BNKey.m */,
 			);
 			path = BitnashKit;
 			sourceTree = "<group>";
@@ -347,6 +377,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DC9C8D1C191435EB008F4B63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C8D24191435EB008F4B63 /* NavKit.framework */,
+				DC9C8D26191435EB008F4B63 /* NavKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -357,6 +396,7 @@
 				DCF1CBFB18FF01CC00AE815A /* BNError.h in Headers */,
 				DCD10B2218E219A10001B6F4 /* BNPayToAddressScriptSig.h in Headers */,
 				AA753DC7191079DA00D07CB5 /* qrinput.h in Headers */,
+				DC350EBA1914420000C25A01 /* BNKeysNode.h in Headers */,
 				AA753DC9191079DA00D07CB5 /* qrspec.h in Headers */,
 				DCE3D9CE18CD72A20098DE31 /* BNPayToAddressScriptPubKey.h in Headers */,
 				DC90334E18CBD213005D82A2 /* BNWallet.h in Headers */,
@@ -378,6 +418,7 @@
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
 				DCB016D1191316730064F540 /* BNKey.h in Headers */,
 				DCF1CC0218FF20FE00AE815A /* BNObject.h in Headers */,
+				DC350EB4191439FD00C25A01 /* BNTransactionsNode.h in Headers */,
 				DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */,
 				DC6161AF18CFBF7900F7B602 /* NSString+BNJSON.h in Headers */,
 				DCE23FC218CC329600F64729 /* BNMultisigScriptPubKey.h in Headers */,
@@ -448,6 +489,12 @@
 			mainGroup = DC90331418CBD1A2005D82A2;
 			productRefGroup = DC90331F18CBD1A2005D82A2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DC9C8D1C191435EB008F4B63 /* Products */;
+					ProjectRef = DC9C8D1B191435EB008F4B63 /* NavKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				DC90331D18CBD1A2005D82A2 /* BitnashKit */,
@@ -455,6 +502,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DC9C8D24191435EB008F4B63 /* NavKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NavKit.framework;
+			remoteRef = DC9C8D23191435EB008F4B63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC9C8D26191435EB008F4B63 /* NavKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NavKitTests.xctest;
+			remoteRef = DC9C8D25191435EB008F4B63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DC90331C18CBD1A2005D82A2 /* Resources */ = {
@@ -486,6 +550,7 @@
 			files = (
 				DCD10B1F18E218F60001B6F4 /* BNMultisigScriptSig.m in Sources */,
 				DCF1CC0318FF20FE00AE815A /* BNObject.m in Sources */,
+				DC350EBB1914420000C25A01 /* BNKeysNode.m in Sources */,
 				DCD906F418E0DF3600342231 /* BNTx.m in Sources */,
 				AA753DCC191079DA00D07CB5 /* split.c in Sources */,
 				DCE23FBF18CC326000F64729 /* BNScriptPubKey.m in Sources */,
@@ -500,6 +565,7 @@
 				DCD10B2318E219A10001B6F4 /* BNPayToAddressScriptSig.m in Sources */,
 				DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */,
 				DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */,
+				DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,
 				AA753DC6191079DA00D07CB5 /* qrinput.c in Sources */,
 				AA753DCA191079DA00D07CB5 /* rscode.c in Sources */,
@@ -626,6 +692,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BitMarkets-cudzravdfeuhswevrvyvukbewtcc/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BitnashKit/BitnashKit-Prefix.pch";
@@ -642,6 +712,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BitMarkets-cudzravdfeuhswevrvyvukbewtcc/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BitnashKit/BitnashKit-Prefix.pch";

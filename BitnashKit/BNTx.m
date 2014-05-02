@@ -22,7 +22,7 @@
                                                    @"error",
                                                    @"inputs",
                                                    @"outputs",
-                                                   @"hash",
+                                                   @"txHash",
                                                    @"netValue",
                                                    @"updateTime",
                                                    @"counterParty",
@@ -156,5 +156,41 @@
     
     return tx;
 }
+
+- (NSString *)txTypeString
+{
+    if (self.netValue > 0)
+    {
+        return @"Deposit";
+    }
+    
+    return @"Withdrawal";
+}
+
+- (NSString *)nodeSubtitle
+{
+    return self.txHash;
+}
+
+- (NSString *)nodeNote
+{
+    return nil;
+}
+
+- (NSString *)nodeTitle
+{
+    return [NSString stringWithFormat:@"%@ of %.4f BTC", self.txTypeString, (float)(self.netValue.doubleValue * 0.00000001)];
+}
+
+- (NSUInteger)hash
+{
+    return [self.txHash hash];
+}
+
+- (BOOL)isEqualTo:(id)object
+{
+    return [self.txHash isEqualTo:[object performSelector:@selector(txHash)]];
+}
+
 
 @end
