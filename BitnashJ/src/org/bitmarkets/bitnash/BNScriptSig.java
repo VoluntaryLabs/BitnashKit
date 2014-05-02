@@ -1,12 +1,17 @@
 package org.bitmarkets.bitnash;
 
+import java.util.Arrays;
+
 import com.google.bitcoin.core.Utils;
 import com.google.bitcoin.script.Script;
 
 public class BNScriptSig extends BNObject {
+	String programHexBytes;
+	Boolean isMultisig;
+	
 	public BNScriptSig() {
 		super();
-		bnSlotNames.add("programHexBytes");
+		bnSlotNames.addAll(Arrays.asList("programHexBytes", "isMultisig"));
 	}
 	
 	public String getProgramHexBytes() {
@@ -17,6 +22,14 @@ public class BNScriptSig extends BNObject {
 		this.programHexBytes = programHexBytes;
 	}
 	
+	public Boolean getIsMultisig() {
+		return isMultisig;
+	}
+	
+	public void setIsMultisig(Boolean isMultisig) {
+		this.isMultisig = isMultisig;
+	}
+	
 	public Script script() { 
 		return txIn().transactionInput().getScriptSig();
 	}
@@ -24,8 +37,6 @@ public class BNScriptSig extends BNObject {
 	public boolean isMultisig() {
 		return script().getChunks().size() > 2; //TODO will this always be the case?
 	}
-	
-	String programHexBytes;
 	
 	BNTxIn txIn() {
 		return (BNTxIn) bnParent;
@@ -40,6 +51,9 @@ public class BNScriptSig extends BNObject {
 	void willSerializeSelf() {
 		if (script().getProgram().length > 0) {
 			programHexBytes = Utils.bytesToHexString(script().getProgram());
+			setIsMultisig(Boolean.valueOf(script().getChunks().size() > 2)); //TODO fix this
+		} else {
+			setIsMultisig(Boolean.valueOf(false));
 		}
 	}
 }

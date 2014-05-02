@@ -12,5 +12,6 @@
 @interface BNScriptSig : BNObject
 
 @property NSString *programHexBytes;
+@property NSNumber *isMultisig;
 
 @end

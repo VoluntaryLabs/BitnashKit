@@ -13,7 +13,10 @@
 - (id)init
 {
     self = [super init];
-    [self.serializedSlotNames addObject:@"programHexBytes"];
+    [self.serializedSlotNames addObjectsFromArray:[NSArray arrayWithObjects:
+                                                   @"programHexBytes",
+                                                   @"isMultisig",
+                                                   nil]];
     return self;
 }
 
