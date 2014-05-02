@@ -10,6 +10,7 @@
 #import "BNWallet.h"
 #import "BNMultisigScriptPubKey.h"
 #import "BNPayToAddressScriptPubKey.h"
+#import "BNTxIn.h"
 
 @implementation BNTx
 
@@ -119,6 +120,18 @@
     return nil;
 }
 
+- (BNTxIn *)multisigInput
+{
+    for (BNTxIn *txIn in self.inputs)
+    {
+        if ([[txIn.scriptSig isMultisig] boolValue])
+        {
+            return txIn;
+        }
+    }
+    return nil;
+}
+
 - (void)broadcast
 {
     [self sendToServer:@"broadcast"];
@@ -157,14 +170,27 @@
     return tx;
 }
 
-- (NSString *)txTypeString
+- (NSString *)txTypeString //TODO -- more rigorous heuristic
 {
-    if (self.netValue > 0)
+    if (self.netValue.longLongValue < 0)
+    {
+        if ([self multisigOutput])
+        {
+            return @"Escrow";
+        }
+        else
+        {
+            return @"Withdrawal";
+        }
+    }
+    else if ([self multisigInput])
+    {
+        return @"Escrow Release";
+    }
+    else
     {
         return @"Deposit";
     }
-    
-    return @"Withdrawal";
 }
 
 - (NSString *)nodeSubtitle
