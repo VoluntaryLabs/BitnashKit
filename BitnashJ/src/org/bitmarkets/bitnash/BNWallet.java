@@ -36,11 +36,15 @@ public class BNWallet extends BNObject {
 		return walletAppKit.wallet().getBalance();
 	}
 	
-	public String apiCreateKey(Object args) {
+	public BNKey apiCreateKey(Object args) {
 		ECKey key = new ECKey();
 		walletAppKit.wallet().addKey(key);
 		
-		return key.toAddress(walletAppKit.wallet().getParams()).toString();
+		BNKey bnKey = new BNKey();
+		bnKey.setBnParent(this);
+		bnKey.setKey(key);
+		
+		return bnKey;
 	}
 	
 	public JSONArray apiTransactions(Object args) {
