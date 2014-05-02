@@ -55,4 +55,6 @@
 - (BNTx *)cancellationTx;
 //Returns a new transaction that sends this transactions inputs back to this transactions wallet
 
+- (NSString *)webUrl;
+
 @end

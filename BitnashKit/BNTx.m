@@ -192,5 +192,10 @@
     return [self.txHash isEqualTo:[object performSelector:@selector(txHash)]];
 }
 
+- (NSString *)webUrl
+{
+    return [@"http://testnet.btclook.com/txn/" stringByAppendingString:self.txHash];
+}
+
 
 @end
