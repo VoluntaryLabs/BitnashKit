@@ -33,9 +33,12 @@
 
 - (NSString *)nodeSubtitle
 {
-    return [self.creationDate
-            descriptionWithCalendarFormat:@"%Y %b %d %l:%M:%S %p" timeZone:nil
+    NSString *dateString =  [self.creationDate
+                             descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S" timeZone:nil
+                             //descriptionWithCalendarFormat:@"%x %X %Z" timeZone:nil
+            //descriptionWithCalendarFormat:@"%c" timeZone:nil
             locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+    return [@"Created " stringByAppendingString:dateString];
 }
 
 - (NSUInteger)hash
