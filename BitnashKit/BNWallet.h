@@ -43,6 +43,9 @@
 - (void)setPath:(NSString *)path;
 //Set that path to the wallet directory
 
+- (void)setCheckpointsPath:(NSString *)path;
+//Set the path to the checkpoints file
+
 - (NSError *) error;
 //Error for last operation.
 

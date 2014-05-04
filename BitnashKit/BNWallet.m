@@ -46,7 +46,12 @@
 
 - (void)setPath:(NSString *)path
 {
-    _server.path = path;
+    _server.walletPath = path;
+}
+
+- (void)setCheckpointsPath:(NSString *)path
+{
+    _server.checkpointsPath = path;
 }
 
 - (BNError *) error

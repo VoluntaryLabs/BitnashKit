@@ -11,8 +11,11 @@
 
 @interface BNServer : BNObject
 
-@property NSString *path;
+@property NSString *walletPath;
 //path to folder that will contain the wallet and chainstore.
+
+@property NSString *checkpointsPath;
+//path to the checkpoints file
 
 @property BOOL started;
 

@@ -14,7 +14,7 @@
 - (id)init
 {
     self = [super init];
-    self.path = [NSHomeDirectory() stringByAppendingString:@"/.bitnash"];
+    self.walletPath = [NSHomeDirectory() stringByAppendingString:@"/.bitnash"];
     return self;
 }
 
@@ -48,13 +48,19 @@
                             nil] componentsJoinedByString:@":"];
     
     self.task = [[NSTask alloc] init];
-    _task.currentDirectoryPath = _path;
+    _task.currentDirectoryPath = _walletPath;
     _task.launchPath = @"/usr/bin/java"; //TODO: Locate it first?
-    _task.arguments = [NSArray arrayWithObjects:
-                         @"-Dfile.encoding=MacRoman",
-                         @"-classpath", classPath,
-                         @"org.bitmarkets.bitnash.BNApp",
-                         nil];
+    
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:
+                                 @"-Dfile.encoding=MacRoman",
+                                 @"-classpath", classPath,
+                                 @"org.bitmarkets.bitnash.BNApp",
+                                 nil];
+    if (_checkpointsPath)
+    {
+        [arguments addObject:_checkpointsPath];
+    }
+    _task.arguments = arguments;
     
     _task.standardInput = [NSPipe pipe];
     _task.standardOutput = [NSPipe pipe];
@@ -76,9 +82,9 @@
 {
     NSError *error = nil;
     
-    if(![[NSFileManager defaultManager] fileExistsAtPath:_path])
+    if(![[NSFileManager defaultManager] fileExistsAtPath:_walletPath])
     {
-        [[NSFileManager defaultManager] createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:&error];
+        [[NSFileManager defaultManager] createDirectoryAtPath:_walletPath withIntermediateDirectories:YES attributes:nil error:&error];
     }
     
     if (error) {

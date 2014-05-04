@@ -1,8 +1,10 @@
 package org.bitmarkets.bitnash;
 
 import java.io.File;
+import java.io.FileInputStream;
 //import java.io.FileOutputStream;
 import java.io.IOException;
+
 //import java.io.PrintStream;
 
 import com.google.bitcoin.kits.WalletAppKit;
@@ -20,6 +22,9 @@ public class BNApp {
 		WalletAppKit walletAppKit = new WalletAppKit(new TestNet3Params(), new File("."), "bitnash");
 		walletAppKit.setAutoStop(false);
 		walletAppKit.setAutoSave(true);
+		if (args.length == 1) {
+			walletAppKit.setCheckpoints(new FileInputStream(new File(args[0])));
+		}
 		
 		BNServer server = BNServer.shared();
 		server.getBnWallet().setWalletAppKit(walletAppKit);
