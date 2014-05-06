@@ -61,4 +61,7 @@
 
 - (NSArray *)keys;
 
+- (NSString *)status;
+//The current status of the server (initialized, starting, started)
+
 @end

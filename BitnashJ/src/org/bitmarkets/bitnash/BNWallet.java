@@ -5,19 +5,40 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import org.json.simple.JSONArray;
+import org.spongycastle.crypto.params.KeyParameter;
 
 import com.google.bitcoin.core.*;
+import com.google.bitcoin.crypto.KeyCrypter;
+import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.Service;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 @SuppressWarnings("unchecked")
 public class BNWallet extends BNObject {
 	public static enum NetworkType {TestNet3, MainNet};
+	static BNWallet shared;
+	
+	KeyParameter keyParameter;
+	String status;
 	
 	public WalletAppKit walletAppKit;
 	
+	public BNWallet() {
+		super();
+		status = "initialized";
+	} 
+	
 	public static BNWallet bnDeserializerInstance() {
-		return BNServer.bnDeserializerInstance().getBnWallet();
+		return shared();
+	}
+	
+	public static BNWallet shared() {
+		if (shared == null) {
+			shared = new BNWallet();
+		}
+		return shared;
 	}
 	
 	public WalletAppKit getWalletAppKit() {
@@ -28,12 +49,50 @@ public class BNWallet extends BNObject {
 		this.walletAppKit = walletAppKit;
 	}
 	
-	public BigInteger apiBalance(Object args) {
-		return wallet().getBalance();
+	public boolean setPassphrase(String passphrase) {
+		if (keyParameter != null) {
+			//Passphrase is being changed.  Decrypt it first.
+	        wallet().decrypt(keyParameter);
+		}
+		
+		KeyCrypter keyCrypter = wallet().getKeyCrypter();
+		if (keyCrypter == null) {
+			keyCrypter = new KeyCrypterScrypt();
+		}
+        
+		keyParameter = keyCrypter.deriveKey(passphrase);
+		
+		if (wallet().isEncrypted()) {
+			if (!wallet().checkAESKey(keyParameter)) {
+				keyParameter = null;
+				return false;
+			}
+		} else {
+			System.err.println("INITIAL ENCRYPTION");
+			wallet().encrypt(keyCrypter, keyParameter);
+		}
+		
+		return true;
 	}
 	
 	public BigInteger getBalance() {
 		return walletAppKit.wallet().getBalance();
+	}
+	
+	public KeyParameter getKeyParameter() {
+		return keyParameter;
+	}
+	
+	public Boolean apiSetPassphrase(Object args) {
+		return Boolean.valueOf(this.setPassphrase((String)args));
+	}
+	
+	public BigInteger apiBalance(Object args) {
+		return wallet().getBalance();
+	}
+	
+	public String apiStatus(Object args) {
+		return status;
 	}
 	
 	public BNKey apiCreateKey(Object args) {
@@ -66,6 +125,17 @@ public class BNWallet extends BNObject {
 			keys.add(bnKey);
 		}
 		return keys;
+	}
+	
+	public void start() {
+		status = "starting";
+		
+		walletAppKit.startAsync();
+		walletAppKit.addListener(new Service.Listener(){
+			public void running() {
+				status = "started";
+			}
+		}, MoreExecutors.sameThreadExecutor());
 	}
 	
 	public Wallet wallet() {

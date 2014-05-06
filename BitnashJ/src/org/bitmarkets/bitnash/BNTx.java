@@ -233,7 +233,7 @@ public class BNTx extends BNObject {
 	}
 	
 	BNWallet bnWallet() {
-		return BNServer.shared().getBnWallet();
+		return BNWallet.shared();
 	}
 	
 	Wallet wallet() {

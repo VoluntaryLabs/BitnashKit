@@ -1,8 +1,6 @@
 package org.bitmarkets.bitnash;
 
 import java.io.BufferedReader;
-import com.google.common.util.concurrent.MoreExecutors;
-import com.google.common.util.concurrent.Service;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,39 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class BNServer extends BNObject implements Runnable {
-	public BNServer() {
-		super();
-		bnWallet = new BNWallet();
-	} 
-	
-	public static BNServer shared() {
-		if (BNServer.shared == null) {
-			BNServer.shared = new BNServer();
-		}
-		return BNServer.shared;
-	}
-	
-	public static BNServer bnDeserializerInstance() {
-		return shared();
-	}
-	
-	public BNWallet getBnWallet() {
-		return bnWallet;
-	}
-	
-	public void setBnWallet(BNWallet bnWallet) {
-		this.bnWallet = bnWallet;
-	}
-	
 	public void start() {
-		status = "starting";
 		new Thread(this).start();
-		bnWallet.getWalletAppKit().startAsync();
-		bnWallet.getWalletAppKit().addListener(new Service.Listener(){
-			public void running() {
-				status = "started";
-			}
-		}, MoreExecutors.sameThreadExecutor());
 	}
 	
 	public void run() {
@@ -107,8 +74,8 @@ System.err.println("BitnashJ BNServer Received: " + line);
 		finally {
 System.err.println("Stopping Server ...");
 			try {
-				bnWallet.getWalletAppKit().stopAsync();
-				bnWallet.getWalletAppKit().awaitTerminated(5, TimeUnit.SECONDS);
+				bnWallet().getWalletAppKit().stopAsync();
+				bnWallet().getWalletAppKit().awaitTerminated(5, TimeUnit.SECONDS);
 				System.exit(0);
 			}
 			catch (Exception e) {
@@ -121,15 +88,9 @@ System.err.println("Stopping Server ...");
 		}
 	}
 	
-	public String apiStatus(Object args) {
-		return status;
+	BNWallet bnWallet() {
+		return BNWallet.shared();
 	}
-	
-	static BNServer shared;
-	
-	String status;
-	BNWallet bnWallet;
-	
 	
 	@SuppressWarnings("unchecked")
 	private void respondToMessage(JSONObject incomingMessage, Object obj, Exception e) {

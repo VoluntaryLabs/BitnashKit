@@ -27,9 +27,6 @@
 - (void)start;
 //Start the wallet child process (BitcoinJ)
 
-- (NSString *)status;
-//The current status of the server (initialized, starting, started)
-
 - (id)sendMessage:(NSString *)messageName withObject:(id)object;
 
 - (id)sendMessage:(NSString *)messageName withObject:(id)object withArg:(id)arg;

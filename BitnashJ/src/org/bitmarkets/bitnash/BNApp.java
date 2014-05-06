@@ -25,9 +25,10 @@ public class BNApp {
 		if (args.length == 1) {
 			walletAppKit.setCheckpoints(new FileInputStream(new File(args[0])));
 		}
+		BNWallet.shared().setWalletAppKit(walletAppKit);
+		BNWallet.shared().start();
 		
-		BNServer server = BNServer.shared();
-		server.getBnWallet().setWalletAppKit(walletAppKit);
+		BNServer server = new BNServer();
 		server.start();
 	}
 }

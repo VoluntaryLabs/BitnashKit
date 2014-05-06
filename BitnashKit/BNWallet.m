@@ -37,7 +37,7 @@
 
 - (void)fetch
 {
-    if ([[_server status] isEqualToString:@"started"])
+    if ([[self status] isEqualToString:@"started"])
     {
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
         [self setChildren:[NSMutableArray arrayWithObjects:self.transactionsNode, self.addressesNode, nil]];
@@ -84,6 +84,16 @@
 - (NSArray *)keys
 {
     return [_server sendMessage:@"keys" withObject:self];
+}
+
+- (NSString *)status
+{
+    return [_server sendMessage:@"status" withObject:self];
+}
+
+- (void)setPassphrase:(NSString *)passphrase
+{
+    [_server sendMessage:@"setPassphrase" withObject:self withArg:passphrase];
 }
 
 @end

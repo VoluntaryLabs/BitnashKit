@@ -73,11 +73,6 @@
     [_task launch];
 }
 
-- (NSString *)status
-{
-    return [self sendMessage:@"status" withObject:self];
-}
-
 - (void)createDir
 {
     NSError *error = nil;
