@@ -116,6 +116,10 @@ public class BNTxIn extends BNObject {
 	TransactionSignature signUsingKey(ECKey key) {
 		Transaction transaction = transaction();
 		
+		if (key.isEncrypted()) {
+			key = key.decrypt(wallet().getKeyCrypter(), bnTx().bnWallet().keyParameter);
+		}
+		
 		if (key != null) {
 			return transaction.calculateSignature(
 					index(),

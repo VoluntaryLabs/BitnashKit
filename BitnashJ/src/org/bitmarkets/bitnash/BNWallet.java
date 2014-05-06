@@ -96,8 +96,14 @@ public class BNWallet extends BNObject {
 	}
 	
 	public BNKey apiCreateKey(Object args) {
-		ECKey key = new ECKey();
-		walletAppKit.wallet().addKey(key);
+		ECKey key = null;
+		
+		if (wallet().isEncrypted()) {
+			key = wallet().addNewEncryptedKey(wallet().getKeyCrypter(), keyParameter);
+		} else {
+			key = new ECKey();
+			walletAppKit.wallet().addKey(key);
+		}
 		
 		BNKey bnKey = new BNKey();
 		bnKey.setBnParent(this);
