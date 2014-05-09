@@ -96,4 +96,10 @@
     [_server sendMessage:@"setPassphrase" withObject:self withArg:passphrase];
 }
 
+- (BOOL)isRunning
+{
+    return [self.status isEqualToString:@"started"];
+}
+
+
 @end

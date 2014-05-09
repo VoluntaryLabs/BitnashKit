@@ -64,4 +64,6 @@
 - (NSString *)status;
 //The current status of the server (initialized, starting, started)
 
+- (BOOL)isRunning;
+
 @end
