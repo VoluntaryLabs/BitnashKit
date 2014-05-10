@@ -35,12 +35,27 @@
     return self;
 }
 
+- (void)setNodeSubtitle:(NSString *)nodeSubtitle
+{
+    if (![[super nodeSubtitle] isEqualToString:nodeSubtitle])
+    {
+        [super setNodeSubtitle:nodeSubtitle];
+        [self postParentChainChanged];
+    }
+}
 - (void)fetch
 {
     if ([[self status] isEqualToString:@"started"])
     {
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
-        [self setChildren:[NSMutableArray arrayWithObjects:self.transactionsNode, self.addressesNode, nil]];
+        
+        if (self.children.count == 0)
+        {
+            [self setChildren:[NSMutableArray arrayWithObjects:self.transactionsNode, self.addressesNode, nil]];
+            [self setRefreshInterval:10.0];
+            [self postParentChainChanged];
+        }
+        
     }
 }
 
@@ -54,7 +69,7 @@
     _server.checkpointsPath = path;
 }
 
-- (BNError *) error
+- (BNError *)error
 {
     return _server.error;
 }
