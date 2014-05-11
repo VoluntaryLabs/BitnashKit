@@ -23,6 +23,8 @@
 		AA753DCD191079DA00D07CB5 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB5191079DA00D07CB5 /* split.h */; };
 		AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */; };
+		AAB2809E19201B5F005C9D27 /* NSNumber+Bitnash.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB2809C19201B5F005C9D27 /* NSNumber+Bitnash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAB2809F19201B5F005C9D27 /* NSNumber+Bitnash.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB2809D19201B5F005C9D27 /* NSNumber+Bitnash.m */; };
 		DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3818CD1FEC005328DA /* NSObject+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC261F3B18CD1FEC005328DA /* NSObject+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F3918CD1FEC005328DA /* NSObject+BNJSON.m */; };
 		DC261F3E18CD20A4005328DA /* NSArray+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3C18CD20A4005328DA /* NSArray+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -123,6 +125,8 @@
 		AA753DB5191079DA00D07CB5 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
 		AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		AAB2809C19201B5F005C9D27 /* NSNumber+Bitnash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Bitnash.h"; sourceTree = "<group>"; };
+		AAB2809D19201B5F005C9D27 /* NSNumber+Bitnash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Bitnash.m"; sourceTree = "<group>"; };
 		DC261F3818CD1FEC005328DA /* NSObject+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BNJSON.h"; sourceTree = "<group>"; };
 		DC261F3918CD1FEC005328DA /* NSObject+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BNJSON.m"; sourceTree = "<group>"; };
 		DC261F3C18CD20A4005328DA /* NSArray+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BNJSON.h"; sourceTree = "<group>"; };
@@ -345,6 +349,8 @@
 				DCF1CBFA18FF01CC00AE815A /* BNError.m */,
 				DC4F2FAF19039CD0008803F7 /* NSNull+BNJSON.h */,
 				DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */,
+				AAB2809C19201B5F005C9D27 /* NSNumber+Bitnash.h */,
+				AAB2809D19201B5F005C9D27 /* NSNumber+Bitnash.m */,
 			);
 			path = BitnashKit;
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 				DCE23FBA18CC316B00F64729 /* BNTxIn.h in Headers */,
 				AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */,
 				DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */,
+				AAB2809E19201B5F005C9D27 /* NSNumber+Bitnash.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */,
 				DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */,
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
@@ -569,6 +576,7 @@
 				DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */,
 				DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,
+				AAB2809F19201B5F005C9D27 /* NSNumber+Bitnash.m in Sources */,
 				AA753DC6191079DA00D07CB5 /* qrinput.c in Sources */,
 				AA753DCA191079DA00D07CB5 /* rscode.c in Sources */,
 				AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */,
