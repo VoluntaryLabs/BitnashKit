@@ -160,9 +160,7 @@
     if ([response objectForKey:@"error"])
     {
         self.error = [[response objectForKey:@"error"] asObjectFromJSONObject];
-        if (self.logsErrors) {
-            NSLog(@"BNServer Error: %@", error.description);
-        }
+        [NSException raise:error.description format:nil];
         return nil;
     }
     else

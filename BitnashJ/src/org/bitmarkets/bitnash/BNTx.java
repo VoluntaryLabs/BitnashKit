@@ -24,8 +24,8 @@ public class BNTx extends BNObject {
 	JSONArray inputs;
 	JSONArray outputs;
 	String txHash;
-	BigInteger netValue;
-	BigInteger updateTime;
+	Number netValue;
+	Number updateTime;
 	String counterParty;
 	
 	Transaction transaction;
@@ -83,19 +83,19 @@ public class BNTx extends BNObject {
 		this.txHash = txHash;
 	}
 	
-	public BigInteger getNetValue() {
+	public Number getNetValue() {
 		return netValue;
 	}
 	
-	public void setNetValue(BigInteger netValue) {
+	public void setNetValue(Number netValue) {
 		this.netValue = netValue;
 	}
 	
-	public BigInteger getUpdateTime() {
+	public Number getUpdateTime() {
 		return updateTime;
 	}
 	
-	public void setUpdateTime(BigInteger updateTime) {
+	public void setUpdateTime(Number updateTime) {
 		this.updateTime = updateTime;
 	}
 	
@@ -175,7 +175,9 @@ public class BNTx extends BNObject {
 	public BNTx apiMarkInputsAsSpent(Object args) {
 		for (Object inputObj : inputs) {
 			TransactionInput input = ((BNTxIn) inputObj).transactionInput();
-			input.getConnectedOutput().markAsSpent(input);
+			//Don't do this for now since this txn hash won't be saved in wallet
+			//input.getConnectedOutput().markAsSpent(input);
+			input.getConnectedOutput().markAsSpent(null);
 		}
 		return this;
 	}

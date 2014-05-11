@@ -55,24 +55,28 @@ public class BNWallet extends BNObject {
 	        wallet().decrypt(keyParameter);
 		}
 		
-		KeyCrypter keyCrypter = wallet().getKeyCrypter();
-		if (keyCrypter == null) {
-			keyCrypter = new KeyCrypterScrypt();
-		}
-        
-		keyParameter = keyCrypter.deriveKey(passphrase);
-		
-		if (wallet().isEncrypted()) {
-			if (!wallet().checkAESKey(keyParameter)) {
-				keyParameter = null;
-				return false;
-			}
+		if (passphrase == null) {
+			keyParameter = null;
+			return true;
 		} else {
-			System.err.println("INITIAL ENCRYPTION");
-			wallet().encrypt(keyCrypter, keyParameter);
+			KeyCrypter keyCrypter = wallet().getKeyCrypter();
+			if (keyCrypter == null) {
+				keyCrypter = new KeyCrypterScrypt();
+			}
+	        
+			keyParameter = keyCrypter.deriveKey(passphrase);
+			
+			if (wallet().isEncrypted()) {
+				if (!wallet().checkAESKey(keyParameter)) {
+					keyParameter = null;
+					return false;
+				}
+			} else {
+				wallet().encrypt(keyCrypter, keyParameter);
+			}
+			
+			return true;
 		}
-		
-		return true;
 	}
 	
 	public BigInteger getBalance() {
@@ -81,6 +85,18 @@ public class BNWallet extends BNObject {
 	
 	public KeyParameter getKeyParameter() {
 		return keyParameter;
+	}
+	
+	public void markPendingOutputsAsUnspent() {
+		for (Transaction tx : wallet().getTransactions(true)) {
+			if (!tx.isPending()) {
+				for (TransactionOutput txo : tx.getOutputs()) {
+					if (txo.isMine(wallet())) {
+						txo.markAsUnspent();
+					}
+				}
+			}
+		}
 	}
 	
 	public Boolean apiSetPassphrase(Object args) {
@@ -140,6 +156,7 @@ public class BNWallet extends BNObject {
 		walletAppKit.addListener(new Service.Listener(){
 			public void running() {
 				status = "started";
+				//markPendingOutputsAsUnspent();
 			}
 		}, MoreExecutors.sameThreadExecutor());
 	}
