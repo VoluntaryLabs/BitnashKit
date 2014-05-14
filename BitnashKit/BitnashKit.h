@@ -21,6 +21,7 @@
 #import "NSArray+BNJSON.h"
 #import "NSDictionary+BNJSON.h"
 #import "NSString+BNJSON.h"
+#import "NSNumber+Bitnash.h"
 #import "BNError.h"
 #import "QRCodeGenerator.h"
 #import "BNKey.h"
