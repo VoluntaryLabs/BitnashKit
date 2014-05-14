@@ -131,10 +131,14 @@
         return nil;
     }
     
-//NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
     [[_task.standardInput fileHandleForWriting] writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    if (self.logsStderr)
+    {
+        NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:message options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
+    }
     
     NSMutableData *output = [NSMutableData data];
     
@@ -143,10 +147,13 @@
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
         [output appendData:data];
     }
-    
-//NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
+    
+    if (self.logsStderr)
+    {
+        NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
+    }
     
     if (error)
     {

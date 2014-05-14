@@ -22,14 +22,21 @@
 @property NSString *txHash;
 
 @property NSNumber *netValue;
+@property NSNumber *fee;
 @property NSNumber *updateTime;
 @property NSString *counterParty;
 
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.
 
-- (void)configureForEscrowWithValue:(long long)value;
-//sets up transaction for a 2 of 2 multisig output w/ given value.  Also selects inputs and change address.  Doesn't add fees.
+- (void)configureForOutputWithValue:(NSNumber *)value;
+//sets up transaction to have a pay to address output w/ given value.  Also selects inputs and change address.  Doesn't add fees.
+
+- (void)configureForEscrowWithValue:(NSNumber *)value;
+//sets up transaction to have a 2of2 multisig output w/ given value.  Also selects inputs and change address.  Doesn't add fees.
+
+- (void)configureForEscrowWithInputTx:(BNTx *)inputTx;
+//completely spends the first output from inputTx (no change)
 
 - (void)subtractFee;
 //subtracts the estimated fees from the first output.
@@ -56,5 +63,7 @@
 //Returns a new transaction that sends this transactions inputs back to this transactions wallet
 
 - (NSString *)webUrl;
+
+- (NSNumber *)changeValue;
 
 @end

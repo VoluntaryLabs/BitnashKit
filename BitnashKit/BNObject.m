@@ -59,8 +59,13 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         if ([self respondsToSelector:NSSelectorFromString(setterName)])
         {
-            [self performSelector:NSSelectorFromString(setterName)
-                       withObject:[[dict objectForKey:propertyName] asObjectFromJSONObject]];
+            id obj = [[dict objectForKey:propertyName] asObjectFromJSONObject];
+            
+            if ([obj respondsToSelector:@selector(setBnParent:)])
+            {
+                [obj performSelector:@selector(setBnParent:) withObject:self];
+            }
+            [self performSelector:NSSelectorFromString(setterName) withObject:obj];
         }
 #pragma clang diagnostic pop
     }

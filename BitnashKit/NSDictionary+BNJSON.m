@@ -8,6 +8,7 @@
 
 #import "NSDictionary+BNJSON.h"
 #import "BNObject.h"
+#import "NSArray+BNJSON.h"
 
 @implementation NSDictionary (BNJSON)
 
@@ -40,6 +41,11 @@
         }
         return dict;
     }
+}
+
+- (void)setBnParent:(BNObject *)bnParent
+{
+    [[self allValues] setBnParent:bnParent];
 }
 
 @end

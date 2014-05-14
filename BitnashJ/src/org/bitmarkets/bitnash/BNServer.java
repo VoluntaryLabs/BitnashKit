@@ -27,7 +27,7 @@ public class BNServer extends BNObject implements Runnable {
 					if (line == null) {
 						break;
 					} else {
-System.err.println("BitnashJ BNServer Received: " + line);
+//System.err.println("BitnashJ BNServer Received: " + line);
 						try {
 							JSONObject message = (JSONObject)parser.parse(line);
 							
@@ -112,7 +112,7 @@ System.err.println("Stopping Server ...");
 				outgoingMessage.put("error", e2.toString());
 			}
 		}
-System.err.println("BitnashJ BNServer Sent: " + outgoingMessage.toJSONString());
+//System.err.println("BitnashJ BNServer Sent: " + outgoingMessage.toJSONString());
 		System.out.println(outgoingMessage.toJSONString());
 	}
 	

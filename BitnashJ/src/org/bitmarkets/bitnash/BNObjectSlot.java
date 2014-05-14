@@ -35,9 +35,6 @@ public class BNObjectSlot {
 			System.err.println("Could not setValue for slot " + name + " on object of class: " + owner.getClass().getName());
 		} else {
 			try {
-				if (value != null) {
-					System.err.println("setSlot " + name + " to " + value + " " + value.getClass());
-				}
 				method.invoke(owner, value);
 			} catch (Exception e) {
 				throw new RuntimeException(e);

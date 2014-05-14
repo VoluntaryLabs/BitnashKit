@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BNScriptSig.h"
 #import "BNObject.h"
+#import "BNTxOut.h"
 
 @interface BNTxIn : BNObject
 
@@ -16,5 +17,7 @@
 @property NSNumber *previousOutIndex;
 @property NSString *previousTxSerializedHex;
 @property NSString *previousTxHash;
+
+- (void)configureFromTxOut:(BNTxOut *)txOut;
 
 @end

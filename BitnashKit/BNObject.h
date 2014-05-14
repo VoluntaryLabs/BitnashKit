@@ -15,6 +15,7 @@
 
 @property NSMutableArray *serializedSlotNames;
 @property BNError *error;
+@property (weak) BNObject *bnParent;
 
 - (id)asJSONObject;
 

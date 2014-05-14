@@ -8,6 +8,7 @@
 
 #import "NSArray+BNJSON.h"
 #import "NSObject+BNJSON.h"
+#import "BNObject.h"
 
 @implementation NSArray (BNJSON)
 
@@ -29,6 +30,17 @@
         [array addObject:[obj asObjectFromJSONObject]];
     }
     return array;
+}
+
+- (void)setBnParent:(BNObject *)bnParent
+{
+    for (id obj in self)
+    {
+        if ([obj respondsToSelector:@selector(setBnParent:)])
+        {
+            [obj performSelector:@selector(setBnParent:) withObject:bnParent];
+        }
+    }
 }
 
 @end

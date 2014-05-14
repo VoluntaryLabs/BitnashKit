@@ -7,6 +7,8 @@
 //
 
 #import "BNTxIn.h"
+#import "BNTxOut.h"
+#import "BNTx.h"
 
 @implementation BNTxIn
 
@@ -20,6 +22,12 @@
                                                    @"previousOutIndex",
                                                    nil]];
     return self;
+}
+
+- (void)configureFromTxOut:(BNTxOut *)txOut
+{
+    self.previousTxHash = txOut.parentTx.txHash;
+    self.previousOutIndex = [txOut index];
 }
 
 @end

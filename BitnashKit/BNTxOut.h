@@ -10,9 +10,14 @@
 #import "BNScriptPubKey.h"
 #import "BNObject.h"
 
+@class BNTx;
+
 @interface BNTxOut : BNObject
 
 @property NSNumber *value;
 @property BNScriptPubKey *scriptPubKey;
+
+- (NSNumber *)index;
+- (BNTx *)parentTx;
 
 @end

@@ -1,5 +1,6 @@
 package org.bitmarkets.bitnash;
 
+import java.util.List;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ public class BNTx extends BNObject {
 	JSONArray outputs;
 	String txHash;
 	Number netValue;
+	Number fee;
 	Number updateTime;
 	String counterParty;
 	
@@ -38,6 +40,7 @@ public class BNTx extends BNObject {
 				"outputs",
 				"txHash",
 				"netValue",
+				"fee",
 				"updateTime",
 				"counterParty"
 		));
@@ -91,6 +94,14 @@ public class BNTx extends BNObject {
 		this.netValue = netValue;
 	}
 	
+	public Number getFee() {
+		return fee;
+	}
+	
+	public void setFee(Number fee) {
+		this.fee = fee;
+	}
+	
 	public Number getUpdateTime() {
 		return updateTime;
 	}
@@ -110,6 +121,8 @@ public class BNTx extends BNObject {
 	public BNTx apiAddInputsAndChange(Object args) throws InsufficientMoneyException {
 		Wallet.SendRequest req = Wallet.SendRequest.forTx(transaction);
 		
+		req.changeAddress = bnWallet().apiCreateKey(null).getKey().toAddress(networkParams());
+		
 		try {
 			wallet().completeTx(req);
 		}
@@ -123,7 +136,8 @@ public class BNTx extends BNObject {
 			input.setScriptSig(new Script(new byte[0])); //Remove signatures
 		}
 		
-		lastOutput().setValue(lastOutput().getValue().add(fees()));
+		setFee(req.fee);
+		lastOutput().setValue(lastOutput().getValue().add(req.fee));
 		
 		return this;
 		
@@ -131,13 +145,27 @@ public class BNTx extends BNObject {
 	
 	//TODO subtract fees evenly from change outputs rather than first?
 	public BNTx apiSubtractFee(Object args) {
-		long fee = ((transaction.bitcoinSerialize().length + transaction.getInputs().size()*74)/1000 + 1)*Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.longValue();
+		int changeOutputCount = Math.max(1, transaction.getOutputs().size() - 1);
 		
-		TransactionOutput output = transaction.getOutputs().get(0);
-		output.setValue(BigInteger.valueOf(Math.max(output.getValue().longValue() - fee, 0)));
+		long fee = changeOutputCount - 1 + ((transaction.bitcoinSerialize().length + transaction.getInputs().size()*74)/1000 + 1)*Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.longValue();
+		setFee(BigInteger.valueOf(fee));
 		
-		BNTxOut firstTxOut = (BNTxOut) outputs.get(0);
-		firstTxOut.setValue(output.getValue());
+		long feePerOutput = fee/changeOutputCount;
+		
+		for (int i = 0; i < changeOutputCount; i ++) {
+			int outputIndex = transaction.getOutputs().size() - 1 - i;
+			
+			TransactionOutput output = transaction.getOutputs().get(outputIndex);
+			long newValue = Math.max(output.getValue().longValue() - feePerOutput, 0);
+			if (newValue < Transaction.MIN_NONDUST_OUTPUT.longValue()) {
+				List<TransactionOutput> outputs = transaction.getOutputs();
+				transaction.clearOutputs();
+				for (int j = 0; j < outputIndex; j ++) {
+					transaction.addOutput(outputs.get(j));
+				}
+			}
+			output.setValue(BigInteger.valueOf(newValue));
+		}
 		
 		return this;
 	}
@@ -152,7 +180,13 @@ public class BNTx extends BNObject {
 	}
 	
 	public BNTx apiBroadcast(Object args) {
+		boolean allInputsMine = true;
+		
 		for (TransactionInput input : getTransaction().getInputs()) {
+			TransactionOutput output = input.getConnectedOutput();
+			if (!allInputsMine || output == null || !output.isMine(wallet())) {
+				allInputsMine = false;
+			}
 			try {
 				input.verify(input.getConnectedOutput());
 				System.err.println("VERIFIED SUCCESSFULLY");
@@ -161,6 +195,9 @@ public class BNTx extends BNObject {
 				System.err.println(transaction.toString());
 				throw new RuntimeException(e);
 			}
+		}
+		if (allInputsMine) {
+			getTransaction().getConfidence().setSource(TransactionConfidence.Source.SELF);
 		}
 		
 		bnWallet().peerGroup().broadcastTransaction(getTransaction());
@@ -214,20 +251,15 @@ public class BNTx extends BNObject {
 		BigInteger value = BigInteger.valueOf(0);
 		
 		for (TransactionInput input : transaction.getInputs()) {
-			value = value.add(input.getConnectedOutput().getValue());
+			TransactionOutput transactionOutput = input.getConnectedOutput();
+			if (transactionOutput == null) {
+				return null;
+			} else {
+				value = value.add(transactionOutput.getValue());
+			}
 		}
 		
 		return value;
-	}
-	
-	BigInteger fees() {
-		BigInteger fees = inputValue();
-		
-		for (TransactionOutput output : transaction.getOutputs()) {
-			fees = fees.subtract(output.getValue());
-		}
-		
-		return fees;
 	}
 	
 	TransactionOutput lastOutput() {
@@ -274,7 +306,6 @@ public class BNTx extends BNObject {
 		
 		setTxHash(transaction.getHashAsString());
 		setNetValue(transaction.getValue(wallet()));
-System.err.println(transaction.getUpdateTime());
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
 		
 		setupCounterParty();

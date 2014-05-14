@@ -7,6 +7,7 @@
 //
 
 #import "BNTxOut.h"
+#import "BNTx.h"
 
 @implementation BNTxOut
 
@@ -18,6 +19,16 @@
                                                    @"scriptPubKey",
                                                    nil]];
     return self;
+}
+
+- (NSNumber *)index
+{
+    return [NSNumber numberWithInteger:[[self parentTx].outputs indexOfObject:self]];
+}
+
+- (BNTx *)parentTx
+{
+    return (BNTx *)self.bnParent;
 }
 
 @end

@@ -25,6 +25,7 @@
                                                    @"outputs",
                                                    @"txHash",
                                                    @"netValue",
+                                                   @"fee",
                                                    @"updateTime",
                                                    @"counterParty",
                                                    nil]];
@@ -43,6 +44,13 @@
     return [self sendToServer:message withArg:nil];
 }
 
+- (BNTxIn *)newInput
+{
+    BNTxIn *newInput = [[BNTxIn alloc] init];
+    [_inputs addObject:newInput];
+    return newInput;
+}
+
 - (BNTxOut *)newOutput
 {
     BNTxOut *newOutput = [[BNTxOut alloc] init];
@@ -50,11 +58,25 @@
     return newOutput;
 }
 
-- (void)configureForEscrowWithValue:(long long)value
+- (void)configureForOutputWithValue:(NSNumber *)value
 {
     BNTxOut *txOut = [self newOutput];
     
-    txOut.value = [NSNumber numberWithLongLong:value];
+    txOut.value = value;
+    
+    BNPayToAddressScriptPubKey *script = [[BNPayToAddressScriptPubKey alloc] init];
+    BNKey *key = [_wallet createKey];
+    script.address = key.address;
+    txOut.scriptPubKey = script;
+    
+    [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
+}
+
+- (void)configureForEscrowWithValue:(NSNumber *)value
+{
+    BNTxOut *txOut = [self newOutput];
+    
+    txOut.value = value;
     
     BNMultisigScriptPubKey *script = [[BNMultisigScriptPubKey alloc] init];
     BNKey *key = [_wallet createKey];
@@ -63,6 +85,32 @@
     txOut.scriptPubKey = script;
     
     [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
+}
+
+- (void)configureForEscrowWithInputTx:(BNTx *)inputTx
+{
+    BNTxIn *txIn = [self newInput];
+    txIn.previousOutIndex = [NSNumber numberWithInt:0];
+    txIn.previousTxHash = inputTx.txHash;
+    
+    BNTxOut *txOut = [self newOutput];
+    
+    txOut.value = [(BNTxOut *)[inputTx.outputs firstObject] value];
+    
+    BNMultisigScriptPubKey *script = [[BNMultisigScriptPubKey alloc] init];
+    BNKey *key = [_wallet createKey];
+    [script.pubKeys addObject:key.pubKey];
+    [script.pubKeys addObject:key.pubKey]; //do it twice to properly estimate tx size for fees
+    txOut.scriptPubKey = script;
+}
+
+- (void)configureForEscrowSpendingOutput:(BNTxOut *)utxo
+{
+    [self configureForEscrowWithValue:utxo.value];
+    
+    BNTxIn *txIn = [[BNTxIn alloc] init];
+    [txIn configureFromTxOut:utxo];
+    [_inputs addObject:txIn];
 }
 
 - (void)subtractFee
@@ -230,5 +278,28 @@
     return [@"http://testnet.btclook.com/txn/" stringByAppendingString:self.txHash];
 }
 
+- (BNTxOut *)changeOutput
+{
+    if (self.outputs.count > 1)
+    {
+        return [self.outputs lastObject];
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+- (NSNumber *)changeValue
+{
+    if ([self changeOutput])
+    {
+        return [self changeOutput].value;
+    }
+    else
+    {
+        return [NSNumber numberWithLongLong:0];
+    }
+}
 
 @end
