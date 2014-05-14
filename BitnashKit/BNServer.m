@@ -65,7 +65,7 @@
     _task.standardInput = [NSPipe pipe];
     _task.standardOutput = [NSPipe pipe];
     
-    if (!_logsStderr)
+    if (!self.logs)
     {
         _task.standardError = [NSPipe pipe];
     }
@@ -125,20 +125,18 @@
     
     if (error)
     {
-        BNError *bnError = [[BNError alloc] init];
-        bnError.description = [error localizedDescription];
-        self.error = bnError;
-        return nil;
+        [NSException raise:error.description format:nil];
     }
     
+    if (self.logs)
+    {
+        NSLog(@"BNServer Sending: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:message options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
+    }
     
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
     [[_task.standardInput fileHandleForWriting] writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
-    if (self.logsStderr)
-    {
-        NSLog(@"BNServer Sent: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:message options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
-    }
+    
     
     NSMutableData *output = [NSMutableData data];
     
@@ -150,18 +148,15 @@
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
     
-    if (self.logsStderr)
-    {
-        NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
-    }
-    
     if (error)
     {
-        if (self.logsErrors)
-        {
-            NSLog(@"BNServer Error: %@", self.error.description);
-        }
-        return nil;
+        NSLog(@"Error Decoding response JSON: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
+        [NSException raise:error.description format:nil];
+    }
+    
+    if (self.logs)
+    {
+        NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
     }
     
     if ([response objectForKey:@"error"])

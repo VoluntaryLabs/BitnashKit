@@ -19,8 +19,7 @@
 
 @property BOOL started;
 
-@property BOOL logsStderr;
-@property BOOL logsErrors;
+@property BOOL logs;
 
 @property NSTask *task;
 

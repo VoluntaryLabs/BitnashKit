@@ -174,6 +174,7 @@ public class BNTx extends BNObject {
 		for (Object input : inputs) {
 			BNTxIn txIn = (BNTxIn) input;
 			txIn.sign();
+			txIn.verify();
 		}
 		
 		return this;
