@@ -20,6 +20,7 @@
 @property NSMutableArray *outputs;
 
 @property NSString *txHash;
+@property NSString *serializedHex;
 
 @property NSNumber *netValue;
 @property NSNumber *fee;

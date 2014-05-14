@@ -24,6 +24,7 @@
                                                    @"inputs",
                                                    @"outputs",
                                                    @"txHash",
+                                                   @"serializedHex",
                                                    @"netValue",
                                                    @"fee",
                                                    @"updateTime",
@@ -92,6 +93,7 @@
     BNTxIn *txIn = [self newInput];
     txIn.previousOutIndex = [NSNumber numberWithInt:0];
     txIn.previousTxHash = inputTx.txHash;
+    txIn.previousTxSerializedHex = inputTx.serializedHex;
     
     BNTxOut *txOut = [self newOutput];
     

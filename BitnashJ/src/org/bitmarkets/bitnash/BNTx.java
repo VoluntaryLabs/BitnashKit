@@ -25,6 +25,7 @@ public class BNTx extends BNObject {
 	JSONArray inputs;
 	JSONArray outputs;
 	String txHash;
+	String serializedHex;
 	Number netValue;
 	Number fee;
 	Number updateTime;
@@ -39,6 +40,7 @@ public class BNTx extends BNObject {
 				"inputs",
 				"outputs",
 				"txHash",
+				"serializedHex",
 				"netValue",
 				"fee",
 				"updateTime",
@@ -84,6 +86,14 @@ public class BNTx extends BNObject {
 	
 	public void setTxHash(String txHash) {
 		this.txHash = txHash;
+	}
+	
+	public String getSerializedHex() {
+		return serializedHex;
+	}
+	
+	public void setSerializedHex(String serializedHex) {
+		this.serializedHex = serializedHex;
 	}
 	
 	public Number getNetValue() {
@@ -207,6 +217,7 @@ public class BNTx extends BNObject {
 	}
 	
 	public Boolean apiIsConfirmed(Object args) {
+		System.err.println("CONFIDENCE TYPE: " + transaction.getConfidence().getConfidenceType());
 		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
 	}
 	
@@ -306,6 +317,7 @@ public class BNTx extends BNObject {
 		}
 		
 		setTxHash(transaction.getHashAsString());
+		setSerializedHex(Utils.bytesToHexString(transaction.bitcoinSerialize()));
 		setNetValue(transaction.getValue(wallet()));
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
 		
