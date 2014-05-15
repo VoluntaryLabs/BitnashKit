@@ -51,4 +51,25 @@
     return [self.address isEqualTo:[object performSelector:@selector(address)]];
 }
 
+// --------------------
+
+- (NSString *)webUrl
+{
+    return [@"http://testnet.helloblock.io/addresses/" stringByAppendingString:self.address];
+}
+
+// actions
+
+- (NSArray *)modelActions
+{
+    return @[@"inspect"];
+}
+
+- (void)inspect
+{
+    NSURL *url = [NSURL URLWithString:self.webUrl];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+
 @end
