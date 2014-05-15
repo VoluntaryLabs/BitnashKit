@@ -277,7 +277,7 @@
 
 - (NSString *)webUrl
 {
-    return [@"http://testnet.btclook.com/txn/" stringByAppendingString:self.txHash];
+    return [@"http://testnet.helloblock.io/transactions/" stringByAppendingString:self.txHash];
 }
 
 - (BNTxOut *)changeOutput
