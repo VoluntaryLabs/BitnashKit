@@ -61,14 +61,7 @@
 
 - (void)configureForOutputWithValue:(NSNumber *)value
 {
-    BNTxOut *txOut = [self newOutput];
-    
-    txOut.value = value;
-    
-    BNPayToAddressScriptPubKey *script = [[BNPayToAddressScriptPubKey alloc] init];
-    BNKey *key = [_wallet createKey];
-    script.address = key.address;
-    txOut.scriptPubKey = script;
+    [self addPayToAddressOutputWithValue:value];
     
     [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
 }
@@ -106,6 +99,14 @@
     txOut.scriptPubKey = script;
 }
 
+- (void)configureForReleaseWithInputTx:(BNTx *)inputTx value:(NSNumber *)value
+{
+    BNTxIn *txIn = [self newInput];
+    txIn.previousOutIndex = [NSNumber numberWithInt:0];
+    txIn.previousTxHash = inputTx.txHash;
+    txIn.previousTxSerializedHex = inputTx.serializedHex;
+}
+
 - (void)configureForEscrowSpendingOutput:(BNTxOut *)utxo
 {
     [self configureForEscrowWithValue:utxo.value];
@@ -113,6 +114,18 @@
     BNTxIn *txIn = [[BNTxIn alloc] init];
     [txIn configureFromTxOut:utxo];
     [_inputs addObject:txIn];
+}
+
+- (void)addPayToAddressOutputWithValue:(NSNumber *)value
+{
+    BNTxOut *txOut = [self newOutput];
+    
+    txOut.value = value;
+    
+    BNPayToAddressScriptPubKey *script = [[BNPayToAddressScriptPubKey alloc] init];
+    BNKey *key = [_wallet createKey];
+    script.address = key.address;
+    txOut.scriptPubKey = script;
 }
 
 - (void)subtractFee
@@ -302,6 +315,11 @@
     {
         return [NSNumber numberWithLongLong:0];
     }
+}
+
+- (BNTxOut *)firstOutput
+{
+    return (BNTxOut *)[self.outputs firstObject];
 }
 
 @end

@@ -39,6 +39,11 @@
 - (void)configureForEscrowWithInputTx:(BNTx *)inputTx;
 //completely spends the first output from inputTx (no change)
 
+- (void)configureForReleaseWithInputTx:(BNTx *)inputTx;
+//completely spends the first output from inputTx;
+
+- (void)addPayToAddressOutputWithValue:(NSNumber *)value;
+
 - (void)subtractFee;
 //subtracts the estimated fees from the first output.
 
@@ -66,5 +71,7 @@
 - (NSString *)webUrl;
 
 - (NSNumber *)changeValue;
+
+- (BNTxOut *)firstOutput;
 
 @end
