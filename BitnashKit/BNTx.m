@@ -99,7 +99,7 @@
     txOut.scriptPubKey = script;
 }
 
-- (void)configureForReleaseWithInputTx:(BNTx *)inputTx value:(NSNumber *)value
+- (void)configureForReleaseWithInputTx:(BNTx *)inputTx
 {
     BNTxIn *txIn = [self newInput];
     txIn.previousOutIndex = [NSNumber numberWithInt:0];
