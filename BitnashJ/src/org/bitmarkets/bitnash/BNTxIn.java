@@ -174,7 +174,7 @@ public class BNTxIn extends BNObject {
 			previousTx = new Transaction(networkParams(), Utils.parseAsHexOrBase58(previousTxSerializedHex));
 		}
 		
-		if (previousTx != null) {
+		if (previousTx != null && !bnTx().existsInWallet()) {
 			tx.addInput(previousTx.getOutput(previousOutIndex.intValue()));
 		}
 	}

@@ -41,7 +41,7 @@ public class BNMultisigScriptPubKey extends BNScriptPubKey {
 	}
 	
 	void didDeserializeSelf() {
-		if (pubKeys.size() > 0) {
+		if (pubKeys.size() > 0 && !bnTx().existsInWallet()) {
 			BigInteger value = BigInteger.valueOf(txOut().getValue().longValue());
 			Script scriptPubKey = ScriptBuilder.createMultiSigOutputScript(pubKeys.size(), ecPubKeys());
 			bnTx().getTransaction().addOutput(value, scriptPubKey);
