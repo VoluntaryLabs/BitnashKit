@@ -25,7 +25,7 @@ public class BNPayToAddressScriptPubKey extends BNScriptPubKey {
 	@Override
 	void didDeserializeSelf() {
 		try {
-			if (address != null) {
+			if (address != null && !bnTx().existsInWallet()) {
 				bnTx().getTransaction().addOutput(BigInteger.valueOf(txOut().getValue().longValue()), new Address(networkParams(), address));
 			}
 		} catch (AddressFormatException e) {

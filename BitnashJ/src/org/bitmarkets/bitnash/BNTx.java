@@ -254,6 +254,10 @@ public class BNTx extends BNObject {
 		return inputValue();
 	}
 	
+	public boolean existsInWallet() {
+		return (txHash != null) && (wallet().getTransaction(new Sha256Hash(txHash)) != null);
+	}
+	
 	void resetSlots() {
 		inputs = new JSONArray();
 		outputs = new JSONArray();
