@@ -277,6 +277,7 @@
 
 - (NSString *)webUrl
 {
+    // http://testnet.helloblock.io/addresses/n1grcACynNZCB9zN1G4sHP9BETiFZrC15y
     return [@"http://testnet.helloblock.io/transactions/" stringByAppendingString:self.txHash];
 }
 
@@ -302,6 +303,19 @@
     {
         return [NSNumber numberWithLongLong:0];
     }
+}
+
+// actions
+
+- (NSArray *)modelActions
+{
+    return @[@"inspect"];
+}
+
+- (void)inspect
+{
+    NSURL *url = [NSURL URLWithString:self.webUrl];
+    [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 @end
