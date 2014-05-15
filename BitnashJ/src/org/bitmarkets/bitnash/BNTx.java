@@ -332,6 +332,9 @@ public class BNTx extends BNObject {
 		if (netValue.longValue() > 0) {
 			for (Object input : inputs) {
 				BNTxIn txIn = (BNTxIn) input;
+				if (txIn.getScriptSig() == null) {
+					continue;
+				}
 				if (txIn.getScriptSig().isMultisig()) {
 					for (ScriptChunk chunk : txIn.getScriptSig().script().getChunks()) {
 						if (chunk.data.length > 1) {
