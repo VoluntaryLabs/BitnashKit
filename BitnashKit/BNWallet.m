@@ -43,6 +43,7 @@
         [self postParentChainChanged];
     }
 }
+
 - (void)fetch
 {
     if ([[self status] isEqualToString:@"started"])
