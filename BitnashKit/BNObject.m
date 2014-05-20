@@ -47,7 +47,7 @@
     for (NSString *propertyName in self.serializedSlotNames)
     {
         NSMutableString *setterName = [NSMutableString stringWithString:@"set"];
-        [setterName appendString:[[propertyName substringToIndex:1] capitalizedString]];
+        [setterName appendString:[[propertyName substringToIndex:1] capitalisedFirstCharacterString]];
         if ([propertyName length] > 1)
         {
             [setterName appendString:[propertyName substringFromIndex:1]];
