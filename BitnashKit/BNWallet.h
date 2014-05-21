@@ -62,10 +62,12 @@
 
 - (NSArray *)keys;
 
-- (BNDepositKey *)depositKey;
+- (BNDepositKey *)depositKey; //TODO: This might return address used in tx that hasn't been broadcasted yet.
 
 - (NSString *)status;
 //The current status of the server (initialized, starting, started)
+
+- (BNTx *)newWithdrawalTxToAddress:(NSString *)address withValue:(NSNumber *)value;
 
 - (BOOL)isRunning;
 

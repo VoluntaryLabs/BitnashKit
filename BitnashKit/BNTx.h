@@ -44,6 +44,10 @@
 
 - (void)addPayToAddressOutputWithValue:(NSNumber *)value;
 
+- (void)payToAddress:(NSString *)address value:(NSNumber *)value;
+
+- (void)addInputsAndChange;
+
 - (void)subtractFee;
 //subtracts the estimated fees from the first output.
 

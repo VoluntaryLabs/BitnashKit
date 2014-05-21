@@ -122,5 +122,14 @@
     return [self.status isEqualToString:@"started"];
 }
 
+- (BNTx *)newWithdrawalTxToAddress:(NSString *)address withValue:(NSNumber *)value
+{
+    BNTx *tx = [self newTx];
+    [tx payToAddress:address value:value];
+    [tx addInputsAndChange];
+    [tx subtractFee];
+    return tx;
+}
+
 
 @end

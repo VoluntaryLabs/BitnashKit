@@ -78,7 +78,7 @@
     [script.pubKeys addObject:key.pubKey]; //do it twice to properly estimate tx size for fees
     txOut.scriptPubKey = script;
     
-    [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
+    [self addInputsAndChange];
 }
 
 - (void)configureForEscrowWithInputTx:(BNTx *)inputTx
@@ -116,16 +116,25 @@
     [_inputs addObject:txIn];
 }
 
-- (void)addPayToAddressOutputWithValue:(NSNumber *)value
+- (void)payToAddress:(NSString *)address value:(NSNumber *)value
 {
     BNTxOut *txOut = [self newOutput];
     
     txOut.value = value;
     
     BNPayToAddressScriptPubKey *script = [[BNPayToAddressScriptPubKey alloc] init];
-    BNKey *key = [_wallet createKey];
-    script.address = key.address;
+    script.address = address;
     txOut.scriptPubKey = script;
+}
+
+- (void)addInputsAndChange
+{
+    [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
+}
+
+- (void)addPayToAddressOutputWithValue:(NSNumber *)value
+{
+    [self payToAddress:[_wallet createKey].address value:value];
 }
 
 - (void)subtractFee
