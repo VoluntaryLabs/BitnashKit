@@ -55,6 +55,8 @@
 		DC90334F18CBD213005D82A2 /* BNWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = DC90334D18CBD213005D82A2 /* BNWallet.m */; };
 		DCA62FB018CD2FEC00475735 /* BNServer.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA62FAE18CD2FEC00475735 /* BNServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA62FAF18CD2FEC00475735 /* BNServer.m */; };
+		DCAB5D14192C58BB0090BB69 /* BNDepositKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCAB5D12192C58BB0090BB69 /* BNDepositKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCAB5D15192C58BB0090BB69 /* BNDepositKey.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAB5D13192C58BB0090BB69 /* BNDepositKey.m */; };
 		DCB016D1191316730064F540 /* BNKey.h in Headers */ = {isa = PBXBuildFile; fileRef = DCB016CF191316730064F540 /* BNKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCB016D2191316730064F540 /* BNKey.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB016D0191316730064F540 /* BNKey.m */; };
 		DCD10B1E18E218F60001B6F4 /* BNMultisigScriptSig.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD10B1C18E218F60001B6F4 /* BNMultisigScriptSig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -163,6 +165,8 @@
 		DC9C8D1B191435EB008F4B63 /* NavKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavKit.xcodeproj; path = ../NavKit/NavKit.xcodeproj; sourceTree = "<group>"; };
 		DCA62FAE18CD2FEC00475735 /* BNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNServer.h; sourceTree = "<group>"; };
 		DCA62FAF18CD2FEC00475735 /* BNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNServer.m; sourceTree = "<group>"; };
+		DCAB5D12192C58BB0090BB69 /* BNDepositKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNDepositKey.h; sourceTree = "<group>"; };
+		DCAB5D13192C58BB0090BB69 /* BNDepositKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNDepositKey.m; sourceTree = "<group>"; };
 		DCB016CF191316730064F540 /* BNKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNKey.h; sourceTree = "<group>"; };
 		DCB016D0191316730064F540 /* BNKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNKey.m; sourceTree = "<group>"; };
 		DCD10B1C18E218F60001B6F4 /* BNMultisigScriptSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNMultisigScriptSig.h; sourceTree = "<group>"; };
@@ -319,6 +323,8 @@
 				DC350EB9191441FF00C25A01 /* BNKeysNode.m */,
 				DCB016CF191316730064F540 /* BNKey.h */,
 				DCB016D0191316730064F540 /* BNKey.m */,
+				DCAB5D12192C58BB0090BB69 /* BNDepositKey.h */,
+				DCAB5D13192C58BB0090BB69 /* BNDepositKey.m */,
 				DCD906F118E0DF3600342231 /* BNTx.h */,
 				DCD906F218E0DF3600342231 /* BNTx.m */,
 				DCE23FB818CC316B00F64729 /* BNTxIn.h */,
@@ -420,6 +426,7 @@
 				AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */,
 				DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */,
 				AAB2809E19201B5F005C9D27 /* NSNumber+Bitnash.h in Headers */,
+				DCAB5D14192C58BB0090BB69 /* BNDepositKey.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */,
 				DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */,
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
@@ -573,6 +580,7 @@
 				AA753DC0191079DA00D07CB5 /* bitstream.c in Sources */,
 				DCD10B2318E219A10001B6F4 /* BNPayToAddressScriptSig.m in Sources */,
 				DCE3D9CF18CD72A20098DE31 /* BNPayToAddressScriptPubKey.m in Sources */,
+				DCAB5D15192C58BB0090BB69 /* BNDepositKey.m in Sources */,
 				DCE23FC318CC329600F64729 /* BNMultisigScriptPubKey.m in Sources */,
 				DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,

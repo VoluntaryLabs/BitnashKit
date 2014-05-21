@@ -25,5 +25,6 @@
 #import "BNError.h"
 #import "QRCodeGenerator.h"
 #import "BNKey.h"
+#import "BNDepositKey.h"
 
 #endif

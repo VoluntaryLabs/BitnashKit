@@ -11,8 +11,10 @@
 #import "BNObject.h"
 #import "BNTx.h"
 #import "BNKey.h"
+#import "BNDepositKey.h"
 #import "BNTransactionsNode.h"
-#import "BNKeysNode.h"
+
+@class BNDepositKey; //why?
 
 @interface BNWallet : BNObject
 
@@ -37,7 +39,6 @@
 //Start a BNServer and set it on this wallet prior to use.
 
 @property BNTransactionsNode *transactionsNode;
-@property BNKeysNode *addressesNode;
 
 
 - (void)setPath:(NSString *)path;
@@ -60,6 +61,8 @@
 - (NSArray *)transactions;
 
 - (NSArray *)keys;
+
+- (BNDepositKey *)depositKey;
 
 - (NSString *)status;
 //The current status of the server (initialized, starting, started)

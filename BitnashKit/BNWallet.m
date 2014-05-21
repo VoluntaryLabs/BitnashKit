@@ -28,9 +28,6 @@
     self.nodeSubtitle = @"starting ...";
     self.transactionsNode = [[BNTransactionsNode alloc] init];
     self.transactionsNode.wallet = self;
-    
-    self.addressesNode = [[BNKeysNode alloc] init];
-    self.addressesNode.wallet = self;
 
     return self;
 }
@@ -52,7 +49,7 @@
         
         if (self.children.count == 0)
         {
-            [self setChildren:[NSMutableArray arrayWithObjects:self.transactionsNode, self.addressesNode, nil]];
+            [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, nil]];
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
         }
@@ -100,6 +97,14 @@
 - (NSArray *)keys
 {
     return [_server sendMessage:@"keys" withObject:self];
+}
+
+- (BNDepositKey *)depositKey
+{
+    BNDepositKey *depositKey = [[BNDepositKey alloc] init];
+    depositKey.bnParent = self;
+    [depositKey copySlotsFrom:[_server sendMessage:@"depositKey" withObject:self]];
+    return depositKey;
 }
 
 - (NSString *)status
