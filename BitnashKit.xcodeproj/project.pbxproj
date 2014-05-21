@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA09C822192D569800317130 /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA09C821192D569800317130 /* NavNodeKit.framework */; };
 		AA753DC0191079DA00D07CB5 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DA8191079DA00D07CB5 /* bitstream.c */; };
 		AA753DC1191079DA00D07CB5 /* bitstream.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DA9191079DA00D07CB5 /* bitstream.h */; };
 		AA753DC2191079DA00D07CB5 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DAA191079DA00D07CB5 /* mask.c */; };
@@ -111,6 +112,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA09C821192D569800317130 /* NavNodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NavNodeKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug/NavNodeKit.framework"; sourceTree = "<group>"; };
 		AA753DA8191079DA00D07CB5 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
 		AA753DA9191079DA00D07CB5 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
 		AA753DAA191079DA00D07CB5 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA09C822192D569800317130 /* NavNodeKit.framework in Frameworks */,
 				DC350EA6191437CE00C25A01 /* NavKit.framework in Frameworks */,
 				DC90332218CBD1A2005D82A2 /* Cocoa.framework in Frameworks */,
 			);
@@ -288,6 +291,7 @@
 		DC90332018CBD1A2005D82A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA09C821192D569800317130 /* NavNodeKit.framework */,
 				DC90332118CBD1A2005D82A2 /* Cocoa.framework */,
 				DC90333618CBD1A2005D82A2 /* XCTest.framework */,
 				DC90332318CBD1A2005D82A2 /* Other Frameworks */,
@@ -713,6 +717,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BitMarkets-cudzravdfeuhswevrvyvukbewtcc/Build/Products/Debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -733,6 +738,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BitMarkets-cudzravdfeuhswevrvyvukbewtcc/Build/Products/Debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
