@@ -66,7 +66,7 @@
         {
             self.nodeNote = [NSString stringWithFormat:@"%d%%", (int)roundf(progress.floatValue*100)];
         }
-        [self postSelfChanged];
+        [self postParentChainChanged];
     }
 }
 
