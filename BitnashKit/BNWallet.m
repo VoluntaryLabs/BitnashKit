@@ -45,6 +45,8 @@
 {
     if (self.isRunning)
     {
+        self.refreshInterval = 5.0;
+        
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
         
         if (self.children.count == 0)
@@ -53,10 +55,18 @@
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
         }
+        
+        self.nodeNote = nil;
     }
     else
     {
         self.nodeSubtitle = [self status];
+        NSNumber *progress = [self progress];
+        if (progress)
+        {
+            self.nodeNote = [NSString stringWithFormat:@"%d%%", (int)roundf(progress.floatValue*100)];
+        }
+        [self postSelfChanged];
     }
 }
 
@@ -118,6 +128,11 @@
 - (NSString *)status
 {
     return [_server sendMessage:@"status" withObject:self];
+}
+
+- (NSNumber *)progress
+{
+    return [_server sendMessage:@"progress" withObject:self];
 }
 
 - (void)setPassphrase:(NSString *)passphrase

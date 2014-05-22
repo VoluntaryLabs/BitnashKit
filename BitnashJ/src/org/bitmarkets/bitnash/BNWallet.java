@@ -118,15 +118,24 @@ public class BNWallet extends BNObject {
 			case Initialized:
 				return "initialized";
 			case Starting:
-				return "starting";
+				return "starting ...";
 			case Connecting:
-				return "connecting to peers (" + walletAppKit.peerGroup().numConnectedPeers() + "/" + walletAppKit.peerGroup().getMaxConnections() + ")";
+				return "connecting to peers ..."; // (" + walletAppKit.peerGroup().numConnectedPeers() + "/" + walletAppKit.peerGroup().getMaxConnections() + ")";
 			case Downloading:
-				return "downloading blocks (" + blocksDownloaded + "/" + blocksToDownload + ")";
+				return "downloading blocks ..."; //(" + blocksDownloaded + "/" + blocksToDownload + ")";
 			case Running:
 				return "started";
 			default:
 				return "unknown state";
+		}
+	}
+	
+	public Float apiProgress(Object args) {
+		switch (state) {
+			case Downloading:
+				return Float.valueOf((float)blocksDownloaded/blocksToDownload);
+			default:
+				return null;
 		}
 	}
 	
@@ -244,19 +253,21 @@ public class BNWallet extends BNObject {
 		
 		walletAppKit.setDownloadListener(new DownloadListener(){
 			protected void startDownload(int blocksRemaining) {
-				System.err.println("START DOWNLOAD");
-				state = BNWalletState.Downloading;
+				if (state == BNWalletState.Connecting) {
+					state = BNWalletState.Downloading;
+				}
+				
 				blocksToDownload = blocksRemaining;
 			}
 			
 			protected void progress(double pct, int blocksRemaining, Date date) {
-				System.err.println("DOWNLOAD PROGRESS");
 				blocksDownloaded = blocksToDownload - blocksRemaining;
 		    }
 			
 			protected void doneDownload() {
-				System.err.println("DONE DOWNLOAD");
 				state = BNWalletState.Running;
+				blocksDownloaded = 0;
+				blocksToDownload = 0;
 		    }
 		});
 		
