@@ -3,7 +3,9 @@ package org.bitmarkets.bitnash;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.net.InetAddress;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.spongycastle.crypto.params.KeyParameter;
@@ -12,24 +14,26 @@ import com.google.bitcoin.core.*;
 import com.google.bitcoin.crypto.KeyCrypter;
 import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
+import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.script.Script;
-import com.google.common.util.concurrent.MoreExecutors;
-import com.google.common.util.concurrent.Service;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 @SuppressWarnings("unchecked")
 public class BNWallet extends BNObject {
-	public static enum NetworkType {TestNet3, MainNet};
+	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running };
 	static BNWallet shared;
 	
 	KeyParameter keyParameter;
-	String status;
+	BNWalletState state;
+	int blocksToDownload;
+	int blocksDownloaded;
 	
 	public WalletAppKit walletAppKit;
 	
 	public BNWallet() {
 		super();
-		status = "initialized";
+		state = BNWalletState.Initialized;
+		setupWalletAppKit();
 	} 
 	
 	public static BNWallet bnDeserializerInstance() {
@@ -110,7 +114,20 @@ public class BNWallet extends BNObject {
 	}
 	
 	public String apiStatus(Object args) {
-		return status;
+		switch (state) {
+			case Initialized:
+				return "initialized";
+			case Starting:
+				return "starting";
+			case Connecting:
+				return "connecting to peers (" + walletAppKit.peerGroup().numConnectedPeers() + "/" + walletAppKit.peerGroup().getMaxConnections() + ")";
+			case Downloading:
+				return "downloading blocks (" + blocksDownloaded + "/" + blocksToDownload + ")";
+			case Running:
+				return "started";
+			default:
+				return "unknown state";
+		}
 	}
 	
 	public BNKey apiCreateKey(Object args) {
@@ -192,15 +209,9 @@ public class BNWallet extends BNObject {
 	}
 	
 	public void start() {
-		status = "starting";
+		state = BNWalletState.Starting;
 		
 		walletAppKit.startAsync();
-		walletAppKit.addListener(new Service.Listener(){
-			public void running() {
-				status = "started";
-				//markPendingOutputsAsUnspent();
-			}
-		}, MoreExecutors.sameThreadExecutor());
 	}
 	
 	public Wallet wallet() {
@@ -221,5 +232,69 @@ public class BNWallet extends BNObject {
 	
 	public String path() throws IOException {
 		return walletAppKit.directory().getCanonicalPath();
+	}
+	
+	void setupWalletAppKit() {
+		walletAppKit = new WalletAppKit(new TestNet3Params(), new File("."), "bitnash") {
+			protected void onSetupCompleted() {
+				this.peerGroup().setMaxConnections(4);
+				state = BNWalletState.Connecting;
+			}
+		};
+		
+		walletAppKit.setDownloadListener(new DownloadListener(){
+			protected void startDownload(int blocksRemaining) {
+				System.err.println("START DOWNLOAD");
+				state = BNWalletState.Downloading;
+				blocksToDownload = blocksRemaining;
+			}
+			
+			protected void progress(double pct, int blocksRemaining, Date date) {
+				System.err.println("DOWNLOAD PROGRESS");
+				blocksDownloaded = blocksToDownload - blocksRemaining;
+		    }
+			
+			protected void doneDownload() {
+				System.err.println("DONE DOWNLOAD");
+				state = BNWalletState.Running;
+		    }
+		});
+		
+		try {
+			walletAppKit.setPeerNodes(
+					new PeerAddress(InetAddress.getByName("54.83.28.75"), 18333),
+					new PeerAddress(InetAddress.getByName("107.170.35.88"), 18333),
+					new PeerAddress(InetAddress.getByName("192.187.125.226"), 18333),
+					new PeerAddress(InetAddress.getByName("144.76.175.228"), 18333),
+					new PeerAddress(InetAddress.getByName("107.170.107.245"), 18333),
+					new PeerAddress(InetAddress.getByName("54.83.21.194"), 18333),
+					new PeerAddress(InetAddress.getByName("184.107.180.2"), 18333),
+					new PeerAddress(InetAddress.getByName("66.172.10.161"), 18333),
+					new PeerAddress(InetAddress.getByName("5.9.119.49"), 18333),
+					new PeerAddress(InetAddress.getByName("94.102.53.181"), 18333),
+					new PeerAddress(InetAddress.getByName("5.135.159.139"), 18333),
+					new PeerAddress(InetAddress.getByName("84.74.97.62"), 18333),
+					new PeerAddress(InetAddress.getByName("107.170.99.148"), 18333),
+					new PeerAddress(InetAddress.getByName("206.125.175.243"), 18333),
+					new PeerAddress(InetAddress.getByName("198.50.156.105"), 18333),
+					new PeerAddress(InetAddress.getByName("37.34.60.19"), 18333),
+					new PeerAddress(InetAddress.getByName("37.59.21.113"), 18333),
+					new PeerAddress(InetAddress.getByName("15.125.110.219"), 18333),
+					new PeerAddress(InetAddress.getByName("203.195.193.90"), 18333),
+					new PeerAddress(InetAddress.getByName("54.225.176.205"), 18333),
+					new PeerAddress(InetAddress.getByName("37.187.40.137"), 18333),
+					new PeerAddress(InetAddress.getByName("46.182.106.2"), 18333),
+					new PeerAddress(InetAddress.getByName("104.33.110.107"), 18333),
+					new PeerAddress(InetAddress.getByName("188.165.246.217"), 18333),
+					new PeerAddress(InetAddress.getByName("200.215.116.113"), 18333)
+			);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+		walletAppKit.setAutoStop(false);
+		walletAppKit.setAutoSave(true);
+		walletAppKit.setBlockingStartup(false);
 	}
 }

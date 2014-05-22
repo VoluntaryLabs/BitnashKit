@@ -43,7 +43,7 @@
 
 - (void)fetch
 {
-    if ([[self status] isEqualToString:@"started"])
+    if (self.isRunning)
     {
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
         
@@ -53,7 +53,10 @@
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
         }
-        
+    }
+    else
+    {
+        self.nodeSubtitle = [self status];
     }
 }
 
