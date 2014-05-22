@@ -91,7 +91,12 @@
 
 - (NSArray *)transactions
 {
-    return [_server sendMessage:@"transactions" withObject:self];
+    NSArray *transactions = [_server sendMessage:@"transactions" withObject:self];
+    for (BNTx *tx in transactions)
+    {
+        tx.wallet = self;
+    }
+    return transactions;
 }
 
 - (NSArray *)keys

@@ -29,6 +29,7 @@
                                                    @"fee",
                                                    @"updateTime",
                                                    @"counterParty",
+                                                   @"confirmations",
                                                    nil]];
     return self;
 }
@@ -211,7 +212,7 @@
 
 - (BOOL)isConfirmed
 {
-    return [(NSNumber *)[self sendToServer:@"isConfirmed"] boolValue];
+    return self.confirmations.intValue > 0;
 }
 
 - (void)markInputsAsSpent
@@ -284,7 +285,11 @@
     }
     */
     
-    return [NSString stringWithFormat:@"%@ of %.4f BTC", self.txTypeString, (float)(self.netValue.doubleValue * 0.00000001)];
+    return [NSString stringWithFormat:@"%@ of %.4f BTC (%@)",
+            self.txTypeString,
+            (float)(self.netValue.doubleValue * 0.00000001),
+            self.isConfirmed ? [NSString stringWithFormat:@"%@ confirmations", self.confirmations] : @"pending"
+    ];
 }
 
 - (NSUInteger)hash
@@ -343,6 +348,12 @@
 {
     NSURL *url = [NSURL URLWithString:self.webUrl];
     [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+- (void)fetch
+{
+    self.confirmations = [self sendToServer:@"confirmations"];
+    [self postSelfChanged];
 }
 
 @end

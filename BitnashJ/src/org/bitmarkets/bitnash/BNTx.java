@@ -30,6 +30,7 @@ public class BNTx extends BNObject {
 	Number fee;
 	Number updateTime;
 	String counterParty;
+	Number confirmations;
 	
 	Transaction transaction;
 	
@@ -44,7 +45,8 @@ public class BNTx extends BNObject {
 				"netValue",
 				"fee",
 				"updateTime",
-				"counterParty"
+				"counterParty",
+				"confirmations"
 		));
 	}
 	
@@ -126,6 +128,14 @@ public class BNTx extends BNObject {
 	
 	public void setCounterParty(String counterParty) {
 		this.counterParty = counterParty;
+	}
+	
+	public Number getConfirmations() {
+		return confirmations;
+	}
+	
+	public void setConfirmations(Number confirmations) {
+		this.confirmations = confirmations;
 	}
 	
 	public BNTx apiAddInputsAndChange(Object args) throws InsufficientMoneyException {
@@ -250,6 +260,15 @@ public class BNTx extends BNObject {
 		return this;
 	}
 	
+	public Number apiConfirmations(Object args) {
+		TransactionConfidence confidence = transaction.getConfidence();
+		if (confidence == null) {
+			return Integer.valueOf(0);
+		} else {
+			return Integer.valueOf(confidence.getDepthInBlocks());
+		}
+	}
+	
 	public BigInteger apiInputValue(Object args) {
 		return inputValue();
 	}
@@ -324,6 +343,8 @@ public class BNTx extends BNObject {
 		setSerializedHex(Utils.bytesToHexString(transaction.bitcoinSerialize()));
 		setNetValue(transaction.getValue(wallet()));
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
+		
+		setConfirmations(apiConfirmations(null));
 		
 		setupCounterParty();
 	}

@@ -26,6 +26,7 @@
 @property NSNumber *fee;
 @property NSNumber *updateTime;
 @property NSString *counterParty;
+@property NSNumber *confirmations;
 
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.
