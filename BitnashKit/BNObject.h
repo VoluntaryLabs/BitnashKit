@@ -16,6 +16,7 @@
 @property NSMutableArray *serializedSlotNames;
 @property BNError *error;
 @property (weak) BNObject *bnParent;
+@property NSDictionary *metaData;
 
 - (id)asJSONObject;
 
@@ -26,5 +27,9 @@
 - (void)writeToFile:(NSString *)filePath;
 
 - (void)copySlotsFrom:(BNObject *)other;
+
+- (NSString *)metaDataKey;
+- (void)readMetaData;
+- (void)writeMetaData;
 
 @end

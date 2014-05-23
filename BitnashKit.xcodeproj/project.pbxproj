@@ -34,6 +34,8 @@
 		DC261F3F18CD20A4005328DA /* NSArray+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F3D18CD20A4005328DA /* NSArray+BNJSON.m */; };
 		DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F4018CD21FA005328DA /* NSDictionary+BNJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC261F4318CD21FB005328DA /* NSDictionary+BNJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */; };
+		DC2AEAAA192FF4F6004BB65E /* BNMetaDataDb.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2AEAA8192FF4F6004BB65E /* BNMetaDataDb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC2AEAAB192FF4F6004BB65E /* BNMetaDataDb.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2AEAA9192FF4F6004BB65E /* BNMetaDataDb.m */; };
 		DC350EA6191437CE00C25A01 /* NavKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9C8D24191435EB008F4B63 /* NavKit.framework */; };
 		DC350EB4191439FD00C25A01 /* BNTransactionsNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DC350EB2191439FD00C25A01 /* BNTransactionsNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DC350EB3191439FD00C25A01 /* BNTransactionsNode.m */; };
@@ -141,6 +143,8 @@
 		DC261F3D18CD20A4005328DA /* NSArray+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BNJSON.m"; sourceTree = "<group>"; };
 		DC261F4018CD21FA005328DA /* NSDictionary+BNJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BNJSON.h"; sourceTree = "<group>"; };
 		DC261F4118CD21FB005328DA /* NSDictionary+BNJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BNJSON.m"; sourceTree = "<group>"; };
+		DC2AEAA8192FF4F6004BB65E /* BNMetaDataDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNMetaDataDb.h; sourceTree = "<group>"; };
+		DC2AEAA9192FF4F6004BB65E /* BNMetaDataDb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNMetaDataDb.m; sourceTree = "<group>"; };
 		DC350EB2191439FD00C25A01 /* BNTransactionsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNTransactionsNode.h; sourceTree = "<group>"; };
 		DC350EB3191439FD00C25A01 /* BNTransactionsNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNTransactionsNode.m; sourceTree = "<group>"; };
 		DC350EB8191441FF00C25A01 /* BNKeysNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNKeysNode.h; sourceTree = "<group>"; };
@@ -367,6 +371,8 @@
 				DC4F2FB019039CD0008803F7 /* NSNull+BNJSON.m */,
 				AAB2809C19201B5F005C9D27 /* NSNumber+Bitnash.h */,
 				AAB2809D19201B5F005C9D27 /* NSNumber+Bitnash.m */,
+				DC2AEAA8192FF4F6004BB65E /* BNMetaDataDb.h */,
+				DC2AEAA9192FF4F6004BB65E /* BNMetaDataDb.m */,
 			);
 			path = BitnashKit;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 				DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */,
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
 				DCB016D1191316730064F540 /* BNKey.h in Headers */,
+				DC2AEAAA192FF4F6004BB65E /* BNMetaDataDb.h in Headers */,
 				DCF1CC0218FF20FE00AE815A /* BNObject.h in Headers */,
 				DC350EB4191439FD00C25A01 /* BNTransactionsNode.h in Headers */,
 				DC261F4218CD21FB005328DA /* NSDictionary+BNJSON.h in Headers */,
@@ -597,6 +604,7 @@
 				DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */,
 				DCA62FB118CD2FEC00475735 /* BNServer.m in Sources */,
 				AAB2809F19201B5F005C9D27 /* NSNumber+Bitnash.m in Sources */,
+				DC2AEAAB192FF4F6004BB65E /* BNMetaDataDb.m in Sources */,
 				AA753DC6191079DA00D07CB5 /* qrinput.c in Sources */,
 				AA753DCA191079DA00D07CB5 /* rscode.c in Sources */,
 				AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */,

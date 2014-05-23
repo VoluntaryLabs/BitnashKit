@@ -8,6 +8,7 @@
 
 #import "BNObject.h"
 #import "NSObject+BNJSON.h"
+#import "BNMetaDataDb.h"
 
 @implementation BNObject
 
@@ -15,6 +16,7 @@
 {
     self = [super init];
     self.serializedSlotNames = [NSMutableArray array];
+    self.metaData = [NSMutableDictionary dictionary];
     return self;
 }
 
@@ -69,7 +71,6 @@
         }
 #pragma clang diagnostic pop
     }
-    
 }
 
 - (void)writeToFile:(NSString *)filePath
@@ -81,6 +82,16 @@
 - (void)copySlotsFrom:(BNObject *)other
 {
     [self awakeFromJSONDict:[other asJSONObject]];
+}
+
+- (void)readMetaData
+{
+    [[BNMetaDataDb shared] readToBnObject:self];
+}
+
+- (void)writeMetaData
+{
+    [[BNMetaDataDb shared] writeFromBnObject:self];
 }
 
 @end
