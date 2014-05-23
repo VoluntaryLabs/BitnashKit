@@ -29,7 +29,7 @@
     self.transactionsNode = [[BNTransactionsNode alloc] init];
     self.transactionsNode.wallet = self;
     
-    //self.withdralNode = [[BNWithdrawl alloc] init];
+    self.withdralNode = [[BNWithdrawl alloc] init];
 
     return self;
 }
@@ -53,8 +53,7 @@
         
         if (self.children.count == 0)
         {
-            [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, nil]];
-            //[self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, self.withdralNode, nil]];
+            [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, self.withdralNode, nil]];
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
         }
@@ -166,6 +165,17 @@
     BNTx *tx = [self newTx];
     [tx payToAddress:address value:value];
     [tx addInputsAndChange];
+    if (tx.error)
+    {
+        if (tx.error.insufficientValue)
+        {
+            [tx emptyWallet]; //TODO confirm with user first in case they mistyped?
+        }
+        else
+        {
+            [NSException raise:tx.error.description format:nil];
+        }
+    }
     [tx subtractFee];
     return tx;
 }

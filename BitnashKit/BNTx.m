@@ -133,6 +133,11 @@
     [self copySlotsFrom:[self sendToServer:@"addInputsAndChange"]];
 }
 
+- (void)emptyWallet
+{
+    [self copySlotsFrom:[self sendToServer:@"emptyWallet"]];
+}
+
 - (void)addPayToAddressOutputWithValue:(NSNumber *)value
 {
     [self payToAddress:[_wallet createKey].address value:value];

@@ -49,6 +49,8 @@
 
 - (void)addInputsAndChange;
 
+- (void)emptyWallet; //Spends all utxo
+
 - (void)subtractFee;
 //subtracts the estimated fees from the first output.
 

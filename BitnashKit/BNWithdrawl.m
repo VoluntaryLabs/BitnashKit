@@ -28,7 +28,7 @@
 
     {
         NavDataSlot *slot = [mirror newDataSlotWithName:@"amountInBtc"];
-        [slot setVisibleName:@"Amount"];
+        [slot setVisibleName:@"Amount (BTC)"];
         //[slot setSuffix:@"BTC"];
     }
     
@@ -54,7 +54,12 @@
 {
     BNWallet *wallet = self.wallet;
     
-    //...
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    self.tx = [wallet newWithdrawalTxToAddress:self.toAddress withValue:[[f numberFromString:self.amountInBtc] btcToSatoshi]];
+    [self.tx sign];
+    [self.tx broadcast];
+    
     
     self.status = @"sending...";
     [self postSelfChanged];
@@ -70,9 +75,7 @@
 
 - (void)checkForConfirm
 {
-    BOOL isConfirmed = NO;
-    
-    if (isConfirmed)
+    if (self.tx.isConfirmed)
     {
         self.status = @"confirmed";
     }

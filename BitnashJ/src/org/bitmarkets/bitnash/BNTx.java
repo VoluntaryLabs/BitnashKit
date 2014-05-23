@@ -184,6 +184,31 @@ public class BNTx extends BNObject {
 		
 	}
 	
+	public BNTx apiEmptyWallet(Object args) throws InsufficientMoneyException {
+		
+		Wallet.SendRequest req = Wallet.SendRequest.forTx(transaction);
+		req.emptyWallet = true;
+		
+		try {
+			wallet().completeTx(req);
+		}
+		catch (InsufficientMoneyException e) {
+			error = new BNError();
+			error.setInsufficientValue(BigInteger.valueOf(Math.max(e.missing.longValue(), Transaction.MIN_NONDUST_OUTPUT.longValue())));
+			return this;
+		}
+		
+		for (TransactionInput input : transaction.getInputs()) {
+			input.setScriptSig(new Script(new byte[0])); //Remove signatures
+		}
+		
+		setFee(req.fee);
+		lastOutput().setValue(lastOutput().getValue().add(req.fee));
+		
+		return this;
+		
+	}
+	
 	//TODO subtract fees evenly from change outputs rather than first?
 	public BNTx apiSubtractFee(Object args) {
 		int changeOutputCount = Math.max(1, transaction.getOutputs().size() - 1);
