@@ -139,6 +139,9 @@ public class BNTx extends BNObject {
 	}
 	
 	public BNTx apiAddInputsAndChange(Object args) throws InsufficientMoneyException {
+		
+		List<TransactionOutput> outputsBefore = new ArrayList<TransactionOutput>(transaction.getOutputs());
+		
 		Wallet.SendRequest req = Wallet.SendRequest.forTx(transaction);
 		
 		req.changeAddress = bnWallet().apiCreateKey(null).getKey().toAddress(networkParams());
@@ -154,6 +157,24 @@ public class BNTx extends BNObject {
 		
 		for (TransactionInput input : transaction.getInputs()) {
 			input.setScriptSig(new Script(new byte[0])); //Remove signatures
+		}
+		
+		
+		List<TransactionOutput> outputsAfter = new ArrayList<TransactionOutput>(transaction.getOutputs());
+		
+		transaction.clearOutputs();
+		
+		for (TransactionOutput out : outputsBefore)
+		{
+			transaction.addOutput(out);
+		}
+		
+		for (TransactionOutput out : outputsAfter)
+		{
+			if (!transaction.getOutputs().contains(out))
+			{
+				transaction.addOutput(out);
+			}
 		}
 		
 		setFee(req.fee);
