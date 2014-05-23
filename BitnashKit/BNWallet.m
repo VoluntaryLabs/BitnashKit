@@ -45,6 +45,11 @@
 {
     if (self.isRunning)
     {
+        for (BNKey *key in self.keys)
+        {
+            NSLog(@"%@", key.creationDate);
+        }
+        
         self.refreshInterval = 5.0;
         
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
@@ -119,9 +124,22 @@
 
 - (BNDepositKey *)depositKey
 {
-    BNDepositKey *depositKey = [[BNDepositKey alloc] init];
+    NSString *depositKeyPath = [_server.walletPath stringByAppendingPathComponent:@"depositKey"];
+    BNDepositKey *depositKey = nil;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:depositKeyPath])
+    {
+        depositKey = [[NSString stringWithContentsOfFile:depositKeyPath encoding:NSUTF8StringEncoding error:0x0] asObjectFromJSONString];
+    }
+    
+    if (depositKey == nil || [[_server sendMessage:@"usedKeys" withObject:self] containsObject:depositKey])
+    {
+        BNDepositKey *depositKey = [[BNDepositKey alloc] init];
+        [depositKey copySlotsFrom:[_server sendMessage:@"createKey" withObject:self]];
+        [[depositKey asJSONString] writeToFile:depositKeyPath atomically:YES encoding:NSUTF8StringEncoding error:0x0]; //TODO -- encrypt this!!!
+    }
+
     depositKey.bnParent = self;
-    [depositKey copySlotsFrom:[_server sendMessage:@"depositKey" withObject:self]];
+    
     return depositKey;
 }
 

@@ -177,44 +177,33 @@ public class BNWallet extends BNObject {
 		return keys;
 	}
 	
-	public BNKey apiDepositKey(Object args) {
+	public JSONArray apiUsedKeys(Object args) {
+		JSONArray usedKeys = new JSONArray();
+		
 		for (ECKey key : wallet().getKeys()) {
-			ECKey candidateKey = key;
+			BNKey bnKey = new BNKey();
+			bnKey.setParent(this);
+			bnKey.setKey(key);
+			
 			for (Transaction transaction : wallet().getTransactions(true)) {
-				if (candidateKey == null) {
-					break;
-				}
 				for (TransactionOutput transactionOutput : transaction.getOutputs()) {
-					if (candidateKey == null) {
-						break;
-					}
 					Script scriptPubKey = transactionOutput.getScriptPubKey();
 					if (scriptPubKey.isSentToMultiSig()) {
 						for (int i = 1; i < 3; i ++) {
-							if (candidateKey == null) {
-								break;
-							}
 							if (Arrays.equals(scriptPubKey.getChunks().get(i).data, key.getPubKey())) {
-								candidateKey = null;
+								usedKeys.add(bnKey);
 							}
 						}
 					} else {
 						if (Arrays.equals(key.getPubKeyHash(), scriptPubKey.getPubKeyHash())) {
-							candidateKey = null;
+							usedKeys.add(bnKey);
 						}
 					}
 				}
 			}
-			
-			if (candidateKey != null) {
-				BNKey bnKey = new BNKey();
-				bnKey.setKey(candidateKey);
-				bnKey.setBnParent(this);
-				return bnKey;
-			}
 		}
 		
-		return apiCreateKey(null);
+		return usedKeys;
 	}
 	
 	public void start() {

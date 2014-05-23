@@ -14,6 +14,7 @@
 - (void)fetch
 {
     [self copySlotsFrom:[(BNWallet *)self.bnParent depositKey]];
+    [self postParentChainChanged];
 }
 
 - (NSString *)nodeTitle

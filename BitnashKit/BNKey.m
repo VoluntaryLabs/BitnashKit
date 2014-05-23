@@ -46,9 +46,14 @@
     return [self.address hash];
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [self.address isEqual:[object performSelector:@selector(address)]];
+}
+
 - (BOOL)isEqualTo:(id)object
 {
-    return [self.address isEqualTo:[object performSelector:@selector(address)]];
+    return [self isEqual:object];
 }
 
 // --------------------

@@ -40,7 +40,6 @@
 
 @property BNTransactionsNode *transactionsNode;
 
-
 - (void)setPath:(NSString *)path;
 //Set that path to the wallet directory
 
