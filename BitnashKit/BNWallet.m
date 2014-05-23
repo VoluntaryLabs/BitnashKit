@@ -45,11 +45,6 @@
 {
     if (self.isRunning)
     {
-        for (BNKey *key in self.keys)
-        {
-            NSLog(@"%@", key.creationDate);
-        }
-        
         self.refreshInterval = 5.0;
         
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
