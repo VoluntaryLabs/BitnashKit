@@ -13,6 +13,7 @@
 #import "BNKey.h"
 #import "BNDepositKey.h"
 #import "BNTransactionsNode.h"
+#import "BNWithdrawl.h"
 
 @class BNDepositKey; //why?
 
@@ -37,6 +38,8 @@
 
 @property BNServer *server;
 //Start a BNServer and set it on this wallet prior to use.
+
+@property (strong, nonatomic) BNWithdrawl *withdralNode;
 
 @property BNTransactionsNode *transactionsNode;
 

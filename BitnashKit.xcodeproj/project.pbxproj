@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AA09C822192D569800317130 /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA09C821192D569800317130 /* NavNodeKit.framework */; };
+		AA09C87A192FEA0D00317130 /* BNWithdrawl.h in Headers */ = {isa = PBXBuildFile; fileRef = AA09C878192FEA0D00317130 /* BNWithdrawl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA09C87B192FEA0D00317130 /* BNWithdrawl.m in Sources */ = {isa = PBXBuildFile; fileRef = AA09C879192FEA0D00317130 /* BNWithdrawl.m */; };
 		AA753DC0191079DA00D07CB5 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DA8191079DA00D07CB5 /* bitstream.c */; };
 		AA753DC1191079DA00D07CB5 /* bitstream.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DA9191079DA00D07CB5 /* bitstream.h */; };
 		AA753DC2191079DA00D07CB5 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = AA753DAA191079DA00D07CB5 /* mask.c */; };
@@ -113,6 +115,8 @@
 
 /* Begin PBXFileReference section */
 		AA09C821192D569800317130 /* NavNodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NavNodeKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug/NavNodeKit.framework"; sourceTree = "<group>"; };
+		AA09C878192FEA0D00317130 /* BNWithdrawl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNWithdrawl.h; sourceTree = "<group>"; };
+		AA09C879192FEA0D00317130 /* BNWithdrawl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNWithdrawl.m; sourceTree = "<group>"; };
 		AA753DA8191079DA00D07CB5 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
 		AA753DA9191079DA00D07CB5 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
 		AA753DAA191079DA00D07CB5 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 		DC90331418CBD1A2005D82A2 = {
 			isa = PBXGroup;
 			children = (
+				AA09C878192FEA0D00317130 /* BNWithdrawl.h */,
+				AA09C879192FEA0D00317130 /* BNWithdrawl.m */,
 				DC261F4D18CD2E1A005328DA /* BitnashJ */,
 				DC90332718CBD1A2005D82A2 /* BitnashKit */,
 				DC90333C18CBD1A2005D82A2 /* BitnashKitTests */,
@@ -431,6 +437,7 @@
 				DCE23FBE18CC326000F64729 /* BNScriptPubKey.h in Headers */,
 				AAB2809E19201B5F005C9D27 /* NSNumber+Bitnash.h in Headers */,
 				DCAB5D14192C58BB0090BB69 /* BNDepositKey.h in Headers */,
+				AA09C87A192FEA0D00317130 /* BNWithdrawl.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BNJSON.h in Headers */,
 				DC4F2FB119039CD0008803F7 /* NSNull+BNJSON.h in Headers */,
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
@@ -569,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCD10B1F18E218F60001B6F4 /* BNMultisigScriptSig.m in Sources */,
+				AA09C87B192FEA0D00317130 /* BNWithdrawl.m in Sources */,
 				DCF1CC0318FF20FE00AE815A /* BNObject.m in Sources */,
 				DC350EBB1914420000C25A01 /* BNKeysNode.m in Sources */,
 				DCD906F418E0DF3600342231 /* BNTx.m in Sources */,

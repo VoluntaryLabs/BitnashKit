@@ -28,6 +28,8 @@
     self.nodeSubtitle = @"starting ...";
     self.transactionsNode = [[BNTransactionsNode alloc] init];
     self.transactionsNode.wallet = self;
+    
+    //self.withdralNode = [[BNWithdrawl alloc] init];
 
     return self;
 }
@@ -52,6 +54,7 @@
         if (self.children.count == 0)
         {
             [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, nil]];
+            //[self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, self.withdralNode, nil]];
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
         }
