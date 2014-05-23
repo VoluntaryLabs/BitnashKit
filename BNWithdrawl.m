@@ -17,6 +17,8 @@
     
     self.nodeTitle = @"Withdrawl";
     
+    self.nodeViewClass = NavMirrorView.class;
+    
     NavMirror *mirror = self.navMirror;
     
     {
