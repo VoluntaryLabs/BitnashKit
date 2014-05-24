@@ -28,7 +28,6 @@
 
 - (void)copySlotsFrom:(BNObject *)other;
 
-- (NSString *)metaDataKey;
 - (void)readMetaData;
 - (void)writeMetaData;
 
