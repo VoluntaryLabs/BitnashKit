@@ -48,7 +48,12 @@
 
 - (BOOL)isEqual:(id)object
 {
-    return [self.address isEqual:[object performSelector:@selector(address)]];
+    if ([object isKindOfClass:self.class])
+    {
+        return [self.address isEqual:[object performSelector:@selector(address)]];
+    }
+    
+    return NO;
 }
 
 - (BOOL)isEqualTo:(id)object

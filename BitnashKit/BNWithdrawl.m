@@ -23,13 +23,15 @@
     
     {
         NavDataSlot *slot = [mirror newDataSlotWithName:@"toAddress"];
-        [slot setVisibleName:@"To Address"];
+        [slot setVisibleName:@"Recipient Bitcoin Address"];
+        [slot setUneditedValue:@"Enter Recipient Bitcoin Address"];
     }
 
     {
         NavDataSlot *slot = [mirror newDataSlotWithName:@"amountInBtc"];
-        [slot setVisibleName:@"Amount (BTC)"];
-        //[slot setSuffix:@"BTC"];
+        [slot setVisibleName:@"Amount to Send"];
+        [slot setValueSuffix:@"BTC"];
+        [slot setUneditedValue:@"0.0"];
     }
     
     {
