@@ -41,7 +41,6 @@
 		DC350EB5191439FD00C25A01 /* BNTransactionsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DC350EB3191439FD00C25A01 /* BNTransactionsNode.m */; };
 		DC350EBA1914420000C25A01 /* BNKeysNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DC350EB8191441FF00C25A01 /* BNKeysNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC350EBB1914420000C25A01 /* BNKeysNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DC350EB9191441FF00C25A01 /* BNKeysNode.m */; };
-		DC350EEA1916062100C25A01 /* checkpoints in Resources */ = {isa = PBXBuildFile; fileRef = DC350EE71916061500C25A01 /* checkpoints */; };
 		DC350EEC191612C200C25A01 /* checkpoints-testnet in Resources */ = {isa = PBXBuildFile; fileRef = DC350EEB191612B300C25A01 /* checkpoints-testnet */; };
 		DC4F2FB119039CD0008803F7 /* NSNull+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC4F2FAF19039CD0008803F7 /* NSNull+BN.h */; };
 		DC4F2FB219039CD0008803F7 /* NSNull+BN.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4F2FB019039CD0008803F7 /* NSNull+BN.m */; };
@@ -335,8 +334,9 @@
 		DC90331418CBD1A2005D82A2 = {
 			isa = PBXGroup;
 			children = (
-				DC261F4D18CD2E1A005328DA /* BitnashJ */,
 				DC90332718CBD1A2005D82A2 /* BitnashKit */,
+				AA753D9E191079DA00D07CB5 /* Mac-QR-Code-Encoder */,
+				DC261F4D18CD2E1A005328DA /* BitnashJ */,
 				DC90333C18CBD1A2005D82A2 /* BitnashKitTests */,
 				DC90332018CBD1A2005D82A2 /* Frameworks */,
 				DC90331F18CBD1A2005D82A2 /* Products */,
@@ -378,7 +378,6 @@
 			isa = PBXGroup;
 			children = (
 				DC80CD0D1930E80A004B3288 /* BN */,
-				AA753D9E191079DA00D07CB5 /* Mac-QR-Code-Encoder */,
 				DC90332818CBD1A2005D82A2 /* Supporting Files */,
 				DC85CBB618CBE13800942C9D /* BitnashKit.h */,
 			);
@@ -476,6 +475,7 @@
 				DC90331918CBD1A2005D82A2 /* Sources */,
 				DC90331A18CBD1A2005D82A2 /* Frameworks */,
 				DC90331B18CBD1A2005D82A2 /* Headers */,
+				DC80CD10193122CB004B3288 /* Run Script */,
 				DC90331C18CBD1A2005D82A2 /* Resources */,
 			);
 			buildRules = (
@@ -566,7 +566,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC350EEC191612C200C25A01 /* checkpoints-testnet in Resources */,
-				DC350EEA1916062100C25A01 /* checkpoints in Resources */,
 				DC5A24891910606900D48B14 /* bitcoinj.jar in Resources */,
 				DCE5E28D190B034D0005396A /* json-simple-1.1.1.jar in Resources */,
 				DCE5E28E190B034D0005396A /* slf4j-simple-1.7.6.jar in Resources */,
@@ -584,6 +583,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DC80CD10193122CB004B3288 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "touch -cm ${SRCROOT}/BitnashJ/bin/org";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DC90331918CBD1A2005D82A2 /* Sources */ = {
