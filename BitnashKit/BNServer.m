@@ -7,7 +7,7 @@
 //
 
 #import "BNServer.h"
-#import "NSObject+BNJSON.h"
+#import "NSObject+BN.h"
 
 @implementation BNServer
 

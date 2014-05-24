@@ -7,7 +7,7 @@
 //
 
 #import "BNObject.h"
-#import "NSObject+BNJSON.h"
+#import "NSObject+BN.h"
 #import "BNMetaDataDb.h"
 
 @implementation BNObject

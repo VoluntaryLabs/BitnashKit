@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSNumber (Bitnash)
+@interface NSNumber (BN)
 
 - (NSNumber *)btcToSatoshi;
 - (NSNumber *)satoshiToBtc;

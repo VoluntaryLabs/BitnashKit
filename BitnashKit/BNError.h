@@ -14,4 +14,6 @@
 @property NSString *description;
 @property NSNumber *insufficientValue;
 
+- (BOOL)isInvalidAddress;
+
 @end

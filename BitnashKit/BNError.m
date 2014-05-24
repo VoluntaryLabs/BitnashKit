@@ -20,4 +20,9 @@
     return self;
 }
 
+- (BOOL)isInvalidAddress
+{
+    return [self.description isEqualToString:@"invalidAddress"];
+}
+
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (BNJSON)
+@interface NSObject (BN)
 
 - (id)asJSONObject;
 

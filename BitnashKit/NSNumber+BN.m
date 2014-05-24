@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Bitmarkets. All rights reserved.
 //
 
-#import "NSNumber+Bitnash.h"
+#import "NSNumber+BN.h"
 
-@implementation NSNumber (Bitnash)
+@implementation NSNumber (BN)
 
 + (double)satoshiPerBtc
 {

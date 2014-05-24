@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Bitmarkets. All rights reserved.
 //
 
-#import "NSArray+BNJSON.h"
-#import "NSObject+BNJSON.h"
+#import "NSArray+BN.h"
+#import "NSObject+BN.h"
 #import "BNObject.h"
 
-@implementation NSArray (BNJSON)
+@implementation NSArray (BN)
 
 - asJSONObject
 {

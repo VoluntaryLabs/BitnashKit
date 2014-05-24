@@ -7,11 +7,11 @@
 //
 
 
-#import "NSObject+BNJSON.h"
-#import "NSString+BNJSON.h"
+#import "NSObject+BN.h"
+#import "NSString+BN.h"
 
 
-@implementation NSString (BNJSON)
+@implementation NSString (BN)
 
 - (id)asObjectFromJSONString
 {

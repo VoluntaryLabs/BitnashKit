@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BNObject.h"
 
-@interface NSArray (BNJSON)
+@interface NSArray (BN)
 
 - (void)setBnParent:(BNObject *)bnParent;
 

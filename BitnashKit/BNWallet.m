@@ -8,8 +8,8 @@
 
 #import "BNWallet.h"
 #import "BNTx.h"
-#import "NSObject+BNJSON.h"
-#import "NSString+BNJSON.h"
+#import "NSObject+BN.h"
+#import "NSString+BN.h"
 
 @implementation BNWallet
 

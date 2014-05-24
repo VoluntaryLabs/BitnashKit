@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Bitmarkets. All rights reserved.
 //
 
-#import "NSObject+BNJSON.h"
+#import "NSObject+BN.h"
 
-@implementation NSObject (BNJSON)
+@implementation NSObject (BN)
 
 - (id)asJSONObject
 {

@@ -1,13 +1,15 @@
 //
-//  NSDictionary+BNJSON.h
+//  NSString+BNJSON.h
 //  BitnashKit
 //
-//  Created by Rich Collins on 3/9/14.
+//  Created by Rich Collins on 3/11/14.
 //  Copyright (c) 2014 Bitmarkets. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (BNJSON)
+@interface NSString (BN)
+
+- (id)asObjectFromJSONString;
 
 @end
