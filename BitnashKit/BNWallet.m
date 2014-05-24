@@ -180,5 +180,11 @@
     return tx;
 }
 
+- (BOOL)isValidAddress:(NSString *)address
+{
+    NSNumber *result = [self.server sendMessage:@"isValidAddress" withObject:self withArg:address];
+    return result.boolValue;
+}
+
 
 @end

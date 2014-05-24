@@ -206,6 +206,17 @@ public class BNWallet extends BNObject {
 		return usedKeys;
 	}
 	
+	public Boolean apiIsValidAddress(Object obj) {
+		String address = (String) obj;
+		try {
+			new Address(walletAppKit.params(), address);
+			return Boolean.valueOf(true);
+		}
+		catch (Exception e) {
+			return Boolean.valueOf(false);
+		}
+	}
+	
 	public void start() {
 		state = BNWalletState.Starting;
 		

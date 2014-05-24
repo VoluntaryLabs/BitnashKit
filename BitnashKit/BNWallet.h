@@ -73,4 +73,6 @@
 
 - (BOOL)isRunning;
 
+- (BOOL)isValidAddress:(NSString *)address;
+
 @end
