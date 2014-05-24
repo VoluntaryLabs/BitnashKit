@@ -34,12 +34,22 @@
         [slot setUneditedValue:@"0.0"];
     }
     
-    {
-        NavActionSlot *slot = [mirror newActionSlotWithName:@"send"];
-        [slot setVisibleName:@"Send"];
-    }
+    [self updateActions];
     
     return self;
+}
+
+- (void)updatedSlot:(NavSlot *)aNavSlot
+{
+    [self updateActions];
+}
+
+- (void)updateActions
+{
+    NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"send"];
+    [slot setVisibleName:@"Send"];
+    [slot setIsActive:self.navMirror.dataSlotsAreFilled];
+    [slot.slotView syncFromSlot];
 }
 
 - (NSString *)nodeSubtitle
