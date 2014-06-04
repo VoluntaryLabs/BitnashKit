@@ -106,6 +106,13 @@
         [self start];
     }
     
+    BOOL logsBeforeMessage = self.logs;
+    
+    if (self.logsNextMessage)
+    {
+        self.logs = YES;
+    }
+    
     self.error = nil;
     
     NSMutableDictionary *message = [NSMutableDictionary dictionary];
@@ -158,6 +165,9 @@
     {
         NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
     }
+    
+    self.logs = logsBeforeMessage;
+    self.logsNextMessage = NO;
     
     if ([response objectForKey:@"error"])
     {
