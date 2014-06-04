@@ -21,6 +21,8 @@
 
 @property BOOL logs;
 
+@property BOOL logsNextMessage;
+
 @property NSTask *task;
 
 - (void)start;

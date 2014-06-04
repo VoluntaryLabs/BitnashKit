@@ -3,7 +3,7 @@ package org.bitmarkets.bitnash;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.InetAddress;
+//import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -271,6 +271,7 @@ public class BNWallet extends BNObject {
 		    }
 		});
 		
+		/*
 		try {
 			walletAppKit.setPeerNodes(
 					new PeerAddress(InetAddress.getByName("54.83.28.75"), 18333),
@@ -303,6 +304,7 @@ public class BNWallet extends BNObject {
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+		*/
 		
 		walletAppKit.setAutoStop(false);
 		walletAppKit.setAutoSave(true);
