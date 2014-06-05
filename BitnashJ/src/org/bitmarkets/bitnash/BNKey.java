@@ -56,7 +56,7 @@ public class BNKey extends BNObject {
 	}
 	
 	void willSerializeSelf() {
-		setPubKey(Utils.bytesToHexString(key.getPubKey()));
+		setPubKey(Utils.HEX.encode(key.getPubKey()));
 		setAddress(new Address(bnWallet().wallet().getParams(), key.getPubKeyHash()).toString());
 		setCreationTime(BigInteger.valueOf(key.getCreationTimeSeconds()*1000));
 	}

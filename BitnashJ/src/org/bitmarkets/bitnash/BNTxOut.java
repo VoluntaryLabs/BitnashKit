@@ -1,5 +1,6 @@
 package org.bitmarkets.bitnash;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 import com.google.bitcoin.core.Transaction;
@@ -64,6 +65,6 @@ public class BNTxOut extends BNObject {
 		
 		setScriptPubKey(scriptPubKey);
 		
-		setValue(transactionOutput.getValue());
+		setValue(BigInteger.valueOf(transactionOutput.getValue().longValue()));
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.json.simple.JSONArray;
 
+import com.google.bitcoin.core.Coin;
 import com.google.bitcoin.core.ECKey;
 import com.google.bitcoin.core.InsufficientMoneyException;
 import com.google.bitcoin.core.NetworkParameters;
@@ -177,7 +178,7 @@ public class BNTx extends BNObject {
 			}
 		}
 		
-		setFee(req.fee);
+		setFee(BigInteger.valueOf(req.fee.longValue()));
 		lastOutput().setValue(lastOutput().getValue().add(req.fee));
 		
 		return this;
@@ -202,7 +203,7 @@ public class BNTx extends BNObject {
 			input.setScriptSig(new Script(new byte[0])); //Remove signatures
 		}
 		
-		setFee(req.fee);
+		setFee(BigInteger.valueOf(req.fee.longValue()));
 		lastOutput().setValue(lastOutput().getValue().add(req.fee));
 		
 		return this;
@@ -230,7 +231,7 @@ public class BNTx extends BNObject {
 					transaction.addOutput(outputs.get(j));
 				}
 			}
-			output.setValue(BigInteger.valueOf(newValue));
+			output.setValue(Coin.valueOf(newValue));
 		}
 		
 		return this;
@@ -336,7 +337,7 @@ public class BNTx extends BNObject {
 			if (transactionOutput == null) {
 				return null;
 			} else {
-				value = value.add(transactionOutput.getValue());
+				value = value.add(BigInteger.valueOf(transactionOutput.getValue().longValue()));
 			}
 		}
 		
@@ -386,13 +387,13 @@ public class BNTx extends BNObject {
 		}
 		
 		setTxHash(transaction.getHashAsString());
-		setSerializedHex(Utils.bytesToHexString(transaction.bitcoinSerialize()));
-		setNetValue(transaction.getValue(wallet()));
+		setSerializedHex(Utils.HEX.encode(transaction.bitcoinSerialize()));
+		setNetValue(BigInteger.valueOf(transaction.getValue(wallet()).longValue()));
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
 		
 		setConfirmations(apiConfirmations(null));
 		
-		setupCounterParty();
+		//setupCounterParty();
 	}
 	
 	void setupCounterParty() { //TODO properly check previous output for type.  Handle all types.
@@ -405,8 +406,8 @@ public class BNTx extends BNObject {
 				if (txIn.getScriptSig().isMultisig()) {
 					for (ScriptChunk chunk : txIn.getScriptSig().script().getChunks()) {
 						if (chunk.data.length > 1) {
-							if (!wallet().hasKey(new ECKey(null, chunk.data))) {
-								setCounterParty(Utils.bytesToHexString(chunk.data));
+							if (!wallet().hasKey(ECKey.fromPublicOnly(chunk.data))) {
+								setCounterParty(Utils.HEX.encode(chunk.data));
 								break;
 							}
 						}
@@ -415,7 +416,7 @@ public class BNTx extends BNObject {
 						break;
 					}
 				} else {
-					ECKey key = new ECKey(null, txIn.getScriptSig().script().getChunks().get(1).data);
+					ECKey key = ECKey.fromPublicOnly(txIn.getScriptSig().script().getChunks().get(1).data);
 					if (!wallet().hasKey(key)) {
 						setCounterParty(key.toAddress(networkParams()).toString());
 						break;
@@ -428,7 +429,7 @@ public class BNTx extends BNObject {
 				BNScriptPubKey scriptPubKey = txOut.getScriptPubKey();
 				if (scriptPubKey.script().isSentToMultiSig()) {
 					for (Object pubKey : ((BNMultisigScriptPubKey)scriptPubKey).getPubKeys()) {
-						if (!wallet().hasKey(new ECKey(null, Utils.parseAsHexOrBase58((String)pubKey)))) {
+						if (!wallet().hasKey(ECKey.fromPublicOnly(Utils.parseAsHexOrBase58((String)pubKey)))) {
 							setCounterParty((String)pubKey);
 							break;
 						}

@@ -56,6 +56,10 @@ public class BNWallet extends BNObject {
 	}
 	
 	public boolean setPassphrase(String passphrase) {
+		if ("true".length() > 0) {
+			throw new RuntimeException("Wallet encryption isn't supported yet"); //TODO
+		}
+		
 		if (keyParameter != null) {
 			//Passphrase is being changed.  Decrypt it first.
 	        wallet().decrypt(keyParameter);
@@ -86,7 +90,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	public BigInteger getBalance() {
-		return walletAppKit.wallet().getBalance();
+		return BigInteger.valueOf(walletAppKit.wallet().getBalance().longValue());
 	}
 	
 	public KeyParameter getKeyParameter() {
@@ -110,7 +114,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	public BigInteger apiBalance(Object args) {
-		return wallet().getBalance();
+		return getBalance();
 	}
 	
 	public String apiStatus(Object args) {
@@ -143,10 +147,11 @@ public class BNWallet extends BNObject {
 		ECKey key = null;
 		
 		if (wallet().isEncrypted()) {
-			key = wallet().addNewEncryptedKey(wallet().getKeyCrypter(), keyParameter);
+			//key = wallet().addNewEncryptedKey(wallet().getKeyCrypter(), keyParameter);
+			throw new RuntimeException("Wallet encryption isn't supported yet"); //TODO
 		} else {
 			key = new ECKey();
-			walletAppKit.wallet().addKey(key);
+			walletAppKit.wallet().importKey(key);
 		}
 		
 		BNKey bnKey = new BNKey();
@@ -168,7 +173,7 @@ public class BNWallet extends BNObject {
 	
 	public JSONArray apiKeys(Object args) {
 		JSONArray keys = new JSONArray();
-		for (ECKey key : wallet().getKeys()) {
+		for (ECKey key : wallet().getImportedKeys()) {
 			BNKey bnKey = new BNKey();
 			bnKey.setBnParent(this);
 			bnKey.setKey(key);
@@ -180,7 +185,7 @@ public class BNWallet extends BNObject {
 	public JSONArray apiUsedKeys(Object args) {
 		JSONArray usedKeys = new JSONArray();
 		
-		for (ECKey key : wallet().getKeys()) {
+		for (ECKey key : wallet().getImportedKeys()) {
 			BNKey bnKey = new BNKey();
 			bnKey.setParent(this);
 			bnKey.setKey(key);

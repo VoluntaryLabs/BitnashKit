@@ -135,7 +135,6 @@ public class BNTxIn extends BNObject {
 			return transaction.calculateSignature(
 					index(),
 					key,
-					null,
 					transactionInput().getOutpoint().getConnectedOutput().getScriptBytes(),
 					SigHash.ALL,
 					false
@@ -184,7 +183,7 @@ public class BNTxIn extends BNObject {
 		setPreviousTxHash(transactionInput().getOutpoint().getHash().toString());
 		
 		if (transactionInput().getConnectedOutput() != null) {
-			setPreviousTxSerializedHex(Utils.bytesToHexString(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
+			setPreviousTxSerializedHex(Utils.HEX.encode(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
 		}
 		
 		if (transactionInput().getScriptSig() != null && transactionInput().getScriptSig().getChunks().size() > 0) {
