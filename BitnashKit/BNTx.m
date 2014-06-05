@@ -31,7 +31,14 @@
                                                    @"counterParty",
                                                    @"confirmations",
                                                    nil]];
+    
+    self.nodeViewClass = NavDescriptionView.class;
     return self;
+}
+
+- (id)descriptionJSONObject
+{
+    return self.asJSONObject;
 }
 
 - (id)sendToServer:(NSString *)message withArg:(id)arg
