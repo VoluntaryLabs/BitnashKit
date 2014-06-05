@@ -18,6 +18,8 @@
     self.nodeTitle = @"Transactions";
     self.nodeSuggestedWidth = 480;
     self.shouldUseCountForNodeNote = YES;
+    self.shouldSortChildren = YES;
+    self.sortChildrenKey = @"updateTime";
     
     return self;
 }
