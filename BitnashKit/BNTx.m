@@ -227,14 +227,14 @@
     return self.confirmations.intValue > 0;
 }
 
-- (void)markInputsAsSpent
+- (void)lockInputs
 {
-    [self sendToServer:@"markInputsAsSpent"];
+    [self sendToServer:@"lockInputs"];
 }
 
-- (void)markInputsAsUnspent
+- (void)unlockInputs
 {
-    [self sendToServer:@"markInputsAsUnspent"];
+    [self sendToServer:@"unlockInputs"];
 }
 
 - (BNTx *)cancellationTx

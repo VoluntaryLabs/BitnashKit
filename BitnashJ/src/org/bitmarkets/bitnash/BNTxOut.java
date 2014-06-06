@@ -4,9 +4,19 @@ import java.math.BigInteger;
 import java.util.Arrays;
 
 import com.google.bitcoin.core.Transaction;
+import com.google.bitcoin.core.TransactionOutPoint;
 import com.google.bitcoin.core.TransactionOutput;
 
 public class BNTxOut extends BNObject {
+	public static BNTxOut fromOutpoint(TransactionOutPoint outpoint) {
+		BNTx bnTx = new BNTx();
+		bnTx.setBnParent(BNWallet.shared());
+		bnTx.setTransaction(outpoint.getConnectedOutput().getParentTransaction());
+		bnTx.willSerialize();
+		
+		return (BNTxOut) bnTx.getOutputs().get((int)outpoint.getIndex());
+	}
+	
 	public Number getValue() {
 		return value;
 	}
@@ -25,6 +35,20 @@ public class BNTxOut extends BNObject {
 	
 	public int index() {
 		return bnTx().getOutputs().indexOf(this);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void lock() {
+		metaData.put("isLocked", Boolean.valueOf(true));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void unlock() {
+		metaData.put("isLocked", Boolean.valueOf(false));
+	}
+	
+	public String id() {
+		return bnTx().id() + "." + Integer.toHexString(index());
 	}
 	
 	BNTx bnTx() {

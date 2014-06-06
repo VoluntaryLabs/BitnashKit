@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 
 public abstract class BNObject {
 	BNObject bnParent; //object that "awoke" this object
+	JSONObject metaData; //persistent data associated with this object
 	
 	List<String> bnSlotNames;
 	
@@ -14,6 +15,7 @@ public abstract class BNObject {
 	
 	public BNObject() {
 		bnSlotNames = new ArrayList<String>();
+		metaData = new JSONObject();
 		resetSlots();
 	}
 	
@@ -51,6 +53,14 @@ public abstract class BNObject {
 		return bnParent;
 	}
 	
+	public JSONObject getMetaData() {
+		return metaData;
+	}
+	
+	public void setMetaData(JSONObject metaData) {
+		this.metaData = metaData;
+	}
+	
 	public void deserialzeFromJSONObject(JSONObject jsonObject) {
 		for (BNObjectSlot slot: bnSlots()) {
 			BNObjectDeserializer d = new BNObjectDeserializer();
@@ -68,6 +78,7 @@ public abstract class BNObject {
 		for (BNObjectSlot slot: bnSlots()) {
 			BNObjectDeserializer.didDeserializeObject(slot.getValue());
 		}
+		//readMetaData(); TODO Synchronize this to avoid race conditions?
 	}
 	
 	void willSerializeSelf() {}
@@ -82,9 +93,22 @@ public abstract class BNObject {
 		for (BNObjectSlot slot: bnSlots()) {
 			BNObjectSerializer.willSerializeObject(slot.getValue());
 		}
+		//writeMetaData(); TODO Synchronize this to avoid race conditions?
 	}
 	
 	public BNObject apiPing(Object args) {
 		return this;
+	}
+	
+	public void readMetaData() {
+		BNMetaDataDb.shared().readToBnObject(this);
+	}
+	
+	public void writeMetaData() {
+		BNMetaDataDb.shared().writeFromBnObject(this);
+	}
+	
+	public String id() {
+		return Integer.toHexString(hashCode());
 	}
 }

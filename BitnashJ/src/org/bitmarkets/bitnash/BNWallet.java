@@ -89,20 +89,32 @@ public class BNWallet extends BNObject {
 		}
 	}
 	
-	public BigInteger getBalance() {
-		return BigInteger.valueOf(walletAppKit.wallet().getBalance().longValue());
-	}
-	
 	public KeyParameter getKeyParameter() {
 		return keyParameter;
 	}
 	
-	public void markPendingOutputsAsUnspent() {
+	public void lockAllOutputs() {
 		for (Transaction tx : wallet().getTransactions(true)) {
 			if (!tx.isPending()) {
 				for (TransactionOutput txo : tx.getOutputs()) {
 					if (txo.isMine(wallet())) {
-						txo.markAsUnspent();
+						BNTxOut bnTxOut = BNTxOut.fromOutpoint(txo.getOutPointFor());
+						bnTxOut.lock();
+						bnTxOut.writeMetaData();
+					}
+				}
+			}
+		}
+	}
+	
+	public void unlockAllOutputs() {
+		for (Transaction tx : wallet().getTransactions(true)) {
+			if (!tx.isPending()) {
+				for (TransactionOutput txo : tx.getOutputs()) {
+					if (txo.isMine(wallet())) {
+						BNTxOut bnTxOut = BNTxOut.fromOutpoint(txo.getOutPointFor());
+						bnTxOut.unlock();
+						bnTxOut.writeMetaData();
 					}
 				}
 			}
@@ -114,7 +126,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	public BigInteger apiBalance(Object args) {
-		return getBalance();
+		return BigInteger.valueOf(walletAppKit.wallet().getBalance(new BNUnlockedCoinSelector()).longValue());
 	}
 	
 	public String apiStatus(Object args) {
@@ -225,6 +237,8 @@ public class BNWallet extends BNObject {
 	public void start() {
 		state = BNWalletState.Starting;
 		
+		BNMetaDataDb.shared().setPath("./meta-data");
+		
 		walletAppKit.startAsync();
 	}
 	
@@ -273,6 +287,7 @@ public class BNWallet extends BNObject {
 				state = BNWalletState.Running;
 				blocksDownloaded = 0;
 				blocksToDownload = 0;
+				lockAllOutputs();
 		    }
 		});
 		

@@ -85,6 +85,10 @@ public class BNTxIn extends BNObject {
 		}
 	}
 	
+	public BNTxOut bnTxOut() {
+		return BNTxOut.fromOutpoint(transactionInput().getOutpoint());
+	}
+	
 	BNScriptSig scriptSig;
 	Number previousOutIndex;
 	String previousTxSerializedHex;

@@ -278,20 +278,22 @@ public class BNTx extends BNObject {
 		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
 	}
 	
-	public BNTx apiMarkInputsAsSpent(Object args) {
+	public BNTx apiLockInputs(Object args) {
 		for (Object inputObj : inputs) {
-			TransactionInput input = ((BNTxIn) inputObj).transactionInput();
-			//Don't do this for now since this txn hash won't be saved in wallet
-			//input.getConnectedOutput().markAsSpent(input);
-			input.getConnectedOutput().markAsSpent(null);
+			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			bnTxOut.readMetaData();
+			bnTxOut.lock();
+			bnTxOut.writeMetaData();
 		}
 		return this;
 	}
 	
-	public BNTx apiMarkInputsAsUnspent(Object args) {
+	public BNTx apiUnlockInputs(Object args) {
 		for (Object inputObj : inputs) {
-			TransactionInput input = ((BNTxIn) inputObj).transactionInput();
-			input.getConnectedOutput().markAsUnspent();
+			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			bnTxOut.readMetaData();
+			bnTxOut.unlock();
+			bnTxOut.writeMetaData();
 		}
 		return this;
 	}
@@ -322,6 +324,10 @@ public class BNTx extends BNObject {
 	
 	public boolean existsInWallet() {
 		return (txHash != null) && (wallet().getTransaction(new Sha256Hash(txHash)) != null);
+	}
+	
+	public String id() {
+		return transaction.getHashAsString();
 	}
 	
 	void resetSlots() {

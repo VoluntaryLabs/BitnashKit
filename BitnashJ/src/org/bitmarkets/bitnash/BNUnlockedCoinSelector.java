@@ -33,6 +33,14 @@ public class BNUnlockedCoinSelector implements CoinSelector {
             if (total >= target) break;
             // Only pick chain-included transactions, or transactions that are ours and pending.
             if (!shouldSelect(output.getParentTransaction())) continue;
+            
+            //Modification from DefaultCoinSelector:
+            BNTxOut bnTxOut = BNTxOut.fromOutpoint(output.getOutPointFor());
+            bnTxOut.readMetaData();
+            if (Boolean.valueOf(true).equals(bnTxOut.getMetaData().get("isLocked"))) {
+            	continue;
+            }
+            
             selected.add(output);
             total += output.getValue().value;
         }

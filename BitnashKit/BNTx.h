@@ -66,11 +66,11 @@
 - (BOOL)isConfirmed;
 //YES if this tx is in a block from the longest chain.
 
-- (void)markInputsAsSpent;
-//Marks the inputs as spent so they won't be used for subsequent txs
+- (void)lockInputs;
+//Locks the connected outputs so they won't be used for subsequent txs
 
-- (void)markInputsAsUnspent;
-//Marks the inputs as spent so they won't be used for subsequent txs
+- (void)unlockInputs;
+//Unlocks the connected outputs so they can be used for subsequent txs
 
 - (BNTx *)cancellationTx;
 //Returns a new transaction that sends this transactions inputs back to this transactions wallet
