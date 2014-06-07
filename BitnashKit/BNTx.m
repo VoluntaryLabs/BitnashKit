@@ -284,7 +284,7 @@
     
     if (d)
     {
-        return [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)d.doubleValue];
+        return [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)(d.doubleValue/1000.0)];
     }
     
     return nil;
@@ -298,8 +298,8 @@
         return self.updateTimeDate.itemDateTimeString;
     }
     */
-    
-    return self.confirmStatus;
+    return [NSString stringWithFormat:@"%@ - %@", self.updateTimeDate.itemDateTimeString, self.confirmStatus];
+    //return self.confirmStatus;
     //return self.txHash;
 }
 
