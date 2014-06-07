@@ -278,14 +278,39 @@
     }
 }
 
+- (NSDate *)updateTimeDate
+{
+    NSNumber *d = self.updateTime;
+    
+    if (d)
+    {
+        return [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)d.doubleValue];
+    }
+    
+    return nil;
+}
+
 - (NSString *)nodeSubtitle
 {
-    return self.txHash;
+    /*
+    if (self.updateTimeDate)
+    {
+        return self.updateTimeDate.itemDateTimeString;
+    }
+    */
+    
+    return self.confirmStatus;
+    //return self.txHash;
 }
 
 - (NSString *)nodeNote
 {
-    return nil;
+    if (self.isConfirmed)
+    {
+        return nil; //@"✓";
+    }
+    
+    return @"●";
 }
 
 - (NSString *)nodeTitle
@@ -296,17 +321,39 @@
         [self composeChildrenFromPropertyNames:@[@"updateTime", @"counterParty"]];
     }
     */
+ 
+    return [NSString stringWithFormat:@"%@ of %.4f BTC",
+            self.txTypeString,
+            (float)(self.netValue.doubleValue * 0.00000001)];
     
+/*
     return [NSString stringWithFormat:@"%@ of %.4f BTC (%@)",
             self.txTypeString,
             (float)(self.netValue.doubleValue * 0.00000001),
             self.isConfirmed ? [NSString stringWithFormat:@"%@ confirmations", self.confirmations] : @"pending"
     ];
+*/
+}
+
+- (NSString *)confirmStatus
+{
+    return self.isConfirmed ? [NSString stringWithFormat:@"%@ confirms", self.confirmations] : @"pending";
 }
 
 - (NSUInteger)hash
 {
     return [self.txHash hash];
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:BNTx.class])
+    {
+        BNTx *otherTx = object;
+        return [self.txHash isEqualTo:[otherTx txHash]];
+    }
+    
+    return NO;
 }
 
 - (BOOL)isEqualTo:(id)object

@@ -16,10 +16,10 @@
     self = [super init];
     
     self.nodeTitle = @"Transactions";
-    self.nodeSuggestedWidth = 480;
+    self.nodeSuggestedWidth = 500;
     self.shouldUseCountForNodeNote = YES;
     self.shouldSortChildren = YES;
-    self.sortChildrenKey = @"updateTime";
+    self.sortChildrenKey = @"confirmations"; //@"updateTime";
     
     return self;
 }
@@ -27,6 +27,7 @@
 - (void)fetch
 {
     [self mergeWithChildren:[self.wallet transactions]];
+    [self sortChildren];
 }
 
 @end
