@@ -287,7 +287,7 @@ public class BNWallet extends BNObject {
 				state = BNWalletState.Running;
 				blocksDownloaded = 0;
 				blocksToDownload = 0;
-				lockAllOutputs();
+				//lockAllOutputs();
 		    }
 		});
 		
