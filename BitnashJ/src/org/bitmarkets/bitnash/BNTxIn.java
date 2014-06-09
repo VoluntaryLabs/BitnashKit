@@ -96,9 +96,11 @@ public class BNTxIn extends BNObject {
 	
 	void signPayToAddress() {
 		ECKey key = transactionInput().getOutpoint().getConnectedKey(wallet());
-		TransactionSignature txSig = signUsingKey(key);
-		if (txSig != null) {
-			transactionInput().setScriptSig(ScriptBuilder.createInputScript(txSig, key));
+		if (key != null) {
+			TransactionSignature txSig = signUsingKey(key);
+			if (txSig != null) {
+				transactionInput().setScriptSig(ScriptBuilder.createInputScript(txSig, key));
+			}
 		}
 	}
 	
@@ -129,6 +131,10 @@ public class BNTxIn extends BNObject {
 	}
 	
 	TransactionSignature signUsingKey(ECKey key) {
+		if (key == null) {
+			return null;
+		}
+		
 		Transaction transaction = transaction();
 		
 		if (key.isEncrypted()) {
