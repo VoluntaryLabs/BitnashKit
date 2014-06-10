@@ -27,6 +27,7 @@
 @property NSNumber *updateTime;
 @property NSString *counterParty;
 @property NSNumber *confirmations;
+@property BNTx *subsumingTx;
 
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.
@@ -80,5 +81,8 @@
 - (NSNumber *)changeValue;
 
 - (BNTxOut *)firstOutput;
+
+//YES if all inputs and outputs are the same (but not necessarily the txhash)
+- (BOOL)isEquivalentTo:(BNTx *)otherTx;
 
 @end

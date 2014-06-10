@@ -321,6 +321,29 @@ public class BNTx extends BNObject {
 		return inputValue();
 	}
 	
+	//Tx that spends an input owned by this wallet.
+	//It might be the same tx with the same txhash,
+	//the same tx with a different txhash (tx malleability),
+	//or a tx that spent an input of this tx before this tx was able to  
+	public BNTx apiSubsumingTx(Object args) {
+		for (TransactionInput input : transaction.getInputs()) {
+			TransactionOutput output = input.getConnectedOutput();
+			if (output != null) {
+				TransactionInput spendingInput = output.getSpentBy();
+				if (spendingInput != null) {
+					Transaction subsumingTransaction = spendingInput.getParentTransaction();
+					if (subsumingTransaction != null && !subsumingTransaction.equals(this)) {
+						BNTx bnTx = new BNTx();
+						bnTx.setParent(bnParent);
+						bnTx.setTransaction(subsumingTransaction);
+						return bnTx;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 	public boolean existsInWallet() {
 		return (txHash != null) && (wallet().getTransaction(new Sha256Hash(txHash)) != null);
 	}

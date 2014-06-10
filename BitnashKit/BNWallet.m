@@ -54,6 +54,7 @@
         if (self.children.count == 0)
         {
             [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, self.withdralNode, nil]];
+            
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
         }
@@ -111,6 +112,7 @@
     {
         tx.wallet = self;
     }
+    
     return transactions;
 }
 

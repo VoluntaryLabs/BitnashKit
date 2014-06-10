@@ -30,4 +30,13 @@
     self.previousOutIndex = [txOut index];
 }
 
+- (BOOL)isEqual:(id)object
+{
+    BNTxIn *other = (BNTxIn *)object;
+    
+    return [object isKindOfClass:[BNTxIn class]] &&
+        [self.previousTxHash isEqual:other.previousTxHash] &&
+        [self.previousOutIndex isEqual:other.previousOutIndex];
+}
+
 @end

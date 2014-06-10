@@ -25,4 +25,12 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    BNMultisigScriptPubKey *other = (BNMultisigScriptPubKey *)object;
+    
+    return [object isKindOfClass:[BNMultisigScriptPubKey class]] &&
+        [self.pubKeys isEqualToArray:other.pubKeys];
+}
+
 @end

@@ -31,4 +31,13 @@
     return (BNTx *)self.bnParent;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    BNTxOut *other = (BNTxOut *)object;
+    
+    return [object isKindOfClass:[BNTxOut class]] &&
+        [self.value isEqual:other.value] &&
+        [self.scriptPubKey isEqual:other.scriptPubKey];
+}
+
 @end

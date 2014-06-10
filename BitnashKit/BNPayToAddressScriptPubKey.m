@@ -19,4 +19,12 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    BNPayToAddressScriptPubKey *other = (BNPayToAddressScriptPubKey *)object;
+    
+    return [object isKindOfClass:[BNPayToAddressScriptPubKey class]] &&
+        [self.address isEqual:other.address];
+}
+
 @end

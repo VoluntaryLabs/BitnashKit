@@ -224,7 +224,33 @@
 
 - (BOOL)isConfirmed
 {
-    return self.confirmations.intValue > 0;
+    if ([self isCancelled])
+    {
+        return NO;
+    }
+    else
+    {
+        if (self.subsumingTx)
+        {
+            return [self.subsumingTx isConfirmed];
+        }
+        else
+        {
+            return self.confirmations.intValue > 0;
+        }
+    }
+}
+
+- (BOOL)isCancelled
+{
+    if (self.subsumingTx)
+    {
+        return ![self.subsumingTx isEquivalentTo:self];
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 - (void)lockInputs
@@ -411,8 +437,28 @@
 
 - (void)fetch
 {
-    self.confirmations = [self sendToServer:@"confirmations"];
+    if (self.subsumingTx)
+    {
+        [self.subsumingTx fetch];
+    }
+    else
+    {
+        self.subsumingTx = [self sendToServer:@"subsumingTx"];
+        if (self.subsumingTx)
+        {
+            self.subsumingTx.wallet = self.wallet;
+            self.subsumingTx.bnParent = self.bnParent;
+        }
+        self.confirmations = [self sendToServer:@"confirmations"];
+    }
+    
+    
     [self postSelfChanged];
+}
+
+- (BOOL)isEquivalentTo:(BNTx *)otherTx
+{
+    return [self.inputs isEqualToArray:otherTx.inputs] && [self.outputs isEqualToArray:otherTx.outputs];
 }
 
 @end
