@@ -332,7 +332,7 @@ public class BNTx extends BNObject {
 				TransactionInput spendingInput = output.getSpentBy();
 				if (spendingInput != null) {
 					Transaction subsumingTransaction = spendingInput.getParentTransaction();
-					if (subsumingTransaction != null && !subsumingTransaction.equals(this)) {
+					if (subsumingTransaction != null && !subsumingTransaction.equals(transaction)) {
 						BNTx bnTx = new BNTx();
 						bnTx.setParent(bnParent);
 						bnTx.setTransaction(subsumingTransaction);
