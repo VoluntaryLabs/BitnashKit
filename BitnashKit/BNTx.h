@@ -67,6 +67,8 @@
 - (BOOL)isConfirmed;
 //YES if this tx is in a block from the longest chain.
 
+- (BOOL)isCancelled;
+
 - (void)lockInputs;
 //Locks the connected outputs so they won't be used for subsequent txs
 
