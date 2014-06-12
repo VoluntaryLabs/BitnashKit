@@ -114,6 +114,7 @@ System.err.println("Stopping Server ...");
 		}
 //System.err.println("BitnashJ BNServer Sent: " + outgoingMessage.toJSONString());
 		System.out.println(outgoingMessage.toJSONString());
+		System.out.flush();
 	}
 	
 	private void respondToMessage(JSONObject incomingMessage, Object data) {

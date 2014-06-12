@@ -152,6 +152,7 @@
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
         [output appendData:data];
     }
+    
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
     
