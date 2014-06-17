@@ -2,7 +2,12 @@ package org.bitmarkets.bitnash;
 
 import java.lang.reflect.Method;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BNObjectSlot {
+	private static final Logger log = LoggerFactory.getLogger(BNObjectSlot.class);
+	
 	BNObject owner;
 	String name;
 	
@@ -32,7 +37,7 @@ public class BNObjectSlot {
 		}
 		
 		if (method == null) {
-			System.err.println("Could not setValue for slot " + name + " on object of class: " + owner.getClass().getName());
+			log.warn("Could not setValue for slot {} on object of class: {}", name, owner.getClass().getName());
 		} else {
 			try {
 				method.invoke(owner, value);

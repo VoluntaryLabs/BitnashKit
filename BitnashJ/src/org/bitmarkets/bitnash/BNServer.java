@@ -9,8 +9,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BNServer extends BNObject implements Runnable {
+	private static final Logger log = LoggerFactory.getLogger(BNServer.class);
+	
 	public void start() {
 		new Thread(this).start();
 	}
@@ -22,12 +26,11 @@ public class BNServer extends BNObject implements Runnable {
 			JSONParser parser = new JSONParser();
 			while (line != null) { 
 				try {
-//System.err.println("waiting for line ...");
 					line = reader.readLine();
 					if (line == null) {
 						break;
 					} else {
-//System.err.println("BitnashJ BNServer Received: " + line);
+						log.info("BitnashJ BNServer Received: {}", line);
 						try {
 							JSONObject message = (JSONObject)parser.parse(line);
 							
@@ -72,17 +75,18 @@ public class BNServer extends BNObject implements Runnable {
 			throw new RuntimeException(e);
 		}
 		finally {
-System.err.println("Stopping Server ...");
+			log.info("Stopping Server ...");
 			try {
 				bnWallet().getWalletAppKit().stopAsync();
 				bnWallet().getWalletAppKit().awaitTerminated(5, TimeUnit.SECONDS);
+				log.info("Server Stopped");
 				System.exit(0);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 			finally {
-				System.err.println("Server Stopped");
+				log.info("Server Stopped");
 				System.exit(1);
 			}
 		}
@@ -108,11 +112,11 @@ System.err.println("Stopping Server ...");
 				outgoingMessage.put("error", s.serialize());
 			}
 			catch (Exception e2) {
-				e2.printStackTrace(System.err);
+				log.error("Error Serializing Message", e2);
 				outgoingMessage.put("error", e2.toString());
 			}
 		}
-//System.err.println("BitnashJ BNServer Sent: " + outgoingMessage.toJSONString());
+		//log.info("BitnashJ BNServer Sent: {}", outgoingMessage.toJSONString());
 		System.out.println(outgoingMessage.toJSONString());
 		System.out.flush();
 	}

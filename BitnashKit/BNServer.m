@@ -15,8 +15,40 @@
 {
     self = [super init];
     self.walletPath = [NSHomeDirectory() stringByAppendingString:@"/.bitnash"];
+    self.logs = YES;
     return self;
 }
+
+/*
+- (void)watchTaskStandardError
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskStandardErrorNotified:) name:NSFileHandleReadCompletionNotification object:self.taskStandardError];
+    [self.taskStandardError readInBackgroundAndNotify];
+}
+
+- (void)taskStandardErrorNotified:(NSNotification *)notification
+{
+    NSData *data = [notification.userInfo objectForKey:NSFileHandleNotificationDataItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:self.taskStandardError];
+    if (data)
+    {
+        if (self.logs)
+        {
+            NSString *filePath = [self.walletPath stringByAppendingPathComponent:@"bitnash.log"];
+            
+            if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+            {
+                [[NSFileManager defaultManager] createFileAtPath:filePath contents:[NSData data] attributes:nil];
+            }
+            NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+            [fileHandle seekToEndOfFile];
+            [fileHandle writeData:data];
+            [fileHandle closeFile];
+        }
+        [self watchTaskStandardError];
+    }
+}
+ */
 
 - (void)start
 {
@@ -65,10 +97,9 @@
     _task.standardInput = [NSPipe pipe];
     _task.standardOutput = [NSPipe pipe];
     
-    if (!self.logs)
-    {
-        _task.standardError = [NSPipe pipe];
-    }
+    _task.standardError = [NSPipe pipe];
+    //self.taskStandardError = [_task.standardError fileHandleForReading];
+    //[self watchTaskStandardError];
     
     [_task launch];
 }
@@ -106,13 +137,6 @@
         [self start];
     }
     
-    BOOL logsBeforeMessage = self.logs;
-    
-    if (self.logsNextMessage)
-    {
-        self.logs = YES;
-    }
-    
     self.error = nil;
     
     NSMutableDictionary *message = [NSMutableDictionary dictionary];
@@ -135,11 +159,6 @@
         [NSException raise:error.description format:nil];
     }
     
-    if (self.logs)
-    {
-        NSLog(@"BNServer Sending: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:message options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
-    }
-    
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
     [[_task.standardInput fileHandleForWriting] writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -158,17 +177,8 @@
     
     if (error)
     {
-        NSLog(@"Error Decoding response JSON: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
         [NSException raise:error.description format:nil];
     }
-    
-    if (self.logs)
-    {
-        NSLog(@"BNServer Received: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:0x0] encoding:NSUTF8StringEncoding]);
-    }
-    
-    self.logs = logsBeforeMessage;
-    self.logsNextMessage = NO;
     
     if ([response objectForKey:@"error"])
     {

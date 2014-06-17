@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.json.simple.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongycastle.crypto.params.KeyParameter;
 
 import com.google.bitcoin.core.*;
@@ -20,6 +22,7 @@ import com.google.bitcoin.script.Script;
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 @SuppressWarnings("unchecked")
 public class BNWallet extends BNObject {
+	private static final Logger log = LoggerFactory.getLogger(BNWallet.class);
 	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running };
 	static BNWallet shared;
 	
@@ -239,6 +242,8 @@ public class BNWallet extends BNObject {
 		
 		BNMetaDataDb.shared().setPath("./meta-data");
 		
+		log.info("Wallet Starting ...");
+		
 		walletAppKit.startAsync();
 	}
 	
@@ -266,6 +271,7 @@ public class BNWallet extends BNObject {
 		walletAppKit = new WalletAppKit(new TestNet3Params(), new File("."), "bitnash") {
 			protected void onSetupCompleted() {
 				this.peerGroup().setMaxConnections(4);
+				log.info("Wallet Connecting to Peers ...");
 				state = BNWalletState.Connecting;
 			}
 		};
@@ -273,6 +279,7 @@ public class BNWallet extends BNObject {
 		walletAppKit.setDownloadListener(new DownloadListener(){
 			protected void startDownload(int blocksRemaining) {
 				if (state == BNWalletState.Connecting) {
+					log.info("Wallet Downloading Blocks ...");
 					state = BNWalletState.Downloading;
 				}
 				
@@ -284,6 +291,7 @@ public class BNWallet extends BNObject {
 		    }
 			
 			protected void doneDownload() {
+				log.info("Wallet Running");
 				state = BNWalletState.Running;
 				blocksDownloaded = 0;
 				blocksToDownload = 0;

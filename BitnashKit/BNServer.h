@@ -19,11 +19,12 @@
 
 @property BOOL started;
 
+//set to YES or NO before starting server to enable / disable logging to the wallet log file
 @property BOOL logs;
 
-@property BOOL logsNextMessage;
-
 @property NSTask *task;
+
+@property NSFileHandle *taskStandardError;
 
 - (void)start;
 //Start the wallet child process (BitcoinJ)

@@ -77,10 +77,7 @@ public class BNTxIn extends BNObject {
 	public void verify() {
 		try {
 			transactionInput().verify();
-			System.err.println("VERIFIED SUCCESSFULLY");
 		} catch (Exception e) {
-			System.err.println("VERIFY FAILED:");
-			System.err.println(transactionInput().toString());
 			throw new RuntimeException(e);
 		}
 	}

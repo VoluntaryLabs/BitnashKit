@@ -256,10 +256,7 @@ public class BNTx extends BNObject {
 			}
 			try {
 				input.verify(input.getConnectedOutput());
-				System.err.println("VERIFIED SUCCESSFULLY");
 			} catch (Exception e) {
-				System.err.println("VERIFY FAILED:");
-				System.err.println(transaction.toString());
 				throw new RuntimeException(e);
 			}
 		}
@@ -273,7 +270,6 @@ public class BNTx extends BNObject {
 	}
 	
 	public Boolean apiIsConfirmed(Object args) {
-		System.err.println("CONFIDENCE TYPE: " + transaction.getConfidence().getConfidenceType());
 		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
 	}
 	

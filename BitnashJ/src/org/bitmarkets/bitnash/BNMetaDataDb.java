@@ -44,8 +44,6 @@ public class BNMetaDataDb {
 		
 		if (metaDataFile.exists()) {
 			try {
-				System.err.println("READ: " + metaDataFile.getPath());
-				
 				String contents = new Scanner(metaDataFile, "UTF-8").useDelimiter("\\Z").next();
 				JSONParser parser = new JSONParser();
 				bnObject.setMetaData((JSONObject)parser.parse(contents));
@@ -61,9 +59,6 @@ public class BNMetaDataDb {
 		if (metaData.size() > 0) {
 			try {
 				File metaDataFile = metaDataFileFor(bnObject);
-				
-System.err.println("WRITE: " + metaDataFile.getPath());
-				
 				Files.write(bnObject.getMetaData().toJSONString().getBytes(Charset.forName("UTF-8")), metaDataFile);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
@@ -74,8 +69,6 @@ System.err.println("WRITE: " + metaDataFile.getPath());
 			File metaDataFile = metaDataFileFor(bnObject);
 			
 			if (metaDataFile.exists()) {
-				System.err.println("DELETE: " + metaDataFile.getPath());
-				
 				metaDataFile.delete();
 			}
 		}
