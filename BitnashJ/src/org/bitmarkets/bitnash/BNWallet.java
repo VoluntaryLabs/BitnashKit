@@ -18,12 +18,14 @@ import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
 import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.script.Script;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.Service;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 @SuppressWarnings("unchecked")
 public class BNWallet extends BNObject {
 	private static final Logger log = LoggerFactory.getLogger(BNWallet.class);
-	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running };
+	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running, Error };
 	static BNWallet shared;
 	
 	KeyParameter keyParameter;
@@ -144,6 +146,8 @@ public class BNWallet extends BNObject {
 				return "syncing ..."; //(" + blocksDownloaded + "/" + blocksToDownload + ")";
 			case Running:
 				return "started";
+			case Error:
+				return "error";
 			default:
 				return "unknown state";
 		}
@@ -298,6 +302,12 @@ public class BNWallet extends BNObject {
 				//lockAllOutputs();
 		    }
 		});
+		
+		walletAppKit.addListener(new Service.Listener() {
+			public void failed(Service.State from, Throwable failure) {
+				state = BNWalletState.Error;
+			}
+		}, MoreExecutors.sameThreadExecutor());
 		
 		/*
 		try {
