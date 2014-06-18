@@ -19,9 +19,6 @@
 
 @property BOOL started;
 
-//set to YES or NO before starting server to enable / disable logging to the wallet log file
-@property BOOL logs;
-
 @property NSTask *task;
 
 @property NSFileHandle *taskStandardError;

@@ -139,9 +139,9 @@ public class BNWallet extends BNObject {
 			case Starting:
 				return "starting ...";
 			case Connecting:
-				return "connecting to peers ..."; // (" + walletAppKit.peerGroup().numConnectedPeers() + "/" + walletAppKit.peerGroup().getMaxConnections() + ")";
+				return "connecting ..."; // (" + walletAppKit.peerGroup().numConnectedPeers() + "/" + walletAppKit.peerGroup().getMaxConnections() + ")";
 			case Downloading:
-				return "downloading blocks ..."; //(" + blocksDownloaded + "/" + blocksToDownload + ")";
+				return "syncing ..."; //(" + blocksDownloaded + "/" + blocksToDownload + ")";
 			case Running:
 				return "started";
 			default:

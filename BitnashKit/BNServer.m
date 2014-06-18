@@ -15,7 +15,6 @@
 {
     self = [super init];
     self.walletPath = [NSHomeDirectory() stringByAppendingString:@"/.bitnash"];
-    self.logs = YES;
     return self;
 }
 
