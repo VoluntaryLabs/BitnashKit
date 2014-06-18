@@ -45,12 +45,12 @@ public abstract class BNObject {
 		this.bnParent = bnParent;
 	}
 	
-	public void setParent(BNObject parent) {
-		this.bnParent = parent;
-	}
-	
 	public BNObject getParent() {
 		return bnParent;
+	}
+	
+	public void setParent(BNObject parent) {
+		this.bnParent = parent;
 	}
 	
 	public JSONObject getMetaData() {
@@ -61,7 +61,15 @@ public abstract class BNObject {
 		this.metaData = metaData;
 	}
 	
-	public void deserialzeFromJSONObject(JSONObject jsonObject) {
+	public String id() {
+		return Integer.toHexString(hashCode());
+	}
+	
+	public BNObject apiPing(Object args) {
+		return this;
+	}
+	
+	void deserialzeFromJSONObject(JSONObject jsonObject) {
 		for (BNObjectSlot slot: bnSlots()) {
 			BNObjectDeserializer d = new BNObjectDeserializer();
 			d.setSerialization(jsonObject.get(slot.getName()));
@@ -73,7 +81,7 @@ public abstract class BNObject {
 	
 	void didDeserializeSelf() {}
 	
-	public void didDeserialize() {
+	void didDeserialize() {
 		didDeserializeSelf();
 		for (BNObjectSlot slot: bnSlots()) {
 			BNObjectDeserializer.didDeserializeObject(slot.getValue());
@@ -83,11 +91,9 @@ public abstract class BNObject {
 	
 	void willSerializeSelf() {}
 	
-	void resetSlots() {
-		
-	}
+	void resetSlots() {}
 	
-	public void willSerialize() {
+	void willSerialize() {
 		resetSlots();
 		willSerializeSelf();
 		for (BNObjectSlot slot: bnSlots()) {
@@ -96,19 +102,11 @@ public abstract class BNObject {
 		//writeMetaData(); TODO Synchronize this to avoid race conditions?
 	}
 	
-	public BNObject apiPing(Object args) {
-		return this;
-	}
-	
-	public void readMetaData() {
+	void readMetaData() {
 		BNMetaDataDb.shared().readToBnObject(this);
 	}
 	
-	public void writeMetaData() {
+	void writeMetaData() {
 		BNMetaDataDb.shared().writeFromBnObject(this);
-	}
-	
-	public String id() {
-		return Integer.toHexString(hashCode());
 	}
 }

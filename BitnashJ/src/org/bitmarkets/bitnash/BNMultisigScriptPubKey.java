@@ -13,14 +13,6 @@ import com.google.bitcoin.script.Script;
 import com.google.bitcoin.script.ScriptBuilder;
 
 public class BNMultisigScriptPubKey extends BNScriptPubKey {
-	public JSONArray getPubKeys() {
-		return pubKeys;
-	}
-	
-	public void setPubKeys(JSONArray pubKeys) {
-		this.pubKeys = pubKeys;
-	}
-	
 	JSONArray pubKeys;
 	
 	public BNMultisigScriptPubKey() {
@@ -28,16 +20,12 @@ public class BNMultisigScriptPubKey extends BNScriptPubKey {
 		bnSlotNames.addAll(Arrays.asList("pubKeys"));
 	}
 	
-	void resetSlots() {
-		pubKeys = new JSONArray();
+	public JSONArray getPubKeys() {
+		return pubKeys;
 	}
 	
-	List<ECKey> ecPubKeys() {
-		ArrayList<ECKey>ecPubKeys = new ArrayList<ECKey>();
-		for (Object pubKey : pubKeys) {
-			ecPubKeys.add(ECKey.fromPublicOnly(Utils.parseAsHexOrBase58((String)pubKey)));
-		}
-		return ecPubKeys;
+	public void setPubKeys(JSONArray pubKeys) {
+		this.pubKeys = pubKeys;
 	}
 	
 	void didDeserializeSelf() {
@@ -53,5 +41,17 @@ public class BNMultisigScriptPubKey extends BNScriptPubKey {
 			pubKeys.add(Utils.HEX.encode(script().getChunks().get(1).data));
 			pubKeys.add(Utils.HEX.encode(script().getChunks().get(2).data));
 		}
+	}
+	
+	void resetSlots() {
+		pubKeys = new JSONArray();
+	}
+	
+	List<ECKey> ecPubKeys() {
+		ArrayList<ECKey>ecPubKeys = new ArrayList<ECKey>();
+		for (Object pubKey : pubKeys) {
+			ecPubKeys.add(ECKey.fromPublicOnly(Utils.parseAsHexOrBase58((String)pubKey)));
+		}
+		return ecPubKeys;
 	}
 }

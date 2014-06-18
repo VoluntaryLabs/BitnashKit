@@ -210,7 +210,6 @@ public class BNTx extends BNObject {
 		
 	}
 	
-	//TODO subtract fees evenly from change outputs rather than first?
 	public BNTx apiSubtractFee(Object args) {
 		int changeOutputCount = Math.max(1, transaction.getOutputs().size() - 1);
 		

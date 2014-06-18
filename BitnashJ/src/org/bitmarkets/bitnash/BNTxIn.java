@@ -17,6 +17,11 @@ import com.google.bitcoin.script.Script;
 import com.google.bitcoin.script.ScriptBuilder;
 
 public class BNTxIn extends BNObject {
+	BNScriptSig scriptSig;
+	Number previousOutIndex;
+	String previousTxSerializedHex;
+	String previousTxHash;
+	
 	public BNTxIn() {
 		super();
 		bnSlotNames.addAll(Arrays.asList(
@@ -85,11 +90,6 @@ public class BNTxIn extends BNObject {
 	public BNTxOut bnTxOut() {
 		return BNTxOut.fromOutpoint(transactionInput().getOutpoint());
 	}
-	
-	BNScriptSig scriptSig;
-	Number previousOutIndex;
-	String previousTxSerializedHex;
-	String previousTxHash;
 	
 	void signPayToAddress() {
 		ECKey key = transactionInput().getOutpoint().getConnectedKey(wallet());

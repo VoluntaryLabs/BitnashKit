@@ -4,7 +4,7 @@ import com.google.bitcoin.core.Transaction;
 import com.google.bitcoin.wallet.DefaultCoinSelector;
 
 public class BNCoinSelector extends DefaultCoinSelector {
-	private BNWallet bnWallet;
+	BNWallet bnWallet;
 	
 	public void setBnWallet(BNWallet bnWallet) {
 		this.bnWallet = bnWallet;

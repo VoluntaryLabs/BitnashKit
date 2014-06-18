@@ -6,8 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class BNObjectSerializer {
-	private Object objectToSerialize;
-	
+	Object objectToSerialize;
 	
 	public void setObjectToSerialize(Object objectToSerialize) {
 		this.objectToSerialize = objectToSerialize;
