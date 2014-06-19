@@ -30,7 +30,7 @@ public class BNServer extends BNObject implements Runnable {
 					if (line == null) {
 						break;
 					} else {
-						log.info("BitnashJ BNServer Received: {}", line);
+						//log.info("BitnashJ BNServer Received: {}", line);
 						try {
 							JSONObject message = (JSONObject)parser.parse(line);
 							

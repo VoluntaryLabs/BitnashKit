@@ -40,6 +40,8 @@ public class BNObjectSlot {
 			log.warn("Could not setValue for slot {} on object of class: {}", name, owner.getClass().getName());
 		} else {
 			try {
+				//System.err.println(name);
+				//System.err.println(value);
 				method.invoke(owner, value);
 			} catch (Exception e) {
 				throw new RuntimeException(e);

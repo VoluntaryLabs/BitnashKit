@@ -123,22 +123,9 @@
 
 - (BNDepositKey *)depositKey
 {
-    NSString *depositKeyPath = [_server.walletPath stringByAppendingPathComponent:@"depositKey"];
-    BNDepositKey *depositKey = nil;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:depositKeyPath])
-    {
-        depositKey = [[NSString stringWithContentsOfFile:depositKeyPath encoding:NSUTF8StringEncoding error:0x0] asObjectFromJSONString];
-    }
-    
-    if (depositKey == nil || [[_server sendMessage:@"usedKeys" withObject:self] containsObject:depositKey])
-    {
-        BNDepositKey *depositKey = [[BNDepositKey alloc] init];
-        [depositKey copySlotsFrom:[_server sendMessage:@"createKey" withObject:self]];
-        [[depositKey asJSONString] writeToFile:depositKeyPath atomically:YES encoding:NSUTF8StringEncoding error:0x0]; //TODO -- encrypt this!!!
-    }
-
+    BNDepositKey *depositKey = [[BNDepositKey alloc] init];
+    [depositKey copySlotsFrom:[_server sendMessage:@"depositKey" withObject:self]];
     depositKey.bnParent = self;
-    
     return depositKey;
 }
 

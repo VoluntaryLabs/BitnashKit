@@ -10,7 +10,7 @@ import com.google.bitcoin.core.Utils;
 public class BNKey extends BNObject {
 	String pubKey;
 	String address;
-	BigInteger creationTime;
+	Number creationTime;
 	
 	ECKey key;
 	
@@ -35,11 +35,11 @@ public class BNKey extends BNObject {
 		this.address = address;
 	}
 	
-	public BigInteger getCreationTime() {
+	public Number getCreationTime() {
 		return creationTime;
 	}
 	
-	public void setCreationTime(BigInteger creationTime) {
+	public void setCreationTime(Number creationTime) {
 		this.creationTime = creationTime;
 	}
 	
@@ -51,8 +51,22 @@ public class BNKey extends BNObject {
 		this.key = key;
 	}
 	
+	public boolean equals(Object o) {
+		if (o instanceof BNKey) {
+			BNKey bnKey = (BNKey) o;
+			
+			return bnKey.getKey().equals(key);
+		} else {
+			return false;
+		}
+	}
+	
 	BNWallet bnWallet() {
 		return (BNWallet)bnParent;
+	}
+	
+	void didDeserializeSelf() {
+		key = bnWallet().wallet().findKeyFromPubKey(Utils.parseAsHexOrBase58(pubKey));
 	}
 	
 	void willSerializeSelf() {

@@ -3,11 +3,12 @@ package org.bitmarkets.bitnash;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-//import java.net.InetAddress;
+import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Date;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.crypto.params.KeyParameter;
@@ -241,6 +242,31 @@ public class BNWallet extends BNObject {
 		}
 	}
 	
+	public BNKey apiDepositKey(Object obj) {
+		readMetaData();
+		
+		JSONObject serializedDepositKey = (JSONObject) metaData.get("depositKey");
+		if (serializedDepositKey == null) {
+			BNKey bnKey = apiCreateKey(obj);
+			setDepositKey(bnKey);
+			return bnKey;
+		} else {
+			BNObjectDeserializer d = new BNObjectDeserializer();
+			d.setSerialization(serializedDepositKey);
+			d.setBnParent(this);
+			BNKey bnKey = (BNKey) d.deserialize();
+			BNObjectDeserializer.didDeserializeObject(bnKey);
+			
+			if (this.apiUsedKeys(obj).contains(bnKey)) {
+				bnKey = apiCreateKey(obj);
+				setDepositKey(bnKey);
+				return bnKey;
+			} else {
+				return bnKey;
+			}
+		}
+	}
+	
 	public void start() {
 		state = BNWalletState.Starting;
 		
@@ -269,6 +295,22 @@ public class BNWallet extends BNObject {
 	
 	public String path() throws IOException {
 		return walletAppKit.directory().getCanonicalPath();
+	}
+	
+	public String id() {
+		return "shared";
+	}
+	
+	void setDepositKey(BNKey depositKey) {
+		depositKey.willSerialize();
+		BNObjectSerializer s = new BNObjectSerializer();
+		s.setObjectToSerialize(depositKey);
+		try {
+			metaData.put("depositKey", s.serialize());
+			writeMetaData();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	void setupWalletAppKit() {
@@ -309,7 +351,7 @@ public class BNWallet extends BNObject {
 			}
 		}, MoreExecutors.sameThreadExecutor());
 		
-		/*
+		//*
 		try {
 			walletAppKit.setPeerNodes(
 					new PeerAddress(InetAddress.getByName("54.83.28.75"), 18333),
@@ -342,7 +384,7 @@ public class BNWallet extends BNObject {
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		*/
+		//*/
 		
 		walletAppKit.setAutoStop(false);
 		walletAppKit.setAutoSave(true);
