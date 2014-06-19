@@ -91,6 +91,10 @@
 
 - (void)configureForEscrowWithInputTx:(BNTx *)inputTx
 {
+    if (inputTx.subsumingTx) {
+        inputTx = inputTx.subsumingTx;
+    }
+    
     BNTxIn *txIn = [self newInput];
     txIn.previousOutIndex = [NSNumber numberWithInt:0];
     txIn.previousTxHash = inputTx.txHash;
@@ -281,13 +285,26 @@
     return tx;
 }
 
-- (NSString *)txTypeString //TODO -- more rigorous heuristic
+- (NSNumber *)isSentToSelf
+{
+    if (!_isSentToSelf)
+    {
+        self.isSentToSelf = [self sendToServer:@"isSentToSelf"];
+    }
+    return _isSentToSelf;
+}
+
+- (NSString *)txTypeString
 {
     if (self.netValue.longLongValue < 0)
     {
         if ([self multisigOutput])
         {
             return @"Escrow";
+        }
+        else if ([[self isSentToSelf] boolValue])
+        {
+            return @"Escrow Setup";
         }
         else
         {

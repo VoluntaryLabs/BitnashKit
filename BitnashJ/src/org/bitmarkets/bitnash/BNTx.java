@@ -339,6 +339,18 @@ public class BNTx extends BNObject {
 		return null;
 	}
 	
+	//are all outputs owned by this wallet?
+	public Boolean apiIsSentToSelf(Object args)
+	{
+		for (TransactionOutput txout : transaction.getOutputs()) {
+			if (!txout.isMine(wallet())) {
+				return Boolean.valueOf(false);
+			}
+		}
+		
+		return Boolean.valueOf(true);
+	}
+	
 	public boolean existsInWallet() {
 		return (txHash != null) && (wallet().getTransaction(new Sha256Hash(txHash)) != null);
 	}

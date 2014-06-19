@@ -28,6 +28,7 @@
 @property NSString *counterParty;
 @property NSNumber *confirmations;
 @property BNTx *subsumingTx;
+@property (nonatomic) NSNumber *isSentToSelf;
 
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.
