@@ -386,6 +386,18 @@ public class BNWallet extends BNObject {
 		}
 		//*/
 		
+		/*
+		try {
+			walletAppKit.setPeerNodes(
+					new PeerAddress(InetAddress.getByName("54.83.28.76"), 18333),
+					new PeerAddress(InetAddress.getByName("54.83.28.77"), 18333)
+			);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		*/
+		
 		walletAppKit.setAutoStop(false);
 		walletAppKit.setAutoSave(true);
 		walletAppKit.setBlockingStartup(false);
