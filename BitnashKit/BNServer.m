@@ -73,9 +73,9 @@
     
     NSString *classPath = [[NSArray arrayWithObjects:
                             frameworkBundle.resourcePath,
-                            [frameworkBundle pathForResource:@"bitcoinj" ofType:@"jar"],
+                            [frameworkBundle pathForResource:@"bitcoinj-0.11.3-bundled" ofType:@"jar"],
                             [frameworkBundle pathForResource:@"json-simple-1.1.1" ofType:@"jar"],
-                            [frameworkBundle pathForResource:@"slf4j-simple-1.7.6" ofType:@"jar"],
+                            [frameworkBundle pathForResource:@"slf4j-simple-1.7.7" ofType:@"jar"],
                             nil] componentsJoinedByString:@":"];
     
     self.task = [[NSTask alloc] init];
@@ -87,6 +87,7 @@
                                  @"-classpath", classPath,
                                  @"org.bitmarkets.bitnash.BNApp",
                                  nil];
+    
     if (_checkpointsPath)
     {
         [arguments addObject:_checkpointsPath];

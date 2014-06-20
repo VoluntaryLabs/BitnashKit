@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,6 +19,8 @@ public class BNServer extends BNObject implements Runnable {
 	}
 	
 	public void run() {
+		System.err.println("BNServer run");
+		System.err.flush();
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			String line = "notnull";
@@ -77,8 +78,9 @@ public class BNServer extends BNObject implements Runnable {
 		finally {
 			log.info("Stopping Server ...");
 			try {
-				bnWallet().getWalletAppKit().stopAsync();
-				bnWallet().getWalletAppKit().awaitTerminated(5, TimeUnit.SECONDS);
+				//bnWallet().getWalletAppKit().stop().get(5, TimeUnit.SECONDS);
+				bnWallet().getWalletAppKit().stopAndWait(); //TODO make sure this works
+				
 				log.info("Server Stopped");
 				System.exit(0);
 			}

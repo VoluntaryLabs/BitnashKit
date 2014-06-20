@@ -88,7 +88,7 @@ public class BNTxIn extends BNObject {
 	}
 	
 	public BNTxOut bnTxOut() {
-		return BNTxOut.fromOutpoint(transactionInput().getOutpoint());
+		return BNTxOut.fromOutput(transactionInput().getConnectedOutput());
 	}
 	
 	void signPayToAddress() {
@@ -135,20 +135,17 @@ public class BNTxIn extends BNObject {
 		Transaction transaction = transaction();
 		
 		if (key.isEncrypted()) {
-			key = key.decrypt(wallet().getKeyCrypter(), bnTx().bnWallet().keyParameter);
+			throw new RuntimeException("Encryption isn't supported for now");
+			//key = key.decrypt(wallet().getKeyCrypter(), bnTx().bnWallet().keyParameter);
 		}
 		
-		if (key != null) {
-			return transaction.calculateSignature(
-					index(),
-					key,
-					transactionInput().getOutpoint().getConnectedOutput().getScriptBytes(),
-					SigHash.ALL,
-					false
-			);
-		} else {
-			return null;
-		}
+		return transaction.calculateSignature(
+				index(),
+				key,
+				transactionInput().getOutpoint().getConnectedOutput().getScriptPubKey(),
+				SigHash.ALL,
+				false
+		);
 	}
 	
 	BNTx bnTx() {
@@ -189,8 +186,9 @@ public class BNTxIn extends BNObject {
 		setPreviousOutIndex(BigInteger.valueOf(transactionInput().getOutpoint().getIndex()));
 		setPreviousTxHash(transactionInput().getOutpoint().getHash().toString());
 		
+		
 		if (transactionInput().getConnectedOutput() != null) {
-			setPreviousTxSerializedHex(Utils.HEX.encode(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
+			setPreviousTxSerializedHex(Utils.bytesToHexString(transactionInput().getConnectedOutput().getParentTransaction().bitcoinSerialize()));
 		}
 		
 		if (transactionInput().getScriptSig() != null && transactionInput().getScriptSig().getChunks().size() > 0) {

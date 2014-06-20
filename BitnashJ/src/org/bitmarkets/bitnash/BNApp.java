@@ -10,15 +10,22 @@ import java.io.IOException;
 
 public class BNApp {
 	public static void main(String[] args) throws IOException {
-		System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream("bitnash.log", true))));
-		
-		if (args.length == 1) {
-			BNWallet.shared().getWalletAppKit().setCheckpoints(new FileInputStream(new File(args[0])));
+		try {
+			System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream("bitnash.log", true))));
+			
+			if (args.length == 1) {
+				BNWallet.shared().getWalletAppKit().setCheckpoints(new FileInputStream(new File(args[0])));
+			}
+			
+			BNWallet.shared().start();
+			
+			BNServer server = new BNServer();
+			server.start();
 		}
-		
-		BNWallet.shared().start();
-		
-		BNServer server = new BNServer();
-		server.start();
+		catch (Throwable e) {
+			e.printStackTrace(System.err);
+			System.err.flush();
+			System.exit(1);
+		}
 	}
 }

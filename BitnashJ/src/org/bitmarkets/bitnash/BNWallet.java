@@ -11,25 +11,23 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spongycastle.crypto.params.KeyParameter;
 
 import com.google.bitcoin.core.*;
-import com.google.bitcoin.crypto.KeyCrypter;
-import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
 import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.script.Script;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Service;
+import com.google.common.util.concurrent.Service.State;
 
 //https://code.google.com/p/bitcoinj/wiki/WorkingWithContracts
 @SuppressWarnings("unchecked")
 public class BNWallet extends BNObject {
-	private static final Logger log = LoggerFactory.getLogger(BNWallet.class);
+	public static Logger log = LoggerFactory.getLogger(BNWallet.class);
 	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running, Error };
 	static BNWallet shared;
 	
-	KeyParameter keyParameter;
+	//KeyParameter keyParameter;
 	BNWalletState state;
 	int blocksToDownload;
 	int blocksDownloaded;
@@ -61,6 +59,15 @@ public class BNWallet extends BNObject {
 		this.walletAppKit = walletAppKit;
 	}
 	
+	public BNWalletState getState() {
+		return state;
+	}
+	
+	public void setState(BNWalletState state) {
+		this.state = state;
+	}
+	
+	/*
 	public boolean setPassphrase(String passphrase) {
 		if ("true".length() > 0) {
 			throw new RuntimeException("Wallet encryption isn't supported yet"); //TODO
@@ -94,17 +101,20 @@ public class BNWallet extends BNObject {
 			return true;
 		}
 	}
+	*/
 	
+	/*
 	public KeyParameter getKeyParameter() {
 		return keyParameter;
 	}
+	*/
 	
 	public void lockAllOutputs() {
 		for (Transaction tx : wallet().getTransactions(true)) {
 			if (!tx.isPending()) {
 				for (TransactionOutput txo : tx.getOutputs()) {
 					if (txo.isMine(wallet())) {
-						BNTxOut bnTxOut = BNTxOut.fromOutpoint(txo.getOutPointFor());
+						BNTxOut bnTxOut = BNTxOut.fromOutput(txo);
 						bnTxOut.lock();
 						bnTxOut.writeMetaData();
 					}
@@ -118,7 +128,7 @@ public class BNWallet extends BNObject {
 			if (!tx.isPending()) {
 				for (TransactionOutput txo : tx.getOutputs()) {
 					if (txo.isMine(wallet())) {
-						BNTxOut bnTxOut = BNTxOut.fromOutpoint(txo.getOutPointFor());
+						BNTxOut bnTxOut = BNTxOut.fromOutput(txo);
 						bnTxOut.unlock();
 						bnTxOut.writeMetaData();
 					}
@@ -127,9 +137,11 @@ public class BNWallet extends BNObject {
 		}
 	}
 	
+	/*
 	public Boolean apiSetPassphrase(Object args) {
 		return Boolean.valueOf(this.setPassphrase((String)args));
 	}
+	*/
 	
 	public BigInteger apiBalance(Object args) {
 		return BigInteger.valueOf(walletAppKit.wallet().getBalance(new BNUnlockedCoinSelector()).longValue());
@@ -171,7 +183,7 @@ public class BNWallet extends BNObject {
 			throw new RuntimeException("Wallet encryption isn't supported yet"); //TODO
 		} else {
 			key = new ECKey();
-			walletAppKit.wallet().importKey(key);
+			walletAppKit.wallet().addKey(key);
 		}
 		
 		BNKey bnKey = new BNKey();
@@ -193,7 +205,7 @@ public class BNWallet extends BNObject {
 	
 	public JSONArray apiKeys(Object args) {
 		JSONArray keys = new JSONArray();
-		for (ECKey key : wallet().getImportedKeys()) {
+		for (ECKey key : wallet().getKeys()) {
 			BNKey bnKey = new BNKey();
 			bnKey.setBnParent(this);
 			bnKey.setKey(key);
@@ -205,7 +217,7 @@ public class BNWallet extends BNObject {
 	public JSONArray apiUsedKeys(Object args) {
 		JSONArray usedKeys = new JSONArray();
 		
-		for (ECKey key : wallet().getImportedKeys()) {
+		for (ECKey key : wallet().getKeys()) {
 			BNKey bnKey = new BNKey();
 			bnKey.setParent(this);
 			bnKey.setKey(key);
@@ -274,7 +286,7 @@ public class BNWallet extends BNObject {
 		
 		log.info("Wallet Starting ...");
 		
-		walletAppKit.startAsync();
+		walletAppKit.start();
 	}
 	
 	public Wallet wallet() {
@@ -318,7 +330,7 @@ public class BNWallet extends BNObject {
 			protected void onSetupCompleted() {
 				this.peerGroup().setMaxConnections(4);
 				log.info("Wallet Connecting to Peers ...");
-				state = BNWalletState.Connecting;
+				setState(BNWalletState.Connecting);
 			}
 		};
 		
@@ -346,12 +358,39 @@ public class BNWallet extends BNObject {
 		});
 		
 		walletAppKit.addListener(new Service.Listener() {
-			public void failed(Service.State from, Throwable failure) {
+
+			@Override
+			public void failed(State arg0, Throwable arg1) {
 				state = BNWalletState.Error;
 			}
+
+			@Override
+			public void running() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void starting() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void stopping(State arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void terminated(State arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
 		}, MoreExecutors.sameThreadExecutor());
 		
-		//*
+		/*
 		try {
 			walletAppKit.setPeerNodes(
 					new PeerAddress(InetAddress.getByName("54.83.28.75"), 18333),

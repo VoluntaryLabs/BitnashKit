@@ -4,17 +4,25 @@ import java.math.BigInteger;
 import java.util.Arrays;
 
 import com.google.bitcoin.core.Transaction;
-import com.google.bitcoin.core.TransactionOutPoint;
 import com.google.bitcoin.core.TransactionOutput;
 
 public class BNTxOut extends BNObject {
-	public static BNTxOut fromOutpoint(TransactionOutPoint outpoint) {
+	public static BNTxOut fromOutput(TransactionOutput output) {
 		BNTx bnTx = new BNTx();
 		bnTx.setBnParent(BNWallet.shared());
-		bnTx.setTransaction(outpoint.getConnectedOutput().getParentTransaction());
+		bnTx.setTransaction(output.getParentTransaction());
 		bnTx.willSerialize();
 		
-		return (BNTxOut) bnTx.getOutputs().get((int)outpoint.getIndex());
+		int index = -1;
+		for (int i = 0; i < output.getParentTransaction().getOutputs().size(); i++) {
+            if (output.getParentTransaction().getOutputs().get(i) == output)
+            {
+            	index = i;
+            	break;
+            }
+        }
+		
+		return (BNTxOut) bnTx.getOutputs().get(index);
 	}
 	
 	public Number getValue() {

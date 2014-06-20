@@ -1,10 +1,10 @@
 package org.bitmarkets.bitnash;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 import com.google.bitcoin.core.Address;
 import com.google.bitcoin.core.AddressFormatException;
-import com.google.bitcoin.core.Coin;
 
 public class BNPayToAddressScriptPubKey extends BNScriptPubKey {
 	String address;
@@ -26,7 +26,7 @@ public class BNPayToAddressScriptPubKey extends BNScriptPubKey {
 	void didDeserializeSelf() {
 		try {
 			if (address != null && !bnTx().existsInWallet()) {
-				bnTx().getTransaction().addOutput(Coin.valueOf(txOut().getValue().longValue()), new Address(networkParams(), address));
+				bnTx().getTransaction().addOutput(BigInteger.valueOf(txOut().getValue().longValue()), new Address(networkParams(), address));
 			}
 		} catch (AddressFormatException e) {
 			throw new RuntimeException(e);

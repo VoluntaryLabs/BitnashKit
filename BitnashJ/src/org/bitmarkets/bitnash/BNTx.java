@@ -7,8 +7,6 @@ import java.util.Arrays;
 
 import org.json.simple.JSONArray;
 
-import com.google.bitcoin.core.Coin;
-import com.google.bitcoin.core.ECKey;
 import com.google.bitcoin.core.InsufficientMoneyException;
 import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Sha256Hash;
@@ -19,7 +17,6 @@ import com.google.bitcoin.core.TransactionOutput;
 import com.google.bitcoin.core.Utils;
 import com.google.bitcoin.core.Wallet;
 import com.google.bitcoin.script.Script;
-import com.google.bitcoin.script.ScriptChunk;
 
 public class BNTx extends BNObject {
 	BNError error;
@@ -230,7 +227,7 @@ public class BNTx extends BNObject {
 					transaction.addOutput(outputs.get(j));
 				}
 			}
-			output.setValue(Coin.valueOf(newValue));
+			output.setValue(BigInteger.valueOf(newValue));
 		}
 		
 		return this;
@@ -422,61 +419,10 @@ public class BNTx extends BNObject {
 		}
 		
 		setTxHash(transaction.getHashAsString());
-		setSerializedHex(Utils.HEX.encode(transaction.bitcoinSerialize()));
+		setSerializedHex(Utils.bytesToHexString(transaction.bitcoinSerialize()));
 		setNetValue(BigInteger.valueOf(transaction.getValue(wallet()).longValue()));
 		setUpdateTime(BigInteger.valueOf(transaction.getUpdateTime().getTime()));
 		
 		setConfirmations(apiConfirmations(null));
-		
-		//setupCounterParty();
-	}
-	
-	void setupCounterParty() { //TODO properly check previous output for type.  Handle all types.
-		if (netValue.longValue() > 0) {
-			for (Object input : inputs) {
-				BNTxIn txIn = (BNTxIn) input;
-				if (txIn.getScriptSig() == null) {
-					continue;
-				}
-				if (txIn.getScriptSig().isMultisig()) {
-					for (ScriptChunk chunk : txIn.getScriptSig().script().getChunks()) {
-						if (chunk.data.length > 1) {
-							if (!wallet().hasKey(ECKey.fromPublicOnly(chunk.data))) {
-								setCounterParty(Utils.HEX.encode(chunk.data));
-								break;
-							}
-						}
-					}
-					if (counterParty != null) {
-						break;
-					}
-				} else {
-					ECKey key = ECKey.fromPublicOnly(txIn.getScriptSig().script().getChunks().get(1).data);
-					if (!wallet().hasKey(key)) {
-						setCounterParty(key.toAddress(networkParams()).toString());
-						break;
-					}
-				}
-			}
-		} else {
-			for (Object output : outputs) {
-				BNTxOut txOut = (BNTxOut) output;
-				BNScriptPubKey scriptPubKey = txOut.getScriptPubKey();
-				if (scriptPubKey.script().isSentToMultiSig()) {
-					for (Object pubKey : ((BNMultisigScriptPubKey)scriptPubKey).getPubKeys()) {
-						if (!wallet().hasKey(ECKey.fromPublicOnly(Utils.parseAsHexOrBase58((String)pubKey)))) {
-							setCounterParty((String)pubKey);
-							break;
-						}
-					}
-					if (counterParty != null) {
-						break;
-					}
-				} else if (!txOut.transactionOutput().isMine(wallet())) {
-					setCounterParty(scriptPubKey.script().getToAddress(networkParams()).toString());
-					break;
-				}
-			}
-		}
 	}
 }

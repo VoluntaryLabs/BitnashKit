@@ -1,6 +1,5 @@
 package org.bitmarkets.bitnash;
 
-import com.google.bitcoin.core.Coin;
 import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Transaction;
 import com.google.bitcoin.core.TransactionConfidence;
@@ -15,8 +14,8 @@ import java.util.*;
 
 public class BNUnlockedCoinSelector implements CoinSelector {
 	@Override
-    public CoinSelection select(Coin biTarget, LinkedList<TransactionOutput> candidates) {
-        long target = biTarget.value;
+	public CoinSelection select(BigInteger biTarget, LinkedList<TransactionOutput> candidates) {
+        long target = biTarget.longValue();
         HashSet<TransactionOutput> selected = new HashSet<TransactionOutput>();
         // Sort the inputs by age*value so we get the highest "coindays" spent.
         // TODO: Consider changing the wallets internal format to track just outputs and keep them ordered.
@@ -35,18 +34,18 @@ public class BNUnlockedCoinSelector implements CoinSelector {
             if (!shouldSelect(output.getParentTransaction())) continue;
             
             //Modification from DefaultCoinSelector:
-            BNTxOut bnTxOut = BNTxOut.fromOutpoint(output.getOutPointFor());
+            BNTxOut bnTxOut = BNTxOut.fromOutput(output);
             bnTxOut.readMetaData();
             if (Boolean.valueOf(true).equals(bnTxOut.getMetaData().get("isLocked"))) {
             	continue;
             }
             
             selected.add(output);
-            total += output.getValue().value;
+            total += output.getValue().longValue();
         }
         // Total may be lower than target here, if the given candidates were insufficient to create to requested
         // transaction.
-        return new CoinSelection(Coin.valueOf(total), selected);
+        return new CoinSelection(BigInteger.valueOf(total), selected);
     }
 
     @VisibleForTesting static void sortOutputs(ArrayList<TransactionOutput> outputs) {
@@ -61,10 +60,10 @@ public class BNUnlockedCoinSelector implements CoinSelector {
                     depth1 = conf1.getDepthInBlocks();
                 if (conf2.getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING)
                     depth2 = conf2.getDepthInBlocks();
-                Coin aValue = a.getValue();
-                Coin bValue = b.getValue();
-                BigInteger aCoinDepth = BigInteger.valueOf(aValue.value).multiply(BigInteger.valueOf(depth1));
-                BigInteger bCoinDepth = BigInteger.valueOf(bValue.value).multiply(BigInteger.valueOf(depth2));
+                BigInteger aValue = a.getValue();
+                BigInteger bValue = b.getValue();
+                BigInteger aCoinDepth = aValue.multiply(BigInteger.valueOf(depth1));
+                BigInteger bCoinDepth = bValue.multiply(BigInteger.valueOf(depth2));
                 int c1 = bCoinDepth.compareTo(aCoinDepth);
                 if (c1 != 0) return c1;
                 // The "coin*days" destroyed are equal, sort by value alone to get the lowest transaction size.

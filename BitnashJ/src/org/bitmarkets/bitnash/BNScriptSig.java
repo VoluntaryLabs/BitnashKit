@@ -50,7 +50,7 @@ public class BNScriptSig extends BNObject {
 	
 	void willSerializeSelf() {
 		if (script().getProgram().length > 0) {
-			programHexBytes = Utils.HEX.encode(script().getProgram());
+			programHexBytes = Utils.bytesToHexString(script().getProgram());
 			setIsMultisig(Boolean.valueOf(script().getChunks().size() > 2)); //TODO fix this
 		} else {
 			setIsMultisig(Boolean.valueOf(false));
