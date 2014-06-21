@@ -19,8 +19,6 @@ public class BNServer extends BNObject implements Runnable {
 	}
 	
 	public void run() {
-		System.err.println("BNServer run");
-		System.err.flush();
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			String line = "notnull";

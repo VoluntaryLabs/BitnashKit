@@ -49,7 +49,7 @@
 - (void)setCheckpointsPath:(NSString *)path;
 //Set the path to the checkpoints file
 
-- (NSError *) error;
+- (BNError *) error;
 //Error for last operation.
 
 - (NSNumber *)balance;
@@ -74,5 +74,7 @@
 - (BOOL)isRunning;
 
 - (BOOL)isValidAddress:(NSString *)address;
+
+- (void)setPassphrase:(NSString *)passphrase;
 
 @end

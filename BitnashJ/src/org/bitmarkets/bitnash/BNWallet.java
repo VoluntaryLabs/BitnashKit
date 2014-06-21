@@ -11,8 +11,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongycastle.crypto.params.KeyParameter;
 
 import com.google.bitcoin.core.*;
+import com.google.bitcoin.crypto.KeyCrypter;
+import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
 import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.script.Script;
@@ -27,7 +30,7 @@ public class BNWallet extends BNObject {
 	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running, Error };
 	static BNWallet shared;
 	
-	//KeyParameter keyParameter;
+	KeyParameter keyParameter;
 	BNWalletState state;
 	int blocksToDownload;
 	int blocksDownloaded;
@@ -67,12 +70,7 @@ public class BNWallet extends BNObject {
 		this.state = state;
 	}
 	
-	/*
 	public boolean setPassphrase(String passphrase) {
-		if ("true".length() > 0) {
-			throw new RuntimeException("Wallet encryption isn't supported yet"); //TODO
-		}
-		
 		if (keyParameter != null) {
 			//Passphrase is being changed.  Decrypt it first.
 	        wallet().decrypt(keyParameter);
@@ -101,13 +99,10 @@ public class BNWallet extends BNObject {
 			return true;
 		}
 	}
-	*/
 	
-	/*
 	public KeyParameter getKeyParameter() {
 		return keyParameter;
 	}
-	*/
 	
 	public void lockAllOutputs() {
 		for (Transaction tx : wallet().getTransactions(true)) {
@@ -137,11 +132,9 @@ public class BNWallet extends BNObject {
 		}
 	}
 	
-	/*
 	public Boolean apiSetPassphrase(Object args) {
 		return Boolean.valueOf(this.setPassphrase((String)args));
 	}
-	*/
 	
 	public BigInteger apiBalance(Object args) {
 		return BigInteger.valueOf(walletAppKit.wallet().getBalance(new BNUnlockedCoinSelector()).longValue());
@@ -179,8 +172,7 @@ public class BNWallet extends BNObject {
 		ECKey key = null;
 		
 		if (wallet().isEncrypted()) {
-			//key = wallet().addNewEncryptedKey(wallet().getKeyCrypter(), keyParameter);
-			throw new RuntimeException("Wallet encryption isn't supported yet"); //TODO
+			key = wallet().addNewEncryptedKey(wallet().getKeyCrypter(), keyParameter);
 		} else {
 			key = new ECKey();
 			walletAppKit.wallet().addKey(key);

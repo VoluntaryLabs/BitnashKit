@@ -141,7 +141,16 @@
 
 - (void)setPassphrase:(NSString *)passphrase
 {
-    [_server sendMessage:@"setPassphrase" withObject:self withArg:passphrase];
+    NSNumber *success = [_server sendMessage:@"setPassphrase" withObject:self withArg:passphrase];
+    if (success.boolValue)
+    {
+        self.error = nil;
+    }
+    else
+    {
+        self.error = [[BNError alloc] init];
+        self.error.description = @"Bad Passphrase";
+    }
 }
 
 - (BOOL)isRunning

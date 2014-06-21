@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.bitcoin.core.ECKey;
 import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Sha256Hash;
@@ -17,6 +20,7 @@ import com.google.bitcoin.script.Script;
 import com.google.bitcoin.script.ScriptBuilder;
 
 public class BNTxIn extends BNObject {
+	public static Logger log = LoggerFactory.getLogger(BNTxIn.class);
 	BNScriptSig scriptSig;
 	Number previousOutIndex;
 	String previousTxSerializedHex;
@@ -135,8 +139,7 @@ public class BNTxIn extends BNObject {
 		Transaction transaction = transaction();
 		
 		if (key.isEncrypted()) {
-			throw new RuntimeException("Encryption isn't supported for now");
-			//key = key.decrypt(wallet().getKeyCrypter(), bnTx().bnWallet().keyParameter);
+			key = key.decrypt(wallet().getKeyCrypter(), bnTx().bnWallet().keyParameter);
 		}
 		
 		return transaction.calculateSignature(
