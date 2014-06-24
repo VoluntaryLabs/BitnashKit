@@ -183,6 +183,7 @@
     if ([response objectForKey:@"error"])
     {
         self.error = [[response objectForKey:@"error"] asObjectFromJSONObject];
+        NSLog(@"wallet error [%@]", [response objectForKey:@"error"]);
         [NSException raise:error.description format:nil];
         return nil;
     }
