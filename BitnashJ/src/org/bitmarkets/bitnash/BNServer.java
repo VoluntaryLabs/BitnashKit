@@ -5,11 +5,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 public class BNServer extends BNObject implements Runnable {
 	private static final Logger log = LoggerFactory.getLogger(BNServer.class);
@@ -76,9 +79,7 @@ public class BNServer extends BNObject implements Runnable {
 		finally {
 			log.info("Stopping Server ...");
 			try {
-				//bnWallet().getWalletAppKit().stop().get(5, TimeUnit.SECONDS);
-				bnWallet().getWalletAppKit().stopAndWait(); //TODO make sure this works
-				
+				Uninterruptibles.getUninterruptibly(bnWallet().getWalletAppKit().stop(), 5, TimeUnit.SECONDS);
 				log.info("Server Stopped");
 				System.exit(0);
 			}

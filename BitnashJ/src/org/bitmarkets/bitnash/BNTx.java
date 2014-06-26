@@ -209,6 +209,7 @@ public class BNTx extends BNObject {
 	}
 	
 	public BNTx apiSubtractFee(Object args) {
+		System.err.println("apiSubtractFee: " + transaction.toString());
 		int changeOutputCount = Math.max(1, transaction.getOutputs().size() - 1);
 		
 		long fee = changeOutputCount - 1 + ((transaction.bitcoinSerialize().length + transaction.getInputs().size()*74)/1000 + 1)*Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.longValue();
@@ -262,6 +263,8 @@ public class BNTx extends BNObject {
 		}
 		
 		bnWallet().peerGroup().broadcastTransaction(getTransaction());
+		
+		this.apiLockInputs(args); //TODO unlock if it fails
 		
 		return this;
 	}
