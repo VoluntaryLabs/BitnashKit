@@ -39,6 +39,10 @@ public class BNServer extends BNObject implements Runnable {
 							try {
 								String messageName = (String)message.get("name");
 								
+								if (messageName.equals("subtractFee")) {
+									log.info("BitnashJ BNServer Received: {}", message.toJSONString());
+								}
+								
 								BNObjectDeserializer d = new BNObjectDeserializer();
 								d.setSerialization(message.get("obj"));
 								Object receiver = d.deserialize();
