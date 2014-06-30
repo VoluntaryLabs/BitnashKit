@@ -30,8 +30,27 @@
     self.transactionsNode.wallet = self;
     
     self.withdralNode = [[BNWithdrawl alloc] init];
-
+    
+    [self updateActions];
+    
     return self;
+}
+
+- (void)updateActions
+{
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openDepositView"];
+        [slot setVisibleName:@"Deposit"];
+        [slot setIsActive:self.isRunning];
+        [slot.slotView syncFromSlot];
+    }
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openWithdrawlView"];
+        [slot setVisibleName:@"Widthdrawl"];
+        [slot setIsActive:self.isRunning && (self.balance.longLongValue > 0)];
+        [slot.slotView syncFromSlot];
+    }
 }
 
 - (void)setNodeSubtitle:(NSString *)nodeSubtitle
