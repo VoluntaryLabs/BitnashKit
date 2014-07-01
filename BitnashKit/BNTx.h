@@ -30,6 +30,8 @@
 @property BNTx *subsumingTx;
 @property (nonatomic) NSNumber *isSentToSelf;
 
+- (NSString *)txTypeString;
+
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.
 

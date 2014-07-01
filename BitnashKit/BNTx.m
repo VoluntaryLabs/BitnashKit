@@ -341,6 +341,7 @@
         return self.updateTimeDate.itemDateTimeString;
     }
     */
+    
     return [NSString stringWithFormat:@"%@ - %@", self.updateTimeDate.itemDateTimeString, self.confirmStatus];
     //return self.confirmStatus;
     //return self.txHash;
