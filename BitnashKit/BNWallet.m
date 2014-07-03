@@ -174,7 +174,14 @@
 
 - (BOOL)isRunning
 {
-    return [self.status isEqualToString:@"started"];
+    if (self.server.started)
+    {
+        return [self.status isEqualToString:@"started"];
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 - (BNTx *)newWithdrawalTxToAddress:(NSString *)address withValue:(NSNumber *)value
