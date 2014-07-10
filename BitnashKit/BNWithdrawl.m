@@ -23,13 +23,13 @@
     
     {
         NavDataSlot *slot = [mirror newDataSlotWithName:@"toAddress"];
-        [slot setVisibleName:@"Recipient Bitcoin Address"];
+        [slot setVisibleName:@"Address"];
         [slot setUneditedValue:@"Enter Recipient Bitcoin Address"];
     }
 
     {
         NavDataSlot *slot = [mirror newDataSlotWithName:@"amountInBtc"];
-        [slot setVisibleName:@"Amount to Send"];
+        [slot setVisibleName:@"Amount"];
         [slot setValueSuffix:@"BTC"];
         [slot setUneditedValue:@"0.0"];
     }
@@ -47,7 +47,7 @@
 - (void)updateActions
 {
     NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"send"];
-    [slot setVisibleName:@"Send"];
+    [slot setVisibleName:@"Widthdrawl"];
     [slot setIsActive:self.navMirror.dataSlotsAreFilled];
     [slot.slotView syncFromSlot];
 }
@@ -68,7 +68,8 @@
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    self.tx = [wallet newWithdrawalTxToAddress:self.toAddress withValue:[[f numberFromString:self.amountInBtc] btcToSatoshi]];
+    NSNumber *value = [[f numberFromString:self.amountInBtc] btcToSatoshi];
+    self.tx = [wallet newWithdrawalTxToAddress:self.toAddress withValue:value];
     [self.tx sign];
     [self.tx broadcast];
     

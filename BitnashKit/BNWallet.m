@@ -90,6 +90,8 @@
         }
         [self postParentChainChanged];
     }
+    
+    [self updateActions];
 }
 
 - (void)setPath:(NSString *)path
