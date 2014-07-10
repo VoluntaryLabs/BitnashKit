@@ -70,6 +70,9 @@
 - (BOOL)isConfirmed;
 //YES if this tx is in a block from the longest chain.
 
+- (BOOL)wasBroadcast;
+//YES if this tx was broadcast
+
 - (BOOL)isCancelled;
 
 - (void)lockInputs;
@@ -89,5 +92,8 @@
 
 //YES if all inputs and outputs are the same (but not necessarily the txhash)
 - (BOOL)isEquivalentTo:(BNTx *)otherTx;
+
+//Returns self or a subsuming tx that is equivalent to this tx
+- (BNTx *)canonicalTx;
 
 @end

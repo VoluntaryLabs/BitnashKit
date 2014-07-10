@@ -156,7 +156,7 @@
 
 - (void)subtractFee
 {
-    [self copySlotsFrom:[self sendToServer:@"subtractFee"]];
+    [self copySlotsFrom:[self sendToServer:@"subtractFee"]]; //TODO it should reset fees first?
 }
 
 - (BNMultisigScriptPubKey *)multisigScriptPubKey
@@ -224,6 +224,11 @@
 - (void)broadcast
 {
     [self sendToServer:@"broadcast"];
+}
+
+- (BOOL)wasBroadcast
+{
+    return [[self.canonicalTx sendToServer:@"wasBroadcast"] boolValue];
 }
 
 - (BOOL)isConfirmed
@@ -477,6 +482,18 @@
 - (BOOL)isEquivalentTo:(BNTx *)otherTx
 {
     return [self.inputs isEqualToArray:otherTx.inputs] && [self.outputs isEqualToArray:otherTx.outputs];
+}
+
+- (BNTx *)canonicalTx
+{
+    if (self.subsumingTx && [self.subsumingTx isEquivalentTo:self])
+    {
+        return self.subsumingTx;
+    }
+    else
+    {
+        return self;
+    }
 }
 
 @end

@@ -159,6 +159,8 @@
         [NSException raise:error.description format:nil];
     }
     
+    //NSLog(@"SENT: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+    
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
     [[_task.standardInput fileHandleForWriting] writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -171,6 +173,8 @@
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
         [output appendData:data];
     }
+    
+    //NSLog(@"RECEIVED: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
     
 
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];

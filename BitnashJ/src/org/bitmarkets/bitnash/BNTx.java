@@ -273,6 +273,10 @@ public class BNTx extends BNObject {
 		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
 	}
 	
+	public Boolean apiWasBroadcast(Object args) {
+		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() != TransactionConfidence.ConfidenceType.UNKNOWN);
+	}
+	
 	public BNTx apiLockInputs(Object args) {
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
