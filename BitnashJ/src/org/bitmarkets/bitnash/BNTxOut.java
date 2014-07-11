@@ -41,6 +41,15 @@ public class BNTxOut extends BNObject {
 		this.scriptPubKey = scriptPubKey;
 	}
 	
+	public String getDescription() {
+		return (String) metaData.get("description");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setDescription(String description) {
+		metaData.put("description", description);
+	}
+	
 	public int index() {
 		return bnTx().getOutputs().indexOf(this);
 	}

@@ -14,6 +14,8 @@
 
 @implementation BNTx
 
+@synthesize description = _description;
+
 - (id)init
 {
     self = [super init];
@@ -31,7 +33,7 @@
                                                    @"counterParty",
                                                    @"confirmations",
                                                    nil]];
-    
+    _description = @"Unknown";
     self.nodeViewClass = NavDescriptionView.class;
     return self;
 }
@@ -299,30 +301,59 @@
     return _isSentToSelf;
 }
 
+- (NSString *)description
+{
+    if ([_description isEqualToString:@"Unknown"])
+    {
+        _description = [self sendToServer:@"getDescription"];
+    }
+    
+    return _description;
+}
+
+- (void)setDescription:(NSString *)description
+{
+    _description = [self sendToServer:@"setDescription" withArg:description];
+}
+
 - (NSString *)txTypeString
 {
-    if (self.netValue.longLongValue < 0)
+    if (self.subsumingTx)
     {
-        if ([self multisigOutput])
-        {
-            return @"Escrow";
-        }
-        else if ([[self isSentToSelf] boolValue])
-        {
-            return @"Escrow Setup";
-        }
-        else
-        {
-            return @"Withdrawal";
-        }
-    }
-    else if ([self multisigInput])
-    {
-        return @"Escrow Release";
+        return self.subsumingTx.description;
     }
     else
     {
-        return @"Deposit";
+        if (self.description)
+        {
+            return self.description;
+        }
+        else
+        {
+            if (self.netValue.longLongValue < 0)
+            {
+                if ([self multisigOutput])
+                {
+                    return @"Escrow";
+                }
+                else if ([[self isSentToSelf] boolValue])
+                {
+                    return @"Escrow Setup";
+                }
+                else
+                {
+                    return @"Withdrawal";
+                }
+            }
+            else if ([self multisigInput])
+            {
+                return @"Escrow Release";
+            }
+            else
+            {
+                return @"Deposit";
+            }
+        }
     }
 }
 

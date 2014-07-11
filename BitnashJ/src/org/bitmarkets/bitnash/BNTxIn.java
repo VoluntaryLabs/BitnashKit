@@ -12,6 +12,7 @@ import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Sha256Hash;
 import com.google.bitcoin.core.Transaction;
 import com.google.bitcoin.core.TransactionInput;
+import com.google.bitcoin.core.TransactionOutput;
 import com.google.bitcoin.core.Utils;
 import com.google.bitcoin.core.Wallet;
 import com.google.bitcoin.core.Transaction.SigHash;
@@ -92,7 +93,11 @@ public class BNTxIn extends BNObject {
 	}
 	
 	public BNTxOut bnTxOut() {
-		return BNTxOut.fromOutput(transactionInput().getConnectedOutput());
+		TransactionOutput txOut = transactionInput().getConnectedOutput();
+		if (txOut == null) {
+			return null;
+		}
+		return BNTxOut.fromOutput(txOut);
 	}
 	
 	void signPayToAddress() {

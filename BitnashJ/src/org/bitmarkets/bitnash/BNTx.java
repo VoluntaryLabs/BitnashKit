@@ -287,6 +287,32 @@ public class BNTx extends BNObject {
 		return this;
 	}
 	
+	public BNTx apiSetDescription(Object args) {
+		for (Object inputObj : inputs) {
+			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			if (bnTxOut == null) {
+				return null;
+			}
+			bnTxOut.setDescription((String)args);
+			bnTxOut.writeMetaData();
+		}
+		return this;
+	}
+	
+	public String apiGetDescription(Object args) {
+		for (Object inputObj : inputs) {
+			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			if (bnTxOut == null) {
+				return null;
+			}
+			bnTxOut.readMetaData();
+			if (bnTxOut.getDescription() != null) {
+				return bnTxOut.getDescription();
+			}
+		}
+		return null;
+	}
+	
 	public BNTx apiUnlockInputs(Object args) {
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
