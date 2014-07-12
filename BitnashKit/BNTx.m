@@ -247,7 +247,7 @@
         }
         else
         {
-            return self.confirmations.intValue > 0;
+            return self.confirmations.intValue >= self.wallet.requiredConfirmations.intValue;
         }
     }
 }

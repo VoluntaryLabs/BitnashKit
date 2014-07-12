@@ -260,8 +260,7 @@ public class BNTx extends BNObject {
 		}
 System.err.println("BROADCAST TX " + getTransaction().getHashAsString() + ": " + String.valueOf(allInputsMine));
 		if (allInputsMine) {
-			getTransaction().getConfidence().setSource(
-					TransactionConfidence.Source.SELF);
+			getTransaction().getConfidence().setSource(TransactionConfidence.Source.SELF);
 		}
 
 		bnWallet().peerGroup().broadcastTransaction(getTransaction());
@@ -272,13 +271,11 @@ System.err.println("BROADCAST TX " + getTransaction().getHashAsString() + ": " +
 	}
 
 	public Boolean apiIsConfirmed(Object args) {
-		return Boolean
-				.valueOf(transaction.getConfidence().getConfidenceType() == TransactionConfidence.ConfidenceType.BUILDING);
+		return Boolean.valueOf(apiConfirmations(args).intValue() >= this.bnWallet().getRequiredConfirmations().intValue());
 	}
 
 	public Boolean apiWasBroadcast(Object args) {
-		return Boolean
-				.valueOf(transaction.getConfidence().getConfidenceType() != TransactionConfidence.ConfidenceType.UNKNOWN);
+		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() != TransactionConfidence.ConfidenceType.UNKNOWN);
 	}
 
 	public BNTx apiLockInputs(Object args) {

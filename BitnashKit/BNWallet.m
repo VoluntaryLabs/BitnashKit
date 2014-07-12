@@ -13,6 +13,8 @@
 
 @implementation BNWallet
 
+@synthesize requiredConfirmations = _requiredConfirmations;
+
 + (NSArray *)jsonProperties
 {
     return [NSArray array];
@@ -30,10 +32,16 @@
     self.transactionsNode.wallet = self;
     
     self.withdralNode = [[BNWithdrawl alloc] init];
-    
+    _requiredConfirmations = @1;
     [self updateActions];
     
     return self;
+}
+
+- (void)setRequiredConfirmations:(NSNumber *)requiredConfirmations
+{
+    _requiredConfirmations = requiredConfirmations;
+    [self.server sendMessage:@"setRequiredConfirmations" withObject:self withArg:requiredConfirmations];
 }
 
 - (void)updateActions

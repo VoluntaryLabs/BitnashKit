@@ -79,14 +79,17 @@ public class BNUnlockedCoinSelector implements CoinSelector {
 
     /** Sub-classes can override this to just customize whether transactions are usable, but keep age sorting. */
     protected boolean shouldSelect(Transaction tx) {
-        return isSelectable(tx);
+    	if (BNWallet.shared().getRequiredConfirmations().intValue() > 0) {
+    		return isSelectable(tx);
+    	} else {
+    		return true;
+    	}
     }
 
     public static boolean isSelectable(Transaction tx) {
         // Only pick chain-included transactions, or transactions that are ours and pending.
         TransactionConfidence confidence = tx.getConfidence();
         TransactionConfidence.ConfidenceType type = confidence.getConfidenceType();
-System.err.println(tx.getHashAsString() + ": " + type.toString() + "/" + confidence.getSource().toString());
         return type.equals(TransactionConfidence.ConfidenceType.BUILDING) ||
 
                type.equals(TransactionConfidence.ConfidenceType.PENDING) &&

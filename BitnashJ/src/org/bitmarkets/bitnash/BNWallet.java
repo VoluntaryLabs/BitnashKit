@@ -30,6 +30,7 @@ public class BNWallet extends BNObject {
 	public static enum BNWalletState { Initialized, Starting, Connecting, Downloading, Running, Error };
 	static BNWallet shared;
 	
+	Number requiredConfirmations;
 	KeyParameter keyParameter;
 	BNWalletState state;
 	int blocksToDownload;
@@ -40,6 +41,7 @@ public class BNWallet extends BNObject {
 	public BNWallet() {
 		super();
 		state = BNWalletState.Initialized;
+		requiredConfirmations = Integer.valueOf(1);
 		setupWalletAppKit();
 	} 
 	
@@ -52,6 +54,14 @@ public class BNWallet extends BNObject {
 			shared = new BNWallet();
 		}
 		return shared;
+	}
+	
+	public Number getRequiredConfirmations() {
+		return requiredConfirmations;
+	}
+	
+	public void setRequiredConfirmations(Number requiredConfirmations) {
+		this.requiredConfirmations = requiredConfirmations;
 	}
 	
 	public WalletAppKit getWalletAppKit() {
@@ -130,6 +140,12 @@ public class BNWallet extends BNObject {
 				}
 			}
 		}
+	}
+	
+	public BNWallet apiSetRequiredConfirmations(Object args)
+	{
+		setRequiredConfirmations((Number)args);
+		return this;
 	}
 	
 	public Boolean apiSetPassphrase(Object args) {
