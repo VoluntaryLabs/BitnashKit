@@ -86,6 +86,7 @@ public class BNUnlockedCoinSelector implements CoinSelector {
         // Only pick chain-included transactions, or transactions that are ours and pending.
         TransactionConfidence confidence = tx.getConfidence();
         TransactionConfidence.ConfidenceType type = confidence.getConfidenceType();
+System.err.println(tx.getHashAsString() + ": " + type.toString() + "/" + confidence.getSource().toString());
         return type.equals(TransactionConfidence.ConfidenceType.BUILDING) ||
 
                type.equals(TransactionConfidence.ConfidenceType.PENDING) &&
