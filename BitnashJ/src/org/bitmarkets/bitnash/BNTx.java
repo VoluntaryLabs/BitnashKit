@@ -295,7 +295,7 @@ System.err.println("BROADCAST TX " + getTransaction().getHashAsString() + ": " +
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
 			if (bnTxOut == null) {
-				return null;
+				continue;
 			}
 			bnTxOut.setDescription((String) args);
 			bnTxOut.writeMetaData();
@@ -307,7 +307,7 @@ System.err.println("BROADCAST TX " + getTransaction().getHashAsString() + ": " +
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
 			if (bnTxOut == null) {
-				return null;
+				continue;
 			}
 			bnTxOut.readMetaData();
 			if (bnTxOut.getDescription() != null) {
