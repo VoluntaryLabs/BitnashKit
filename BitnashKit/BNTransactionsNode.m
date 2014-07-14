@@ -27,13 +27,6 @@
 - (void)fetch
 {
     [self mergeWithChildren:[self.wallet transactions]];
-    for (BNTx *tx in self.children)
-    {
-        if ([tx.description containsString:@"Zeroconf"])
-        {
-            NSLog(@"%@, %@", tx.txHash, tx.description);
-        }
-    }
     [self sortChildren];
 }
 
