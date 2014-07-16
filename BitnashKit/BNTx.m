@@ -527,4 +527,20 @@
     }
 }
 
+- (NSNumber *)ordinality
+{
+    return [NSNumber numberWithInt:-1*self.updateTime.intValue];
+}
+
+//for display in wallet
+- (NSString *)updateTimeDescription
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.locale = [NSLocale systemLocale];
+    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
+    return [dateFormatter stringFromDate:self.updateTimeDate];
+}
+
 @end

@@ -98,4 +98,13 @@
 //Returns self or a subsuming tx that is equivalent to this tx
 - (BNTx *)canonicalTx;
 
+//updateTime as an NSDate
+- (NSDate *)updateTimeDate;
+
+//for display in wallet
+- (NSString *)updateTimeDescription;
+
+//Used for sorting
+- (NSNumber *)ordinality;
+
 @end

@@ -19,7 +19,7 @@
     self.nodeSuggestedWidth = 500;
     self.shouldUseCountForNodeNote = YES;
     self.shouldSortChildren = YES;
-    self.sortChildrenKey = @"confirmations"; //@"updateTime";
+    self.sortChildrenKey = @"ordinality";
     
     return self;
 }
