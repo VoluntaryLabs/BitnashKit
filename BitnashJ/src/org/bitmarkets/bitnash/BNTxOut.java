@@ -50,6 +50,15 @@ public class BNTxOut extends BNObject {
 		metaData.put("description", description);
 	}
 	
+	public String getTxType() {
+		return (String) metaData.get("txType");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setTxType(String txType) {
+		metaData.put("txType", txType);
+	}
+	
 	public int index() {
 		return bnTx().getOutputs().indexOf(this);
 	}

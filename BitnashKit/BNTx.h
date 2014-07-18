@@ -31,8 +31,7 @@
 @property (nonatomic) NSNumber *isSentToSelf;
 
 @property (nonatomic) NSString *description;
-
-- (NSString *)txTypeString;
+@property (nonatomic) NSString *txType;
 
 - (BNTxOut *)newOutput;
 //Creates a new BNTxOut and adds it to the outputs array.

@@ -15,6 +15,7 @@
 @implementation BNTx
 
 @synthesize description = _description;
+@synthesize txType = _txType;
 
 - (id)init
 {
@@ -34,6 +35,7 @@
                                                    @"confirmations",
                                                    nil]];
     _description = @"Unknown";
+    _txType = @"Unknown";
     self.nodeViewClass = NavDescriptionView.class;
     return self;
 }
@@ -301,6 +303,22 @@
     return _isSentToSelf;
 }
 
+- (NSString *)txType
+{
+    if ([_txType isEqualToString:@"Unknown"])
+    {
+        _txType = [self sendToServer:@"getTxType"];
+    }
+    
+    return _description;
+}
+
+- (void)setTxType:(NSString *)txType
+{
+    _txType = [self sendToServer:@"setTxType" withArg:txType];
+}
+
+
 - (NSString *)description
 {
     if ([_description isEqualToString:@"Unknown"])
@@ -314,47 +332,6 @@
 - (void)setDescription:(NSString *)description
 {
     _description = [self sendToServer:@"setDescription" withArg:description];
-}
-
-- (NSString *)txTypeString
-{
-    if (self.subsumingTx)
-    {
-        return self.subsumingTx.description;
-    }
-    else
-    {
-        if (self.description)
-        {
-            return self.description;
-        }
-        else
-        {
-            if (self.netValue.longLongValue < 0)
-            {
-                if ([self multisigOutput])
-                {
-                    return @"Escrow";
-                }
-                else if ([[self isSentToSelf] boolValue])
-                {
-                    return @"Escrow Setup";
-                }
-                else
-                {
-                    return @"Withdrawal";
-                }
-            }
-            else if ([self multisigInput])
-            {
-                return @"Escrow Release";
-            }
-            else
-            {
-                return @"Deposit";
-            }
-        }
-    }
 }
 
 - (NSDate *)updateTimeDate
@@ -403,7 +380,7 @@
     */
  
     return [NSString stringWithFormat:@"%@ of %.4f BTC",
-            self.txTypeString,
+            self.txType,
             (float)(self.netValue.doubleValue * 0.00000001)];
     
 /*
