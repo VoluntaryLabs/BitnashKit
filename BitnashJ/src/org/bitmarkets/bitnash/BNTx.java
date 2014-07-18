@@ -202,7 +202,6 @@ public class BNTx extends BNObject {
 	}
 
 	public BNTx apiSubtractFee(Object args) {
-		System.err.println("apiSubtractFee: " + transaction.toString());
 		int changeOutputCount = Math
 				.max(1, transaction.getOutputs().size() - 1);
 

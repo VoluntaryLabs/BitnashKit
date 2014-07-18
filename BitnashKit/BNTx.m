@@ -310,12 +310,43 @@
         _txType = [self sendToServer:@"getTxType"];
     }
     
-    return _description;
+    if (_txType == nil)
+    {
+        if (self.netValue.longLongValue < 0)
+        {
+            if ([self multisigOutput])
+            {
+                return @"Lock Escrow";
+            }
+            else if ([[self isSentToSelf] boolValue])
+            {
+                return @"Setup Escrow";
+            }
+            else
+            {
+                return @"Withdrawal";
+            }
+        }
+        else if ([self multisigInput])
+        {
+            return @"Payment";
+        }
+        else
+        {
+            return @"Deposit";
+        }
+
+    }
+    else
+    {
+        return _txType;
+    }
 }
 
 - (void)setTxType:(NSString *)txType
 {
-    _txType = [self sendToServer:@"setTxType" withArg:txType];
+    [self sendToServer:@"setTxType" withArg:txType];
+    _txType = txType;
 }
 
 
@@ -331,7 +362,8 @@
 
 - (void)setDescription:(NSString *)description
 {
-    _description = [self sendToServer:@"setDescription" withArg:description];
+    [self sendToServer:@"setDescription" withArg:description];
+    _description = description;
 }
 
 - (NSDate *)updateTimeDate

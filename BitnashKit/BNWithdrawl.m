@@ -70,6 +70,8 @@
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *value = [[f numberFromString:self.amountInBtc] btcToSatoshi];
     self.tx = [wallet newWithdrawalTxToAddress:self.toAddress withValue:value];
+    self.tx.txType = @"Withdrawal";
+    self.tx.description = self.toAddress;
     [self.tx sign];
     [self.tx broadcast];
     
