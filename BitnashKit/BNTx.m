@@ -411,17 +411,9 @@
     }
     */
  
-    return [NSString stringWithFormat:@"%@ of %.4f BTC",
+    return [NSString stringWithFormat:@"%@ of %@BTC",
             self.txType,
-            (float)(self.netValue.doubleValue * 0.00000001)];
-    
-/*
-    return [NSString stringWithFormat:@"%@ of %.4f BTC (%@)",
-            self.txTypeString,
-            (float)(self.netValue.doubleValue * 0.00000001),
-            self.isConfirmed ? [NSString stringWithFormat:@"%@ confirmations", self.confirmations] : @"pending"
-    ];
-*/
+            [self.netValue.satoshiToBtc asFormattedStringWithFractionalDigits:4]];
 }
 
 - (NSString *)confirmStatus
