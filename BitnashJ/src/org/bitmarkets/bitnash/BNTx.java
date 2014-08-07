@@ -274,7 +274,7 @@ public class BNTx extends BNObject {
 				throw new RuntimeException(e);
 			}
 		}
-System.err.println("BROADCAST TX " + getTransaction().getHashAsString() + ": " + String.valueOf(allInputsMine));
+//System.err.println("BROADCAST TX " + getTransaction().getHashAsString() + ": " + String.valueOf(allInputsMine));
 		if (allInputsMine) {
 			getTransaction().getConfidence().setSource(TransactionConfidence.Source.SELF);
 		}
