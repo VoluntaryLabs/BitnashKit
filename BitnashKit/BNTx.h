@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BNObject.h"
 #import "BNTxOut.h"
+#import "BNTxIn.h"
 
 @class BNWallet;
 
@@ -61,6 +62,10 @@
 
 - (void)sign;
 //signs the inputs owned by wallet associated with this tx.
+
+- (void)signInput:(BNTxIn *)txIn;
+
+- (void)lockInput:(BNTxIn *)txIn;
 
 - (BNTx *)mergedWithEscrowTx:(BNTx *)tx;
 //Returns a new BNTx that includes the inputs and outputs from this BNTx and the tx arg.  The multisig outputs are merged into a single multisig output with a value summed from the others and a set of pubkeys derrived from the first pubkey from any existing multisig output.

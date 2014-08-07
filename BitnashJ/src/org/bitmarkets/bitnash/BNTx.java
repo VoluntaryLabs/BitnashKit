@@ -242,6 +242,23 @@ public class BNTx extends BNObject {
 
 		return this;
 	}
+	
+	public BNTxIn apiSignInputAtIndex(Object args) {
+		Number index = (Number) args;
+		BNTxIn bnTxIn = (BNTxIn)this.inputs.get(index.intValue());
+		bnTxIn.sign();
+		return bnTxIn;
+	}
+	
+	public BNTxIn apiLockInputAtIndex(Object args) {
+		Number index = (Number) args;
+		BNTxIn bnTxIn = (BNTxIn)this.inputs.get(index.intValue());
+		BNTxOut bnTxOut = ((BNTxIn) bnTxIn).bnTxOut();
+		bnTxOut.readMetaData();
+		bnTxOut.lock();
+		bnTxOut.writeMetaData();
+		return bnTxIn;
+	}
 
 	public BNTx apiBroadcast(Object args) {
 		boolean allInputsMine = true;

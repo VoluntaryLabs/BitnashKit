@@ -201,6 +201,16 @@
     [self copySlotsFrom:[self sendToServer:@"sign"]];
 }
 
+- (void)signInput:(BNTxIn *)txIn
+{
+    [txIn copySlotsFrom:[self sendToServer:@"signInputAtIndex" withArg:[NSNumber numberWithInteger:[self.inputs indexOfObject:txIn]]]];
+}
+
+- (void)lockInput:(BNTxIn *)txIn
+{
+    [txIn copySlotsFrom:[self sendToServer:@"lockInputAtIndex" withArg:[NSNumber numberWithInteger:[self.inputs indexOfObject:txIn]]]];
+}
+
 - (BNTxOut *)multisigOutput
 {
     for (BNTxOut *txOut in self.outputs)
