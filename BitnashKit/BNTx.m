@@ -540,7 +540,7 @@
 
 - (NSNumber *)ordinality
 {
-    return [NSNumber numberWithInt:-1*self.updateTime.intValue];
+    return [NSNumber numberWithLong:-1*self.updateTime.longValue];
 }
 
 //for display in wallet
