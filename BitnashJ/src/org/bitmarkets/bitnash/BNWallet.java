@@ -3,7 +3,7 @@ package org.bitmarkets.bitnash;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.InetAddress;
+//import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -17,7 +17,7 @@ import com.google.bitcoin.core.*;
 import com.google.bitcoin.crypto.KeyCrypter;
 import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
-import com.google.bitcoin.params.TestNet3Params;
+//import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.script.Script;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Service;
@@ -334,7 +334,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	void setupWalletAppKit() {
-		walletAppKit = new WalletAppKit(new TestNet3Params(), new File("."), "bitnash") {
+		walletAppKit = new WalletAppKit(new BNTestNet3Params(), new File("."), "bitnash") {
 			protected void onSetupCompleted() {
 				this.peerGroup().setMaxConnections(4);
 				log.info("Wallet Connecting to Peers ...");
