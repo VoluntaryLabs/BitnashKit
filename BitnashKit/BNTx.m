@@ -367,6 +367,15 @@
         _description = [self sendToServer:@"getDescription"];
     }
     
+    if (!_description)
+    {
+        if ([self.txType isEqualToString:@"Deposit"] || [self.txType isEqualToString:@"Withdrawal"])
+        {
+            BNPayToAddressScriptPubKey *scriptPubKey = (BNPayToAddressScriptPubKey *)self.firstOutput.scriptPubKey;
+            return scriptPubKey.address;
+        }
+    }
+    
     return _description;
 }
 

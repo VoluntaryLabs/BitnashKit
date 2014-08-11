@@ -42,6 +42,7 @@
 		DC350EBA1914420000C25A01 /* BNKeysNode.h in Headers */ = {isa = PBXBuildFile; fileRef = DC350EB8191441FF00C25A01 /* BNKeysNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC350EBB1914420000C25A01 /* BNKeysNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DC350EB9191441FF00C25A01 /* BNKeysNode.m */; };
 		DC350EEC191612C200C25A01 /* checkpoints-testnet in Resources */ = {isa = PBXBuildFile; fileRef = DC350EEB191612B300C25A01 /* checkpoints-testnet */; };
+		DC44C57A19987E4B0072AE8A /* checkpoints in Resources */ = {isa = PBXBuildFile; fileRef = DC350EE71916061500C25A01 /* checkpoints */; };
 		DC4F2FB119039CD0008803F7 /* NSNull+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC4F2FAF19039CD0008803F7 /* NSNull+BN.h */; };
 		DC4F2FB219039CD0008803F7 /* NSNull+BN.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4F2FB019039CD0008803F7 /* NSNull+BN.m */; };
 		DC6161AF18CFBF7900F7B602 /* NSString+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC6161AD18CFBF7900F7B602 /* NSString+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -565,6 +566,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC44C57A19987E4B0072AE8A /* checkpoints in Resources */,
 				DCA2CE291954F17000F929B4 /* bitcoinj-0.11.3-bundled.jar in Resources */,
 				DCA2CE271954DB6400F929B4 /* slf4j-simple-1.7.7.jar in Resources */,
 				DC350EEC191612C200C25A01 /* checkpoints-testnet in Resources */,

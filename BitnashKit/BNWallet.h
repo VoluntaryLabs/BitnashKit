@@ -79,4 +79,8 @@
 
 - (void)setPassphrase:(NSString *)passphrase;
 
+- (BOOL)usesTestNet;
+
+- (void)setUsesTestNet:(BOOL)usesTestNet;
+
 @end

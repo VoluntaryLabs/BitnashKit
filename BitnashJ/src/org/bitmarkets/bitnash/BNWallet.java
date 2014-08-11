@@ -18,6 +18,7 @@ import com.google.bitcoin.crypto.KeyCrypter;
 import com.google.bitcoin.crypto.KeyCrypterScrypt;
 import com.google.bitcoin.kits.WalletAppKit;
 //import com.google.bitcoin.params.TestNet3Params;
+import com.google.bitcoin.params.MainNetParams;
 import com.google.bitcoin.script.Script;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Service;
@@ -31,6 +32,8 @@ public class BNWallet extends BNObject {
 	static BNWallet shared;
 	
 	Number requiredConfirmations;
+	boolean usesTestNet;
+	
 	KeyParameter keyParameter;
 	BNWalletState state;
 	int blocksToDownload;
@@ -54,6 +57,14 @@ public class BNWallet extends BNObject {
 			shared = new BNWallet();
 		}
 		return shared;
+	}
+	
+	boolean usesTestNet() {
+		return usesTestNet;
+	}
+	
+	public void setUsesTestNet(boolean usesTestNet) {
+		this.usesTestNet = usesTestNet;
 	}
 	
 	public Number getRequiredConfirmations() {
@@ -334,7 +345,11 @@ public class BNWallet extends BNObject {
 	}
 	
 	void setupWalletAppKit() {
-		walletAppKit = new WalletAppKit(new BNTestNet3Params(), new File("."), "bitnash") {
+		walletAppKit = new WalletAppKit(
+			usesTestNet ? new BNTestNet3Params() : new MainNetParams(),
+			new File("."),
+			"bitnash"
+		) {
 			protected void onSetupCompleted() {
 				this.peerGroup().setMaxConnections(4);
 				log.info("Wallet Connecting to Peers ...");

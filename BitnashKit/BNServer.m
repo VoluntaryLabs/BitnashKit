@@ -86,11 +86,12 @@
                                  @"-Dfile.encoding=MacRoman",
                                  @"-classpath", classPath,
                                  @"org.bitmarkets.bitnash.BNApp",
+                                 @"-testnet", self.usesTestNet ? @"true" : @"false",
                                  nil];
     
     if (_checkpointsPath)
     {
-        [arguments addObject:_checkpointsPath];
+        [arguments addObjectsFromArray:@[@"-checkpoints", _checkpointsPath]];
     }
     _task.arguments = arguments;
     

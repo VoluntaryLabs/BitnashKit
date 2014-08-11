@@ -31,4 +31,6 @@
 - (void)readMetaData;
 - (void)writeMetaData;
 
+- (BNObject *)ancestorWithType:(Class)ancestorClass;
+
 @end

@@ -23,6 +23,8 @@
 
 @property NSFileHandle *taskStandardError;
 
+@property BOOL usesTestNet;
+
 - (void)start;
 //Start the wallet child process (BitcoinJ)
 

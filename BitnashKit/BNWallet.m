@@ -30,6 +30,7 @@
     self.nodeSubtitle = @"starting ...";
     self.transactionsNode = [[BNTransactionsNode alloc] init];
     self.transactionsNode.wallet = self;
+    self.usesTestNet = YES;
     
     self.withdralNode = [[BNWithdrawl alloc] init];
     _requiredConfirmations = @1;
@@ -220,5 +221,14 @@
     return result.boolValue;
 }
 
+- (BOOL)usesTestNet
+{
+    return self.server.usesTestNet;
+}
+
+- (void)setUsesTestNet:(BOOL)usesTestNet
+{
+    self.server.usesTestNet = usesTestNet;
+}
 
 @end

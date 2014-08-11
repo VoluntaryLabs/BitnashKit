@@ -94,4 +94,20 @@
     [[BNMetaDataDb shared] writeFromBnObject:self];
 }
 
+- (BNObject *)ancestorWithType:(Class)ancestorClass
+{
+    if (!self.bnParent)
+    {
+        return nil;
+    }
+    else if ([self.bnParent isKindOfClass:ancestorClass])
+    {
+        return self.bnParent;
+    }
+    else
+    {
+        return [self.bnParent ancestorWithType:ancestorClass];
+    }
+}
+
 @end
