@@ -374,6 +374,10 @@
             BNPayToAddressScriptPubKey *scriptPubKey = (BNPayToAddressScriptPubKey *)self.firstOutput.scriptPubKey;
             return scriptPubKey.address;
         }
+        else
+        {
+            return self.txHash;
+        }
     }
     
     return _description;
@@ -463,8 +467,11 @@
 
 - (NSString *)webUrl
 {
-    // http://testnet.helloblock.io/addresses/n1grcACynNZCB9zN1G4sHP9BETiFZrC15y
-    return [@"http://testnet.helloblock.io/transactions/" stringByAppendingString:self.txHash];
+    if (self.wallet.usesTestNet) {
+        return [@"http://testnet.helloblock.io/transactions/" stringByAppendingString:self.txHash];
+    } else {
+        return [@"http://blockchain.info/tx" stringByAppendingString:self.txHash];
+    }
 }
 
 - (BNTxOut *)changeOutput
