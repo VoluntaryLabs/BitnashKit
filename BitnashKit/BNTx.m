@@ -475,7 +475,7 @@
     if (self.wallet.usesTestNet) {
         return [@"http://testnet.helloblock.io/transactions/" stringByAppendingString:self.txHash];
     } else {
-        return [@"http://blockchain.info/tx" stringByAppendingString:self.txHash];
+        return [@"http://blockchain.info/tx/" stringByAppendingString:self.txHash];
     }
 }
 
