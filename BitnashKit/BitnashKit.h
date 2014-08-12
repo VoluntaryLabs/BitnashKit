@@ -28,5 +28,6 @@
 #import "BNDepositKey.h"
 #import "BNWithdrawl.h"
 #import "BNMetaDataDb.h"
+#import "BNPriceFormatter.h"
 
 #endif

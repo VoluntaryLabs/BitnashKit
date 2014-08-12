@@ -39,16 +39,36 @@
     return self;
 }
 
+- (BOOL)amountInBtcSlotIsValid
+{
+    NavDataSlot *slot = [self.navMirror dataSlotNamed:@"amountInBtc"];
+    return slot.numberValue.floatValue > 0;
+}
+
+- (BOOL)toAddressSlotIsValid
+{
+    NavDataSlot *slot = [self.navMirror dataSlotNamed:@"toAddress"];
+    //NSLog(@"self.toAddress = '%@'", slot.value);
+    return [self.wallet isValidAddress:slot.value];
+}
+
 - (void)updatedSlot:(NavSlot *)aNavSlot
 {
     [self updateActions];
+}
+
+- (BOOL)isReady
+{
+    return
+        self.toAddressSlotIsValid &&
+        self.amountInBtcSlotIsValid;
 }
 
 - (void)updateActions
 {
     NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"send"];
     [slot setVisibleName:@"Widthdraw"];
-    [slot setIsActive:self.navMirror.dataSlotsAreFilled];
+    [slot setIsActive:self.isReady];
     [slot.slotView syncFromSlot];
 }
 
@@ -62,13 +82,19 @@
     return [self firstInParentChainOfClass:BNWallet.class];
 }
 
-- (void)send
+- (NSNumber *)amountInSatoshi
 {
-    BNWallet *wallet = self.wallet;
-    
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *value = [[f numberFromString:self.amountInBtc] btcToSatoshi];
+    return value;
+}
+
+- (void)send
+{
+    BNWallet *wallet = self.wallet;
+    NSNumber *value = self.amountInSatoshi;
+
     self.tx = [wallet newWithdrawalTxToAddress:self.toAddress withValue:value];
     self.tx.txType = @"Withdrawal";
     self.tx.description = self.toAddress;

@@ -24,6 +24,8 @@
 		AA753DCD191079DA00D07CB5 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB5191079DA00D07CB5 /* split.h */; };
 		AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */; };
+		AA989F91199ACEEE001401E4 /* BNPriceFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA989F8F199ACEEE001401E4 /* BNPriceFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA989F92199ACEEE001401E4 /* BNPriceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */; };
 		AAB2809E19201B5F005C9D27 /* NSNumber+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAB2809F19201B5F005C9D27 /* NSNumber+BN.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB2809D19201B5F005C9D27 /* NSNumber+BN.m */; };
 		DC261F3A18CD1FEC005328DA /* NSObject+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3818CD1FEC005328DA /* NSObject+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -133,6 +135,8 @@
 		AA753DB5191079DA00D07CB5 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
 		AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		AA989F8F199ACEEE001401E4 /* BNPriceFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPriceFormatter.h; sourceTree = "<group>"; };
+		AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPriceFormatter.m; sourceTree = "<group>"; };
 		AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BN.h"; sourceTree = "<group>"; };
 		AAB2809D19201B5F005C9D27 /* NSNumber+BN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BN.m"; sourceTree = "<group>"; };
 		DC261F3818CD1FEC005328DA /* NSObject+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BN.h"; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 				DC2AEAA9192FF4F6004BB65E /* BNMetaDataDb.m */,
 				DC2AEAAE192FFF18004BB65E /* BNWithdrawl.h */,
 				DC2AEAAF192FFF18004BB65E /* BNWithdrawl.m */,
+				AA989F8F199ACEEE001401E4 /* BNPriceFormatter.h */,
+				AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */,
 			);
 			name = BN;
 			sourceTree = "<group>";
@@ -453,6 +459,7 @@
 				AAB2809E19201B5F005C9D27 /* NSNumber+BN.h in Headers */,
 				DCAB5D14192C58BB0090BB69 /* BNDepositKey.h in Headers */,
 				DC261F3A18CD1FEC005328DA /* NSObject+BN.h in Headers */,
+				AA989F91199ACEEE001401E4 /* BNPriceFormatter.h in Headers */,
 				DC4F2FB119039CD0008803F7 /* NSNull+BN.h in Headers */,
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
 				DCB016D1191316730064F540 /* BNKey.h in Headers */,
@@ -618,6 +625,7 @@
 				DCE23FB718CC314900F64729 /* BNTxOut.m in Sources */,
 				AA753DC8191079DA00D07CB5 /* qrspec.c in Sources */,
 				DCE23FC718CC36C900F64729 /* BNScriptSig.m in Sources */,
+				AA989F92199ACEEE001401E4 /* BNPriceFormatter.m in Sources */,
 				DC261F4318CD21FB005328DA /* NSDictionary+BN.m in Sources */,
 				DC261F3F18CD20A4005328DA /* NSArray+BN.m in Sources */,
 				DCE23FBB18CC316B00F64729 /* BNTxIn.m in Sources */,
