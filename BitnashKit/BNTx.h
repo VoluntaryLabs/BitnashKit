@@ -66,6 +66,7 @@
 - (void)signInput:(BNTxIn *)txIn;
 
 - (void)lockInput:(BNTxIn *)txIn;
+- (void)lockOutput:(BNTxOut *)txOut;
 
 - (BNTx *)mergedWithEscrowTx:(BNTx *)tx;
 //Returns a new BNTx that includes the inputs and outputs from this BNTx and the tx arg.  The multisig outputs are merged into a single multisig output with a value summed from the others and a set of pubkeys derrived from the first pubkey from any existing multisig output.

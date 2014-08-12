@@ -254,10 +254,21 @@ public class BNTx extends BNObject {
 		Number index = (Number) args;
 		BNTxIn bnTxIn = (BNTxIn)this.inputs.get(index.intValue());
 		BNTxOut bnTxOut = ((BNTxIn) bnTxIn).bnTxOut();
+		System.err.println("Lock: " + bnTxOut.id());
 		bnTxOut.readMetaData();
 		bnTxOut.lock();
 		bnTxOut.writeMetaData();
 		return bnTxIn;
+	}
+	
+	public BNTxOut apiLockOutputAtIndex(Object args) {
+		Number index = (Number) args;
+		BNTxOut bnTxOut = (BNTxOut)this.outputs.get(index.intValue());
+		System.err.println("Lock: " + bnTxOut.id());
+		bnTxOut.readMetaData();
+		bnTxOut.lock();
+		bnTxOut.writeMetaData();
+		return bnTxOut;
 	}
 
 	public BNTx apiBroadcast(Object args) {
@@ -279,6 +290,7 @@ public class BNTx extends BNObject {
 			getTransaction().getConfidence().setSource(TransactionConfidence.Source.SELF);
 		}
 
+		System.err.println(Utils.bytesToHexString(getTransaction().bitcoinSerialize()));
 		bnWallet().peerGroup().broadcastTransaction(getTransaction());
 
 		this.apiLockInputs(args); // TODO unlock if it fails
@@ -297,6 +309,7 @@ public class BNTx extends BNObject {
 	public BNTx apiLockInputs(Object args) {
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			System.err.println("Lock: " + bnTxOut.id());
 			bnTxOut.readMetaData();
 			bnTxOut.lock();
 			bnTxOut.writeMetaData();
@@ -362,6 +375,7 @@ public class BNTx extends BNObject {
 	public BNTx apiUnlockInputs(Object args) {
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			System.err.println("Unlock: " + bnTxOut.id());
 			bnTxOut.readMetaData();
 			bnTxOut.unlock();
 			bnTxOut.writeMetaData();

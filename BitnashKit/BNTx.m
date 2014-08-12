@@ -211,6 +211,11 @@
     [txIn copySlotsFrom:[self sendToServer:@"lockInputAtIndex" withArg:[NSNumber numberWithInteger:[self.inputs indexOfObject:txIn]]]];
 }
 
+- (void)lockOutput:(BNTxOut *)txOut
+{
+    [txOut copySlotsFrom:[self sendToServer:@"lockOutputAtIndex" withArg:[NSNumber numberWithInteger:[self.outputs indexOfObject:txOut]]]];
+}
+
 - (BNTxOut *)multisigOutput
 {
     for (BNTxOut *txOut in self.outputs)
