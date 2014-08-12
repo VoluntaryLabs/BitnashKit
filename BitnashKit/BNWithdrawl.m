@@ -47,7 +47,7 @@
 - (void)updateActions
 {
     NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"send"];
-    [slot setVisibleName:@"Widthdrawl"];
+    [slot setVisibleName:@"Widthdraw"];
     [slot setIsActive:self.navMirror.dataSlotsAreFilled];
     [slot.slotView syncFromSlot];
 }
