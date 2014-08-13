@@ -134,7 +134,8 @@ public class BNTx extends BNObject {
 				transaction.getOutputs());
 
 		Wallet.SendRequest req = Wallet.SendRequest.forTx(transaction);
-
+		req.coinSelector = new BNUnlockedCoinSelector();
+		
 		req.changeAddress = bnWallet().apiCreateKey(null).getKey()
 				.toAddress(networkParams());
 		req.aesKey = bnWallet().keyParameter;
