@@ -31,7 +31,8 @@
         NavDataSlot *slot = [mirror newDataSlotWithName:@"amountInBtc"];
         [slot setVisibleName:@"Amount"];
         [slot setValueSuffix:@"BTC"];
-        [slot setUneditedValue:@"0.0"];
+        [slot setUneditedValue:@"?"];
+        [slot setFormatterClassName:@"BNPriceFormatter"];
     }
     
     [self updateActions];
@@ -42,7 +43,7 @@
 - (BOOL)amountInBtcSlotIsValid
 {
     NavDataSlot *slot = [self.navMirror dataSlotNamed:@"amountInBtc"];
-    return slot.numberValue.floatValue > 0;
+    return slot.numberValue.floatValue >= 0;
 }
 
 - (BOOL)toAddressSlotIsValid
