@@ -65,10 +65,6 @@ public abstract class BNObject {
 		return Integer.toHexString(hashCode());
 	}
 	
-	public BNObject apiPing(Object args) {
-		return this;
-	}
-	
 	void deserialzeFromJSONObject(JSONObject jsonObject) {
 		for (BNObjectSlot slot: bnSlots()) {
 			BNObjectDeserializer d = new BNObjectDeserializer();

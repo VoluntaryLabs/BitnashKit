@@ -21,27 +21,28 @@ public class BNServer extends BNObject implements Runnable {
 		new Thread(this).start();
 	}
 	
+	public String apiPing(Object arg) {
+		return (String) arg;
+	}
+	
 	public void run() {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			String line = "notnull";
 			JSONParser parser = new JSONParser();
+
 			while (line != null) { 
 				try {
 					line = reader.readLine();
 					if (line == null) {
 						break;
 					} else {
-						//log.info("BitnashJ BNServer Received: {}", line);
+//log.info("BitnashJ BNServer Received: {}", line);
 						try {
 							JSONObject message = (JSONObject)parser.parse(line);
 							
 							try {
 								String messageName = (String)message.get("name");
-								
-								if (messageName.equals("subtractFee")) {
-									log.info("BitnashJ BNServer Received: {}", message.toJSONString());
-								}
 								
 								BNObjectDeserializer d = new BNObjectDeserializer();
 								d.setSerialization(message.get("obj"));
@@ -121,7 +122,8 @@ public class BNServer extends BNObject implements Runnable {
 				outgoingMessage.put("error", e2.toString());
 			}
 		}
-		//log.info("BitnashJ BNServer Sent: {}", outgoingMessage.toJSONString());
+//log.info("BitnashJ BNServer Sent: {}", outgoingMessage.toJSONString());
+		
 		System.out.println(outgoingMessage.toJSONString());
 		System.out.flush();
 	}

@@ -369,7 +369,12 @@
 {
     if ([_description isEqualToString:@"Unknown"])
     {
-        _description = [self sendToServer:@"getDescription"];
+        @try {
+            _description = [self sendToServer:@"getDescription"];
+        }
+        @catch (NSException *exception) {
+            
+        }
     }
     
     if (!_description)

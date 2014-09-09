@@ -168,11 +168,15 @@
     
     
     NSMutableData *output = [NSMutableData data];
-    
-    while (![[[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding] hasSuffix:@"\n"])
+    int lastByte = 0;
+    while (lastByte != 10)
     {
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
         [output appendData:data];
+        NSRange range;
+        range.location = output.length - 1;
+        range.length = 1;
+        [output getBytes:&lastByte range:range];
     }
     
     //NSLog(@"RECEIVED: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
@@ -196,6 +200,11 @@
     {
         return [[response objectForKey:@"obj"] asObjectFromJSONObject];
     }
+}
+
+- (NSString *)ping:(NSString *)data
+{
+    return [self sendMessage:@"ping" withObject:self withArg:data];
 }
 
 

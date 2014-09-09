@@ -33,4 +33,6 @@
 - (id)sendMessage:(NSString *)messageName withObject:(id)object withArg:(id)arg;
 //send a message to the child and get back an object
 
+- (NSString *)ping:(NSString *)data;
+
 @end
