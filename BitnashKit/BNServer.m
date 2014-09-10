@@ -160,6 +160,11 @@
         [NSException raise:error.description format:nil];
     }
     
+    if ([[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] UTF8String] == nil)
+    {
+        [NSException raise:@"message contains invalid UTF-8 bytes" format:nil];
+    }
+    
     //NSLog(@"SENT: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     
     [[_task.standardInput fileHandleForWriting] writeData:jsonData];
