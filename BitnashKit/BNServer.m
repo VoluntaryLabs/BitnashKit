@@ -184,9 +184,16 @@
         [output getBytes:&lastByte range:range];
     }
     
-    //NSLog(@"RECEIVED: %@", [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
     
-
+    NSString *json = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
+    
+    //NSLog(@"RECEIVED: %@", json);
+    
+    if (json == nil) {
+        NSLog(@"Received non-UTF8 string");
+        return nil;
+    }
+    
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:output options:0x0 error:&error];
     
     if (error)
