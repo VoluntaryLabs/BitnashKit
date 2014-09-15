@@ -69,6 +69,16 @@ public class BNTxOut extends BNObject {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public void markAsBroadcast() {
+		metaData.put("wasBroadcast", Boolean.valueOf(true));
+	}
+	
+	public boolean wasBroadcast() {
+		Boolean wasBroadcast = (Boolean) metaData.get("wasBroadcast");
+		return wasBroadcast != null && wasBroadcast.booleanValue();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public void unlock() {
 		metaData.put("isLocked", Boolean.valueOf(false));
 	}

@@ -215,6 +215,7 @@ public class BNWallet extends BNObject {
 	public JSONArray apiTransactions(Object args) {
 		JSONArray transactions = new JSONArray();
 		for (Transaction transaction : wallet().getTransactions(true)) {
+//System.err.println(transaction.getHashAsString());
 			BNTx bnTx = new BNTx();
 			bnTx.setTransaction(transaction);
 			transactions.add(bnTx);

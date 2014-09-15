@@ -273,6 +273,10 @@ public class BNTx extends BNObject {
 	}
 
 	public BNTx apiBroadcast(Object args) {
+		if (this.apiWasBroadcast(args)) {
+			throw new RuntimeException("Attempt to re-broadcast transaction"); 
+		}
+		
 		boolean allInputsMine = true;
 
 		for (TransactionInput input : getTransaction().getInputs()) {
@@ -291,12 +295,24 @@ public class BNTx extends BNObject {
 			getTransaction().getConfidence().setSource(TransactionConfidence.Source.SELF);
 		}
 
-		System.err.println(Utils.bytesToHexString(getTransaction().bitcoinSerialize()));
+//System.err.println(Utils.bytesToHexString(getTransaction().bitcoinSerialize()));
 		bnWallet().peerGroup().broadcastTransaction(getTransaction());
 
 		this.apiLockInputs(args); // TODO unlock if it fails
+		this.markInputsAsBroadcast();
 
 		return this;
+	}
+	
+	public void markInputsAsBroadcast() {
+		for (Object inputObj : inputs) {
+			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			bnTxOut.readMetaData();
+//System.err.println(bnTxOut.metaData.toJSONString());
+			bnTxOut.markAsBroadcast();
+//System.err.println(bnTxOut.metaData.toJSONString());
+			bnTxOut.writeMetaData();
+		}
 	}
 
 	public Boolean apiIsConfirmed(Object args) {
@@ -304,13 +320,21 @@ public class BNTx extends BNObject {
 	}
 
 	public Boolean apiWasBroadcast(Object args) {
+		for (Object inputObj : inputs) {
+			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+			bnTxOut.readMetaData();
+			if (bnTxOut.wasBroadcast()) {
+				return true;
+			}
+		}
+		
 		return Boolean.valueOf(transaction.getConfidence().getConfidenceType() != TransactionConfidence.ConfidenceType.UNKNOWN);
 	}
 
 	public BNTx apiLockInputs(Object args) {
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
-			System.err.println("Lock: " + bnTxOut.id());
+			//System.err.println("Lock: " + bnTxOut.id());
 			bnTxOut.readMetaData();
 			bnTxOut.lock();
 			bnTxOut.writeMetaData();
@@ -336,6 +360,7 @@ public class BNTx extends BNObject {
 			error.setDescription("Can't set description without a connected output");
 			return this;
 		}
+		bnTxOut.readMetaData();
 		bnTxOut.setTxType((String) args);
 		bnTxOut.writeMetaData();
 
@@ -358,6 +383,7 @@ public class BNTx extends BNObject {
 			error.setDescription("Can't set description without a connected output");
 			return this;
 		}
+		bnTxOut.readMetaData();
 		bnTxOut.setDescription((String) args);
 		bnTxOut.writeMetaData();
 
@@ -416,11 +442,16 @@ public class BNTx extends BNObject {
 	public BNTx apiSubsumingTx(Object args) {
 		for (TransactionInput input : transaction.getInputs()) {
 			TransactionOutput output = input.getConnectedOutput();
+//			if (this.txHash == "634afbce9ba417c4d14b2ff25f7d9a9ccc0a478be2d0e8021fc620c559dcbb54") {
+//System.err.println("output: " + output);
+//			}
 			if (output != null) {
 				TransactionInput spendingInput = output.getSpentBy();
+//System.err.println("spendingInput: " + output);
 				if (spendingInput != null) {
 					Transaction subsumingTransaction = spendingInput
 							.getParentTransaction();
+//System.err.println("subsumingTransaction: " + subsumingTransaction);
 					if (subsumingTransaction != null
 							&& !subsumingTransaction.equals(transaction)) {
 						BNTx bnTx = new BNTx();
