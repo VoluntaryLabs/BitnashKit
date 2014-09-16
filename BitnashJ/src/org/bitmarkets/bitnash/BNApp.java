@@ -13,9 +13,9 @@ public class BNApp {
 			
 			for (int i = 0; i < args.length; i += 2) {
 				String name = args[i];
-				if (name == "-testnet") {
+				if (name.equals("-testnet")) {
 					BNWallet.shared().setUsesTestNet(Boolean.valueOf(args[i + 1]).booleanValue());
-				} else if (name == "-checkpoints") {
+				} else if (name.equals("-checkpoints")) {
 					BNWallet.shared().setCheckpointsPath(args[i + 1]);
 				}
 			}
