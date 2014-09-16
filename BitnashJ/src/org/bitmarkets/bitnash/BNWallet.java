@@ -1,6 +1,8 @@
 package org.bitmarkets.bitnash;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigInteger;
 //import java.net.InetAddress;
@@ -33,6 +35,7 @@ public class BNWallet extends BNObject {
 	
 	Number requiredConfirmations;
 	boolean usesTestNet;
+	String checkpointsPath;
 	
 	KeyParameter keyParameter;
 	BNWalletState state;
@@ -45,7 +48,7 @@ public class BNWallet extends BNObject {
 		super();
 		state = BNWalletState.Initialized;
 		requiredConfirmations = Integer.valueOf(1);
-		setupWalletAppKit();
+		usesTestNet = true;
 	} 
 	
 	public static BNWallet bnDeserializerInstance() {
@@ -65,6 +68,14 @@ public class BNWallet extends BNObject {
 	
 	public void setUsesTestNet(boolean usesTestNet) {
 		this.usesTestNet = usesTestNet;
+	}
+	
+	public String getCheckpointsPath() {
+		return checkpointsPath;
+	}
+	
+	public void setCheckpointsPath(String checkpointsPath) {
+		this.checkpointsPath = checkpointsPath;
 	}
 	
 	public Number getRequiredConfirmations() {
@@ -300,6 +311,10 @@ public class BNWallet extends BNObject {
 	}
 	
 	public void start() {
+		if (walletAppKit == null) {
+			setupWalletAppKit();
+		}
+		
 		state = BNWalletState.Starting;
 		
 		BNMetaDataDb.shared().setPath("./meta-data");
@@ -464,5 +479,13 @@ public class BNWallet extends BNObject {
 		walletAppKit.setAutoStop(false);
 		walletAppKit.setAutoSave(true);
 		walletAppKit.setBlockingStartup(false);
+		
+		if (checkpointsPath != null) {
+			try {
+				walletAppKit.setCheckpoints(new FileInputStream(new File(checkpointsPath)));
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 }

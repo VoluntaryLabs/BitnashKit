@@ -1,8 +1,6 @@
 package org.bitmarkets.bitnash;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 //import java.io.FileOutputStream;
@@ -18,7 +16,7 @@ public class BNApp {
 				if (name == "-testnet") {
 					BNWallet.shared().setUsesTestNet(Boolean.valueOf(args[i + 1]).booleanValue());
 				} else if (name == "-checkpoints") {
-					BNWallet.shared().getWalletAppKit().setCheckpoints(new FileInputStream(new File(args[i + 1])));
+					BNWallet.shared().setCheckpointsPath(args[i + 1]);
 				}
 			}
 			

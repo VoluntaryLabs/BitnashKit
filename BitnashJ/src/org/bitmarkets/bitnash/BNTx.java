@@ -440,28 +440,37 @@ public class BNTx extends BNObject {
 	// the same tx with a different txhash (tx malleability),
 	// or a tx that spent an input of this tx before this tx was able to
 	public BNTx apiSubsumingTx(Object args) {
+//System.err.println("txhash: " + transaction.getHashAsString());
 		for (TransactionInput input : transaction.getInputs()) {
 			TransactionOutput output = input.getConnectedOutput();
-//			if (this.txHash == "634afbce9ba417c4d14b2ff25f7d9a9ccc0a478be2d0e8021fc620c559dcbb54") {
 //System.err.println("output: " + output);
-//			}
 			if (output != null) {
 				TransactionInput spendingInput = output.getSpentBy();
-//System.err.println("spendingInput: " + output);
+//System.err.println("spendingInput: " + spendingInput);
 				if (spendingInput != null) {
-					Transaction subsumingTransaction = spendingInput
-							.getParentTransaction();
+					Transaction subsumingTransaction = spendingInput.getParentTransaction();
 //System.err.println("subsumingTransaction: " + subsumingTransaction);
-					if (subsumingTransaction != null
-							&& !subsumingTransaction.equals(transaction)) {
+					if (subsumingTransaction == null) {
+//System.err.println("returning null");
+//System.err.flush();
+						return null;
+					} else if (subsumingTransaction.equals(transaction)) {
+//System.err.println("returning this");
+//System.err.flush();
+						return this;
+					} else {
 						BNTx bnTx = new BNTx();
 						bnTx.setParent(bnParent);
 						bnTx.setTransaction(subsumingTransaction);
-						return bnTx;
+//System.err.println("returning subsumingTransaction");
+//System.err.flush();
+						return bnTx; 
 					}
 				}
 			}
 		}
+//System.err.println("returning null");
+//System.err.flush();
 		return null;
 	}
 

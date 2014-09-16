@@ -534,11 +534,12 @@
     }
     else
     {
-        self.subsumingTx = [self sendToServer:@"subsumingTx"];
-        if (self.subsumingTx)
-        {
-            self.subsumingTx.wallet = self.wallet;
-            self.subsumingTx.bnParent = self.bnParent;
+        BNTx *subsumingTx = [self sendToServer:@"subsumingTx"];
+    
+        if (![self isEqual:subsumingTx]) {
+            subsumingTx.wallet = self.wallet;
+            subsumingTx.bnParent = self.bnParent;
+            self.subsumingTx = subsumingTx;
         }
         self.confirmations = [self sendToServer:@"confirmations"];
     }
