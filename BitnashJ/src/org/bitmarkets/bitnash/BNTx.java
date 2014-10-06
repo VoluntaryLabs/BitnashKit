@@ -305,8 +305,7 @@ public class BNTx extends BNObject {
 	}
 	
 	public void markInputsAsBroadcast() {
-		for (Object inputObj : inputs) {
-			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+		for (BNTxOut bnTxOut : connectedOutputs()) {
 			bnTxOut.readMetaData();
 //System.err.println(bnTxOut.metaData.toJSONString());
 			bnTxOut.markAsBroadcast();
@@ -320,8 +319,7 @@ public class BNTx extends BNObject {
 	}
 
 	public Boolean apiWasBroadcast(Object args) {
-		for (Object inputObj : inputs) {
-			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+		for (BNTxOut bnTxOut : connectedOutputs()) {
 			bnTxOut.readMetaData();
 			if (bnTxOut.wasBroadcast()) {
 				return true;
@@ -332,8 +330,7 @@ public class BNTx extends BNObject {
 	}
 
 	public BNTx apiLockInputs(Object args) {
-		for (Object inputObj : inputs) {
-			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+		for (BNTxOut bnTxOut : connectedOutputs()) {
 			//System.err.println("Lock: " + bnTxOut.id());
 			bnTxOut.readMetaData();
 			bnTxOut.lock();
@@ -341,16 +338,26 @@ public class BNTx extends BNObject {
 		}
 		return this;
 	}
-
-	BNTxOut firstConnectedOutput() {
+	
+	List<BNTxOut> connectedOutputs() {
+		List<BNTxOut> connectedOutputs = new ArrayList<BNTxOut>();
 		for (Object inputObj : inputs) {
 			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
 			if (bnTxOut == null) {
 				continue;
 			}
-			return bnTxOut;
+			connectedOutputs.add(bnTxOut);
 		}
-		return null;
+		return connectedOutputs;
+	}
+
+	BNTxOut firstConnectedOutput() {
+		List<BNTxOut> connectedOutputs = connectedOutputs();
+		if (connectedOutputs.size() > 0) {
+			return connectedOutputs.get(0);
+		} else {
+			return null;
+		}
 	}
 	
 	public BNTx apiSetTxType(Object args) {
@@ -400,8 +407,7 @@ public class BNTx extends BNObject {
 	}
 
 	public BNTx apiUnlockInputs(Object args) {
-		for (Object inputObj : inputs) {
-			BNTxOut bnTxOut = ((BNTxIn) inputObj).bnTxOut();
+		for (BNTxOut bnTxOut : connectedOutputs()) {
 			System.err.println("Unlock: " + bnTxOut.id());
 			bnTxOut.readMetaData();
 			bnTxOut.unlock();
@@ -415,7 +421,8 @@ public class BNTx extends BNObject {
 				transaction.getInputs());
 		transaction.clearInputs();
 		for (TransactionInput input : allInputs) {
-			if (input.getConnectedOutput().isMine(wallet())) {
+			TransactionOutput txOut = input.getConnectedOutput(); 
+			if (txOut != null && txOut.isMine(wallet())) {
 				transaction.addInput(input);
 			}
 		}
