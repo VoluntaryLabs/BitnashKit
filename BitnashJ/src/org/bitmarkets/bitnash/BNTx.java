@@ -361,49 +361,45 @@ public class BNTx extends BNObject {
 	}
 	
 	public BNTx apiSetTxType(Object args) {
-		BNTxOut bnTxOut = firstConnectedOutput();
-		if (bnTxOut == null) {
-			setError(new BNError());
-			error.setDescription("Can't set description without a connected output");
-			return this;
+		for (BNTxOut bnTxOut : connectedOutputs()) {
+			bnTxOut.readMetaData();
+			bnTxOut.setTxType((String) args);
+			bnTxOut.writeMetaData();			
 		}
-		bnTxOut.readMetaData();
-		bnTxOut.setTxType((String) args);
-		bnTxOut.writeMetaData();
 
 		return this;
 	}
 
 	public String apiGetTxType(Object args) {
-		BNTxOut bnTxOut = firstConnectedOutput();
-		if (bnTxOut == null) {
-			return null;
+		for (BNTxOut bnTxOut : connectedOutputs()) {
+			bnTxOut.readMetaData();
+			if (bnTxOut.getTxType() != null) {
+				return bnTxOut.getTxType();
+			}
 		}
-		bnTxOut.readMetaData();
-		return bnTxOut.getTxType();
+		return null;
 	}
 	
 	public BNTx apiSetDescription(Object args) {
-		BNTxOut bnTxOut = firstConnectedOutput();
-		if (bnTxOut == null) {
-			setError(new BNError());
-			error.setDescription("Can't set description without a connected output");
-			return this;
+		for (BNTxOut bnTxOut : connectedOutputs()) {
+			bnTxOut.readMetaData();
+			bnTxOut.setDescription((String) args);
+			bnTxOut.writeMetaData();			
 		}
-		bnTxOut.readMetaData();
-		bnTxOut.setDescription((String) args);
-		bnTxOut.writeMetaData();
 
 		return this;
 	}
 
 	public String apiGetDescription(Object args) {
-		BNTxOut bnTxOut = firstConnectedOutput();
-		if (bnTxOut == null) {
-			return null;
+		System.err.println(transaction.getHashAsString() + ": " + connectedOutputs());
+		for (BNTxOut bnTxOut : connectedOutputs()) {
+			System.err.println(bnTxOut.transactionOutput().getSpentBy());
+			bnTxOut.readMetaData();
+			if (bnTxOut.getDescription() != null) {
+				return bnTxOut.getDescription();
+			}
 		}
-		bnTxOut.readMetaData();
-		return bnTxOut.getDescription();
+		return null;
 	}
 
 	public BNTx apiUnlockInputs(Object args) {
