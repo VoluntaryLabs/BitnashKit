@@ -18,6 +18,14 @@
                                                    @"address",
                                                    @"creationTime",
                                                    nil]];
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"inspect"];
+        [slot setVisibleName:@"inspect"];
+        [slot setIsActive:YES];
+        //[slot setVerifyMessage:@""];
+    }
+    
     return self;
 }
 
@@ -69,11 +77,6 @@
 }
 
 // actions
-
-- (NSArray *)modelActions
-{
-    return @[@"inspect"];
-}
 
 - (void)inspect
 {

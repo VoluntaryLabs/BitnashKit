@@ -37,6 +37,14 @@
     _description = @"Unknown";
     _txType = @"Unknown";
     self.nodeViewClass = NavDescriptionView.class;
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"inspect"];
+        [slot setVisibleName:@"inspect"];
+        [slot setIsActive:YES];
+        //[slot setVerifyMessage:@""];
+    }
+    
     return self;
 }
 
@@ -514,11 +522,6 @@
 }
 
 // actions
-
-- (NSArray *)modelActions
-{
-    return @[@"inspect"];
-}
 
 - (void)inspect
 {
