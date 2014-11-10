@@ -17,25 +17,40 @@
 
 - (BOOL)isJavaInstalled
 {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self.self.javaExePath])
+    {
+        return NO;
+    }
+    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:self.javaExePath];
     
     NSPipe *outPipe = [NSPipe pipe];
     
-    NSFileHandle *nullDevice = [NSFileHandle fileHandleWithNullDevice];
-    [task setStandardInput: nullDevice];
-    [task setStandardOutput:[outPipe fileHandleForWriting]];
-    [task setStandardError:nullDevice];
+    [task setStandardInput: [NSFileHandle fileHandleWithNullDevice]];
+    [task setStandardOutput:outPipe];
+    [task setStandardError:outPipe];
     
-    //NSMutableArray *args = [NSMutableArray array];
-    //[task setArguments:args];
-    [task launch];
-    [task waitUntilExit];
+    NSMutableArray *args = [NSMutableArray array];
+    [args addObject:@"-version"];
+    [task setArguments:args];
+    
+    @try
+    {
+        [task launch];
+        [task waitUntilExit];
+    }
+    @catch (NSException *exception)
+    {
+        NSLog(@"%@", exception);
+        [task terminate];
+        return NO;
+    }
     
     NSData *theData = [outPipe fileHandleForReading].availableData;
     NSString *result = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
     
-    return ![result hasPrefix:@"No Java runtime"];
+    return [result hasPrefix:@"java version"];
 }
 
 - (void)presentInstaller
