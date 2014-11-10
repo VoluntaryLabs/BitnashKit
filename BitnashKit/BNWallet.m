@@ -51,15 +51,23 @@
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openDepositView"];
         [slot setVisibleName:@"Deposit"];
         [slot setIsActive:self.isRunning];
+        //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
-    }
+        [slot setVerifyMessage:@"This is experimental software.\n\nWe strongly recommend not storing more bitcoins than you are willing to lose in the wallet until the software is fully audited and well tested."];
+        }
     
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openWithdrawlView"];
         [slot setVisibleName:@"Widthdraw"];
         [slot setIsActive:self.isRunning && (self.balance.longLongValue > 0)];
+        //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
     }
+}
+
+- (void)delete
+{
+    return;
 }
 
 - (void)setNodeSubtitle:(NSString *)nodeSubtitle

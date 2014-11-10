@@ -29,5 +29,6 @@
 #import "BNWithdrawl.h"
 #import "BNMetaDataDb.h"
 #import "BNPriceFormatter.h"
+#import "BNJavaInstall.h"
 
 #endif

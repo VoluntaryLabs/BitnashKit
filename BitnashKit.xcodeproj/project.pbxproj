@@ -28,6 +28,8 @@
 		AA989F92199ACEEE001401E4 /* BNPriceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */; };
 		AAB2809E19201B5F005C9D27 /* NSNumber+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAB2809F19201B5F005C9D27 /* NSNumber+BN.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB2809D19201B5F005C9D27 /* NSNumber+BN.m */; };
+		AAF5CB8C1A1058DB001926FE /* BNJavaInstall.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF5CB8A1A1058DB001926FE /* BNJavaInstall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAF5CB8D1A1058DB001926FE /* BNJavaInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF5CB8B1A1058DB001926FE /* BNJavaInstall.m */; };
 		DC261F3A18CD1FEC005328DA /* NSObject+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3818CD1FEC005328DA /* NSObject+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC261F3B18CD1FEC005328DA /* NSObject+BN.m in Sources */ = {isa = PBXBuildFile; fileRef = DC261F3918CD1FEC005328DA /* NSObject+BN.m */; };
 		DC261F3E18CD20A4005328DA /* NSArray+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3C18CD20A4005328DA /* NSArray+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,6 +141,8 @@
 		AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPriceFormatter.m; sourceTree = "<group>"; };
 		AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BN.h"; sourceTree = "<group>"; };
 		AAB2809D19201B5F005C9D27 /* NSNumber+BN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BN.m"; sourceTree = "<group>"; };
+		AAF5CB8A1A1058DB001926FE /* BNJavaInstall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNJavaInstall.h; sourceTree = "<group>"; };
+		AAF5CB8B1A1058DB001926FE /* BNJavaInstall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNJavaInstall.m; sourceTree = "<group>"; };
 		DC261F3818CD1FEC005328DA /* NSObject+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BN.h"; sourceTree = "<group>"; };
 		DC261F3918CD1FEC005328DA /* NSObject+BN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BN.m"; sourceTree = "<group>"; };
 		DC261F3C18CD20A4005328DA /* NSArray+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BN.h"; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 				DC2AEAAF192FFF18004BB65E /* BNWithdrawl.m */,
 				AA989F8F199ACEEE001401E4 /* BNPriceFormatter.h */,
 				AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */,
+				AAF5CB8A1A1058DB001926FE /* BNJavaInstall.h */,
+				AAF5CB8B1A1058DB001926FE /* BNJavaInstall.m */,
 			);
 			name = BN;
 			sourceTree = "<group>";
@@ -461,6 +467,7 @@
 				DC261F3A18CD1FEC005328DA /* NSObject+BN.h in Headers */,
 				AA989F91199ACEEE001401E4 /* BNPriceFormatter.h in Headers */,
 				DC4F2FB119039CD0008803F7 /* NSNull+BN.h in Headers */,
+				AAF5CB8C1A1058DB001926FE /* BNJavaInstall.h in Headers */,
 				AA753DC3191079DA00D07CB5 /* mask.h in Headers */,
 				DCB016D1191316730064F540 /* BNKey.h in Headers */,
 				DC2AEAAA192FF4F6004BB65E /* BNMetaDataDb.h in Headers */,
@@ -642,6 +649,7 @@
 				AA753DC6191079DA00D07CB5 /* qrinput.c in Sources */,
 				AA753DCA191079DA00D07CB5 /* rscode.c in Sources */,
 				AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */,
+				AAF5CB8D1A1058DB001926FE /* BNJavaInstall.m in Sources */,
 				DC4F2FB219039CD0008803F7 /* NSNull+BN.m in Sources */,
 				DC6161B018CFBF7900F7B602 /* NSString+BN.m in Sources */,
 				AA753DC2191079DA00D07CB5 /* mask.c in Sources */,
