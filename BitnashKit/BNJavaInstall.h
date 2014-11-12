@@ -10,8 +10,7 @@
 
 @interface BNJavaInstall : NSObject
 
-- (NSString *)javaExePath;
-- (BOOL)isJavaInstalled;
-- (void)presentInstaller;
+- (BOOL)isInstalled;
+- (void)openJavaDmg;
 
 @end

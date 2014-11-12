@@ -10,14 +10,30 @@
 
 @implementation BNJavaInstall
 
+- (BOOL)isInstalled
+{
+    NSString *testPath = @"/System/Library/Java/JavaVirtualMachines";
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:testPath] &&
+        [[NSFileManager defaultManager] subpathsAtPath:testPath].count > 0)
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+/*
+ 
 - (NSString *)javaExePath
 {
     return @"/usr/bin/java";
 }
 
-- (BOOL)isJavaInstalled
+ 
+- (BOOL)isInstalled
 {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:self.self.javaExePath])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self.javaExePath])
     {
         return NO;
     }
@@ -58,6 +74,31 @@
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:self.javaExePath];
     [task launch];
+}
+ */
+
+- (void)openJavaDmg
+{
+    if (self.javaEmbeddedDmgFilePath)
+    {
+        [[NSWorkspace sharedWorkspace] openFile:self.javaEmbeddedDmgFilePath];
+    }
+    else
+    {
+        [[NSWorkspace sharedWorkspace] openURL:self.javaDmgURL];
+    }
+}
+
+- (NSString *)javaEmbeddedDmgFilePath
+{
+    return [[NSBundle bundleForClass:self.class]
+                          pathForResource:@"JavaForOSX2014-001.dmg"
+                          ofType:nil];
+}
+
+- (NSURL *)javaDmgURL
+{
+     return [NSURL URLWithString:@"http://support.apple.com/downloads/DL1572/en_US/JavaForOSX2014-001.dmg"];
 }
 
 @end
