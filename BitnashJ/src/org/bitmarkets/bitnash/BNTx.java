@@ -211,7 +211,7 @@ public class BNTx extends BNObject {
 				+ ((transaction.bitcoinSerialize().length + transaction
 						.getInputs().size() * 74) / 1000 + 1)
 				* Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.longValue();
-		setFee(BigInteger.valueOf(fee));
+		setFee(BigInteger.valueOf(2*fee));
 
 		long feePerOutput = fee / changeOutputCount;
 
