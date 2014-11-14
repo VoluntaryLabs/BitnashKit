@@ -3,7 +3,7 @@
 //  BitnashKit
 //
 //  Created by Rich Collins on 3/8/14.
-//  Copyright (c) 2014 Bitmarkets. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import "BNWallet.h"
@@ -25,7 +25,7 @@
     self = [super init];
     self.server = [[BNServer alloc] init];
     self.nodeTitle = @"Wallet";
-    self.nodeSuggestedWidth = 200;
+    self.nodeSuggestedWidth = 1100;
     self.shouldSortChildren = NO;
     self.nodeSubtitle = @"starting ...";
     self.transactionsNode = [[BNTransactionsNode alloc] init];
