@@ -29,6 +29,12 @@
     return self;
 }
 
+- (void)setAddress:(NSString *)address
+{
+    _address = address;
+    //NSLog(@"BNKey setAddress %@", _address);
+}
+
 - (NSDate *)creationDate
 {
     return [NSDate dateWithTimeIntervalSince1970:[_creationTime longValue]/1000];

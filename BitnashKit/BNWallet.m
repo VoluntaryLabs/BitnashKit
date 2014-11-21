@@ -89,7 +89,11 @@
         
         if (self.children.count == 0)
         {
-            [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, self.withdralNode, nil]];
+            [self setChildren:[NSMutableArray arrayWithObjects:
+                               self.depositKey,
+                               self.transactionsNode,
+                               self.withdralNode,
+                               nil]];
             
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
@@ -103,7 +107,8 @@
         NSNumber *progress = [self progress];
         if (progress)
         {
-            self.nodeNote = [NSString stringWithFormat:@"%d%%", (int)roundf(progress.floatValue*100)];
+            self.nodeNote = [NSString stringWithFormat:@"%d%%",
+                             (int)roundf(progress.floatValue*100)];
         }
         [self postParentChainChanged];
     }
@@ -146,6 +151,7 @@
 - (NSArray *)transactions
 {
     NSArray *transactions = [_server sendMessage:@"transactions" withObject:self];
+    
     for (BNTx *tx in transactions)
     {
         tx.wallet = self;
@@ -179,7 +185,10 @@
 
 - (void)setPassphrase:(NSString *)passphrase
 {
-    NSNumber *success = [_server sendMessage:@"setPassphrase" withObject:self withArg:passphrase];
+    NSNumber *success = [_server sendMessage:@"setPassphrase"
+                                  withObject:self
+                                     withArg:passphrase];
+    
     if (success.boolValue)
     {
         self.error = nil;
@@ -208,6 +217,7 @@
     BNTx *tx = [self newTx];
     [tx payToAddress:address value:value];
     [tx addInputsAndChange];
+    
     if (tx.error)
     {
         if (tx.error.insufficientValue)
@@ -219,13 +229,16 @@
             [NSException raise:tx.error.description format:nil];
         }
     }
+    
     [tx subtractFee];
     return tx;
 }
 
 - (BOOL)isValidAddress:(NSString *)address
 {
-    NSNumber *result = [self.server sendMessage:@"isValidAddress" withObject:self withArg:address];
+    NSNumber *result = [self.server sendMessage:@"isValidAddress"
+                                     withObject:self
+                                        withArg:address];
     return result.boolValue;
 }
 

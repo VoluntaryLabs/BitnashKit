@@ -10,9 +10,9 @@
 
 @interface BNKey : BNObject
 
-@property NSString *pubKey;
-@property NSString *address;
-@property NSNumber *creationTime;
+@property (strong, nonatomic) NSString *pubKey;
+@property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSNumber *creationTime;
 
 - (NSDate *)creationDate;
 
