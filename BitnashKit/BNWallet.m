@@ -58,7 +58,7 @@
     
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openWithdrawlView"];
-        [slot setVisibleName:@"Widthdraw"];
+        [slot setVisibleName:@"Withdraw"];
         [slot setIsActive:self.isRunning && (self.balance.longLongValue > 0)];
         //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
