@@ -36,12 +36,16 @@
 //15. Get Release TX (buyer)
 //15. GOTO 5 for Release TX
 
+#define BNWalletStartedNotification @"BNWalletStartedNotification"
+
 @property BNServer *server;
 //Start a BNServer and set it on this wallet prior to use.
 
 @property (strong, nonatomic) NSNumber *requiredConfirmations; //Number of confirmations required before considering tx complete.  Currently supports 0 and 1.
 
 @property (strong, nonatomic) BNWithdrawl *withdralNode;
+@property (strong, nonatomic) NSNumber *cachedBalanceInSatoshi;
+@property (assign, nonatomic) BOOL postedRunningNotification;
 
 @property BNTransactionsNode *transactionsNode;
 

@@ -42,7 +42,9 @@
 - (void)setRequiredConfirmations:(NSNumber *)requiredConfirmations
 {
     _requiredConfirmations = requiredConfirmations;
-    [self.server sendMessage:@"setRequiredConfirmations" withObject:self withArg:requiredConfirmations];
+    [self.server sendMessage:@"setRequiredConfirmations"
+                  withObject:self
+                     withArg:requiredConfirmations];
 }
 
 - (void)updateActions
@@ -54,7 +56,7 @@
         //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
         [slot setVerifyMessage:@"This is experimental software.\n\nWe strongly recommend not storing more bitcoins than you are willing to lose in the wallet until the software is fully audited and well tested."];
-        }
+    }
     
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openWithdrawlView"];
@@ -83,6 +85,8 @@
 {
     if (self.isRunning)
     {
+        [self postRunningNotificationIfNeeded];
+
         self.refreshInterval = 5.0;
         
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
@@ -133,7 +137,13 @@
 
 - (NSNumber *)balance
 {
-    return [_server sendMessage:@"balance" withObject:self withArg:nil];
+    _cachedBalanceInSatoshi = [_server sendMessage:@"balance" withObject:self withArg:nil];
+    return _cachedBalanceInSatoshi;
+}
+
+- (NSNumber *)balanceInSatoshi
+{
+    return self.balance;
 }
 
 - (BNKey *)createKey
@@ -197,6 +207,17 @@
     {
         self.error = [[BNError alloc] init];
         self.error.description = @"Bad Passphrase";
+    }
+}
+
+- (void)postRunningNotificationIfNeeded
+{
+    if (!_postedRunningNotification)
+    {
+        _postedRunningNotification = YES;
+        [self balance]; // cache the balance
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:BNWalletStartedNotification object:self];
     }
 }
 
