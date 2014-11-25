@@ -3,7 +3,7 @@
 //  BitnashKit
 //
 //  Created by Rich Collins on 5/1/14.
-//  Copyright (c) 2014 Bitmarkets. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import "BNKey.h"
@@ -27,6 +27,12 @@
     }
     
     return self;
+}
+
+- (void)setAddress:(NSString *)address
+{
+    _address = address;
+    //NSLog(@"BNKey setAddress %@", _address);
 }
 
 - (NSDate *)creationDate

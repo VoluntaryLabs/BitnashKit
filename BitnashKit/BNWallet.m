@@ -3,7 +3,7 @@
 //  BitnashKit
 //
 //  Created by Rich Collins on 3/8/14.
-//  Copyright (c) 2014 Bitmarkets. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import "BNWallet.h"
@@ -25,7 +25,7 @@
     self = [super init];
     self.server = [[BNServer alloc] init];
     self.nodeTitle = @"Wallet";
-    self.nodeSuggestedWidth = 200;
+    self.nodeSuggestedWidth = 1100;
     self.shouldSortChildren = NO;
     self.nodeSubtitle = @"starting ...";
     self.transactionsNode = [[BNTransactionsNode alloc] init];
@@ -42,7 +42,9 @@
 - (void)setRequiredConfirmations:(NSNumber *)requiredConfirmations
 {
     _requiredConfirmations = requiredConfirmations;
-    [self.server sendMessage:@"setRequiredConfirmations" withObject:self withArg:requiredConfirmations];
+    [self.server sendMessage:@"setRequiredConfirmations"
+                  withObject:self
+                     withArg:requiredConfirmations];
 }
 
 - (void)updateActions
@@ -54,11 +56,11 @@
         //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
         [slot setVerifyMessage:@"This is experimental software.\n\nWe strongly recommend not storing more bitcoins than you are willing to lose in the wallet until the software is fully audited and well tested."];
-        }
+    }
     
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openWithdrawlView"];
-        [slot setVisibleName:@"Widthdraw"];
+        [slot setVisibleName:@"Withdraw"];
         [slot setIsActive:self.isRunning && (self.balance.longLongValue > 0)];
         //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
@@ -83,13 +85,19 @@
 {
     if (self.isRunning)
     {
+        [self postRunningNotificationIfNeeded];
+
         self.refreshInterval = 5.0;
         
         self.nodeSubtitle = [NSString stringWithFormat:@"%.4f BTC", self.balance.floatValue*0.00000001];
         
         if (self.children.count == 0)
         {
-            [self setChildren:[NSMutableArray arrayWithObjects:self.depositKey, self.transactionsNode, self.withdralNode, nil]];
+            [self setChildren:[NSMutableArray arrayWithObjects:
+                               self.depositKey,
+                               self.transactionsNode,
+                               self.withdralNode,
+                               nil]];
             
             [self setRefreshInterval:10.0];
             [self postParentChainChanged];
@@ -103,7 +111,8 @@
         NSNumber *progress = [self progress];
         if (progress)
         {
-            self.nodeNote = [NSString stringWithFormat:@"%d%%", (int)roundf(progress.floatValue*100)];
+            self.nodeNote = [NSString stringWithFormat:@"%d%%",
+                             (int)roundf(progress.floatValue*100)];
         }
         [self postParentChainChanged];
     }
@@ -128,7 +137,13 @@
 
 - (NSNumber *)balance
 {
-    return [_server sendMessage:@"balance" withObject:self withArg:nil];
+    _cachedBalanceInSatoshi = [_server sendMessage:@"balance" withObject:self withArg:nil];
+    return _cachedBalanceInSatoshi;
+}
+
+- (NSNumber *)balanceInSatoshi
+{
+    return self.balance;
 }
 
 - (BNKey *)createKey
@@ -146,6 +161,7 @@
 - (NSArray *)transactions
 {
     NSArray *transactions = [_server sendMessage:@"transactions" withObject:self];
+    
     for (BNTx *tx in transactions)
     {
         tx.wallet = self;
@@ -179,7 +195,10 @@
 
 - (void)setPassphrase:(NSString *)passphrase
 {
-    NSNumber *success = [_server sendMessage:@"setPassphrase" withObject:self withArg:passphrase];
+    NSNumber *success = [_server sendMessage:@"setPassphrase"
+                                  withObject:self
+                                     withArg:passphrase];
+    
     if (success.boolValue)
     {
         self.error = nil;
@@ -188,6 +207,17 @@
     {
         self.error = [[BNError alloc] init];
         self.error.description = @"Bad Passphrase";
+    }
+}
+
+- (void)postRunningNotificationIfNeeded
+{
+    if (!_postedRunningNotification)
+    {
+        _postedRunningNotification = YES;
+        [self balance]; // cache the balance
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:BNWalletStartedNotification object:self];
     }
 }
 
@@ -208,6 +238,7 @@
     BNTx *tx = [self newTx];
     [tx payToAddress:address value:value];
     [tx addInputsAndChange];
+    
     if (tx.error)
     {
         if (tx.error.insufficientValue)
@@ -219,13 +250,16 @@
             [NSException raise:tx.error.description format:nil];
         }
     }
+    
     [tx subtractFee];
     return tx;
 }
 
 - (BOOL)isValidAddress:(NSString *)address
 {
-    NSNumber *result = [self.server sendMessage:@"isValidAddress" withObject:self withArg:address];
+    NSNumber *result = [self.server sendMessage:@"isValidAddress"
+                                     withObject:self
+                                        withArg:address];
     return result.boolValue;
 }
 

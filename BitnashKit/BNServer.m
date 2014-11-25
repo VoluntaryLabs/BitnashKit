@@ -3,7 +3,7 @@
 //  BitnashKit
 //
 //  Created by Rich Collins on 3/9/14.
-//  Copyright (c) 2014 Bitmarkets. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import "BNServer.h"
@@ -189,7 +189,8 @@
     
     //NSLog(@"RECEIVED: %@", json);
     
-    if (json == nil) {
+    if (json == nil)
+    {
         NSLog(@"Received non-UTF8 string");
         return nil;
     }
@@ -203,9 +204,11 @@
     
     if ([response objectForKey:@"error"])
     {
+        //NSString *errorString = [[response objectForKey:@"error"] asObjectFromJSONObject];
         self.error = [[response objectForKey:@"error"] asObjectFromJSONObject];
-        NSLog(@"wallet error [%@]", [response objectForKey:@"error"]);
-        [NSException raise:error.description format:nil];
+        NSString *errorName = [self.error description];
+        NSLog(@"wallet error [%@]", self.error);
+        [NSException raise:errorName format:nil];
         return nil;
     }
     else
@@ -218,6 +221,5 @@
 {
     return [self sendMessage:@"ping" withObject:self withArg:data];
 }
-
 
 @end
