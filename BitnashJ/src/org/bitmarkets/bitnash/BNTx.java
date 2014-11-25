@@ -411,6 +411,17 @@ public class BNTx extends BNObject {
 		}
 		return this;
 	}
+	
+	public BNTx apiUnlockOutputs(Object args) {
+		for (Object outputObj : outputs) {
+			BNTxOut bnTxOut = (BNTxOut)outputObj;
+			System.err.println("Unlock: " + bnTxOut.id());
+			bnTxOut.readMetaData();
+			bnTxOut.unlock();
+			bnTxOut.writeMetaData();
+		}
+		return this;
+	}
 
 	public BNTx apiRemoveForeignInputs(Object args) {
 		ArrayList<TransactionInput> allInputs = new ArrayList<TransactionInput>(

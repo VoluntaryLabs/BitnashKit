@@ -88,6 +88,9 @@
 - (void)unlockInputs;
 //Unlocks the connected outputs so they can be used for subsequent txs
 
+- (void)unlockOutputs;
+//Unlocks the outputs so they can be used for subsequent txs
+
 - (BNTx *)cancellationTx;
 //Returns a new transaction that sends this transactions inputs back to this transactions wallet
 

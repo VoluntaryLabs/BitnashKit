@@ -299,6 +299,11 @@
     [self sendToServer:@"unlockInputs"];
 }
 
+- (void)unlockOutputs
+{
+    [self sendToServer:@"unlockOutputs"];
+}
+
 - (BNTx *)cancellationTx
 {
     BNTx *tx = [self sendToServer:@"removeForeignInputs"];
