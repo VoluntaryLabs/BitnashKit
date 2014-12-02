@@ -61,6 +61,8 @@
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"openWithdrawlView"];
         [slot setVisibleName:@"Withdraw"];
+        [slot setVerifyMessage:@"If you want to ensure the privacy of your transactions, we recommend being on a public wifi address when making a withdraw and not sending your bitcoins to addresses associated with your identity."];
+        
         [slot setIsActive:self.isRunning && (self.balance.longLongValue > 0)];
         //[slot setIsVisible:NO];
         [slot.slotView syncFromSlot];
