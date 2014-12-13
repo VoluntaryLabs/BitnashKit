@@ -28,6 +28,7 @@
 		AA989F92199ACEEE001401E4 /* BNPriceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */; };
 		AAB2809E19201B5F005C9D27 /* NSNumber+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAB2809F19201B5F005C9D27 /* NSNumber+BN.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB2809D19201B5F005C9D27 /* NSNumber+BN.m */; };
+		AABEB78A1A3C2D4B005502A4 /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = AABEB7891A3C2D4B005502A4 /* licenses */; };
 		AAF5CB8C1A1058DB001926FE /* BNJavaInstall.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF5CB8A1A1058DB001926FE /* BNJavaInstall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAF5CB8D1A1058DB001926FE /* BNJavaInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF5CB8B1A1058DB001926FE /* BNJavaInstall.m */; };
 		DC261F3A18CD1FEC005328DA /* NSObject+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = DC261F3818CD1FEC005328DA /* NSObject+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -141,6 +142,7 @@
 		AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPriceFormatter.m; sourceTree = "<group>"; };
 		AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BN.h"; sourceTree = "<group>"; };
 		AAB2809D19201B5F005C9D27 /* NSNumber+BN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BN.m"; sourceTree = "<group>"; };
+		AABEB7891A3C2D4B005502A4 /* licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = licenses; sourceTree = SOURCE_ROOT; };
 		AAF5CB8A1A1058DB001926FE /* BNJavaInstall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNJavaInstall.h; sourceTree = "<group>"; };
 		AAF5CB8B1A1058DB001926FE /* BNJavaInstall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNJavaInstall.m; sourceTree = "<group>"; };
 		DC261F3818CD1FEC005328DA /* NSObject+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BN.h"; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 		DC90332818CBD1A2005D82A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AABEB7891A3C2D4B005502A4 /* licenses */,
 				DC90332918CBD1A2005D82A2 /* BitnashKit-Info.plist */,
 				DC90332A18CBD1A2005D82A2 /* InfoPlist.strings */,
 				DC90332D18CBD1A2005D82A2 /* BitnashKit-Prefix.pch */,
@@ -586,6 +589,7 @@
 				DC350EEC191612C200C25A01 /* checkpoints-testnet in Resources */,
 				DCE5E28D190B034D0005396A /* json-simple-1.1.1.jar in Resources */,
 				DC90332C18CBD1A2005D82A2 /* InfoPlist.strings in Resources */,
+				AABEB78A1A3C2D4B005502A4 /* licenses in Resources */,
 				DCE5E28B190B02FF0005396A /* org in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
