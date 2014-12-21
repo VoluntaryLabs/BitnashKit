@@ -25,7 +25,7 @@
     self = [super init];
     self.server = [[BNServer alloc] init];
     self.nodeTitle = @"Wallet";
-    self.nodeSuggestedWidth = 1100;
+    self.nodeSuggestedWidth = @1100;
     self.nodeShouldSortChildren = @NO;
     self.nodeSubtitle = @"starting ...";
     self.transactionsNode = [[BNTransactionsNode alloc] init];
