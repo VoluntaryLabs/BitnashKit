@@ -17,7 +17,7 @@
     
     self.nodeTitle = @"Transactions";
     self.nodeSuggestedWidth = 500;
-    self.shouldUseCountForNodeNote = YES;
+    self.nodeShouldUseCountForNodeNote = @YES;
     self.nodeShouldSortChildren = @YES;
     self.sortChildrenKey = @"ordinality";
     
