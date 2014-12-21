@@ -19,7 +19,7 @@
     self.nodeSuggestedWidth = 500;
     self.nodeShouldUseCountForNodeNote = @YES;
     self.nodeShouldSortChildren = @YES;
-    self.sortChildrenKey = @"ordinality";
+    self.nodeSortChildrenKey = @"ordinality";
     
     return self;
 }

@@ -16,7 +16,7 @@
 {
     self = [super init];
     self.nodeTitle = @"Addresses";
-    self.childClass = BNKey.class;
+    self.nodeChildClass = BNKey.class;
     self.nodeSuggestedWidth = 325;
     self.nodeShouldUseCountForNodeNote = @YES;
     return self;
