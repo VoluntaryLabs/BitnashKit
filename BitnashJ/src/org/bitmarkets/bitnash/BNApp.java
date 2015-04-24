@@ -17,6 +17,10 @@ public class BNApp {
 					BNWallet.shared().setUsesTestNet(Boolean.valueOf(args[i + 1]).booleanValue());
 				} else if (name.equals("-checkpoints")) {
 					BNWallet.shared().setCheckpointsPath(args[i + 1]);
+				} else if (name.equals("-tor-socks-port")) {
+					System.setProperty("socksProxyHost", "127.0.0.1");
+					System.err.println("Using Tor Socks Proxy on port " + args[i + 1]);
+					System.setProperty("socksProxyPort", args[i + 1]);
 				}
 			}
 			

@@ -93,6 +93,12 @@
     {
         [arguments addObjectsFromArray:@[@"-checkpoints", _checkpointsPath]];
     }
+    
+    if (_torSocksPort)
+    {
+        [arguments addObjectsFromArray:@[@"-tor-socks-port", [_torSocksPort description]]];
+    }
+    
     _task.arguments = arguments;
     
     _task.standardInput = [NSPipe pipe];

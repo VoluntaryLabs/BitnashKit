@@ -361,7 +361,7 @@ public class BNWallet extends BNObject {
 	}
 	
 	void setupWalletAppKit() {
-		walletAppKit = new WalletAppKit(
+		walletAppKit = new BNWalletAppKit(
 			usesTestNet ? new BNTestNet3Params() : new MainNetParams(),
 			new File("."),
 			"bitnash"

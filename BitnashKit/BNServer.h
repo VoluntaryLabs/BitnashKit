@@ -17,6 +17,8 @@
 @property NSString *checkpointsPath;
 //path to the checkpoints file
 
+@property NSNumber *torSocksPort;
+
 @property BOOL started;
 
 @property NSTask *task;
