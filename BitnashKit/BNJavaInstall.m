@@ -98,7 +98,12 @@
 
 - (NSURL *)javaDmgURL
 {
-     return [NSURL URLWithString:@"http://support.apple.com/downloads/DL1572/en_US/JavaForOSX2014-001.dmg"];
+    // return [NSURL URLWithString:
+    //@"http://support.apple.com/downloads/DL1572/en_US/JavaForOSX2014-001.dmg"];
+    
+    //return [NSURL URLWithString:@"https://support.apple.com/downloads/java"];
+
+    return [NSURL URLWithString:@"https://support.apple.com/kb/DL1572?viewlocale=en_US&locale=en_US"];
 }
 
 @end
