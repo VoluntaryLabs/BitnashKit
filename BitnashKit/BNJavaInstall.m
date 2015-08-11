@@ -12,6 +12,9 @@
 
 - (BOOL)isInstalled
 {
+    return [[NSFileManager defaultManager] fileExistsAtPath:@"/usr/bin/java"];
+
+    /*
     NSString *testPath = @"/System/Library/Java/JavaVirtualMachines";
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:testPath] &&
@@ -19,8 +22,10 @@
     {
         return YES;
     }
-    
+
+
     return NO;
+     */
 }
 
 /*
