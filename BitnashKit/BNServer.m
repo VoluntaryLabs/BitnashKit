@@ -134,6 +134,11 @@
 
 - (id)sendMessage:(NSString *)messageName withObject:(id)object withArg:(id)arg
 {
+    if (![self.task isRunning])
+    {
+        [NSException raise:@"Fatal error. BitcoinJ wallet task is down." format:nil];
+    }
+    
     if (arg == nil)
     {
         arg = [NSNull null];
@@ -185,9 +190,17 @@
         NSData *data = [[_task.standardOutput fileHandleForReading] availableData];
         [output appendData:data];
         NSRange range;
-        range.location = output.length - 1;
-        range.length = 1;
-        [output getBytes:&lastByte range:range];
+        
+        if (output.length)
+        {
+            range.location = output.length - 1;
+            range.length = 1;
+            [output getBytes:&lastByte range:range];
+        }
+        else
+        {
+            [NSException raise:@"Fatal error. BitcoinJ wallet task is down." format:nil];
+        }
     }
     
     
