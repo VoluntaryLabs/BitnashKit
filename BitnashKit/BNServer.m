@@ -109,6 +109,15 @@
     //[self watchTaskStandardError];
     
     [_task launch];
+    
+    if(![self.task isRunning])
+    {
+        
+        NSLog(@"waiting for wallet to launch");
+        
+    }
+    
+    NSLog(@"wallet to launched!");
 }
 
 - (void)createDir
@@ -132,13 +141,13 @@
     return [self sendMessage:messageName withObject:object withArg:nil];
 }
 
+- (BOOL)isRunning
+{
+    return [self.task isRunning];
+}
+
 - (id)sendMessage:(NSString *)messageName withObject:(id)object withArg:(id)arg
 {
-    if (![self.task isRunning])
-    {
-        [NSException raise:@"Fatal error. BitcoinJ wallet task is down." format:nil];
-    }
-    
     if (arg == nil)
     {
         arg = [NSNull null];
@@ -147,6 +156,11 @@
     if (!_started)
     {
         [self start];
+    }
+    
+    if (![self.task isRunning])
+    {
+        [NSException raise:@"Fatal error. BitcoinJ wallet task is down." format:@""];
     }
     
     self.error = nil;
@@ -168,12 +182,12 @@
     
     if (error)
     {
-        [NSException raise:error.description format:nil];
+        [NSException raise:error.description format:@""];
     }
     
     if ([[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] UTF8String] == nil)
     {
-        [NSException raise:@"message contains invalid UTF-8 bytes" format:nil];
+        [NSException raise:@"message contains invalid UTF-8 bytes" format:@""];
     }
     
     //NSLog(@"SENT: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
@@ -199,7 +213,7 @@
         }
         else
         {
-            [NSException raise:@"Fatal error. BitcoinJ wallet task is down." format:nil];
+            [NSException raise:@"Fatal error. BitcoinJ wallet task is down." format:@""];
         }
     }
     
@@ -218,7 +232,7 @@
     
     if (error)
     {
-        [NSException raise:error.description format:nil];
+        [NSException raise:error.description format:@""];
     }
     
     if ([response objectForKey:@"error"])
@@ -227,7 +241,7 @@
         self.error = [[response objectForKey:@"error"] asObjectFromJSONObject];
         NSString *errorName = [self.error description];
         NSLog(@"wallet error [%@]", self.error);
-        [NSException raise:errorName format:nil];
+        [NSException raise:errorName format:@""];
         return nil;
     }
     else

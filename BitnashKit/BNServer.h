@@ -30,6 +30,9 @@
 - (void)start;
 //Start the wallet child process (BitcoinJ)
 
+- (BOOL)isRunning;
+
+
 - (id)sendMessage:(NSString *)messageName withObject:(id)object;
 
 - (id)sendMessage:(NSString *)messageName withObject:(id)object withArg:(id)arg;

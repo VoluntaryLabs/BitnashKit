@@ -249,7 +249,7 @@
         }
         else
         {
-            [NSException raise:tx.error.description format:nil];
+            [NSException raise:tx.error.description format:@""];
         }
     }
     

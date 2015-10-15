@@ -41,7 +41,7 @@ static BNMetaDataDb *shared = nil;
     
     if (error)
     {
-        [NSException raise:error.localizedDescription format:nil];
+        [NSException raise:error.localizedDescription format:@""];
     }
 }
 
@@ -59,7 +59,7 @@ static BNMetaDataDb *shared = nil;
     
     if (error)
     {
-        [NSException raise:error.localizedDescription format:nil];
+        [NSException raise:error.localizedDescription format:@""];
     }
 }
 
@@ -71,7 +71,7 @@ static BNMetaDataDb *shared = nil;
     
     if (error)
     {
-        [NSException raise:error.localizedDescription format:nil];
+        [NSException raise:error.localizedDescription format:@""];
     }
     
     [data writeToFile:[self metaDataPathFor:bnObject] atomically:YES];
