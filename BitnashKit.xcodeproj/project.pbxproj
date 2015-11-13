@@ -24,6 +24,7 @@
 		AA753DCD191079DA00D07CB5 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB5191079DA00D07CB5 /* split.h */; };
 		AA753DD1191079DA00D07CB5 /* QRCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA753DD2191079DA00D07CB5 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */; };
+		AA7CB38A1BF187D2002C0593 /* javaforosx.dmg in Resources */ = {isa = PBXBuildFile; fileRef = AA7CB3891BF187D2002C0593 /* javaforosx.dmg */; };
 		AA989F91199ACEEE001401E4 /* BNPriceFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA989F8F199ACEEE001401E4 /* BNPriceFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA989F92199ACEEE001401E4 /* BNPriceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */; };
 		AAB2809E19201B5F005C9D27 /* NSNumber+BN.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -138,6 +139,8 @@
 		AA753DB5191079DA00D07CB5 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		AA753DB9191079DA00D07CB5 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
 		AA753DBA191079DA00D07CB5 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		AA7CB3891BF187D2002C0593 /* javaforosx.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = javaforosx.dmg; sourceTree = "<group>"; };
+		AA7CB38B1BF18804002C0593 /* javaforosx.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; name = javaforosx.dmg; path = BitnashKit/javaforosx.dmg; sourceTree = "<group>"; };
 		AA989F8F199ACEEE001401E4 /* BNPriceFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPriceFormatter.h; sourceTree = "<group>"; };
 		AA989F90199ACEEE001401E4 /* BNPriceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPriceFormatter.m; sourceTree = "<group>"; };
 		AAB2809C19201B5F005C9D27 /* NSNumber+BN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BN.h"; sourceTree = "<group>"; };
@@ -349,6 +352,7 @@
 		DC90331418CBD1A2005D82A2 = {
 			isa = PBXGroup;
 			children = (
+				AA7CB38B1BF18804002C0593 /* javaforosx.dmg */,
 				DC90332718CBD1A2005D82A2 /* BitnashKit */,
 				AA753D9E191079DA00D07CB5 /* Mac-QR-Code-Encoder */,
 				DC261F4D18CD2E1A005328DA /* BitnashJ */,
@@ -402,6 +406,7 @@
 		DC90332818CBD1A2005D82A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AA7CB3891BF187D2002C0593 /* javaforosx.dmg */,
 				AABEB7891A3C2D4B005502A4 /* licenses */,
 				DC90332918CBD1A2005D82A2 /* BitnashKit-Info.plist */,
 				DC90332A18CBD1A2005D82A2 /* InfoPlist.strings */,
@@ -583,6 +588,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA7CB38A1BF187D2002C0593 /* javaforosx.dmg in Resources */,
 				DC44C57A19987E4B0072AE8A /* checkpoints in Resources */,
 				DCA2CE291954F17000F929B4 /* bitcoinj-0.11.3-bundled.jar in Resources */,
 				DCA2CE271954DB6400F929B4 /* slf4j-simple-1.7.7.jar in Resources */,

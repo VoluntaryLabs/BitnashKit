@@ -12,6 +12,7 @@
 
 - (BOOL)isInstalled
 {
+    
     return [[NSFileManager defaultManager] fileExistsAtPath:@"/usr/bin/java"];
 
     /*
@@ -96,9 +97,11 @@
 
 - (NSString *)javaEmbeddedDmgFilePath
 {
-    return [[NSBundle bundleForClass:self.class]
-                          pathForResource:@"JavaForOSX2014-001.dmg"
+    NSString *path = [[NSBundle bundleForClass:self.class]
+                          pathForResource:@"javaforosx.dmg"
                           ofType:nil];
+    
+    return path;
 }
 
 - (NSURL *)javaDmgURL
