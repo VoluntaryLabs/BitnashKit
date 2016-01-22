@@ -1,5 +1,6 @@
 example:
 
+```objective-c
 - (BNWallet *)debugWalletFor:(NSString *)name
 {
     BNWallet *wallet = [[BNWallet alloc] init];
@@ -121,3 +122,4 @@ example:
 	//TODO wait for confirmation
     [self debugRelease];
 }
+```
